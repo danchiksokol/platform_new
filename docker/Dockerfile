@@ -24,8 +24,8 @@ RUN echo 'date.timezone = "UTC"' >> /usr/local/etc/php/php.ini
 RUN echo 'opcache.max_accelerated_files = 20000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 # git config
-RUN git config --global user.email "danchiksokol@mail.ru"
-RUN git config --global user.name "Daniel Sokolov"
+#RUN git config --global user.email "danchiksokol@mail.ru"
+#RUN git config --global user.name "Daniel Sokolov"
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
