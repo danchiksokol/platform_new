@@ -6,7 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Controller\\UserAuthSecurityController' => $baseDir . '/src/Controller/UserAuthSecurityController.php',
+    'App\\Controller\\AdminAuthController' => $baseDir . '/src/Controller/AdminAuthController.php',
+    'App\\Controller\\UserAuthController' => $baseDir . '/src/Controller/UserAuthController.php',
     'App\\DataFixtures\\AdminFixtures' => $baseDir . '/src/DataFixtures/AdminFixtures.php',
     'App\\DataFixtures\\UserFixtures' => $baseDir . '/src/DataFixtures/UserFixtures.php',
     'App\\Entity\\Admin' => $baseDir . '/src/Entity/Admin.php',
@@ -14,6 +15,7 @@ return array(
     'App\\Kernel' => $baseDir . '/src/Kernel.php',
     'App\\Repository\\AdminRepository' => $baseDir . '/src/Repository/AdminRepository.php',
     'App\\Repository\\UserRepository' => $baseDir . '/src/Repository/UserRepository.php',
+    'App\\Security\\AdminAuthenticator' => $baseDir . '/src/Security/AdminAuthenticator.php',
     'App\\Security\\UserAuthenticator' => $baseDir . '/src/Security/UserAuthenticator.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',

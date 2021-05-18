@@ -405,7 +405,8 @@ class ComposerStaticInit49983981d07691c8e0d98eae52ceccaf
     );
 
     public static $classMap = array (
-        'App\\Controller\\UserAuthSecurityController' => __DIR__ . '/../..' . '/src/Controller/UserAuthSecurityController.php',
+        'App\\Controller\\AdminAuthController' => __DIR__ . '/../..' . '/src/Controller/AdminAuthController.php',
+        'App\\Controller\\UserAuthController' => __DIR__ . '/../..' . '/src/Controller/UserAuthController.php',
         'App\\DataFixtures\\AdminFixtures' => __DIR__ . '/../..' . '/src/DataFixtures/AdminFixtures.php',
         'App\\DataFixtures\\UserFixtures' => __DIR__ . '/../..' . '/src/DataFixtures/UserFixtures.php',
         'App\\Entity\\Admin' => __DIR__ . '/../..' . '/src/Entity/Admin.php',
@@ -413,6 +414,7 @@ class ComposerStaticInit49983981d07691c8e0d98eae52ceccaf
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
         'App\\Repository\\AdminRepository' => __DIR__ . '/../..' . '/src/Repository/AdminRepository.php',
         'App\\Repository\\UserRepository' => __DIR__ . '/../..' . '/src/Repository/UserRepository.php',
+        'App\\Security\\AdminAuthenticator' => __DIR__ . '/../..' . '/src/Security/AdminAuthenticator.php',
         'App\\Security\\UserAuthenticator' => __DIR__ . '/../..' . '/src/Security/UserAuthenticator.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',

@@ -21,7 +21,12 @@ RUN apt-get update && apt-get install -y curl \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 
 RUN echo 'date.timezone = "UTC"' >> /usr/local/etc/php/php.ini
+RUN echo 'xdebug.mode = debug' >> /usr/local/etc/php/php.ini
+RUN echo 'xdebug.discover_client_host = 1' >> /usr/local/etc/php/php.ini
 RUN echo 'opcache.max_accelerated_files = 20000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+
+# Apache config
+RUN a2enmod rewrite
 
 # git config
 #RUN git config --global user.email "danchiksokol@mail.ru"
@@ -33,6 +38,3 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 #Install Symfony
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
-
-
-RUN a2enmod rewrite

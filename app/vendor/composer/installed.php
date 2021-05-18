@@ -321,6 +321,15 @@
         0 => '1.0',
       ),
     ),
+    'symfony/apache-pack' => 
+    array (
+      'pretty_version' => 'v1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3aa5818d73ad2551281fc58a75afd9ca82622e6c',
+    ),
     'symfony/cache' => 
     array (
       'pretty_version' => 'v5.2.6',
@@ -505,15 +514,6 @@
       array (
       ),
       'reference' => '4f57a44cef0b4555043160b8bf223fcde8a7a59a',
-    ),
-    'symfony/orm-pack' => 
-    array (
-      'pretty_version' => 'v2.1.0',
-      'version' => '2.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '357f6362067b1ebb94af321b79f8939fc9118751',
     ),
     'symfony/polyfill-ctype' => 
     array (
