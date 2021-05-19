@@ -217,6 +217,15 @@ private static $installed = array (
       ),
       'reference' => '56070bebac6e77230ed7d306ad13528e60732871',
     ),
+    'egulias/email-validator' => 
+    array (
+      'pretty_version' => '3.1.1',
+      'version' => '3.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c81f18a3efb941d8c4d2e025f6183b5c6d697307',
+    ),
     'friendsofphp/proxy-manager-lts' => 
     array (
       'pretty_version' => 'v1.0.3',
@@ -496,6 +505,15 @@ private static $installed = array (
       ),
       'reference' => 'e472606b4b3173564f0edbca8f5d32b52fc4f2c9',
     ),
+    'symfony/form' => 
+    array (
+      'pretty_version' => 'v5.2.8',
+      'version' => '5.2.8.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '10279a74e83eb21c4b980e5aeaeda3d30d214c16',
+    ),
     'symfony/framework-bundle' => 
     array (
       'pretty_version' => 'v5.2.6',
@@ -532,6 +550,24 @@ private static $installed = array (
       ),
       'reference' => 'f34de4c61ca46df73857f7f36b9a3805bdd7e3b2',
     ),
+    'symfony/intl' => 
+    array (
+      'pretty_version' => 'v5.2.7',
+      'version' => '5.2.7.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '6d40be5e4331041aa14add5633986d95667ae624',
+    ),
+    'symfony/mailer' => 
+    array (
+      'pretty_version' => 'v5.2.7',
+      'version' => '5.2.7.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c50b304246e56c8574c203bce440f0eafb107ae9',
+    ),
     'symfony/maker-bundle' => 
     array (
       'pretty_version' => 'v1.31.1',
@@ -540,6 +576,24 @@ private static $installed = array (
       array (
       ),
       'reference' => '4f57a44cef0b4555043160b8bf223fcde8a7a59a',
+    ),
+    'symfony/mime' => 
+    array (
+      'pretty_version' => 'v5.2.7',
+      'version' => '5.2.7.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7af452bf51c46f18da00feb32e1ad36db9426515',
+    ),
+    'symfony/options-resolver' => 
+    array (
+      'pretty_version' => 'v5.2.4',
+      'version' => '5.2.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5d0f633f9bbfcf7ec642a2b5037268e61b0a62ce',
     ),
     'symfony/polyfill-ctype' => 
     array (
@@ -563,6 +617,24 @@ private static $installed = array (
       array (
       ),
       'reference' => '5601e09b69f26c1828b13b6bb87cb07cddba3170',
+    ),
+    'symfony/polyfill-intl-icu' => 
+    array (
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'af1842919c7e7364aaaa2798b29839e3ba168588',
+    ),
+    'symfony/polyfill-intl-idn' => 
+    array (
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2d63434d922daf7da8dd863e7907e67ee3031483',
     ),
     'symfony/polyfill-intl-normalizer' => 
     array (
@@ -749,6 +821,15 @@ private static $installed = array (
       ),
       'reference' => '5ebbb5f0e8bfaa0b4b37cb25ff97f83b18caf221',
     ),
+    'symfony/validator' => 
+    array (
+      'pretty_version' => 'v5.2.7',
+      'version' => '5.2.7.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b0be0360bfbf15059308d815da7f4151bd448b37',
+    ),
     'symfony/var-dumper' => 
     array (
       'pretty_version' => 'v5.2.6',
@@ -775,6 +856,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '298a08ddda623485208506fcee08817807a251dd',
+    ),
+    'symfonycasts/verify-email-bundle' => 
+    array (
+      'pretty_version' => 'v1.5.0',
+      'version' => '1.5.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8c21aa9aa6b7123afed213e72485e8dad75e5dcf',
     ),
     'twig/extra-bundle' => 
     array (

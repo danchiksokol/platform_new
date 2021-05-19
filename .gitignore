@@ -2,6 +2,6 @@
 *.tmp
 .directory
 .idea
-/mysql/*
+mysql/*
 /app/var/*
 tmp/*
