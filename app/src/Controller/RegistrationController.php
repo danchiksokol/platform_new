@@ -24,8 +24,10 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
-    {
+    public function register(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder
+    ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -33,18 +35,26 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
+                $passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData())
             );
+            $user->setSurname($form->get('surname')->getData());
+            $user->setName($form->get('name')->getData());
+            $user->setPatronymic($form->get('patronymic')->getData());
+            $user->setSpecialization($form->get('specialization')->getData());
+            $user->setJob($form->get('job')->getData());
+            $user->setPosition($form->get('position')->getData());
+            $user->setPhone($form->get('phone')->getData());
+            $user->setCountry($form->get('country')->getData());
+            $user->setCity($form->get('city')->getData());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('danchiksokol@mail.ru', 'Registration Mail Bot'))
                     ->to($user->getEmail())
@@ -56,14 +66,18 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
+        return $this->render(
+            'registration/register.html.twig',
+            [
+                'registrationForm' => $form->createView(),
+            ]
+        );
     }
 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request): Response
-    {
+    public function verifyUserEmail(
+        Request $request
+    ): Response {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         // validate email confirmation link, sets User::isVerified=true and persists
