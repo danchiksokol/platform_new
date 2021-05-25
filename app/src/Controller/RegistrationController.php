@@ -46,6 +46,7 @@ class RegistrationController extends AbstractController
             $user->setPhone($form->get('phone')->getData());
             $user->setCountry($form->get('country')->getData());
             $user->setCity($form->get('city')->getData());
+            $user->setRoles(['ROLE_USER']);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
