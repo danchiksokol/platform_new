@@ -23,6 +23,11 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
+    /**
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
+     */
     #[Route('/register', name: 'app_register')]
     public function register(
         Request $request,
@@ -75,6 +80,10 @@ class RegistrationController extends AbstractController
         );
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(
         Request $request
