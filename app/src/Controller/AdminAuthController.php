@@ -9,9 +9,14 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminAuthController extends AbstractController
 {
+    /**
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
     #[Route('/admin/login', name: 'app_admin_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
+    public function login(
+        AuthenticationUtils $authenticationUtils
+    ): Response {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
@@ -24,9 +29,8 @@ class AdminAuthController extends AbstractController
         return $this->render('security/admin-login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    /**
-     * @Route("/logout", name="app_logout")
-     */
+    
+    #[Route('/logout', name: 'app_logout')]
     public function logout()
     {
         throw new \LogicException(
