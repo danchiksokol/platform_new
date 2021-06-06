@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChatRoomController!{% endblock %}
+
+{% block body %}
+    <h1>Chat example</h1>
+    User name: {{ username }}
+
+    <form action="{{ path('newMessage', { 'chatid' : chatid }) }}" method="POST">
+        <input name="username" placeholder="username" value="{{ username }}" size="10">
+        <input name="content" placeholder="Your message..." size="50" autocomplete="off">
+        <input type="submit" value="Post">
+    </form>
+    <hr>
+
+    <div id="messages">
+        {% for message in messages %}
+            {{ message.participant.user.name }}<li> {{ message.content }} </li>
+        {% endfor %}
+    </div>
+{% endblock %}
