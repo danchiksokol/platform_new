@@ -46,7 +46,7 @@ class MessageController extends BaseController
     
     
     #[Route('/message', name: 'message')]
-    public function index(): Response
+    public function indexAction(): Response
     {
         return $this->render('message/index.html.twig', [
             'controller_name' => 'MessageController',
@@ -60,40 +60,15 @@ class MessageController extends BaseController
      * @throws \Exception
      */
     #[Route('/{chatid}', name: 'newMessage', methods: ['POST'])]
-    public function send(Request $request)
+    public function sendAction(Request $request)
     {
         $chatRoomId = $request->get('chatid');
         $chatRoom = $this->chatRoomRepository->find($chatRoomId);
         $user = $this->getUser();
         $content = $request->get('content');
 
-        $message = new Message();
-        $message->setContent($content);
-        $message->setCreatedAt(new \DateTime('NOW'));
-        $message->setIsShow(1);
-
-        $participant = new Participant();
-        $participant->addMessage($message);
-        $participant->setUser($user);
-        $participant->setIsBlock(0);
-        $participant->setChatroom($chatRoom);
-
-        $this->entityManager->beginTransaction();
-        try{
-            $this->entityManager->persist($message);
-            $this->entityManager->persist($participant);
-            $this->entityManager->flush();
-
-            $this->entityManager->commit();
-        }catch (\Exception $exception){
-            $this->entityManager->rollback();
-            throw $exception;
-        }
-
+        //TODO:: Сделать отправку сообщений через сервис для вопросов лектору
         return $this->redirectToRoute('app_chatroom', ['chatid' => $chatRoomId]);
-//        return $this->json($message, Response::HTTP_CREATED, [], [
-//            'attributes' => self::ATRIBUTES_TO_SERIALIZE
-//        ]);
     }
 
 }

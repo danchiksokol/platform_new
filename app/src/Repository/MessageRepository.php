@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Message;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 use function Doctrine\ORM\QueryBuilder;
@@ -16,14 +18,30 @@ use function Doctrine\ORM\QueryBuilder;
  */
 class MessageRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var ManagerRegistry
+     */
+    private $registry;
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * MessageRepository constructor.
+     * @param ManagerRegistry $registry
+     * @param EntityManager $entityManager
+     */
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Message::class);
+        $this->registry = $registry;
+        $this->entityManager = $entityManager;
     }
 
     /**
      * @param int $chatRoomId
-     * @return int|mixed|string
+     * @return Message[]
      */
     public function findAllMessagesByChatRoomId(int $chatRoomId)
     {
@@ -41,4 +59,50 @@ class MessageRepository extends ServiceEntityRepository
     }
 
 
+    /**
+     * @param int $id
+     * @return object
+     */
+    public function getOne(int $id): object
+    {
+        return $this->find($id);
+    }
+
+    /**
+     * @return Message[]
+     */
+    public function getAll(): array
+    {
+        return $this->findAll();
+    }
+
+    /**
+     * @param Message $message
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function setCreate(Message $message)
+    {
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->persist($message);
+            $this->entityManager->flush();
+
+            $this->entityManager->commit();
+        } catch (\Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
+    }
+
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\Persistence\Mapping\MappingException
+     */
+    public function setSave()
+    {
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+    }
 }

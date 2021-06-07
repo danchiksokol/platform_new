@@ -19,5 +19,13 @@ class ChatRoomRepository extends ServiceEntityRepository
         parent::__construct($registry, ChatRoom::class);
     }
 
+    /**
+     * @param int $id
+     * @return object
+     */
+    public function getOne(int $id): object
+    {
+        return $this->find($id);
+    }
 
 }

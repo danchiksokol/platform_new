@@ -57,7 +57,7 @@ class ChatRoomController extends BaseController
      * @throws \Exception
      */
     #[Route('/{chatid}', name: 'chatroom')]
-    public function index(
+    public function indexAction(
         Request $request
     ): Response {
         $chatRoomId = $request->get('chatid');
@@ -84,20 +84,12 @@ class ChatRoomController extends BaseController
         return $this->render(
             'chatroom/index.html.twig',
             [
-                'username' => $this->getUser()->getUsername(),
+                'user' => $this->getUser()->getId(),
                 'messages' => $messages,
                 'chatid' => $chatRoomId
             ]
         );
 
-//        return $this->json(
-//            $messages,
-//            Response::HTTP_CREATED,
-//            [],
-//            [
-//                'attributes' => self::ATRIBUTES_TO_SERIALIZE
-//            ]
-//        );
     }
 
 }
