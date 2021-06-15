@@ -67,7 +67,6 @@ class Chat implements MessageComponentInterface
         $content = $data->message;
         $participant = $this->participantService->createParticipant($chatRoomId, $userId);
         $this->messageService->saveMessage($participant, $content);
-        //TODO сервис сохранения сообщений
     }
 
     public function onClose(ConnectionInterface $conn)
