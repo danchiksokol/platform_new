@@ -12,6 +12,7 @@ class BaseController extends AbstractController
     {
         return [
             'title' => 'Значение по умолчанию',
+            'user' => $this->getUser()->getUsername()
         ];
     }
 }

@@ -74,6 +74,7 @@ class ComposerStaticInit49983981d07691c8e0d98eae52ceccaf
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Config\\' => 25,
             'Symfony\\Component\\Cache\\' => 24,
+            'Symfony\\Component\\Asset\\' => 24,
             'Symfony\\Bundle\\TwigBundle\\' => 26,
             'Symfony\\Bundle\\SecurityBundle\\' => 30,
             'Symfony\\Bundle\\MakerBundle\\' => 27,
@@ -324,6 +325,10 @@ class ComposerStaticInit49983981d07691c8e0d98eae52ceccaf
         array (
             0 => __DIR__ . '/..' . '/symfony/cache',
         ),
+        'Symfony\\Component\\Asset\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/asset',
+        ),
         'Symfony\\Bundle\\TwigBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/twig-bundle',
@@ -535,6 +540,8 @@ class ComposerStaticInit49983981d07691c8e0d98eae52ceccaf
     );
 
     public static $classMap = array (
+        'App\\Command\\SocketCommand' => __DIR__ . '/../..' . '/src/Command/SocketCommand.php',
+        'App\\Command\\SocketCommandMany' => __DIR__ . '/../..' . '/src/Command/SocketCommandMany.php',
         'App\\Controller\\AdminAuthController' => __DIR__ . '/../..' . '/src/Controller/AdminAuthController.php',
         'App\\Controller\\Admin\\AdminBaseController' => __DIR__ . '/../..' . '/src/Controller/Admin/AdminBaseController.php',
         'App\\Controller\\Admin\\AdminHomeController' => __DIR__ . '/../..' . '/src/Controller/Admin/AdminHomeController.php',
@@ -584,6 +591,10 @@ class ComposerStaticInit49983981d07691c8e0d98eae52ceccaf
         'App\\Security\\UserAuthenticator' => __DIR__ . '/../..' . '/src/Security/UserAuthenticator.php',
         'App\\Services\\FileService\\FileManagerService' => __DIR__ . '/../..' . '/src/Services/FileService/FileManagerService.php',
         'App\\Services\\FileService\\FileManagerServiceInterface' => __DIR__ . '/../..' . '/src/Services/FileService/FileManagerServiceInterface.php',
+        'App\\Services\\Message\\MessageService' => __DIR__ . '/../..' . '/src/Services/Message/MessageService.php',
+        'App\\Services\\Participant\\ParticipantService' => __DIR__ . '/../..' . '/src/Services/Participant/ParticipantService.php',
+        'App\\Services\\User\\UserService' => __DIR__ . '/../..' . '/src/Services/User/UserService.php',
+        'App\\Sockets\\Chat' => __DIR__ . '/../..' . '/src/Sockets/Chat.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Collator' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/Collator.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -2820,6 +2831,22 @@ class ComposerStaticInit49983981d07691c8e0d98eae52ceccaf
         'Symfony\\Bundle\\TwigBundle\\DependencyInjection\\TwigExtension' => __DIR__ . '/..' . '/symfony/twig-bundle/DependencyInjection/TwigExtension.php',
         'Symfony\\Bundle\\TwigBundle\\TemplateIterator' => __DIR__ . '/..' . '/symfony/twig-bundle/TemplateIterator.php',
         'Symfony\\Bundle\\TwigBundle\\TwigBundle' => __DIR__ . '/..' . '/symfony/twig-bundle/TwigBundle.php',
+        'Symfony\\Component\\Asset\\Context\\ContextInterface' => __DIR__ . '/..' . '/symfony/asset/Context/ContextInterface.php',
+        'Symfony\\Component\\Asset\\Context\\NullContext' => __DIR__ . '/..' . '/symfony/asset/Context/NullContext.php',
+        'Symfony\\Component\\Asset\\Context\\RequestStackContext' => __DIR__ . '/..' . '/symfony/asset/Context/RequestStackContext.php',
+        'Symfony\\Component\\Asset\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/symfony/asset/Exception/ExceptionInterface.php',
+        'Symfony\\Component\\Asset\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/symfony/asset/Exception/InvalidArgumentException.php',
+        'Symfony\\Component\\Asset\\Exception\\LogicException' => __DIR__ . '/..' . '/symfony/asset/Exception/LogicException.php',
+        'Symfony\\Component\\Asset\\Package' => __DIR__ . '/..' . '/symfony/asset/Package.php',
+        'Symfony\\Component\\Asset\\PackageInterface' => __DIR__ . '/..' . '/symfony/asset/PackageInterface.php',
+        'Symfony\\Component\\Asset\\Packages' => __DIR__ . '/..' . '/symfony/asset/Packages.php',
+        'Symfony\\Component\\Asset\\PathPackage' => __DIR__ . '/..' . '/symfony/asset/PathPackage.php',
+        'Symfony\\Component\\Asset\\UrlPackage' => __DIR__ . '/..' . '/symfony/asset/UrlPackage.php',
+        'Symfony\\Component\\Asset\\VersionStrategy\\EmptyVersionStrategy' => __DIR__ . '/..' . '/symfony/asset/VersionStrategy/EmptyVersionStrategy.php',
+        'Symfony\\Component\\Asset\\VersionStrategy\\JsonManifestVersionStrategy' => __DIR__ . '/..' . '/symfony/asset/VersionStrategy/JsonManifestVersionStrategy.php',
+        'Symfony\\Component\\Asset\\VersionStrategy\\RemoteJsonManifestVersionStrategy' => __DIR__ . '/..' . '/symfony/asset/VersionStrategy/RemoteJsonManifestVersionStrategy.php',
+        'Symfony\\Component\\Asset\\VersionStrategy\\StaticVersionStrategy' => __DIR__ . '/..' . '/symfony/asset/VersionStrategy/StaticVersionStrategy.php',
+        'Symfony\\Component\\Asset\\VersionStrategy\\VersionStrategyInterface' => __DIR__ . '/..' . '/symfony/asset/VersionStrategy/VersionStrategyInterface.php',
         'Symfony\\Component\\Cache\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/AbstractAdapter.php',
         'Symfony\\Component\\Cache\\Adapter\\AbstractTagAwareAdapter' => __DIR__ . '/..' . '/symfony/cache/Adapter/AbstractTagAwareAdapter.php',
         'Symfony\\Component\\Cache\\Adapter\\AdapterInterface' => __DIR__ . '/..' . '/symfony/cache/Adapter/AdapterInterface.php',

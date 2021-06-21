@@ -16,15 +16,21 @@ class EmailVerifier
     private $mailer;
     private $entityManager;
 
-    public function __construct(VerifyEmailHelperInterface $helper, MailerInterface $mailer, EntityManagerInterface $manager)
-    {
+    public function __construct(
+        VerifyEmailHelperInterface $helper,
+        MailerInterface $mailer,
+        EntityManagerInterface $manager
+    ) {
         $this->verifyEmailHelper = $helper;
         $this->mailer = $mailer;
         $this->entityManager = $manager;
     }
 
-    public function sendEmailConfirmation(string $verifyEmailRouteName, UserInterface $user, TemplatedEmail $email): void
-    {
+    public function sendEmailConfirmation(
+        string $verifyEmailRouteName,
+        UserInterface $user,
+        TemplatedEmail $email
+    ): void {
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
             $verifyEmailRouteName,
             $user->getId(),
@@ -32,7 +38,8 @@ class EmailVerifier
         );
 
         $context = $email->getContext();
-        $context['signedUrl'] = $signatureComponents->getSignedUrl();
+//        $context['signedUrl'] = $signatureComponents->getSignedUrl() . '&secret=' . $user->getSecret();
+        $context['signedUrl'] = $signatureComponents->getSignedUrl() .'&secret='. $user->getSecret();
         $context['expiresAtMessageKey'] = $signatureComponents->getExpirationMessageKey();
         $context['expiresAtMessageData'] = $signatureComponents->getExpirationMessageData();
 

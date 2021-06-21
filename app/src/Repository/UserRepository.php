@@ -44,4 +44,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         return $this->find($id);
     }
+
+    /**
+     * @param string $secret
+     * @return object|null
+     */
+    public function getOneBySecret(string $secret): ?object
+    {
+        return $this->findOneBy(['secret' => $secret]);
+    }
 }

@@ -79,8 +79,6 @@ class ChatRoomController extends BaseController
             $messages
         );
 
-//        dd($messages);
-
         return $this->render(
             'chatroom/index.html.twig',
             [

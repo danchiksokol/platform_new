@@ -104,6 +104,11 @@ class User implements UserInterface
      */
     private $answers;
 
+    /**
+     * @ORM\Column(type="guid")
+     */
+    private $secret;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
@@ -398,6 +403,18 @@ class User implements UserInterface
                 $answer->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSecret(): ?string
+    {
+        return $this->secret;
+    }
+
+    public function setSecret(string $secret): self
+    {
+        $this->secret = $secret;
 
         return $this;
     }

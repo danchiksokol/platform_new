@@ -1,28 +1,83 @@
-{% extends 'base.html.twig' %}
+{% extends 'registration/base.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 d-none d-sm-block">
+                <h1>Картинка</h1>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>LOGO</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Регистрация</h3>
+                        {{ form_start(registrationForm) }}
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.email, {
+                                label: 'e-mail',
+                                row_attr: {
+                                    class: 'input-group'
+                                }
+                            }) }}
+                        </div>
+                        {# <div class="form-control"> #}
+                        {# <i class="fa fa-calendar"></i> {{ form_label(registrationForm.email) }} #}
+                        {# {{ form_widget(registrationForm.email, {label: form_label(registrationForm.email)}) }} #}
 
-    <h1>Register</h1>
+                        {# <small>{{ form_help(registrationForm.email) }}</small> #}
 
-    {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
-    {{ form_row(registrationForm.surname, {label: 'Фамилия'}) }}
-    {{ form_row(registrationForm.name, {label: 'Имя'}) }}
-    {{ form_row(registrationForm.patronymic, {label: 'Отчество'}) }}
-    {{ form_row(registrationForm.specialization, {label: 'Специализация'}) }}
-    {{ form_row(registrationForm.job, {label: 'Место работы'}) }}
-    {{ form_row(registrationForm.position, {label: 'Должность'}) }}
-    {{ form_row(registrationForm.phone, {label: 'Телефон'}) }}
-    {{ form_row(registrationForm.country, {label: 'Страна'}) }}
-    {{ form_row(registrationForm.city, {label: 'Город'}) }}
-    {{ form_row(registrationForm.agreeTerms) }}
+                        {# <div class="form-error"> #}
+                        {# {% for flashError in app.flashes('verify_email_error') %} #}
+                        {# <div class="alert alert-danger" role="alert">{{ flashError }}</div> #}
+                        {# {% endfor %} #}
+                        {# </div> #}
+                        {# </div> #}
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.surname, {label: 'Фамилия'}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.name, {label: 'Имя'}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.patronymic, {label: 'Отчество'}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.specialization, {label: 'Специализация'}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.job, {label: 'Место работы'}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.position, {label: 'Должность'}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.phone, {label: 'Телефон'}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.country, {label: 'Страна'}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.city, {label: 'Город'}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.agreeTerms, {label: 'Согласен на обработку персональных данных'}) }}
+                        </div>
 
-    <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                        <button type="submit" class="btn btn-outline-secondary">Зарегестрироваться</button>
+                        {{ form_end(registrationForm) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

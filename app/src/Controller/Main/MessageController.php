@@ -59,7 +59,7 @@ class MessageController extends BaseController
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      * @throws \Exception
      */
-    #[Route('/{chatid}', name: 'newMessage', methods: ['POST'])]
+    #[Route('/newmessage/{chatid}', name: 'newMessage', methods: ['POST'])]
     public function sendAction(Request $request)
     {
         $chatRoomId = $request->get('chatid');

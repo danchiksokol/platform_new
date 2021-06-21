@@ -454,6 +454,15 @@
             'reference' => '3aa5818d73ad2551281fc58a75afd9ca82622e6c',
             'dev_requirement' => false,
         ),
+        'symfony/asset' => array(
+            'pretty_version' => 'v5.2.10',
+            'version' => '5.2.10.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/asset',
+            'aliases' => array(),
+            'reference' => 'c65584ca108c9e51c80cc49ebdcb47dfd995431c',
+            'dev_requirement' => false,
+        ),
         'symfony/cache' => array(
             'pretty_version' => 'v5.2.6',
             'version' => '5.2.6.0',
