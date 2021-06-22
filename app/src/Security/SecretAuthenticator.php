@@ -57,7 +57,8 @@ class SecretAuthenticator extends AbstractGuardAuthenticator
     public function checkCredentials($credentials, UserInterface $user)
     {
         if ($credentials['secret'] === $user->getSecret()) {
-            //TODO: Запись верификации
+            $this->userRepository->setVification($user);
+
             return true;
         }
 

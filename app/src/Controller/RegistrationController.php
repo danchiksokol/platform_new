@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
+use App\Services\User\UserService;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,19 +22,19 @@ class RegistrationController extends AbstractController
      */
     private $emailVerifier;
     /**
-     * @var UserRepository
+     * @var UserService
      */
-    private $userRepository;
+    private $userService;
 
     /**
      * RegistrationController constructor.
      * @param EmailVerifier $emailVerifier
-     * @param UserRepository $userRepository
+     * @param UserService $userService
      */
-    public function __construct(EmailVerifier $emailVerifier, UserRepository $userRepository)
+    public function __construct(EmailVerifier $emailVerifier, UserService $userService)
     {
         $this->emailVerifier = $emailVerifier;
-        $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
 
     /**
@@ -44,34 +44,14 @@ class RegistrationController extends AbstractController
      */
     #[Route('/register', name: 'app_register')]
     public function register(
-        Request $request,
-        UserPasswordEncoderInterface $passwordEncoder
+        Request $request
     ): Response {
-        //TODO Вынести Service
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData())
-            );
-            $user->setSurname($form->get('surname')->getData());
-            $user->setName($form->get('name')->getData());
-            $user->setPatronymic($form->get('patronymic')->getData());
-            $user->setSpecialization($form->get('specialization')->getData());
-            $user->setJob($form->get('job')->getData());
-            $user->setPosition($form->get('position')->getData());
-            $user->setPhone($form->get('phone')->getData());
-            $user->setCountry($form->get('country')->getData());
-            $user->setCity($form->get('city')->getData());
-            $user->setRoles(['ROLE_USER']);
-            $user->setSecret(md5(uniqid()));
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->userService->handleCreate($user, $form);
 
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation(
@@ -85,7 +65,7 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render(

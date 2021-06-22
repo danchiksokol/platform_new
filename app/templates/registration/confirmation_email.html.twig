@@ -1,11 +1,62 @@
-<h1>Hi! Please confirm your email!</h1>
-
-<p>
-    Please confirm your email address by clicking the following link: <br><br>
-    <a href="{{ signedUrl }}">Confirm my Email</a>.
-    This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
-</p>
-
-<p>
-    Cheers!
-</p>
+<td class="esd-stripe" align="center" bgcolor="#f8f9fd" style="background-color: #f8f9fd;">
+    <table bgcolor="#ffffff" class="es-content-body" align="center" cellpadding="0" cellspacing="0" width="600">
+        <tbody>
+        <tr>
+            <td class="esd-structure es-p10t es-p15b es-p30r es-p30l" align="left">
+                <table cellpadding="0" cellspacing="0" width="100%">
+                    <tbody>
+                    <tr>
+                        <td width="540" class="esd-container-frame" align="center" valign="top">
+                            <table cellpadding="0" cellspacing="0" width="100%">
+                                <tbody>
+                                <tr>
+                                    <td align="center" class="esd-block-image" style="font-size:0">
+                                        <a target="_blank">
+                                            <img class="adapt-img esdev-empty-img" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fcaramel-shop.com.ua%2Fp827511551-saharnaya-kartinka-lyubov.html&psig=AOvVaw35fa21Gmc6yU9dUY4SrI-a&ust=1624449184288000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCLCUi_aWq_ECFQAAAAAdAAAAABAD" alt width="100%" height="100" style="display: none;">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" class="esd-block-text">
+                                        <p><b>{{UserName}}</b>, <br>
+                                            Выбыли успешно успешно зарегистрированы на Интерактивный форум<br>
+                                            экспертов по вопросам диагностики и лечения<br><br>
+                                            Уже сейчас ....
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="esd-block-button">
+                                                    <span class="es-button-border">
+                                                        <a href="{{ signedUrl }}" class="es-button" target="_blank"> Подключиться </a>
+                                                    </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" class="esd-block-text">
+                                        <p>Принять участие в форуме можно<br>ыатывиарывиар</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" class="esd-block-text">
+                                        <p style="text-align: center;">Ваш адрес электронной почты<br>
+                                            <a href>{{ UserEmail }}</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" class="esd-block-text">
+                                        <p>Форум будет транслироваться в онлайн режиме</p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</td>

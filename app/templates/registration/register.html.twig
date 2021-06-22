@@ -5,8 +5,18 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col-md-6 d-none d-sm-block">
-                <h1>Картинка</h1>
+            <div class="col-md-6 d-none d-md-block">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Картинка</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-outline-secondary">Программа</button>
+                        <button class="btn btn-outline-secondary">Отправить постер</button>
+                    </div>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="row">
@@ -16,7 +26,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>Регистрация</h3>
+                        <h4>Регистрация</h4>
                         {{ form_start(registrationForm) }}
                         <div class="mb-3">
                             {{ form_row(registrationForm.email, {
@@ -72,9 +82,16 @@
                             {{ form_row(registrationForm.agreeTerms, {label: 'Согласен на обработку персональных данных'}) }}
                         </div>
 
-                        <button type="submit" class="btn btn-outline-secondary">Зарегестрироваться</button>
+                        <button type="submit" class="btn btn-outline-secondary">Зарегистрироваться</button>
+                        <a href="/login">Войти на платформу</a>
                         {{ form_end(registrationForm) }}
 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="d-block d-sm-block d-md-none">
+                        <button class="btn btn-outline-secondary">Программа</button>
+                        <button class="btn btn-outline-secondary">Отправить постер</button>
                     </div>
                 </div>
             </div>

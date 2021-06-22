@@ -28,9 +28,7 @@ class UserAuthController extends AbstractController
         return $this->render('security/user-login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    /**
-     * @Route("/logout", name="app_logout")
-     */
+    #[Route('/logout', name: 'app_logout')]
     public function logout()
     {
         throw new \LogicException(
