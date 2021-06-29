@@ -1,4 +1,4 @@
-{% extends 'registration/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
@@ -79,7 +79,8 @@
                             {{ form_row(registrationForm.city, {label: 'Город'}) }}
                         </div>
                         <div class="mb-3">
-                            {{ form_row(registrationForm.agreeTerms, {label: 'Согласен на обработку персональных данных'}) }}
+                            {{ form_row(registrationForm.agreeTerms) }}
+                            <span>Согласен на обработку персональных данных</span>
                         </div>
 
                         <button type="submit" class="btn btn-outline-secondary">Зарегистрироваться</button>

@@ -13,6 +13,10 @@ class FileManagerService implements FileManagerServiceInterface
 
     private $fileUploadDirectory;
 
+    /**
+     * FileManagerService constructor.
+     * @param $fileUploadDirectory
+     */
     public function __construct($fileUploadDirectory)
     {
         $this->fileUploadDirectory = $fileUploadDirectory;
@@ -43,6 +47,10 @@ class FileManagerService implements FileManagerServiceInterface
         return $fileName;
     }
 
+    /**
+     * @param string $fileName
+     * @return mixed|void
+     */
     public function removeFile(string $fileName)
     {
         $fileSystem = new Filesystem();
