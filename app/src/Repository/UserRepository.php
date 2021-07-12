@@ -96,6 +96,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
+     * @return object
+     */
+    public function getAll(): array
+    {
+        return $this->findAll();
+    }
+
+    /**
      * @param string $secret
      * @return object|null
      */

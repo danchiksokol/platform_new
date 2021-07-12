@@ -17,7 +17,7 @@ class AdminHomeController extends AdminBaseController
     {
         $forRender = parent::renderDefault();
         return $this->render(
-            'main/index.html.twig', $forRender
+            'admin/index.html.twig', $forRender
         );
     }
 }
