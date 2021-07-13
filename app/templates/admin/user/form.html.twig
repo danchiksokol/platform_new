@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ forRender.title }}{% endblock %}
+
+{% block body %}
+    {{ form_start(userForm) }}
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover table-bordered">
+                <tbody>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ form_row(userForm.email) }}</td>
+                </tr>
+                <tr>
+                    <td>Фамилия</td>
+                    <td>{{ form_row(userForm.surname) }}</td>
+                </tr>
+                <tr>
+                    <td>Имя</td>
+                    <td>{{ form_row(userForm.name) }}</td>
+                </tr>
+                <tr>
+                    <td>Отчество</td>
+                    <td>{{ form_row(userForm.patronymic) }}</td>
+                </tr>
+                <tr>
+                    <td>Специализация</td>
+                    <td>{{ form_row(userForm.specialization) }}</td>
+                </tr>
+                <tr>
+                    <td>Место работы</td>
+                    <td>{{ form_row(userForm.job) }}</td>
+                </tr>
+                <tr>
+                    <td>Должность</td>
+                    <td>{{ form_row(userForm.position) }}</td>
+                </tr>
+                <tr>
+                    <td>Телефон</td>
+                    <td>{{ form_row(userForm.phone) }}</td>
+                </tr>
+                <tr>
+                    <td>Страна</td>
+                    <td>{{ form_row(userForm.country) }}</td>
+                </tr>
+                <tr>
+                    <td>Город</td>
+                    <td>{{ form_row(userForm.city) }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-6">{{ form_row(userForm.save) }}</div>
+            <div class="col-md-6">{{ form_row(userForm.delete) }}</div>
+        </div>
+    </div>
+    {{ form_end(userForm) }}
+{% endblock %}

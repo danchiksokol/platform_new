@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Form\RegistrationFormType;
+use App\Form\UserFormType;
 use App\Repository\UserRepository;
 use App\Services\User\UserService;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +41,7 @@ class AdminUserController extends AdminBaseController
         $usersAll = $this->userRepository->getAll();
 
         return $this->render(
-            'admin/user/user.html.twig',
+            'admin/user/index.html.twig',
             [
                 'title' => $forRender,
                 'controller_name' => 'AdminUserController',
@@ -54,15 +55,24 @@ class AdminUserController extends AdminBaseController
      * @param int $userId
      */
     #[Route('/admin/users/update/{userId}', name: 'admin_users_update')]
-    public function updateAction(Request $request, int $userId)
-    {
+    public function updateAction(
+        Request $request,
+        int $userId
+    ) {
         $user = $this->userRepository->getOne($userId);
-        $formUser = $this->createForm(RegistrationFormType::class, $user);
+        $formUser = $this->createForm(UserFormType::class, $user);
         $formUser->handleRequest($request);
 
-        if($formUser->isSubmitted() && $formUser->isValid()) {
-            $this->userService->handleUpdate($user, $formUser);
-            $this->addFlash('success', 'Изменения сохранены');
+        if ($formUser->isSubmitted() && $formUser->isValid()) {
+            if ($formUser->get('save')->isClicked()) {
+                $this->userService->handleUpdate($user, $formUser);
+                $this->addFlash('success', 'Изменения сохранены');
+            }
+
+            if ($formUser->get('delete')->isClicked()) {
+                $this->userService->handleDelete($user);
+                $this->addFlash('success', 'Пользователь удален');
+            }
 
             return $this->redirectToRoute('admin_users');
         }
@@ -70,12 +80,28 @@ class AdminUserController extends AdminBaseController
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Редактирование пользователя';
 
-        //TODO Сделать новую форму для редактирования
         return $this->render(
-            'registration/register.html.twig',
+            'admin/user/form.html.twig',
             [
-                'registrationForm' => $formUser->createView(),
+                'forRender' => $forRender,
+                'userForm' => $formUser->createView(),
             ]
         );
+    }
+
+    /**
+     * @param int $userId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
+     */
+    #[Route('/admin/users/delete/{userId}', name: 'admin_users_delete')]
+    public function deleteAction(
+        int $userId
+    ) {
+        $user = $this->userRepository->getOne($userId);
+        $this->userService->handleDelete($user);
+        $this->addFlash('success', 'Пользователь удален');
+
+        return $this->redirectToRoute('admin_users');
     }
 }

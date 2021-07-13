@@ -59,11 +59,16 @@ class UserService
         return $this;
     }
 
+    /**
+     * @param User $user
+     * @param Form $form
+     * @return $this
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function handleUpdate(User $user, Form $form)
     {
-        $user->setPassword(
-            $this->passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData())
-        );
+        $user->setEmail($form->get('email')->getData());
         $user->setSurname($form->get('surname')->getData());
         $user->setName($form->get('name')->getData());
         $user->setPatronymic($form->get('patronymic')->getData());
@@ -73,8 +78,17 @@ class UserService
         $user->setPhone($form->get('phone')->getData());
         $user->setCountry($form->get('country')->getData());
         $user->setCity($form->get('city')->getData());
-
         $this->userRepository->setSave($user);
+
         return $this;
+    }
+
+    /**
+     * @param User $user
+     * @throws \Exception
+     */
+    public function handleDelete(User $user)
+    {
+        $this->userRepository->setDelete($user);
     }
 }

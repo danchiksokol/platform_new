@@ -13,7 +13,6 @@
                 <th scope="col">Электронная почта</th>
                 <th scope="col">Страна</th>
                 <th scope="col">Город</th>
-                <th scope="col">Статус</th>
             </tr>
             </thead>
             <tbody>
@@ -22,9 +21,7 @@
                 <tr>
                     {% set count = count + 1 %}
                     <td>{{ count }}</td>
-                    <td>{{ row.surname }}</td>
-                    <td>{{ row.name }}</td>
-                    <td>{{ row.patronymic }}</td>
+                    <td>{{ row.surname }} {{ row.name }} {{ row.patronymic }}</td>
                     <td>{{ row.job }}</td>
                     <td>{{ row.position }}</td>
                     <td>{{ row.phone }}</td>
@@ -32,7 +29,7 @@
                     <td>{{ row.country }}</td>
                     <td>{{ row.city }}</td>
                     <td><a type="button" class="btn btn-secondary" href="{{path('admin_users_update', {'userId': row.id}) }}">Изменить</a></td>
-                    <td><a type="button" class="btn btn-danger" href="/delete/{{ row.id }}">X</a></td>
+                    <td><a type="button" class="btn btn-danger" href="{{path('admin_users_delete', {'userId': row.id}) }}">X</a></td>
                 </tr>
             {% endfor %}
             </tbody>
