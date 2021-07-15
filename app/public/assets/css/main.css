@@ -1,0 +1,51 @@
+img {
+    max-width: 100%;
+}
+body {
+    padding: 50px 0;
+}
+.registration-logo {
+    width: 80px;
+    margin: 0 auto;
+    display: block;
+}
+.registration-form input:not(input[type="checkbox"]) {
+    width: 100%;
+    height: 36px;
+    font-size: 14px;
+    padding: 0 16px;
+    border: solid 2px rgba(224, 224, 255, 0.06);
+    background-color: rgba(20, 1, 41, 0.02);
+}
+.registration-form .mb-3 {
+    margin-bottom: 0.7rem !important;
+}
+h4 {
+    color: #261b6b;
+    font-size: 18px;
+    margin: 0.7rem 0;
+}
+.registration-buttons {
+    background: #ede4f0;
+    padding: 25px 15px;
+    text-align: center;
+}
+.registration-checkbox > * {
+    width: auto;
+}
+.registration-checkbox {
+    margin-bottom: 1rem;
+    font-size: 14px;
+}
+.registration-checkbox span {
+    text-decoration: underline;
+    cursor: pointer;
+}
+@media (max-width: 500px) {
+    .registration .col-md-6:first-child {
+        order: 1;
+    }
+    .registration-banner {
+        display: none;
+    }
+}

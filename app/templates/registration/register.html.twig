@@ -4,28 +4,30 @@
 
 {% block body %}
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 d-none d-md-block">
-                <div class="row">
+        <div class="row registration">
+            <div class="col-md-7">
+                <div class="row registration-banner">
                     <div class="col-md-12">
-                        <h2>Картинка</h2>
+                        <img src="/assets/img/banner.png">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <button class="btn btn-outline-secondary">Программа</button>
-                        <a href="{{ path('theses_create') }}" class="btn btn-outline-secondary">Отправить постер</a>
+                        <div class="registration-buttons">
+                            <button class="btn btn-outline-secondary">Программа</button>
+                            <a href="{{ path('theses_create') }}" class="btn btn-outline-secondary">Отправить постер</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>LOGO</h2>
+                        <img class="registration-logo" src="/assets/img/logo.png">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 registration-form">
                         <h4>Регистрация</h4>
                         {{ form_start(registrationForm) }}
                         <div class="mb-3">
@@ -78,13 +80,14 @@
                         <div class="mb-3">
                             {{ form_row(registrationForm.city, {label: 'Город'}) }}
                         </div>
-                        <div class="mb-3">
+                        <div class="row registration-checkbox">
                             {{ form_row(registrationForm.agreeTerms) }}
-                            <span>Согласен на обработку персональных данных</span>
+                            <div>Согласен на <span>обработку персональных данных</span></div>
                         </div>
 
                         <button type="submit" class="btn btn-outline-secondary">Зарегистрироваться</button>
                         <a href="/login">Войти на платформу</a>
+                        <a href="javascript:void(0);">Помощь</a>
                         {{ form_end(registrationForm) }}
 
                     </div>
