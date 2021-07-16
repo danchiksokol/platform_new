@@ -3,9 +3,33 @@
 {% block title %}Create Theses{% endblock %}
 
 {% block body %}
-
-    <h1>Подача тезисов</h1>
-
-    {{ form_start(thesesForm) }}
-    {{ form_end(thesesForm) }}
+    <div class="container">
+        <div class="row theses-create">
+            <div class="col-md-12">
+                <h1>Подача тезисов</h1>
+                <p>Глубокоуважаемые коллеги!</p>
+                <p>Для отправки постера, пожалуйста, заполните строчки с личной информацией ниже.</p>
+                <p>Тезис (краткую аннотацию) постера с длинной не более 2500 символов впишете в раздел "Тезис".</p>
+                <p>Материалы для постера прикрепите одним или несколькими файлами, нажав кнопку "Обзор файлов".</p>
+                <p>Нажмите кнопку "Отправить".</p>
+                <p>На указанный e-mail придет письмо с подтверждением.</p>
+                <p>Если у Вас возникли проблемы с отправкой постера, сообщите в службу поддержки: <a href="mailto:lymphoma@tsoncology.com">lymphoma@tsoncology.com</a></p>
+                <p>Спасибо!</p>
+            </div>
+            <div class="col-md-5 col-12">
+                <div class="form">
+                    {{ form_start(thesesForm) }}
+                    {{ form_end(thesesForm) }}
+                    <textarea placeholder="Тезис" maxlength="2500" id="textarea"></textarea>
+                    <span class="textarea-symbol">Осталось <span>2500</span> символов</span>
+                    <span class="file-label">Размер ограничения для каждого файла 100 MB</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#textarea').bind('input', function () {
+            $('.textarea-symbol span').text(2500 - $(this).val().length);
+        });
+    </script>
 {% endblock %}

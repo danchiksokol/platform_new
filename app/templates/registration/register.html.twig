@@ -5,8 +5,8 @@
 {% block body %}
     <div class="container">
         <div class="row registration">
-            <div class="col-md-7">
-                <div class="row registration-banner">
+            <div class="col-md-7 registration-order">
+                <div class="row registration-banner d-none d-lg-block">
                     <div class="col-md-12">
                         <img src="/assets/img/banner.png">
                     </div>
@@ -15,7 +15,7 @@
                     <div class="col-md-12">
                         <div class="registration-buttons">
                             <button class="btn btn-outline-secondary">Программа</button>
-                            <a href="{{ path('theses_create') }}" class="btn btn-outline-secondary">Отправить постер</a>
+                            <a href="{{ path('theses_create') }}" type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-secondary">Отправить постер</a>
                         </div>
                     </div>
                 </div>
@@ -23,11 +23,15 @@
             <div class="col-md-5">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="lang">
+                            <a class="btn btn-light" href="javascript:void(0);">RU</a>
+                            <a class="btn btn-secondary" href="javascript:void(0);">EN</a>
+                        </div>
                         <img class="registration-logo" src="/assets/img/logo.png">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 registration-form">
+                    <div class="col-md-12 form">
                         <h4>Регистрация</h4>
                         {{ form_start(registrationForm) }}
                         <div class="mb-3">
@@ -82,20 +86,48 @@
                         </div>
                         <div class="row registration-checkbox">
                             {{ form_row(registrationForm.agreeTerms) }}
-                            <div>Согласен на <span>обработку персональных данных</span></div>
+                            <div>Согласен на <button type="button" data-toggle="modal" data-target="#politicModal">обработку персональных данных</button></div>
                         </div>
-
-                        <button type="submit" class="btn btn-outline-secondary">Зарегистрироваться</button>
-                        <a href="/login">Войти на платформу</a>
-                        <a href="javascript:void(0);">Помощь</a>
+                        <div class="registration-btn">
+                            <button type="submit" class="btn btn-outline-secondary">Зарегистрироваться</button>
+                            <a href="/login">Войти на платформу</a>
+                        </div>
                         {{ form_end(registrationForm) }}
-
+                        <button class="btn btn-link registration-help" type="button" data-toggle="modal" data-target="#callbackModal">Помощь</button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="d-block d-sm-block d-md-none">
-                        <button class="btn btn-outline-secondary">Программа</button>
-                        <a href="{{ path('theses_create') }}" class="btn btn-outline-secondary">Отправить постер</a>
+            </div>
+        </div>
+        <div class="modal fade" id="politicModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Обработка персональных данных</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Текст
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="callbackModal" tabindex="-1"  aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >Форма обратной связи</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body form">
+                        <form>
+                            <input type="email" placeholder="Введите свой e-mail" required>
+                            <textarea required placeholder="Введите свой вопрос"></textarea>
+                            <button type="button" class="btn btn-primary">Отправить</button>
+                        </form>
                     </div>
                 </div>
             </div>
