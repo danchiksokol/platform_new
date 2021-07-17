@@ -16,13 +16,14 @@ class ThesesController extends AbstractController
      * @return Response
      */
     #[Route('/theses', name: 'theses')]
-    public function index(): Response
+    public function indexAction(): Response
     {
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Тезисы';
+
         return $this->render(
-            'theses/index.html.twig',
-            [
-                'controller_name' => 'ThesesController',
-            ]
+            'main/theses/index.html.twig',
+            $forRender
         );
     }
 
@@ -32,7 +33,7 @@ class ThesesController extends AbstractController
      * @return Response
      */
     #[Route('/theses/create', name: 'theses_create')]
-    public function create(
+    public function createAction(
         Request $request,
         FileManagerServiceInterface $fileManagerService
     ): Response {
@@ -55,7 +56,7 @@ class ThesesController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
         return $this->render(
-            'theses/form.html.twig',
+            'main/theses/form.html.twig',
             [
                 'thesesForm' => $form->createView(),
             ]

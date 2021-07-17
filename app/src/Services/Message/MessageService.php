@@ -31,7 +31,7 @@ class MessageService
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function saveMessage(Participant $participant, string $content)
+    public function handleCreate(Participant $participant, string $content)
     {
         $message = new Message();
         $message->setContent($content);
@@ -40,7 +40,28 @@ class MessageService
         $message->setParticipant($participant);
         $this->messageRepository->setCreate($message);
 
-        return $message;
+        return $this;
+    }
+
+    /**
+     * @param Message $message
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function handleDelete(Message $message)
+    {
+        $this->messageRepository->setDelete($message);
+    }
+
+    /**
+     * @param Message $message
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\Persistence\Mapping\MappingException
+     */
+    public function handleHide(Message $message)
+    {
+        $this->messageRepository->setHide($message);
     }
 
 }

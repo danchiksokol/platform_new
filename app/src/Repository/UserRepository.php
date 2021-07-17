@@ -41,7 +41,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         $user->setIsVerified(1);
         $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $this->setSave();
     }
 
     /**
@@ -70,8 +70,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function setSave()
     {
         $this->entityManager->flush();
+        $this->entityManager->clear();
     }
 
+    /**
+     * @param User $user
+     * @throws \Exception
+     */
     public function setDelete(User $user)
     {
         $this->entityManager->beginTransaction();

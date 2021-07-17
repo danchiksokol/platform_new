@@ -107,4 +107,22 @@ class ParticipantRepository extends ServiceEntityRepository
         $this->entityManager->flush();
         $this->entityManager->clear();
     }
+
+    /**
+     * @param Participant $participant
+     * @throws \Exception
+     */
+    public function setDelete(Participant $participant)
+    {
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->remove($participant);
+            $this->entityManager->flush();
+
+            $this->entityManager->commit();
+        } catch (\Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
+    }
 }

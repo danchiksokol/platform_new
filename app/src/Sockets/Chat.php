@@ -34,6 +34,9 @@ class Chat implements MessageComponentInterface
         $this->messageService = $messageService;
     }
 
+    /**
+     * @param ConnectionInterface $conn
+     */
     public function onOpen(ConnectionInterface $conn)
     {
         // Store the new connection to send messages to later
@@ -42,6 +45,12 @@ class Chat implements MessageComponentInterface
         echo "New connection! ({$conn->resourceId})\n";
     }
 
+    /**
+     * @param ConnectionInterface $from
+     * @param string $msg
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function onMessage(ConnectionInterface $from, $msg)
     {
         $numRecv = count($this->clients) - 1;
@@ -65,10 +74,13 @@ class Chat implements MessageComponentInterface
         $chatRoomId = intval($data->chatroom);
         $userId = $data->username;
         $content = $data->message;
-        $participant = $this->participantService->createParticipant($chatRoomId, $userId);
-        $this->messageService->saveMessage($participant, $content);
+        $participant = $this->participantService->handleCreate($chatRoomId, $userId);
+        $this->messageService->handleCreate($participant, $content);
     }
 
+    /**
+     * @param ConnectionInterface $conn
+     */
     public function onClose(ConnectionInterface $conn)
     {
         // The connection is closed, remove it, as we can no longer send it messages
@@ -77,6 +89,10 @@ class Chat implements MessageComponentInterface
         echo "Connection {$conn->resourceId} has disconnected\n";
     }
 
+    /**
+     * @param ConnectionInterface $conn
+     * @param \Exception $e
+     */
     public function onError(ConnectionInterface $conn, \Exception $e)
     {
         echo "An error has occurred: {$e->getMessage()}\n";

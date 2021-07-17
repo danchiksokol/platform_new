@@ -11,8 +11,7 @@ class BaseController extends AbstractController
     public function renderDefault()
     {
         return [
-            'title' => 'Значение по умолчанию',
-            'user' => $this->getUser()->getUsername()
+            'title' => 'Значение по умолчанию'
         ];
     }
 }

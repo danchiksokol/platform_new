@@ -30,8 +30,11 @@ class ParticipantService
      * @param ChatRoomRepository $chatRoomRepository
      * @param UserRepository $userRepository
      */
-    public function __construct(ParticipantRepository $participantRepository, ChatRoomRepository $chatRoomRepository, UserRepository $userRepository)
-    {
+    public function __construct(
+        ParticipantRepository $participantRepository,
+        ChatRoomRepository $chatRoomRepository,
+        UserRepository $userRepository
+    ) {
         $this->participantRepository = $participantRepository;
         $this->userRepository = $userRepository;
         $this->chatRoomRepository = $chatRoomRepository;
@@ -42,7 +45,7 @@ class ParticipantService
      * @param int $userId
      * @return $this
      */
-    public function createParticipant(int $chatRoomId, int $userId)
+    public function handleCreate(int $chatRoomId, int $userId)
     {
         $participant = $this->participantRepository->isParticipantExist($chatRoomId, $userId);
         if ($participant) {
@@ -58,7 +61,16 @@ class ParticipantService
         $participant->setChatroom($chatRoom);
         $this->participantRepository->setCreate($participant);
 
-        return $participant;
+        return $this;
+    }
+
+    /**
+     * @param Participant $participant
+     * @throws \Exception
+     */
+    public function handleDelete(Participant $participant)
+    {
+        $this->participantRepository->setDelete($participant);
     }
 
 }

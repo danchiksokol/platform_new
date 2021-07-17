@@ -105,4 +105,36 @@ class MessageRepository extends ServiceEntityRepository
         $this->entityManager->flush();
         $this->entityManager->clear();
     }
+
+    /**
+     * @param Message $message
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function setDelete(Message $message)
+    {
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->remove($message);
+            $this->entityManager->flush();
+
+            $this->entityManager->commit();
+        } catch (\Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
+    }
+
+    /**
+     * @param Message $message
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\Persistence\Mapping\MappingException
+     */
+    public function setHide(Message $message)
+    {
+        $this->entityManager->setIsShow(0);
+        $this->entityManager->persist($message);
+        $this->setSave();
+    }
 }
