@@ -3,18 +3,27 @@
 {% block title %}Hello ChatRoomController!{% endblock %}
 
 {% block body %}
-    <h1>Public chat</h1>
-    <ul id="chat-list">
-    {% for message in messages %}
-        <li>{{ message.mine ? 'me' : user }} : {{ message.content }}</li>
-    {% endfor %}
-    </ul>
-    <hr>
-    <textarea id="form-message" placeholder="Your public message here"></textarea>
-    <input type="button" id="form-submit" value="Send message"/>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-3 col-12">
+                <div class="chatroom">
+                    <h1>Public chat</h1>
+                    <ul id="chat-list">
+                        {% for message in messages %}
+                            <li>{{ message.mine ? 'me' : user }} : {{ message.content }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="chatroom-bottom">
+                        <textarea id="form-message" placeholder="Your public message here"></textarea>
+                        <input type="button" id="form-submit"/>
+                    </div>
 
-    {{ user }}
+                    {{ user }}
 
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         // This object will be sent everytime you submit a message in the sendMessage function.
         var clientInformation = {
