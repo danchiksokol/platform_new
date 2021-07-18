@@ -30,9 +30,27 @@ class ChatRoom
      */
     private $participants;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Speaker::class, mappedBy="chatroom")
+     */
+    private $speakers;
+
+    /**
+     * @ORM\OneToMany(targetEntity=QuestionSpeaker::class, mappedBy="chatroom")
+     */
+    private $questionSpeakers;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AnswerSpeaker::class, mappedBy="chatroom")
+     */
+    private $answerSpeakers;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
+        $this->speakers = new ArrayCollection();
+        $this->questionSpeakers = new ArrayCollection();
+        $this->answerSpeakers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,6 +94,96 @@ class ChatRoom
             // set the owning side to null (unless already changed)
             if ($participant->getChatroom() === $this) {
                 $participant->setChatroom(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Speaker[]
+     */
+    public function getSpeakers(): Collection
+    {
+        return $this->speakers;
+    }
+
+    public function addSpeaker(Speaker $speaker): self
+    {
+        if (!$this->speakers->contains($speaker)) {
+            $this->speakers[] = $speaker;
+            $speaker->setChatroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpeaker(Speaker $speaker): self
+    {
+        if ($this->speakers->removeElement($speaker)) {
+            // set the owning side to null (unless already changed)
+            if ($speaker->getChatroom() === $this) {
+                $speaker->setChatroom(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|QuestionSpeaker[]
+     */
+    public function getQuestionSpeakers(): Collection
+    {
+        return $this->questionSpeakers;
+    }
+
+    public function addQuestionSpeaker(QuestionSpeaker $questionSpeaker): self
+    {
+        if (!$this->questionSpeakers->contains($questionSpeaker)) {
+            $this->questionSpeakers[] = $questionSpeaker;
+            $questionSpeaker->setChatroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestionSpeaker(QuestionSpeaker $questionSpeaker): self
+    {
+        if ($this->questionSpeakers->removeElement($questionSpeaker)) {
+            // set the owning side to null (unless already changed)
+            if ($questionSpeaker->getChatroom() === $this) {
+                $questionSpeaker->setChatroom(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AnswerSpeaker[]
+     */
+    public function getAnswerSpeakers(): Collection
+    {
+        return $this->answerSpeakers;
+    }
+
+    public function addAnswerSpeaker(AnswerSpeaker $answerSpeaker): self
+    {
+        if (!$this->answerSpeakers->contains($answerSpeaker)) {
+            $this->answerSpeakers[] = $answerSpeaker;
+            $answerSpeaker->setChatroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswerSpeaker(AnswerSpeaker $answerSpeaker): self
+    {
+        if ($this->answerSpeakers->removeElement($answerSpeaker)) {
+            // set the owning side to null (unless already changed)
+            if ($answerSpeaker->getChatroom() === $this) {
+                $answerSpeaker->setChatroom(null);
             }
         }
 

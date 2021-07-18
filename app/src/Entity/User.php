@@ -109,11 +109,29 @@ class User implements UserInterface
      */
     private $secret;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Speaker::class, mappedBy="user")
+     */
+    private $speakers;
+
+    /**
+     * @ORM\OneToMany(targetEntity=QuestionSpeaker::class, mappedBy="user")
+     */
+    private $questionSpeakers;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AnswerSpeaker::class, mappedBy="user")
+     */
+    private $answerSpeakers;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
         $this->participants = new ArrayCollection();
         $this->answers = new ArrayCollection();
+        $this->speakers = new ArrayCollection();
+        $this->questionSpeakers = new ArrayCollection();
+        $this->answerSpeakers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -415,6 +433,96 @@ class User implements UserInterface
     public function setSecret(string $secret): self
     {
         $this->secret = $secret;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Speaker[]
+     */
+    public function getSpeakers(): Collection
+    {
+        return $this->speakers;
+    }
+
+    public function addSpeaker(Speaker $speaker): self
+    {
+        if (!$this->speakers->contains($speaker)) {
+            $this->speakers[] = $speaker;
+            $speaker->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpeaker(Speaker $speaker): self
+    {
+        if ($this->speakers->removeElement($speaker)) {
+            // set the owning side to null (unless already changed)
+            if ($speaker->getUser() === $this) {
+                $speaker->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|QuestionSpeaker[]
+     */
+    public function getQuestionSpeakers(): Collection
+    {
+        return $this->questionSpeakers;
+    }
+
+    public function addQuestionSpeaker(QuestionSpeaker $questionSpeaker): self
+    {
+        if (!$this->questionSpeakers->contains($questionSpeaker)) {
+            $this->questionSpeakers[] = $questionSpeaker;
+            $questionSpeaker->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestionSpeaker(QuestionSpeaker $questionSpeaker): self
+    {
+        if ($this->questionSpeakers->removeElement($questionSpeaker)) {
+            // set the owning side to null (unless already changed)
+            if ($questionSpeaker->getUser() === $this) {
+                $questionSpeaker->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AnswerSpeaker[]
+     */
+    public function getAnswerSpeakers(): Collection
+    {
+        return $this->answerSpeakers;
+    }
+
+    public function addAnswerSpeaker(AnswerSpeaker $answerSpeaker): self
+    {
+        if (!$this->answerSpeakers->contains($answerSpeaker)) {
+            $this->answerSpeakers[] = $answerSpeaker;
+            $answerSpeaker->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswerSpeaker(AnswerSpeaker $answerSpeaker): self
+    {
+        if ($this->answerSpeakers->removeElement($answerSpeaker)) {
+            // set the owning side to null (unless already changed)
+            if ($answerSpeaker->getUser() === $this) {
+                $answerSpeaker->setUser(null);
+            }
+        }
 
         return $this;
     }
