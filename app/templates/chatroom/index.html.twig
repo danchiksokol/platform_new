@@ -10,7 +10,11 @@
                     <h1>Public chat</h1>
                     <ul id="chat-list">
                         {% for message in messages %}
-                            <li>{{ message.mine ? 'me' : user }} : {{ message.content }}</li>
+                            <li>
+                                <div class="chatroom-message">{{ message.content }}</div>
+                                <span class="chatroom-user">{{ message.mine ? 'me' : user }}</span>
+                                <span class="chatroom-date">16 июля 21:12</span>
+                            </li>
                         {% endfor %}
                     </ul>
                     <div class="chatroom-bottom">

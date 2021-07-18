@@ -459,6 +459,20 @@ header {
     position: relative;
     border-top: 1px solid #dcdcdc;
 }
+.chatroom-date {
+    font-size: 14px;
+    text-align: right;
+    width: 60%;
+    display: inline-block;
+}
+.chatroom-user {
+    font-size: 14px;
+    width: 38%;
+    display: inline-block;
+}
+.chatroom-message {
+    margin-bottom: 12px;
+}
 @media (max-width: 991px) {
     nav {
         display: none;
