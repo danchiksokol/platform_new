@@ -1,0 +1,140 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="main-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-12 faq">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#askQuestion"
+                            class="btn btn-outline-secondary">Задать вопрос
+                    </button>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                    Каковы системные требования?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to
+                                    demonstrate the <code>.accordion-flush</code> class. This is the first item's
+                                    accordion body.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                        aria-controls="flush-collapseTwo">
+                                    Картинка трансляции подвисает/помехи в трансляции. Что делать?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to
+                                    demonstrate the <code>.accordion-flush</code> class. This is the second item's
+                                    accordion body. Let's imagine this being filled with some actual content.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                        aria-controls="flush-collapseThree">
+                                    Что если программа форума отображается некорректно?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to
+                                    demonstrate the <code>.accordion-flush</code> class. This is the third item's
+                                    accordion body. Nothing more exciting happening here in terms of content, but just
+                                    filling up the space to make it look, at least at first glance, a bit more
+                                    representative of how this would look in a real-world application.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                        aria-controls="flush-collapseThree">
+                                    Могу ли я развернуть окно трансляции на весь экран?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFour" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Могу ли я развернуть окно трансляции на весь экран?</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                        aria-controls="flush-collapseThree">
+                                    Можно ли подключаться с разных устройств?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFive" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Могу ли я развернуть окно трансляции на весь экран?</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseSix" aria-expanded="false"
+                                        aria-controls="flush-collapseThree">
+                                    Как задать вопрос спикеру?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseSix" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Могу ли я развернуть окно трансляции на весь экран?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="chatroom">
+                        <h1>Public chat</h1>
+                        <ul id="chat-list">
+                            <li>24 : czxcxz</li>
+                            <li>24 : xzcxzcz</li>
+                            <li>24 : zxczxc</li>
+                            <li>24 : ssafasf</li>
+                            <li>24 : asfasf</li>
+                            <li>24 : test</li>
+                        </ul>
+                        <hr>
+                        <textarea id="form-message" placeholder="Your public message here"></textarea>
+                        <input class="btn btn-secondary" type="button" id="form-submit" value="Send message">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade askQuestion" id="askQuestion" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Форма обратной связи</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body form">
+                    <form>
+                        <input type="email" placeholder="Введите свой e-mail" required>
+                        <textarea required placeholder="Введите свой вопрос"></textarea>
+                        <button type="button" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

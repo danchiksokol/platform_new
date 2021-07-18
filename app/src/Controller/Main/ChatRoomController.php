@@ -80,7 +80,7 @@ class ChatRoomController extends BaseController
         );
 
         return $this->render(
-            'chatroom/index.html.twig',
+            'main/chatroom/index.html.twig',
             [
                 'user' => $this->getUser()->getId(),
                 'messages' => $messages,

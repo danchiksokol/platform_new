@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'main/base.html.twig' %}
 
 {% block title %}Hello ChatRoomController!{% endblock %}
 
@@ -10,8 +10,8 @@
     {% endfor %}
     </ul>
     <hr>
-    <textarea id="form-message" placeholder="Your public message here"></textarea>
-    <input type="button" id="form-submit" value="Send message"/>
+    <textarea id="form-message" placeholder="Сообщение"></textarea>
+    <input type="button" id="form-submit" value="Отправить"/>
 
     {{ user }}
 
