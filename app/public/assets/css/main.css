@@ -117,6 +117,7 @@ header {
     padding: 8px;
     height: 100%;
     max-height: 600px;
+    background: #fff;
 }
 .chatroom  ul {
     /*height: calc(100% - 44px);*/
@@ -132,6 +133,8 @@ header {
 }
 .chatroom ul {
     padding: 0;
+    max-height: 467px;
+    overflow-y: scroll;
 }
 .chatroom textarea {
     width: 100%;
