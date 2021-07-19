@@ -6,7 +6,7 @@ namespace App\Services\Theses;
 
 use App\Entity\Theses;
 use App\Repository\ThesesRepository;
-use App\Services\FileService\FileManagerServiceInterface;
+use App\Services\FileService\FileManagerService;
 use Symfony\Component\Form\Form;
 
 class ThesesService
@@ -25,10 +25,11 @@ class ThesesService
      * @param ThesesRepository $thesesRepository
      * @param FileManagerServiceInterface $fileManagerService
      */
-    public function __construct(ThesesRepository $thesesRepository, FileManagerServiceInterface $fileManagerService)
+    public function __construct(ThesesRepository $thesesRepository, FileManagerService $fileManagerService)
     {
         $this->thesesRepository = $thesesRepository;
         $this->fileManagerService = $fileManagerService;
+        $this->fileManagerService->setFileUploadDirectory('theses');
     }
 
     /**
@@ -48,6 +49,14 @@ class ThesesService
         $this->thesesRepository->setCreate($theses);
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getThesesPath()
+    {
+        return $this->fileManagerService->getFileUploadDirectory();
     }
 
 }

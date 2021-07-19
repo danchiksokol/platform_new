@@ -5,6 +5,7 @@ namespace App\Controller\Main;
 use App\Entity\Theses;
 use App\Form\ThesesFormType;
 use App\Services\FileService\FileManagerServiceInterface;
+use App\Services\Mailer\MailerService;
 use App\Services\Theses\ThesesService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,15 +18,22 @@ class ThesesController extends AbstractController
      * @var ThesesService
      */
     private $thesesService;
+    /**
+     * @var MailerService
+     */
+    private $mailerService;
 
     /**
      * ThesesController constructor.
      * @param ThesesService $thesesService
+     * @param MailerService $mailerService
      */
-    public function __construct(ThesesService $thesesService)
+    public function __construct(ThesesService $thesesService, MailerService $mailerService)
     {
         $this->thesesService = $thesesService;
+        $this->mailerService = $mailerService;
     }
+
     /**
      * @return Response
      */
@@ -43,19 +51,21 @@ class ThesesController extends AbstractController
 
     /**
      * @param Request $request
-     * @param FileManagerServiceInterface $fileManagerService
      * @return Response
      */
     #[Route('/theses/create', name: 'theses_create')]
     public function createAction(
-        Request $request,
-        FileManagerServiceInterface $fileManagerService
+        Request $request
     ): Response {
         $theses = new Theses();
         $form = $this->createForm(ThesesFormType::class, $theses);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->thesesService->handleCreate($theses, $form);
+            $path = $this->thesesService->getThesesPath();
+            $fileInPath = $path . '/' . $theses->getFile();
+            $this->mailerService->handleSendMail($form, $fileInPath);
+
             $this->addFlash('Success', 'Добавлен успешно');
 
             return $this->redirectToRoute('app_register');
