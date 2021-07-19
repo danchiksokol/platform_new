@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ChatRoom
 {
+    public const MEGA_CHAT = 1;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
