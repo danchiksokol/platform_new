@@ -3,17 +3,76 @@
 
 namespace App\Controller\Main;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ChatRoomRepository;
+use App\Repository\MessageRepository;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends BaseController
 {
+    public const MEGA_CHAT = 1;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+    /**
+     * @var ChatRoomRepository
+     */
+    private $chatRoomRepository;
+    /**
+     * @var MessageRepository
+     */
+    private $messageRepository;
+
+    /**
+     * HomeController constructor.
+     * @param UserRepository $userRepository
+     * @param EntityManagerInterface $entityManager
+     * @param ChatRoomRepository $chatRoomRepository
+     * @param MessageRepository $messageRepository
+     */
+    public function __construct(
+        UserRepository $userRepository,
+        EntityManagerInterface $entityManager,
+        ChatRoomRepository $chatRoomRepository,
+        MessageRepository $messageRepository
+    ) {
+        $this->userRepository = $userRepository;
+        $this->entityManager = $entityManager;
+        $this->chatRoomRepository = $chatRoomRepository;
+        $this->messageRepository = $messageRepository;
+    }
 
     #[Route('/', 'home')]
     public function indexAction()
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Главная страница';
+
+        $chatRoom = $this->chatRoomRepository->getOne($this->chatRoomRepository::MEGA_CHAT);
+        if (is_null($chatRoom)) {
+            throw new \Exception('Такого чата нет!');
+        }
+        $messages = $this->messageRepository->findAllMessagesByChatRoomId($this->chatRoomRepository::MEGA_CHAT);
+        array_map(
+            function ($message) {
+                $message->setMine(
+                    $message->getParticipant()->getUser()->getId() === $this->getUser()->getId()
+                        ? true : false
+                );
+            },
+            $messages
+        );
+
+        $forRender['messages'] = $messages;
+        $forRender['user'] = $this->getUser()->getId();
+        $forRender['chatid'] = $this->chatRoomRepository::MEGA_CHAT;
+
         return $this->render('main/index.html.twig', $forRender);
     }
 

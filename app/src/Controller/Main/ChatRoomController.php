@@ -61,14 +61,11 @@ class ChatRoomController extends BaseController
         Request $request
     ): Response {
         $chatRoomId = $request->get('chatid');
-        $chatRoom = $this->chatRoomRepository->find($chatRoomId);
-
+        $chatRoom = $this->chatRoomRepository->getOne($chatRoomId);
         if (is_null($chatRoom)) {
             throw new \Exception('Такого чата нет!');
         }
-
         $messages = $this->messageRepository->findAllMessagesByChatRoomId($chatRoomId);
-
         array_map(
             function ($message) {
                 $message->setMine(

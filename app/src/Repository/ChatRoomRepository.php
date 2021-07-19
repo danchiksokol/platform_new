@@ -14,6 +14,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ChatRoomRepository extends ServiceEntityRepository
 {
+    public const MEGA_CHAT = 1;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ChatRoom::class);
