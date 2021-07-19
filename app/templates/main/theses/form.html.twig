@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'main/theses/base.html.twig' %}
 
 {% block title %}Create Theses{% endblock %}
 
@@ -13,22 +13,32 @@
                 <p>Материалы для постера прикрепите одним или несколькими файлами, нажав кнопку "Обзор файлов".</p>
                 <p>Нажмите кнопку "Отправить".</p>
                 <p>На указанный e-mail придет письмо с подтверждением.</p>
-                <p>Если у Вас возникли проблемы с отправкой постера, сообщите в службу поддержки: <a href="mailto:lymphoma@tsoncology.com">lymphoma@tsoncology.com</a></p>
+                <p>Если у Вас возникли проблемы с отправкой постера, сообщите в службу поддержки: <a
+                            href="mailto:lymphoma@tsoncology.com">lymphoma@tsoncology.com</a></p>
                 <p>Спасибо!</p>
             </div>
             <div class="col-md-5 col-12">
                 <div class="form">
                     {{ form_start(thesesForm) }}
-                    {{ form_end(thesesForm) }}
-                    <textarea placeholder="Тезис" maxlength="2500" id="textarea"></textarea>
+                    {{ form_row(thesesForm.FIO) }}
+                    {{ form_row(thesesForm.email) }}
+                    {{ form_row(thesesForm.phone) }}
+                    {{ form_row(thesesForm.city) }}
+                    {{ form_row(thesesForm.work) }}
+                    {{ form_row(thesesForm.title) }}
+                    {{ form_row(thesesForm.authors) }}
+                    {{ form_row(thesesForm.theses) }}
                     <span class="textarea-symbol">Осталось <span>2500</span> символов</span>
+                    {{ form_row(thesesForm.file) }}
                     <span class="file-label">Размер ограничения для каждого файла 100 MB</span>
+                    {{ form_row(thesesForm.send) }}
+                    {{ form_end(thesesForm) }}
                 </div>
             </div>
         </div>
     </div>
     <script>
-        $('#textarea').bind('input', function () {
+        $('#theses_form_theses').bind('input', function () {
             $('.textarea-symbol span').text(2500 - $(this).val().length);
         });
     </script>

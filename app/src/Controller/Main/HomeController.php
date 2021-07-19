@@ -48,7 +48,7 @@ class HomeController extends BaseController
         $this->messageRepository = $messageRepository;
     }
 
-    #[Route('/', 'home')]
+    #[Route('/', 'app_main_home_index')]
     public function indexAction()
     {
         $forRender = parent::renderDefault();
@@ -76,7 +76,7 @@ class HomeController extends BaseController
         return $this->render('main/index.html.twig', $forRender);
     }
 
-    #[Route('/programms', 'programms')]
+    #[Route('/programms', 'app_main_home_programms')]
     public function programmsAction()
     {
         $forRender = parent::renderDefault();
@@ -84,7 +84,7 @@ class HomeController extends BaseController
         return $this->render('main/programms/index.html.twig', $forRender);
     }
 
-    #[Route('/sponsors', 'sponsors')]
+    #[Route('/sponsors', 'app_main_home_sponsors')]
     public function sponsorsAction()
     {
         $forRender = parent::renderDefault();
@@ -92,7 +92,7 @@ class HomeController extends BaseController
         return $this->render('main/sponsors/index.html.twig', $forRender);
     }
 
-    #[Route('/broadcast', 'broadcast')]
+    #[Route('/broadcast', 'app_main_home_broadcast')]
     public function broadcastAction()
     {
         $forRender = parent::renderDefault();
@@ -100,7 +100,7 @@ class HomeController extends BaseController
         return $this->render('main/broadcast/index.html.twig', $forRender);
     }
 
-    #[Route('/help', 'help')]
+    #[Route('/help', 'app_main_home_help')]
     public function helpAction()
     {
         $forRender = parent::renderDefault();

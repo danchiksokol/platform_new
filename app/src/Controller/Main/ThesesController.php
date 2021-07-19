@@ -5,6 +5,7 @@ namespace App\Controller\Main;
 use App\Entity\Theses;
 use App\Form\ThesesFormType;
 use App\Services\FileService\FileManagerServiceInterface;
+use App\Services\Theses\ThesesService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ThesesController extends AbstractController
 {
+    /**
+     * @var ThesesService
+     */
+    private $thesesService;
+
+    /**
+     * ThesesController constructor.
+     * @param ThesesService $thesesService
+     */
+    public function __construct(ThesesService $thesesService)
+    {
+        $this->thesesService = $thesesService;
+    }
     /**
      * @return Response
      */
@@ -41,16 +55,7 @@ class ThesesController extends AbstractController
         $form = $this->createForm(ThesesFormType::class, $theses);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $form->get('file')->getData();
-            if ($file) {
-                $fileName = $fileManagerService->uploadFile($file);
-                $theses->setFile($fileName);
-            }
-            $theses->setFIO($form->get('FIO')->getData());
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($theses);
-            $entityManager->flush();
+            $this->thesesService->handleCreate($theses, $form);
             $this->addFlash('Success', 'Добавлен успешно');
 
             return $this->redirectToRoute('app_register');

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Theses;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,37 +15,49 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ThesesRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var ManagerRegistry
+     */
+    private $registry;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * ThesesRepository constructor.
+     * @param ManagerRegistry $registry
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Theses::class);
+        $this->registry = $registry;
+        $this->entityManager = $entityManager;
     }
 
-    // /**
-    //  * @return Theses[] Returns an array of Theses objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Theses $theses
+     * @throws \Exception
+     */
+    public function setCreate(Theses $theses)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->persist($theses);
+            $this->entityManager->flush();
 
-    /*
-    public function findOneBySomeField($value): ?Theses
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            $this->entityManager->commit();
+        } catch (\Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
     }
-    */
+
+    public function setSave()
+    {
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+    }
+
 }

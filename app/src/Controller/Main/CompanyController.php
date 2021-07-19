@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CompanyController extends BaseController
 {
-    #[Route('/company', name: 'company')]
+    #[Route('/company', name: 'app_company')]
     public function indexAction(): Response
     {
         $forRender = parent::renderDefault();
