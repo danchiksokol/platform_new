@@ -3,6 +3,7 @@
 
 namespace App\Controller\Main;
 
+use App\Entity\ChatRoom;
 use App\Repository\ChatRoomRepository;
 use App\Repository\MessageRepository;
 use App\Repository\UserRepository;
@@ -11,7 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends BaseController
 {
-    public const MEGA_CHAT = 1;
     /**
      * @var UserRepository
      */
@@ -54,11 +54,11 @@ class HomeController extends BaseController
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Главная страница';
 
-        $chatRoom = $this->chatRoomRepository->getOne($this->chatRoomRepository::MEGA_CHAT);
+        $chatRoom = $this->chatRoomRepository->getOne(ChatRoom::MEGA_CHAT);
         if (is_null($chatRoom)) {
             throw new \Exception('Такого чата нет!');
         }
-        $messages = $this->messageRepository->findAllMessagesByChatRoomId($this->chatRoomRepository::MEGA_CHAT);
+        $messages = $this->messageRepository->findAllMessagesByChatRoomId(ChatRoom::MEGA_CHAT);
         array_map(
             function ($message) {
                 $message->setMine(
@@ -71,7 +71,7 @@ class HomeController extends BaseController
 
         $forRender['messages'] = $messages;
         $forRender['user'] = $this->getUser()->getId();
-        $forRender['chatid'] = $this->chatRoomRepository::MEGA_CHAT;
+        $forRender['chatid'] = ChatRoom::MEGA_CHAT;
 
         return $this->render('main/index.html.twig', $forRender);
     }
