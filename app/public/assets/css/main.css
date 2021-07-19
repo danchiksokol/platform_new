@@ -25,11 +25,10 @@ input, textarea {
     background-color: rgba(20, 1, 41, 0.02);
     margin-bottom: 0.7rem;
 }
-.form input[type="file"] {
-    margin-bottom: 0.7rem;
-}
 .file-label {
     font-size: 14px;
+    margin-bottom: 16px;
+    display: block;
 }
 .registration_form .mb-3 {
     margin-bottom: 0 !important;
@@ -74,6 +73,7 @@ h4 {
     display: block;
     text-align: right;
     font-weight: 500;
+    margin-bottom: 12px;
 }
 .registration-help {
     background: none;
@@ -408,7 +408,7 @@ header {
     width: 100%;
     height: 88px;
     font-size: 14px;
-    padding: 0 16px;
+    padding: 4px 16px;
     border: solid 2px rgba(224, 224, 255, 0.06);
     background-color: rgba(20, 1, 41, 0.02);
     resize: none;
@@ -480,6 +480,20 @@ header {
 .chatroom-message {
     margin-bottom: 12px;
 }
+.registration {
+    margin-top: 24px;
+}
+.theses-create {
+    border: 1px solid #0d6efd;
+    border-radius: 64px;
+    padding: 32px 56px;
+}
+.theses-create p {
+    margin-bottom: 4px;
+}
+.theses-create .form {
+    margin-top: 8px;
+}
 @media (max-width: 991px) {
     nav {
         display: none;
@@ -527,6 +541,9 @@ header {
         display: block;
         max-width: 100%;
         margin-bottom: 16px;
+    }
+    .theses-create {
+        padding: 24px 32px;
     }
 }
 @media (max-width: 575px) {
@@ -580,6 +597,12 @@ header {
     }
     .registration-btn {
         flex-wrap: wrap;
+    }
+    .theses-create {
+        padding: 24px;
+    }
+    #theses_form_file {
+        max-width: 100%;
     }
 }
 

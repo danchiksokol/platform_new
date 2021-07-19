@@ -4,35 +4,35 @@
 
 {% block body %}
     <div class="container">
-        <div class="row theses-create">
-            <div class="col-md-12">
-                <h1>Подача тезисов</h1>
-                <p>Глубокоуважаемые коллеги!</p>
-                <p>Для отправки постера, пожалуйста, заполните строчки с личной информацией ниже.</p>
-                <p>Тезис (краткую аннотацию) постера с длинной не более 2500 символов впишете в раздел "Тезис".</p>
-                <p>Материалы для постера прикрепите одним или несколькими файлами, нажав кнопку "Обзор файлов".</p>
-                <p>Нажмите кнопку "Отправить".</p>
-                <p>На указанный e-mail придет письмо с подтверждением.</p>
-                <p>Если у Вас возникли проблемы с отправкой постера, сообщите в службу поддержки: <a
-                            href="mailto:lymphoma@tsoncology.com">lymphoma@tsoncology.com</a></p>
-                <p>Спасибо!</p>
-            </div>
-            <div class="col-md-5 col-12">
-                <div class="form">
-                    {{ form_start(thesesForm) }}
-                    {{ form_row(thesesForm.FIO) }}
-                    {{ form_row(thesesForm.email) }}
-                    {{ form_row(thesesForm.phone) }}
-                    {{ form_row(thesesForm.city) }}
-                    {{ form_row(thesesForm.work) }}
-                    {{ form_row(thesesForm.title) }}
-                    {{ form_row(thesesForm.authors) }}
-                    {{ form_row(thesesForm.theses) }}
-                    <span class="textarea-symbol">Осталось <span>2500</span> символов</span>
-                    {{ form_row(thesesForm.file) }}
-                    <span class="file-label">Размер ограничения для каждого файла 100 MB</span>
-                    {{ form_row(thesesForm.send) }}
-                    {{ form_end(thesesForm) }}
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-12">
+                <div class="theses-create">
+                    <h1>Подача тезисов</h1>
+                    <p>Глубокоуважаемые коллеги!</p>
+                    <p>Для отправки постера, пожалуйста, заполните строчки с личной информацией ниже.</p>
+                    <p>Тезис (краткую аннотацию) постера с длинной не более 2500 символов впишете в раздел "Тезис".</p>
+                    <p>Материалы для постера прикрепите одним или несколькими файлами, нажав кнопку "Обзор файлов".</p>
+                    <p>Нажмите кнопку "Отправить".</p>
+                    <p>На указанный e-mail придет письмо с подтверждением.</p>
+                    <p>Если у Вас возникли проблемы с отправкой постера, сообщите в службу поддержки: <a
+                                href="mailto:lymphoma@tsoncology.com">lymphoma@tsoncology.com</a></p>
+                    <p>Спасибо!</p>
+                    <div class="form">
+                        {{ form_start(thesesForm) }}
+                        {{ form_row(thesesForm.FIO) }}
+                        {{ form_row(thesesForm.email) }}
+                        {{ form_row(thesesForm.phone) }}
+                        {{ form_row(thesesForm.city) }}
+                        {{ form_row(thesesForm.work) }}
+                        {{ form_row(thesesForm.title) }}
+                        {{ form_row(thesesForm.authors) }}
+                        {{ form_row(thesesForm.theses) }}
+                        <span class="textarea-symbol">Осталось <span>2500</span> символов</span>
+                        {{ form_row(thesesForm.file) }}
+                        <span class="file-label">Размер ограничения для каждого файла 100 MB</span>
+                        {{ form_row(thesesForm.send) }}
+                        {{ form_end(thesesForm) }}
+                    </div>
                 </div>
             </div>
         </div>
