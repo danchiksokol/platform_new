@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\QuestionSpeaker;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,37 +15,115 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class QuestionSpeakerRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var ManagerRegistry
+     */
+    private $registry;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * QuestionSpeakerRepository constructor.
+     * @param ManagerRegistry $registry
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, QuestionSpeaker::class);
+        $this->registry = $registry;
+        $this->entityManager = $entityManager;
     }
 
-    // /**
-    //  * @return QuestionSpeaker[] Returns an array of QuestionSpeaker objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param QuestionSpeaker $questionSpeaker
+     * @throws \Exception
+     */
+    public function setCreate(QuestionSpeaker $questionSpeaker)
     {
-        return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('q.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->persist($questionSpeaker);
+            $this->entityManager->flush();
 
-    /*
-    public function findOneBySomeField($value): ?QuestionSpeaker
-    {
-        return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            $this->entityManager->commit();
+        } catch (\Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
     }
-    */
+
+    public function setSave()
+    {
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+    }
+
+    /**
+     * @param QuestionSpeaker $questionSpeaker
+     * @throws \Exception
+     */
+    public function setDelete(QuestionSpeaker $questionSpeaker)
+    {
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->remove($questionSpeaker);
+            $this->entityManager->flush();
+
+            $this->entityManager->commit();
+        } catch (\Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
+    }
+
+    /**
+     * @param QuestionSpeaker $questionSpeaker
+     */
+    public function setHide(QuestionSpeaker $questionSpeaker): viod
+    {
+        $this->entityManager->setIsShow(0);
+        $this->entityManager->persist($questionSpeaker);
+        $this->setSave();
+    }
+
+    /**
+     * @param QuestionSpeaker $questionSpeaker
+     * @return viod
+     */
+    public function setShow(QuestionSpeaker $questionSpeaker): viod
+    {
+        $this->entityManager->setIsShow(1);
+        $this->entityManager->persist($questionSpeaker);
+        $this->setSave();
+    }
+
+    /**
+     * @param int $questionSpeakerId
+     * @return object
+     */
+    public function getOne(int $questionSpeakerId): object
+    {
+        return $this->find($questionSpeakerId);
+    }
+
+    /**
+     * @return QuestionSpeaker[]
+     */
+    public function getAll(): array
+    {
+        return $this->findAll();
+    }
+
+    /**
+     * @param int $chatRoomId
+     * @return QuestionSpeaker[]
+     */
+    public function getAllByChatRoom(int $chatRoomId): array
+    {
+        return $this->findBy(['chatroom_id' => $chatRoomId], ['id' => 'ASC']);
+    }
+
+
 }

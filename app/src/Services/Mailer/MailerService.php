@@ -30,7 +30,7 @@ class MailerService
      * @param string $filePath
      * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
-    public function handleSendMail(Form $form, string $filePath)
+    public function handleSendEmail(Form $form, string $filePath)
     {
         $fio = $form->get('FIO')->getData();
         $phone = $form->get('phone')->getData();
@@ -50,4 +50,5 @@ class MailerService
 //TODO:: Отверстать письмо для тезисов
         $this->mailer->send($email);
     }
+
 }

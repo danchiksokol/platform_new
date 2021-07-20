@@ -93,7 +93,7 @@ class QuestionSpeaker
         return $this->speaker;
     }
 
-    public function setSpeaker(?Speaker $speaker): self
+    public function setSpeaker(int|Speaker $speaker): self
     {
         $this->speaker = $speaker;
 

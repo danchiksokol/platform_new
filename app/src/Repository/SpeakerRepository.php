@@ -19,32 +19,46 @@ class SpeakerRepository extends ServiceEntityRepository
         parent::__construct($registry, Speaker::class);
     }
 
-    // /**
-    //  * @return Speaker[] Returns an array of Speaker objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param int $speakerId
+     * @return object
+     */
+    public function getOne(int $speakerId): object
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->find($speakerId);
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Speaker
+    /**
+     * @return Speaker[]
+     */
+    public function getAll(): array
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->findAll();
     }
-    */
+
+    /**
+     * @param int $chatRoomId
+     * @return Speaker[]
+     */
+    public function getSpeakerByChatRoom(int $chatRoomId): array
+    {
+        return $this->findBy(['chatroom' => $chatRoomId], ['id' => 'ASC']);
+    }
+
+    /**
+     * @param int $chatRoomId
+     * @return array
+     */
+    public function getSpeakerByChatRoomForForm(int $chatRoomId): array
+    {
+        $speakers = $this->findBy(['chatroom' => $chatRoomId], ['id' => 'ASC']);
+        $result = [];
+        foreach ($speakers as $speaker) {
+            $id = $speaker->getId();
+            $fio = $speaker->getUser()->getSurname() . ' ' . $speaker->getUser()->getName();
+            $result[$fio] = $id;
+        }
+
+        return $result;
+    }
 }

@@ -8,6 +8,7 @@ use App\Repository\ChatRoomRepository;
 use App\Repository\MessageRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends BaseController
@@ -49,11 +50,8 @@ class HomeController extends BaseController
     }
 
     #[Route('/', 'app_main_home_index')]
-    public function indexAction()
+    public function indexAction(): Response
     {
-        $forRender = parent::renderDefault();
-        $forRender['title'] = 'Главная страница';
-
         $chatRoom = $this->chatRoomRepository->getOne(ChatRoom::MEGA_CHAT);
         if (is_null($chatRoom)) {
             throw new \Exception('Такого чата нет!');
@@ -69,15 +67,16 @@ class HomeController extends BaseController
             $messages
         );
 
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Главная страница';
         $forRender['messages'] = $messages;
         $forRender['user'] = $this->getUser()->getId();
         $forRender['chatid'] = ChatRoom::MEGA_CHAT;
-
         return $this->render('main/index.html.twig', $forRender);
     }
 
     #[Route('/programms', 'app_main_home_programms')]
-    public function programmsAction()
+    public function programmsAction(): Response
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Программы';
@@ -85,23 +84,23 @@ class HomeController extends BaseController
     }
 
     #[Route('/sponsors', 'app_main_home_sponsors')]
-    public function sponsorsAction()
+    public function sponsorsAction(): Response
     {
         $forRender = parent::renderDefault();
-        $forRender['title'] = 'Страница виртуальной выставки';
+        $forRender['title'] = 'Спонсоры';
         return $this->render('main/sponsors/index.html.twig', $forRender);
     }
 
-    #[Route('/broadcast', 'app_main_home_broadcast')]
-    public function broadcastAction()
+    #[Route('/exhibition', 'app_main_home_exhibition')]
+    public function exhibitionAction(): Response
     {
         $forRender = parent::renderDefault();
-        $forRender['title'] = 'Трансляция сессии';
-        return $this->render('main/broadcast/index.html.twig', $forRender);
+        $forRender['title'] = 'Страница виртуальной выставки';
+        return $this->render('main/exhibition/index.html.twig', $forRender);
     }
 
     #[Route('/help', 'app_main_home_help')]
-    public function helpAction()
+    public function helpAction(): Response
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Поддержка';

@@ -15,8 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MessageController extends BaseController
 {
-    const ATRIBUTES_TO_SERIALIZE = ['id', 'content', 'created_at'];
-
     /**
      * @var MessageRepository
      */
@@ -67,7 +65,6 @@ class MessageController extends BaseController
         $user = $this->getUser();
         $content = $request->get('content');
 
-        //TODO:: Сделать отправку сообщений через сервис для вопросов лектору
         return $this->redirectToRoute('app_chatroom', ['chatid' => $chatRoomId]);
     }
 

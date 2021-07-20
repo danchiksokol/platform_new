@@ -64,7 +64,7 @@ class ThesesController extends AbstractController
             $this->thesesService->handleCreate($theses, $form);
             $path = $this->thesesService->getThesesPath();
             $fileInPath = $path . '/' . $theses->getFile();
-            $this->mailerService->handleSendMail($form, $fileInPath);
+            $this->mailerService->handleSendEmail($form, $fileInPath);
 
             $this->addFlash('Success', 'Добавлен успешно');
 
