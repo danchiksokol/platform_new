@@ -85,4 +85,44 @@ class QuestionSpeakerService
     {
         $this->questionSpeakerRepository->setDelete($questionSpeaker);
     }
+
+    /**
+     * @param int $chatRoomId
+     * @return array
+     */
+    public function getQuestionSpeakerForRender(int $chatRoomId): array
+    {
+        $result = [];
+        $questions = $this->questionSpeakerRepository->getAllByChatRoomForUser($chatRoomId);
+        foreach ($questions as $question) {
+            $id = $question->getId();
+            $fio = $question->getUser()->getSurname() . ' ' . $question->getUser()->getName();
+            $content = $question->getContent();
+            $result[$id] = ['fio' => $fio, 'content' => $content];
+        }
+        return $result;
+    }
+
+    public function getQuestionSpeakerForRenderAdmin(int $chatRoomId): array
+    {
+        $result = [];
+        $questions = $this->questionSpeakerRepository->getAllByChatRoomForAdmin($chatRoomId);
+        foreach ($questions as $question) {
+            $id = $question->getId();
+            $user = $question->getUser()->getSurname() . ' ' . $question->getUser()->getName();
+            $speaker = $question->getSpeaker()->getUser()->getSurname() . ' ' . $question->getSpeaker()->getUser(
+                )->getName();
+            $content = $question->getContent();
+            $chat = $question->getChatroom()->getName();
+            $result[$id] = [
+                'id' => $id,
+                'user' => $user,
+                'speaker' => $speaker,
+                'content' => $content,
+                'chat' => $chat
+            ];
+        }
+
+        return $result;
+    }
 }

@@ -109,12 +109,14 @@ class ChatRoomController extends BaseController
             return $this->redirectToRoute('app_broadcast', ['chatid' => $chatRoomId]);
         }
 
+        $questions = $this->questionSpeakerService->getQuestionSpeakerForRender($chatRoomId);
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Трансляция сессии';
         $forRender['user'] = $userId;
         $forRender['messages'] = $messages;
         $forRender['chatid'] = $chatRoomId;
         $forRender['speakers'] = $speakers;
+        $forRender['questions'] = $questions;
         $forRender['questionForm'] = $form->createView();
 
         return $this->render(

@@ -81,9 +81,9 @@ class QuestionSpeakerRepository extends ServiceEntityRepository
     /**
      * @param QuestionSpeaker $questionSpeaker
      */
-    public function setHide(QuestionSpeaker $questionSpeaker): viod
+    public function setHide(QuestionSpeaker $questionSpeaker)
     {
-        $this->entityManager->setIsShow(0);
+        $questionSpeaker->setIsShow(0);
         $this->entityManager->persist($questionSpeaker);
         $this->setSave();
     }
@@ -92,9 +92,9 @@ class QuestionSpeakerRepository extends ServiceEntityRepository
      * @param QuestionSpeaker $questionSpeaker
      * @return viod
      */
-    public function setShow(QuestionSpeaker $questionSpeaker): viod
+    public function setShow(QuestionSpeaker $questionSpeaker)
     {
-        $this->entityManager->setIsShow(1);
+        $questionSpeaker->setIsShow(1);
         $this->entityManager->persist($questionSpeaker);
         $this->setSave();
     }
@@ -120,10 +120,14 @@ class QuestionSpeakerRepository extends ServiceEntityRepository
      * @param int $chatRoomId
      * @return QuestionSpeaker[]
      */
-    public function getAllByChatRoom(int $chatRoomId): array
+    public function getAllByChatRoomForAdmin(int $chatRoomId): array
     {
-        return $this->findBy(['chatroom_id' => $chatRoomId], ['id' => 'ASC']);
+        return $this->findBy(['chatroom' => $chatRoomId, 'is_show' => 0], ['id' => 'ASC']);
     }
 
+    public function getAllByChatRoomForUser(int $chatRoomId): array
+    {
+        return $this->findBy(['chatroom' => $chatRoomId, 'is_show' => 1], ['id' => 'ASC']);
+    }
 
 }
