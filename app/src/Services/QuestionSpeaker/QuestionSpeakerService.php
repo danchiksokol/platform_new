@@ -9,6 +9,7 @@ use App\Repository\ChatRoomRepository;
 use App\Repository\QuestionSpeakerRepository;
 use App\Repository\SpeakerRepository;
 use App\Repository\UserRepository;
+use Exception;
 use Symfony\Component\Form\Form;
 
 class QuestionSpeakerService
@@ -16,7 +17,7 @@ class QuestionSpeakerService
     /**
      * @var QuestionSpeakerRepository
      */
-    private $questionSpeakerRepository;
+    private QuestionSpeakerRepository $questionSpeakerRepository;
     private UserRepository $userRepository;
     private SpeakerRepository $speakerRepository;
     private ChatRoomRepository $chatRoomRepository;
@@ -43,9 +44,11 @@ class QuestionSpeakerService
     /**
      * @param QuestionSpeaker $questionSpeaker
      * @param Form $form
+     * @param array $options
      * @return $this
+     * @throws Exception
      */
-    public function handleCreate(QuestionSpeaker $questionSpeaker, Form $form, array $options)
+    public function handleCreate(QuestionSpeaker $questionSpeaker, Form $form, array $options): object
     {
         $user = $this->userRepository->getOne($options['user']);
         $chatRoom = $this->chatRoomRepository->getOne($options['chatRoom']);
@@ -79,7 +82,7 @@ class QuestionSpeakerService
 
     /**
      * @param QuestionSpeaker $questionSpeaker
-     * @throws \Exception
+     * @throws Exception
      */
     public function handleDelete(QuestionSpeaker $questionSpeaker): void
     {

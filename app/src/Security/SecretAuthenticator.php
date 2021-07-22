@@ -3,6 +3,8 @@
 namespace App\Security;
 
 use App\Repository\UserRepository;
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +20,7 @@ class SecretAuthenticator extends AbstractGuardAuthenticator
     /**
      * @var UserRepository
      */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /**
      * SecretAuthenticator constructor.
@@ -29,21 +31,36 @@ class SecretAuthenticator extends AbstractGuardAuthenticator
         $this->userRepository = $userRepository;
     }
 
-    public function supports(Request $request)
-    {
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    #[Pure]
+    public function supports(
+        Request $request
+    ): bool {
         return $request->query->has('secret');
     }
 
-    public function getCredentials(Request $request)
-    {
-        $credentials = [
+    /**
+     * @param Request $request
+     * @return array
+     */
+    #[ArrayShape(['secret' => "mixed"])]
+    public function getCredentials(
+        Request $request
+    ): array {
+        return [
             'secret' => $request->query->get('secret')
         ];
-
-        return $credentials;
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    /**
+     * @param mixed $credentials
+     * @param UserProviderInterface $userProvider
+     * @return object
+     */
+    public function getUser($credentials, UserProviderInterface $userProvider): object
     {
         $user = $this->userRepository->getOneBySecret($credentials['secret']);
 
@@ -54,24 +71,43 @@ class SecretAuthenticator extends AbstractGuardAuthenticator
         return $user;
     }
 
-    public function checkCredentials($credentials, UserInterface $user)
+    /**
+     * @param mixed $credentials
+     * @param UserInterface $user
+     * @return bool
+     */
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         if ($credentials['secret'] === $user->getSecret()) {
-            $this->userRepository->setVification($user);
+            $this->userRepository->setVerification($user);
 
             return true;
         }
 
-        return  false;
+        return false;
     }
 
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    /**
+     * @param Request $request
+     * @param AuthenticationException $exception
+     * @return Response
+     */
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
         return new Response('Что-то пошло не так попробуюте через форму залогиниться');
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
-    {
+    /**
+     * @param Request $request
+     * @param TokenInterface $token
+     * @param string $providerKey
+     * @return RedirectResponse
+     */
+    public function onAuthenticationSuccess(
+        Request $request,
+        TokenInterface $token,
+        string $providerKey
+    ): RedirectResponse {
         return new RedirectResponse('/');
     }
 

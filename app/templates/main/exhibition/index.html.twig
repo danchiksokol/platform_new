@@ -1,6 +1,35 @@
-{% extends 'main/base.html.twig' %}
+{% extends 'main/base_without_menu.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
 {% block body %}
-
+    <button id="poster_1">Poster1</button>
+    <button id="poster_2">Poster2</button>
+    <div id="ajax-results">here comes the result</div>
+    <script>
+        document.addEventListener('click', function (event) {
+            let buttonId = event.target.getAttribute('id');
+            let tagName = event.target.tagName;
+            //TODO У кнопки отбора сделать уникальный класс event.target.className
+            if ('BUTTON' == tagName) {
+                let id = buttonId.split('_', 2).pop();
+                setAjax(id);
+            }
+        });
+        function setAjax(id) {
+            $.ajax({
+                url: '{{ (path('app_poster_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "posterId": id // Данные которые отправляем на сервер posterId
+                },
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                    $('div#ajax-results').html(data.output);
+                }
+            });
+            return false;
+        };
+    </script>
 {% endblock %}

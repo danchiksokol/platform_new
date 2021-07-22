@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use Exception;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -9,6 +10,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+
+use function get_class;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,10 +21,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * UserRepository constructor.
@@ -37,7 +41,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @param User $user
      */
-    public function setVification(User $user)
+    public function setVerification(User $user)
     {
         $user->setIsVerified(1);
         $this->entityManager->persist($user);
@@ -46,8 +50,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * @param User $user
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws Exception
      */
     public function setCreate(User $user)
     {
@@ -57,16 +60,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $this->entityManager->flush();
 
             $this->entityManager->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->entityManager->rollback();
             throw $exception;
         }
     }
 
-    /**
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
     public function setSave()
     {
         $this->entityManager->flush();
@@ -75,7 +74,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * @param User $user
-     * @throws \Exception
+     * @throws Exception
      */
     public function setDelete(User $user)
     {
@@ -85,24 +84,25 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $this->entityManager->flush();
 
             $this->entityManager->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->entityManager->rollback();
             throw $exception;
         }
     }
 
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * @param UserInterface $user
+     * @param string $newEncodedPassword
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
         if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
         }
 
         $user->setPassword($newEncodedPassword);
-        $this->_em->persist($user);
-        $this->_em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 
     /**
@@ -115,7 +115,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * @return object
+     * @return User[]
      */
     public function getAll(): array
     {

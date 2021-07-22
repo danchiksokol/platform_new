@@ -6,6 +6,8 @@ use App\Entity\QuestionSpeaker;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method QuestionSpeaker|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,13 +18,9 @@ use Doctrine\Persistence\ManagerRegistry;
 class QuestionSpeakerRepository extends ServiceEntityRepository
 {
     /**
-     * @var ManagerRegistry
-     */
-    private $registry;
-    /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * QuestionSpeakerRepository constructor.
@@ -32,13 +30,12 @@ class QuestionSpeakerRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, QuestionSpeaker::class);
-        $this->registry = $registry;
         $this->entityManager = $entityManager;
     }
 
     /**
      * @param QuestionSpeaker $questionSpeaker
-     * @throws \Exception
+     * @throws Exception
      */
     public function setCreate(QuestionSpeaker $questionSpeaker)
     {
@@ -48,7 +45,7 @@ class QuestionSpeakerRepository extends ServiceEntityRepository
             $this->entityManager->flush();
 
             $this->entityManager->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->entityManager->rollback();
             throw $exception;
         }
@@ -62,7 +59,7 @@ class QuestionSpeakerRepository extends ServiceEntityRepository
 
     /**
      * @param QuestionSpeaker $questionSpeaker
-     * @throws \Exception
+     * @throws Exception
      */
     public function setDelete(QuestionSpeaker $questionSpeaker)
     {
@@ -72,7 +69,7 @@ class QuestionSpeakerRepository extends ServiceEntityRepository
             $this->entityManager->flush();
 
             $this->entityManager->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->entityManager->rollback();
             throw $exception;
         }
@@ -90,13 +87,17 @@ class QuestionSpeakerRepository extends ServiceEntityRepository
 
     /**
      * @param QuestionSpeaker $questionSpeaker
-     * @return viod
      */
     public function setShow(QuestionSpeaker $questionSpeaker)
     {
         $questionSpeaker->setIsShow(1);
         $this->entityManager->persist($questionSpeaker);
         $this->setSave();
+    }
+
+    public function setPosterToSession()
+    {
+        
     }
 
     /**

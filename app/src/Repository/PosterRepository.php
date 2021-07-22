@@ -6,6 +6,7 @@ use App\Entity\Poster;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method Poster|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,13 +17,9 @@ use Doctrine\Persistence\ManagerRegistry;
 class PosterRepository extends ServiceEntityRepository
 {
     /**
-     * @var ManagerRegistry
-     */
-    private $registry;
-    /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * PosterRepository constructor.
@@ -32,13 +29,12 @@ class PosterRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Poster::class);
-        $this->registry = $registry;
         $this->entityManager = $entityManager;
     }
 
     /**
      * @param Poster $poster
-     * @throws \Exception
+     * @throws Exception
      */
     public function setCreate(Poster $poster)
     {
@@ -48,7 +44,7 @@ class PosterRepository extends ServiceEntityRepository
             $this->entityManager->flush();
 
             $this->entityManager->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->entityManager->rollback();
             throw $exception;
         }
@@ -62,7 +58,7 @@ class PosterRepository extends ServiceEntityRepository
 
     /**
      * @param Poster $poster
-     * @throws \Exception
+     * @throws Exception
      */
     public function setDelete(Poster $poster)
     {
@@ -72,7 +68,7 @@ class PosterRepository extends ServiceEntityRepository
             $this->entityManager->flush();
 
             $this->entityManager->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->entityManager->rollback();
             throw $exception;
         }
@@ -95,19 +91,28 @@ class PosterRepository extends ServiceEntityRepository
         return $this->findAll();
     }
 
+//    /**
+//     * @param int $categoryId
+//     * @return array
+//     */
+//    public function getAllByCategory(int $categoryId): array
+//    {
+//        $qb = $this->createQueryBuilder('p')
+//            ->select()
+//            ->where('p.id = :id')
+//            ->setParameter('id', $categoryId)
+//            ->orderBy('p.id', 'ASC');
+//
+//        return $qb->getQuery()->getResult();
+//    }
+
     /**
      * @param int $categoryId
-     * @return array
+     * @return Poster[]
      */
     public function getAllByCategory(int $categoryId): array
     {
-        $qb = $this->createQueryBuilder('p')
-            ->select()
-            ->where('p.id = :id')
-            ->setParameter('id', $categoryId)
-            ->orderBy('p.id', 'ASC');
-
-        return $qb->getQuery()->getResult();
+        return $this->findBy(['poster_category' => $categoryId], ['id' => 'ASC']);
     }
 
 }
