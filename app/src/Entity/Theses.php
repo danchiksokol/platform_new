@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ThesesRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,73 +16,83 @@ class Theses
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $FIO;
+    private ?string $FIO;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $email;
+    private ?string $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $phone;
+    private ?string $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $city;
+    private ?string $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $work;
+    private ?string $work;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $authors;
+    private ?string $authors;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $theses;
+    private ?string $theses;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $file;
+    private ?string $file;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private ?DateTimeInterface $created_at;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $date_create;
+    private ?DateTimeInterface $updated_at;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @return int|null
      */
-    private $date_update;
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getFIO(): ?string
     {
         return $this->FIO;
     }
 
+    /**
+     * @param string|null $FIO
+     * @return $this
+     */
     public function setFIO(?string $FIO): self
     {
         $this->FIO = $FIO;
@@ -89,11 +100,18 @@ class Theses
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string|null $email
+     * @return $this
+     */
     public function setEmail(?string $email): self
     {
         $this->email = $email;
@@ -101,11 +119,18 @@ class Theses
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPhone(): ?string
     {
         return $this->phone;
     }
 
+    /**
+     * @param string|null $phone
+     * @return $this
+     */
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
@@ -113,11 +138,18 @@ class Theses
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCity(): ?string
     {
         return $this->city;
     }
 
+    /**
+     * @param string|null $city
+     * @return $this
+     */
     public function setCity(?string $city): self
     {
         $this->city = $city;
@@ -125,11 +157,18 @@ class Theses
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getWork(): ?string
     {
         return $this->work;
     }
 
+    /**
+     * @param string|null $work
+     * @return $this
+     */
     public function setWork(?string $work): self
     {
         $this->work = $work;
@@ -137,11 +176,18 @@ class Theses
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string|null $title
+     * @return $this
+     */
     public function setTitle(?string $title): self
     {
         $this->title = $title;
@@ -149,11 +195,18 @@ class Theses
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getAuthors(): ?string
     {
         return $this->authors;
     }
 
+    /**
+     * @param string|null $authors
+     * @return $this
+     */
     public function setAuthors(?string $authors): self
     {
         $this->authors = $authors;
@@ -161,11 +214,18 @@ class Theses
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTheses(): ?string
     {
         return $this->theses;
     }
 
+    /**
+     * @param string|null $theses
+     * @return $this
+     */
     public function setTheses(?string $theses): self
     {
         $this->theses = $theses;
@@ -173,11 +233,18 @@ class Theses
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getFile(): ?string
     {
         return $this->file;
     }
 
+    /**
+     * @param string|null $file
+     * @return $this
+     */
     public function setFile(?string $file): self
     {
         $this->file = $file;
@@ -185,26 +252,33 @@ class Theses
         return $this;
     }
 
-    public function getDateCreate(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->date_create;
+        return $this->created_at;
     }
 
-    public function setDateCreate(\DateTimeInterface $date_create): self
+    /**
+     * @param DateTimeInterface $created_at
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
-        $this->date_create = $date_create;
+        $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getDateUpdate(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
-        return $this->date_update;
+        return $this->updated_at;
     }
 
-    public function setDateUpdate(?\DateTimeInterface $date_update): self
+    public function setUpdatedAt(?DateTimeInterface $updated_at): self
     {
-        $this->date_update = $date_update;
+        $this->updated_at = $updated_at;
 
         return $this;
     }

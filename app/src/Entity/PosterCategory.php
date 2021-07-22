@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\PosterCategoryRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=PosterCategoryRepository::class)
@@ -17,43 +19,54 @@ class PosterCategory
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_create;
+    private ?DateTimeInterface $created_at;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $date_update;
+    private ?DateTimeInterface $updated_at;
 
     /**
      * @ORM\OneToMany(targetEntity=Poster::class, mappedBy="posterCategory")
      */
-    private $poster;
+    private ArrayCollection $poster;
 
+    #[Pure]
     public function __construct()
     {
         $this->poster = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -61,38 +74,56 @@ class PosterCategory
         return $this;
     }
 
-    public function getDateCreate(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->date_create;
+        return $this->created_at;
     }
 
-    public function setDateCreate(\DateTimeInterface $date_create): self
+    /**
+     * @param DateTimeInterface $created_at
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
-        $this->date_create = $date_create;
-
-        return $this;
-    }
-
-    public function getDateUpdate(): ?\DateTimeInterface
-    {
-        return $this->date_update;
-    }
-
-    public function setDateUpdate(?\DateTimeInterface $date_update): self
-    {
-        $this->date_update = $date_update;
+        $this->created_at = $created_at;
 
         return $this;
     }
 
     /**
-     * @return Collection|Poster[]
+     * @return DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * @param DateTimeInterface|null $updated_at
+     * @return $this
+     */
+    public function setUpdatedAt(?DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection
      */
     public function getPoster(): Collection
     {
         return $this->poster;
     }
 
+    /**
+     * @param Poster $poster
+     * @return $this
+     */
     public function addPoster(Poster $poster): self
     {
         if (!$this->poster->contains($poster)) {
@@ -103,6 +134,10 @@ class PosterCategory
         return $this;
     }
 
+    /**
+     * @param Poster $poster
+     * @return $this
+     */
     public function removePoster(Poster $poster): self
     {
         if ($this->poster->removeElement($poster)) {

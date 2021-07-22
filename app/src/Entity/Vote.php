@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\VoteRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,62 +16,83 @@ class Vote
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_create;
+    private ?DateTimeInterface $created_at;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $date_update;
+    private ?DateTimeInterface $updated_at;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="votes")
      */
-    private $user;
+    private ?User $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Poster::class, inversedBy="votes")
      */
-    private $poster;
+    private ?Poster $poster;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDateCreate(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->date_create;
+        return $this->created_at;
     }
 
-    public function setDateCreate(\DateTimeInterface $date_create): self
+    /**
+     * @param DateTimeInterface $created_at
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
-        $this->date_create = $date_create;
+        $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getDateUpdate(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?DateTimeInterface
     {
-        return $this->date_update;
+        return $this->updated_at;
     }
 
-    public function setDateUpdate(?\DateTimeInterface $date_update): self
+    /**
+     * @param DateTimeInterface|null $updated_at
+     * @return $this
+     */
+    public function setUpdatedAt(?DateTimeInterface $updated_at): self
     {
-        $this->date_update = $date_update;
+        $this->updated_at = $updated_at;
 
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param User|null $user
+     * @return $this
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
@@ -78,11 +100,18 @@ class Vote
         return $this;
     }
 
+    /**
+     * @return Poster|null
+     */
     public function getPoster(): ?Poster
     {
         return $this->poster;
     }
 
+    /**
+     * @param Poster|null $poster
+     * @return $this
+     */
     public function setPoster(?Poster $poster): self
     {
         $this->poster = $poster;

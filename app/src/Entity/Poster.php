@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\PosterRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=PosterRepository::class)
@@ -17,58 +19,69 @@ class Poster
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $content;
+    private ?string $content;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $file;
+    private ?string $file;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_create;
+    private ?DateTimeInterface $created_at;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $date_update;
+    private ?DateTimeInterface $updated_at;
 
     /**
      * @ORM\ManyToOne(targetEntity=PosterCategory::class, inversedBy="poster")
      */
-    private $posterCategory;
+    private ?PosterCategory $posterCategory;
 
     /**
      * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="poster")
      */
-    private $votes;
+    private ArrayCollection $votes;
 
+    #[Pure]
     public function __construct()
     {
         $this->votes = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -76,11 +89,18 @@ class Poster
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param string|null $content
+     * @return $this
+     */
     public function setContent(?string $content): self
     {
         $this->content = $content;
@@ -88,11 +108,18 @@ class Poster
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getFile(): ?string
     {
         return $this->file;
     }
 
+    /**
+     * @param string|null $file
+     * @return $this
+     */
     public function setFile(?string $file): self
     {
         $this->file = $file;
@@ -100,35 +127,56 @@ class Poster
         return $this;
     }
 
-    public function getDateCreate(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->date_create;
+        return $this->created_at;
     }
 
-    public function setDateCreate(\DateTimeInterface $date_create): self
+    /**
+     * @param DateTimeInterface $created_at
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
-        $this->date_create = $date_create;
+        $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getDateUpdate(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?DateTimeInterface
     {
-        return $this->date_update;
+        return $this->updated_at;
     }
 
-    public function setDateUpdate(?\DateTimeInterface $date_update): self
+    /**
+     * @param DateTimeInterface|null $updated_at
+     * @return $this
+     */
+    public function setUpdatedAt(?DateTimeInterface $updated_at): self
     {
-        $this->date_update = $date_update;
+        $this->updated_at = $updated_at;
 
         return $this;
     }
 
+    /**
+     * @return PosterCategory|null
+     */
     public function getPosterCategory(): ?PosterCategory
     {
         return $this->posterCategory;
     }
 
+    /**
+     * @param PosterCategory|null $posterCategory
+     * @return $this
+     */
     public function setPosterCategory(?PosterCategory $posterCategory): self
     {
         $this->posterCategory = $posterCategory;
@@ -144,16 +192,10 @@ class Poster
         return $this->votes;
     }
 
-    public function addVote(Vote $vote): self
-    {
-        if (!$this->votes->contains($vote)) {
-            $this->votes[] = $vote;
-            $vote->setPoster($this);
-        }
-
-        return $this;
-    }
-
+    /**
+     * @param Vote $vote
+     * @return $this
+     */
     public function removeVote(Vote $vote): self
     {
         if ($this->votes->removeElement($vote)) {
