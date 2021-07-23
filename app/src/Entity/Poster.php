@@ -54,7 +54,7 @@ class Poster
     /**
      * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="poster")
      */
-    private ArrayCollection $votes;
+    private $votes;
 
     #[Pure]
     public function __construct()

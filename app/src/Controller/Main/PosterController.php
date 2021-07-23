@@ -3,6 +3,7 @@
 namespace App\Controller\Main;
 
 use App\Services\Poster\PosterService;
+use Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,6 +38,7 @@ class PosterController extends BaseController
     /**
      * @param Request $request
      * @return Response
+     * @throws Exception
      */
     #[Route('/ajax', name: 'poster_ajax')]
     public function posterVoteAction(
@@ -45,8 +47,8 @@ class PosterController extends BaseController
         $userId = $this->getUser()->getId();
         if ($request->isXMLHttpRequest() && $request->get('posterId')) {
             $posterId = (int)$request->get('posterId');
-            $this->posterService->handleSession($request, $posterId);
-            return new JsonResponse(array('output' => $posterId));
+            $votePosters = $this->posterService->handleSession($request, $userId, $posterId);
+            return new JsonResponse(array('output' => $votePosters));
         }
 
         return new Response('This is not ajax!', 400);

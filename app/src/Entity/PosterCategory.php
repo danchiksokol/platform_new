@@ -39,7 +39,7 @@ class PosterCategory
     /**
      * @ORM\OneToMany(targetEntity=Poster::class, mappedBy="posterCategory")
      */
-    private ArrayCollection $poster;
+    private $poster;
 
     #[Pure]
     public function __construct()

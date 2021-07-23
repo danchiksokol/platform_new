@@ -4,7 +4,9 @@
 namespace App\Services\Poster;
 
 
+use App\Entity\Poster;
 use App\Repository\PosterRepository;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 
 class PosterService
@@ -23,15 +25,63 @@ class PosterService
         $this->posterRepository = $posterRepository;
     }
 
-    public function handleSession(Request $request, int $userId, int $posterId)
+    /**
+     * @param Request $request
+     * @param int $userId
+     * @param int $posterId
+     * @return array
+     * @throws Exception
+     */
+    public function handleSession(Request $request, int $userId, int $posterId): array
     {
-        $poster = $this->posterRepository->getOne($posterId);
-        $session = $request->getSession();
-        $session->set("vote_$userId", $poster);
-        $test = $session->get('posters_vote');
+        try {
+            $poster = $this->posterRepository->getOne($posterId);
+            $votePosterSession = [$poster];
+            $session = $request->getSession();
+            if ($session->has("vote_$userId")) {
+                $votePosterSession = $session->get("vote_$userId");
+                $votePosterSession = $this->setVotePosterToArray($poster, $votePosterSession);
+            }
+            $session->set("vote_$userId", $votePosterSession);
 
-        return $session->get("vote_$userId");
-        //TODO разобраться как добавлять и вынимать несколько значений из сессии
+            return $session->get("vote_$userId");
+        } catch (Exception $exception) {
+            return throw new Exception($exception->getMessage());
+        }
+    }
+
+    /**
+     * @param Poster $poster
+     * @param array $votePosterSession
+     * @return bool
+     */
+    public function hasVotePosterSession(Poster $poster, array $votePosterSession): bool
+    {
+        if (count($votePosterSession)) {
+            foreach ($votePosterSession as $vote) {
+                $voteId = $vote->getId();
+                $posterId = $poster->getId();
+                if ($voteId == $posterId) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param Poster $poster
+     * @param array $votePosterSession
+     * @return array
+     */
+    public function setVotePosterToArray(Poster $poster, array $votePosterSession): array
+    {
+        if (!$this->hasVotePosterSession($poster, $votePosterSession)) {
+            array_push($votePosterSession, $poster);
+        }
+
+        return $votePosterSession;
     }
 
 }
