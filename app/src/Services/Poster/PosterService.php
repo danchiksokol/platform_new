@@ -23,12 +23,14 @@ class PosterService
         $this->posterRepository = $posterRepository;
     }
 
-    public function handleSession(Request $request, int $posterId)
+    public function handleSession(Request $request, int $userId, int $posterId)
     {
         $poster = $this->posterRepository->getOne($posterId);
         $session = $request->getSession();
-        $session->set('posters_vote', $poster);
+        $session->set("vote_$userId", $poster);
         $test = $session->get('posters_vote');
+
+        return $session->get("vote_$userId");
         //TODO разобраться как добавлять и вынимать несколько значений из сессии
     }
 

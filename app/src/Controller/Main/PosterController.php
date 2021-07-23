@@ -42,6 +42,7 @@ class PosterController extends BaseController
     public function posterVoteAction(
         Request $request
     ): Response {
+        $userId = $this->getUser()->getId();
         if ($request->isXMLHttpRequest() && $request->get('posterId')) {
             $posterId = (int)$request->get('posterId');
             $this->posterService->handleSession($request, $posterId);
