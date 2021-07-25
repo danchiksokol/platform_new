@@ -8,21 +8,18 @@ use App\Entity\Participant;
 use App\Repository\ChatRoomRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\UserRepository;
+use Exception;
 
 class ParticipantService
 {
     /**
-     * @var ParticipantRepository
-     */
-    private $participantRepository;
-    /**
      * @var UserRepository
      */
-    private $userRepository;
+    private UserRepository $userRepository;
     /**
      * @var ChatRoomRepository
      */
-    private $chatRoomRepository;
+    private ChatRoomRepository $chatRoomRepository;
 
     /**
      * ParticipantService constructor.
@@ -31,11 +28,10 @@ class ParticipantService
      * @param UserRepository $userRepository
      */
     public function __construct(
-        ParticipantRepository $participantRepository,
+        private ParticipantRepository $participantRepository,
         ChatRoomRepository $chatRoomRepository,
         UserRepository $userRepository
     ) {
-        $this->participantRepository = $participantRepository;
         $this->userRepository = $userRepository;
         $this->chatRoomRepository = $chatRoomRepository;
     }
@@ -43,9 +39,10 @@ class ParticipantService
     /**
      * @param int $chatRoomId
      * @param int $userId
-     * @return $this
+     * @return ParticipantService
+     * @throws Exception
      */
-    public function handleCreate(int $chatRoomId, int $userId)
+    public function handleCreate(int $chatRoomId, int $userId): ParticipantService
     {
         $participant = $this->participantRepository->isParticipantExist($chatRoomId, $userId);
         if ($participant) {
@@ -66,7 +63,7 @@ class ParticipantService
 
     /**
      * @param Participant $participant
-     * @throws \Exception
+     * @throws Exception
      */
     public function handleDelete(Participant $participant)
     {

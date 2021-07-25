@@ -90,7 +90,7 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="User")
+     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="User", cascade={"persist"})
      */
     private $votes;
 

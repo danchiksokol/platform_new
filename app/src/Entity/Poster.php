@@ -52,7 +52,7 @@ class Poster
     private ?PosterCategory $posterCategory;
 
     /**
-     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="poster")
+     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="poster", cascade={"persist"})
      */
     private $votes;
 
@@ -190,6 +190,20 @@ class Poster
     public function getVotes(): Collection
     {
         return $this->votes;
+    }
+
+    /**
+     * @param Vote $vote
+     * @return $this
+     */
+    public function addVote(Vote $vote): self
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes[] = $vote;
+            $vote->setPoster($this);
+        }
+
+        return $this;
     }
 
     /**

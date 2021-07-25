@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class FileManagerService implements FileManagerServiceInterface
 {
 
-    private $fileUploadDirectory;
+    private mixed $fileUploadDirectory;
 
     /**
      * FileManagerService constructor.
@@ -25,7 +25,7 @@ class FileManagerService implements FileManagerServiceInterface
     /**
      * @return mixed
      */
-    public function getFileUploadDirectory()
+    public function getFileUploadDirectory(): mixed
     {
         return $this->fileUploadDirectory;
     }
@@ -34,7 +34,7 @@ class FileManagerService implements FileManagerServiceInterface
      * @param string $path
      * @return $this
      */
-    public function setFileUploadDirectory(string $path)
+    public function setFileUploadDirectory(string $path): static
     {
         $this->fileUploadDirectory = $this->fileUploadDirectory . '/' . $path;
 

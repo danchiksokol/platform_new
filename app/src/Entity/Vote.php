@@ -29,12 +29,12 @@ class Vote
     private ?DateTimeInterface $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="votes")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="votes", cascade={"persist"})
      */
     private ?User $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Poster::class, inversedBy="votes")
+     * @ORM\ManyToOne(targetEntity=Poster::class, inversedBy="votes", cascade={"persist"})
      */
     private ?Poster $poster;
 

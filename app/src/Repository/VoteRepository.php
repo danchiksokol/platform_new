@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Vote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method Vote|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,37 +17,86 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class VoteRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private ManagerRegistry $registry;
+    private EntityManagerInterface $entityManager;
+
+    /**
+     * VoteRepository constructor.
+     * @param ManagerRegistry $registry
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Vote::class);
+        $this->registry = $registry;
+        $this->entityManager = $entityManager;
     }
 
-    // /**
-    //  * @return Vote[] Returns an array of Vote objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param int $id
+     * @return object
+     */
+    public function getOne(int $id): object
     {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('v.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->find($id);
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Vote
+    /**
+     * @return Vote[]
+     */
+    public function getAll(): array
     {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->findAll();
     }
-    */
+
+    /**
+     * @param Vote $vote
+     * @throws Exception
+     */
+    public function setCreate(Vote $vote)
+    {
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->persist($vote);
+
+            $this->entityManager->commit();
+        } catch (Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
+    }
+
+    public function setSave()
+    {
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+    }
+
+    /**
+     * @param Vote $vote
+     * @throws Exception
+     */
+    public function setDelete(Vote $vote)
+    {
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->remove($vote);
+            $this->entityManager->flush();
+
+            $this->entityManager->commit();
+        } catch (Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
+    }
+
+    /**
+     * @param User $user
+     * @return Vote|null
+     */
+    public function getOneByUser(User $user): ?Vote
+    {
+        return $this->findOneBy(['user' => $user]);
+    }
+
 }

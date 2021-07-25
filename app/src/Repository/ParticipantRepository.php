@@ -6,6 +6,7 @@ use App\Entity\Participant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method Participant|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,11 +19,11 @@ class ParticipantRepository extends ServiceEntityRepository
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
     /**
      * @var ManagerRegistry
      */
-    private $registry;
+    private ManagerRegistry $registry;
 
     /**
      * ParticipantRepository constructor.
@@ -37,7 +38,7 @@ class ParticipantRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param integer $id
+     * @param int $id
      * @return object
      */
     public function getOne(int $id): object
@@ -86,7 +87,7 @@ class ParticipantRepository extends ServiceEntityRepository
 
     /**
      * @param Participant $participant
-     * @throws \Exception
+     * @throws Exception
      */
     public function setCreate(Participant $participant)
     {
@@ -96,7 +97,7 @@ class ParticipantRepository extends ServiceEntityRepository
             $this->entityManager->flush();
 
             $this->entityManager->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->entityManager->rollback();
             throw $exception;
         }
@@ -110,7 +111,7 @@ class ParticipantRepository extends ServiceEntityRepository
 
     /**
      * @param Participant $participant
-     * @throws \Exception
+     * @throws Exception
      */
     public function setDelete(Participant $participant)
     {
@@ -120,7 +121,7 @@ class ParticipantRepository extends ServiceEntityRepository
             $this->entityManager->flush();
 
             $this->entityManager->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->entityManager->rollback();
             throw $exception;
         }

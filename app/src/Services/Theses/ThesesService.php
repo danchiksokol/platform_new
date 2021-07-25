@@ -7,6 +7,9 @@ namespace App\Services\Theses;
 use App\Entity\Theses;
 use App\Repository\ThesesRepository;
 use App\Services\FileService\FileManagerService;
+use App\Services\FileService\FileManagerServiceInterface;
+use Exception;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Form\Form;
 
 class ThesesService
@@ -14,18 +17,18 @@ class ThesesService
     /**
      * @var ThesesRepository
      */
-    private $thesesRepository;
+    private ThesesRepository $thesesRepository;
     /**
      * @var FileManagerServiceInterface
      */
-    private $fileManagerService;
+    private FileManagerServiceInterface $fileManagerService;
 
     /**
      * ThesesService constructor.
      * @param ThesesRepository $thesesRepository
      * @param FileManagerServiceInterface $fileManagerService
      */
-    public function __construct(ThesesRepository $thesesRepository, FileManagerService $fileManagerService)
+    public function __construct(ThesesRepository $thesesRepository, FileManagerServiceInterface $fileManagerService)
     {
         $this->thesesRepository = $thesesRepository;
         $this->fileManagerService = $fileManagerService;
@@ -36,9 +39,9 @@ class ThesesService
      * @param Theses $theses
      * @param Form $form
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
-    public function handleCreate(Theses $theses, Form $form)
+    public function handleCreate(Theses $theses, Form $form): static
     {
         $file = $form->get('file')->getData();
         if ($file) {
@@ -54,7 +57,8 @@ class ThesesService
     /**
      * @return mixed
      */
-    public function getThesesPath()
+    #[Pure]
+    public function getThesesPath(): mixed
     {
         return $this->fileManagerService->getFileUploadDirectory();
     }

@@ -9,6 +9,7 @@ use App\Repository\ChatRoomRepository;
 use App\Repository\QuestionSpeakerRepository;
 use App\Repository\SpeakerRepository;
 use App\Repository\UserRepository;
+use DateTime;
 use Exception;
 use Symfony\Component\Form\Form;
 
@@ -58,7 +59,7 @@ class QuestionSpeakerService
         $questionSpeaker->setSpeaker($speaker);
         $questionSpeaker->setChatroom($chatRoom);
         $questionSpeaker->setIsShow(0);
-        $questionSpeaker->setCreatedAt(new \DateTime());
+        $questionSpeaker->setCreatedAt(new DateTime());
         $this->questionSpeakerRepository->setCreate($questionSpeaker);
 
         return $this;

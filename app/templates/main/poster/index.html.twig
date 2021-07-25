@@ -20,8 +20,12 @@
                     </div>
                     <div class="poster-list accordion" id="accordionPoster">
                         <div class="accordion-item">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Список постеров в текстовом формате</button>
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Список постеров в текстовом формате
+                            </button>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                 data-bs-parent="#accordionExample">
                                 <ul class="accordion-body">
                                     <li>Accordion Item #1</li>
                                     <li>Accordion Item #1</li>
@@ -35,30 +39,37 @@
                         <a class="poster-manual btn" href="javascript:void(0);" target="_blank">
                             Инструкция по постерному голосованию
                         </a>
-                        <button type="button" class="btn btn-link poster-voting-btn" data-bs-toggle="modal" data-bs-target="#posterSelected">
+                        <button type="button" class="btn btn-success poster-voting-btn" data-bs-toggle="modal"
+                                data-bs-target="#posterSelected">
                             <span>Отобранные постеры</span>
                             <span>Проголосовать за отобранные постеры</span>
                         </button>
                     </div>
 
                     <div class="poster-images row">
-                        <div class="col-md-4" id="poster-1">
-                            <a data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf" data-title="Заголовок 1" href="javascript:void(0);">
+                        <div class="col-md-4" id="poster_1">
+                            <a data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf" data-title="Заголовок 1"
+                               href="javascript:void(0);">
                                 <img src="/assets/img/broadcast/fon.jpg">
                             </a>
-                            <a href="javascript:void(0);" data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf" data-title="Заголовок 1" class="btn btn-link">Постер 1</a>
+                            <a href="javascript:void(0);" data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf"
+                               data-title="Заголовок 1" class="btn btn-link">Постер 1</a>
                         </div>
-                        <div class="col-md-4" id="poster-2">
-                            <a data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd1.pdf" data-title="Заголовок 2" href="javascript:void(0);">
+                        <div class="col-md-4" id="poster_2">
+                            <a data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd1.pdf" data-title="Заголовок 2"
+                               href="javascript:void(0);">
                                 <img src="/assets/img/broadcast/fon.jpg">
                             </a>
-                            <a href="javascript:void(0);" data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf" data-title="Заголовок 1" class="btn btn-link">Постер 2</a>
+                            <a href="javascript:void(0);" data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf"
+                               data-title="Заголовок 2" class="btn btn-link">Постер 2</a>
                         </div>
-                        <div class="col-md-4" id="poster-3">
-                            <a data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf" data-title="Заголовок 3" href="javascript:void(0);">
+                        <div class="col-md-4" id="poster_3">
+                            <a data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf" data-title="Заголовок 3"
+                               href="javascript:void(0);">
                                 <img src="/assets/img/broadcast/fon.jpg">
                             </a>
-                            <a href="javascript:void(0);" data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf" data-title="Заголовок 1" class="btn btn-link">Постер 3</a>
+                            <a href="javascript:void(0);" data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf"
+                               data-title="Заголовок 3" class="btn btn-link">Постер 3</a>
                         </div>
                     </div>
                 </div>
@@ -81,13 +92,15 @@
             </div>
         </div>
     </div>
-    <div class="modal fade posterSelected" id="posterSelected" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade posterSelected" id="posterSelected" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Выбранные вами постеры:</h5>
                     <p>Вы можете удалить постеры из списка отобранных, если передумали.</p>
-                    <p>После нажатия кнопки "Проголосовать" вы отдадите свой голос и более не сможете изменить свое решение.</p>
+                    <p>После нажатия кнопки "Проголосовать" вы отдадите свой голос и более не сможете изменить свое
+                        решение.</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -108,12 +121,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Проголосовать</button>
+                    <button type="button" id='voteButton' class="btn btn-primary">Проголосовать</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade posterModal" id="posterModal" tabindex="-1" aria-labelledby="posterModalLabel" aria-hidden="true">
+    <div class="modal fade posterModal" id="posterModal" tabindex="-1" aria-labelledby="posterModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -131,15 +145,23 @@
 
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:void(0);" target="_blank" class="open_pdf btn btn-secondary">Открыть в формате pdf</a>
-                    <button type="button" class="btn btn-primary">Отобрать данный постер</button>
+                    <a href="javascript:void(0);" target="_blank" class="open_pdf btn btn-secondary">Открыть в формате
+                        pdf</a>
+                    <button type="button" id="poster_1" class="btn btn-primary addToVoteButton">Отобрать данный постер
+                    </button>
                 </div>
             </div>
         </div>
     </div>
     <script>
+        if (0 == {{ countVotePoster }} || {{ isVote }} ) {
+            $('.poster-voting-btn').hide();
+        }
+        if ({{ isVote }}) {
+            $('.addToVoteButton').hide();
+        }
         var myModal = new bootstrap.Modal(document.getElementById('posterModal'));
-        $('.poster-images a').click(function(){
+        $('.poster-images a').click(function () {
             $('.posterModal .modal-title').text($(this).attr('data-title'));
             $('.posterModal .open_pdf').attr('href', $(this).attr('data-pdf'));
             $('.posterModal .posterModal-img').attr('src', $(this).attr('data-img'));
@@ -156,23 +178,87 @@
                 $('.posterModal .poster-next').addClass('hidden');
             }
             $('.posterModal .poster-prev, .posterModal .poster-next').attr('data-id', $(this).parent().attr('id'));
+            let posterId = $('.poster-prev, .posterModal .poster-next').attr('data-id');
+            $('.addToVoteButton').attr('id', posterId);
             myModal.show();
         });
 
-        $('.posterModal .poster-next').click(function(){
+        $('.posterModal .poster-next').click(function () {
             myModal.hide();
             var id = $(this).attr('data-id');
-            setTimeout(function(){
+            setTimeout(function () {
                 $('#' + id).next().find('a').eq(0).click();
             }, 500);
         });
 
-        $('.posterModal .poster-prev').click(function(){
+        $('.posterModal .poster-prev').click(function () {
             myModal.hide();
             var id = $(this).attr('data-id');
-            setTimeout(function(){
+            setTimeout(function () {
                 $('#' + id).prev().find('a').eq(0).click();
             }, 500);
+        });
+
+        $('.addToVoteButton').click(function (event) {
+            let buttonId = event.target.getAttribute('id');
+            let id = buttonId.split('_', 2).pop();
+            createVotePosterAjax(id);
+        });
+
+        function createVotePosterAjax(id) {
+            $.ajax({
+                url: '{{ (path('app_poster_ajax_create')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "posterId": id // Данные которые отправляем на сервер posterId
+                },
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                    $('.poster-voting-btn').show();
+                    myModal.hide();
+                    $('div#ajax-results').html(data.output);
+                }
+            });
+            return false;
+        };
+
+        $('.deleteVoteButton').click(function (event) {
+            let buttonId = event.target.getAttribute('id');
+            let id = buttonId.split('_', 2).pop();
+            deleteVotePosterAjax(id);
+        });
+
+        function deleteVotePosterAjax(id) {
+            $.ajax({
+                url: '{{ (path('app_poster_ajax_delete')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "posterId": id // Данные которые отправляем на сервер posterId
+                },
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                    $('.poster-voting-btn').show();
+                    $('div#ajax-results').html(data.output);
+                }
+            });
+            return false;
+        };
+
+        $('#voteButton').click(function (event) {
+            $.ajax({
+                url: '{{ (path('app_poster_ajax_vote')) }}',
+                type: "POST",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                    $('#voteButton').hide();
+                }
+            });
         });
     </script>
 {% endblock %}
