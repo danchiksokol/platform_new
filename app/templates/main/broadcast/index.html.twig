@@ -51,6 +51,39 @@
         // setInterval(function () {
         //     myModal.show();
         // }, 5000);
+
+        setInterval(function () {
+            $.ajax({
+                url: '{{ (path('app_question_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "chatRoomId": {{ chatid }} // Данные которые отправляем на сервер posterId
+                },
+                async: true,
+                success: function (data) {
+                    let output = data.output;
+                    let idArray = Object.keys(output);
+                    for (let i = 0; i < idArray.length; i++) {
+                        let id = "broadcast-question-id-" + idArray[i];
+                        if (!document.getElementById(id)) {
+                            let divBroadcast = document.createElement("div");
+                            divBroadcast.className = "broadcast-questions-item";
+                            divBroadcast.setAttribute("id", id);
+                            let span = document.createElement("span");
+                            span.innerHTML = output[idArray[i]]['fio'];
+                            let divQuestion = document.createElement("div");
+                            divQuestion.innerHTML = output[idArray[i]]['content'];
+                            divBroadcast.prepend(divQuestion);
+                            divBroadcast.prepend(span);
+                            let broadQuestTitle = document.getElementById('broadcast-questions-title-id');
+                            broadQuestTitle.after(divBroadcast);
+                        }
+                    }
+                    $('div#ajax-results').html(data.output);
+                }
+            });
+        }, 5000);
     </script>
     {% set submit_url = path('app_broadcast', {'chatid': chatid}) %}
     {% include 'main/question_speaker/form.html.twig' with {url: submit_url} %}

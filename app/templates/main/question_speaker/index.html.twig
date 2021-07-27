@@ -13,13 +13,13 @@
                     Задать вопрос
                 </button>
             </div>
-            <div class="col-md-9">
-                <div class="broadcast-questions-title">Вопросы спикерам:</div>
-                {% for question in questions%}
-                <div class="broadcast-questions-item">
-                    <span>{{ question.fio }}</span>
-                    <div>{{ question.content }}</div>
-                </div>
+            <div id="div_question" class="col-md-9">
+                <div id="broadcast-questions-title-id" class="broadcast-questions-title">Вопросы спикерам:</div>
+                {% for key, value in questions %}
+                    <div id="broadcast-question-id-{{ key }}" class="broadcast-questions-item">
+                        <span class="question-fio">{{ value.fio }}</span>
+                        <div class="question-content">{{ value.content }}</div>
+                    </div>
                 {% endfor %}
             </div>
         </div>

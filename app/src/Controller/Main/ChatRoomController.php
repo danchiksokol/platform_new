@@ -6,11 +6,11 @@ use App\Entity\QuestionSpeaker;
 use App\Form\QuestionSpeakerFormType;
 use App\Repository\ChatRoomRepository;
 use App\Repository\MessageRepository;
-use App\Repository\ParticipantRepository;
 use App\Repository\SpeakerRepository;
 use App\Repository\UserRepository;
 use App\Services\QuestionSpeaker\QuestionSpeakerService;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,19 +21,19 @@ class ChatRoomController extends BaseController
     /**
      * @var UserRepository
      */
-    private $userRepository;
+    private UserRepository $userRepository;
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
     /**
      * @var ChatRoomRepository
      */
-    private $chatRoomRepository;
+    private ChatRoomRepository $chatRoomRepository;
     /**
      * @var MessageRepository
      */
-    private $messageRepository;
+    private MessageRepository $messageRepository;
     private QuestionSpeakerService $questionSpeakerService;
     private SpeakerRepository $speakerRepository;
 
@@ -62,10 +62,11 @@ class ChatRoomController extends BaseController
         $this->speakerRepository = $speakerRepository;
     }
 
+
     /**
      * @param Request $request
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     #[Route('/{chatid}', name: 'broadcast')]
     public function indexAction(
@@ -75,7 +76,7 @@ class ChatRoomController extends BaseController
         $chatRoom = $this->chatRoomRepository->getOne($chatRoomId);
         $userId = $this->getUser()->getId();
         if (is_null($chatRoom)) {
-            throw new \Exception('Такого чата нет!');
+            throw new Exception('Такого чата нет!');
         }
         $messages = $this->messageRepository->findAllMessagesByChatRoomId($chatRoomId);
         array_map(
