@@ -4,6 +4,9 @@ namespace App\Security;
 
 use App\Entity\Admin;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Exception;
+use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -29,19 +32,20 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
     /**
      * @var UrlGeneratorInterface
+     * @ORM\Column(type="string")
      */
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
     /**
      * @var CsrfTokenManagerInterface
      */
-    private $csrfTokenManager;
+    private CsrfTokenManagerInterface $csrfTokenManager;
     /**
      * @var UserPasswordEncoderInterface
      */
-    private $passwordEncoder;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
     /**
      * UserAuthenticator constructor.
@@ -62,7 +66,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         if ($request->query->has('secret')) {
             return false;
@@ -71,7 +75,13 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
             && $request->isMethod('POST');
     }
 
-    public function getCredentials(Request $request)
+    /**
+     * @param Request $request
+     * @return array
+     */
+    #[ArrayShape
+    (['email' => "mixed", 'password' => "string", 'csrf_token' => "mixed"])]
+    public function getCredentials(Request $request): array
     {
         $credentials = [
             'email' => $request->request->get('email'),
@@ -86,7 +96,12 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         return $credentials;
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    /**
+     * @param mixed $credentials
+     * @param UserProviderInterface $userProvider
+     * @return mixed|object|UserInterface|null
+     */
+    public function getUser($credentials, UserProviderInterface $userProvider): mixed
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
@@ -102,7 +117,12 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         return $user;
     }
 
-    public function checkCredentials($credentials, UserInterface $user)
+    /**
+     * @param mixed $credentials
+     * @param UserInterface $user
+     * @return bool
+     */
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
@@ -115,17 +135,30 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         return $credentials['password'];
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
-    {
+    /**
+     * @param Request $request
+     * @param TokenInterface $token
+     * @param string $providerKey
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function onAuthenticationSuccess(
+        Request $request,
+        TokenInterface $token,
+        string $providerKey
+    ): RedirectResponse {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside ' . __FILE__);
+        throw new Exception('TODO: provide a valid redirect inside ' . __FILE__);
     }
 
-    protected function getLoginUrl()
+    /**
+     * @return string
+     */
+    protected function getLoginUrl(): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
