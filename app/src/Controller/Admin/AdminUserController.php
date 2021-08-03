@@ -6,6 +6,7 @@ use App\Form\RegistrationFormType;
 use App\Form\UserFormType;
 use App\Repository\UserRepository;
 use App\Services\User\UserService;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,6 +33,9 @@ class AdminUserController extends AdminBaseController
         $this->userService = $userService;
     }
 
+    /**
+     * @return Response
+     */
     #[Route('/admin/users', name: 'admin_users')]
     public function indexAction(): Response
     {
@@ -53,12 +57,15 @@ class AdminUserController extends AdminBaseController
     /**
      * @param Request $request
      * @param int $userId
+     * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     #[Route('/admin/users/update/{userId}', name: 'admin_users_update')]
     public function updateAction(
         Request $request,
         int $userId
-    ) {
+    ): Response {
         $user = $this->userRepository->getOne($userId);
         $formUser = $this->createForm(UserFormType::class, $user);
         $formUser->handleRequest($request);
@@ -91,13 +98,13 @@ class AdminUserController extends AdminBaseController
 
     /**
      * @param int $userId
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     #[Route('/admin/users/delete/{userId}', name: 'admin_users_delete')]
     public function deleteAction(
         int $userId
-    ) {
+    ): Response {
         $user = $this->userRepository->getOne($userId);
         $this->userService->handleDelete($user);
         $this->addFlash('success', 'Пользователь удален');

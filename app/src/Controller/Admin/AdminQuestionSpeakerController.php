@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminBaseController;
 use App\Repository\QuestionSpeakerRepository;
 use App\Services\QuestionSpeaker\QuestionSpeakerService;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +29,9 @@ class AdminQuestionSpeakerController extends AdminBaseController
         $this->questionSpeakerService = $questionSpeakerService;
     }
 
+
     /**
+     * @param Request $request
      * @return Response
      */
     #[Route('/question/{chatid}', name: 'admin_question_speaker')]
@@ -67,7 +70,7 @@ class AdminQuestionSpeakerController extends AdminBaseController
     /**
      * @param Request $request
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     #[Route('/question/delete/{id}', name: 'admin_question_speaker_delete')]
     public function deleteAction(
