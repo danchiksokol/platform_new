@@ -25,24 +25,30 @@
 <body>
 {% block header %}
     <header>
+        <img class="bg-header" src="/assets/img/bg-header.jpg">
         <div class="container">
-            <div class="header-banner">
-                <img src="">
+            <div class="row">
+                <div class="col-2">
+                    <img class="header-logo" src="/assets/img/logo.png">
+                </div>
+                <nav class="col-10 navbar-light navbar navbar-expand-lg">
+                    <a href="{{ path('app_main_home_index') }}" class="nav-link active">Приветствие</a>
+                    <a href="{{ path('app_main_home_sponsors') }}" class="nav-link">Организаторы</a>
+                    <a href="{{ path('app_main_home_exhibition') }}" class="nav-link">Выставка</a>
+                    <a href="{{ path('app_main_home_programms') }}" class="nav-link">Программа</a>
+                    <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="nav-link">Трансляция</a>
+                    <a href="{{ path('app_company') }}" class="nav-link">Компании</a>
+                    <a href="{{ path('app_poster') }}" class="nav-link">Постеры</a>
+                    <a href="{{ path('app_main_home_help') }}" class="nav-link link-dark">Поддержка</a>
+                </nav>
             </div>
-            <nav>
-                <a href="{{ path('app_main_home_index') }}" class="nav-link">Приветствие</a>
-                <a href="{{ path('app_main_home_sponsors') }}" class="nav-link">Организаторы</a>
-                <a href="{{ path('app_main_home_exhibition') }}" class="nav-link">Выставка</a>
-                <a href="{{ path('app_main_home_programms') }}" class="nav-link">Программа</a>
-                <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="nav-link">Трансляция</a>
-                <a href="{{ path('app_company') }}" class="nav-link">Компании</a>
-                <a href="{{ path('app_poster') }}" class="nav-link">Постеры</a>
-                <a href="{{ path('app_main_home_help') }}" class="nav-link">Поддержка</a>
-            </nav>
         </div>
     </header>
 {% endblock %}
 {% block body %}
 {% endblock %}
+    <footer>
+        <img src="/assets/img/bg-footer.jpg">
+    </footer>
 </body>
 </html>

@@ -1,12 +1,20 @@
 ::-webkit-scrollbar {
     width: 0;
 }
-
+body {
+    margin: 0;
+    line-height: normal;
+    width: 100%;
+}
+body,section {
+    overflow-x: hidden;
+}
+*,:after,:before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
 img {
     max-width: 100%;
-}
-body {
-    padding: 50px 0;
 }
 input, textarea {
     outline-color: #d8d8d8;
@@ -42,9 +50,11 @@ h4 {
     margin: 0.7rem 0;
 }
 .registration-buttons {
-    background: #ede4f0;
     padding: 25px 15px;
     text-align: center;
+}
+.registration-buttons .btn:nth-child(2) {
+    margin-left: 24px;
 }
 .registration-checkbox > * {
     width: auto;
@@ -90,6 +100,11 @@ h4 {
 nav {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+nav.navbar {
+    align-items: flex-end;
 }
 img {
     max-width: 100%;
@@ -102,6 +117,24 @@ button {
     border-radius: 25px;
     background: #fff;
     margin-right: 8px;
+    border: 3px solid #8a1e83;
+    color: #fff;
+    background: #8a1e83;
+}
+.nav-link:hover {
+    background: #fff;
+    color: #24196c;
+}
+.nav-link.link-dark {
+    background: #24196c;
+    border: 3px solid #24196c;
+}
+.nav-link.link-dark:hover {
+    background: #fff;
+}
+.nav-link.active {
+    background: #fff;
+    color: #24196c;
 }
 .nav-link:last-child {
     margin-right: 0;
@@ -110,14 +143,30 @@ button {
     background: #ede4f0;
 }
 header {
-    background: #ade4f8;
     padding-bottom: 16px;
+    padding-top: 16px;
+    position: relative;
+    min-height: 225px;
+}
+header .container {
+    margin-top: 5px;
+}
+.header-logo {
+    max-width: 180px;
+}
+.bg-header {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    left: 0;
 }
 .chatroom {
     padding: 8px;
     height: 100%;
     max-height: 600px;
     background: #fff;
+    margin-top: 42px;
 }
 .chatroom  ul {
     /*height: calc(100% - 44px);*/
@@ -247,9 +296,24 @@ header {
 }
 
 .program-table thead {
-    background: #0d6efd;
+    background: #24196c;
     color: #fff;
     text-align: center;
+}
+.btn-bluez {
+    color: #fff;
+    background-color: #24196c;
+    border-color: #24196c;
+}
+.btn-fill {
+    background: #8b1883;
+    color: #fff;
+}
+.btn-fill:hover {
+    color: #fff;
+}
+.btn-bluez:hover {
+    color: #fff;
 }
 .table-break {
     background: #d8e4f5;
@@ -264,6 +328,7 @@ header {
     border-radius: 32px;
     padding: 24px 16px;
     margin: 24px 0;
+    box-shadow: 0 3px 9px #bfbfbf;
 }
 .program-dop {
     display: flex;
@@ -280,6 +345,7 @@ header {
     max-width: calc(50% - 8px);
     width: 100%;
     margin-bottom: 8px;
+    box-shadow: 0 3px 9px #bfbfbf;
 }
 .program-dop .btn {
     margin-top: auto;
@@ -289,6 +355,7 @@ header {
 }
 .program-dop-item-title {
     margin: 8px 0 16px;
+    width: 100%;
 }
 .poster-images {
     margin-top: 16px;
@@ -452,6 +519,9 @@ header {
     margin: 0 auto;
     display: block;
 }
+.login-form {
+    margin: 24px 0;
+}
 .chatroom #form-submit {
     background: url(/assets/img/send.svg);
     width: 30px;
@@ -494,6 +564,10 @@ header {
 .theses-create .form {
     margin-top: 8px;
 }
+footer img {
+    width: 100%;
+}
+
 @media (max-width: 991px) {
     nav {
         display: none;
@@ -525,9 +599,6 @@ header {
     }
     .registration-order {
         order: 1;
-    }
-    .registration-buttons {
-        background: none;
     }
     .registration-buttons > * {
         width: 100%;
