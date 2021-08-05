@@ -7,16 +7,11 @@
             <div class="row">
                 <div class="col-lg-9 col-12">
                     <div class="poster-category">
-                        <a class="btn btn-secondary active" href="javascript:void(0);">Все постеры</a>
-                        <a class="btn btn-secondary" href="javascript:void(0);">Категория 1</a>
-                        <a class="btn btn-secondary" href="javascript:void(0);">Категория 1</a>
-                        <a class="btn btn-secondary" href="javascript:void(0);">Категория 1</a>
-                        <a class="btn btn-secondary" href="javascript:void(0);">Категория 1</a>
-                        <a class="btn btn-secondary" href="javascript:void(0);">Категория 1</a>
-                        <a class="btn btn-secondary" href="javascript:void(0);">Категория 1</a>
-                        <a class="btn btn-secondary" href="javascript:void(0);">Категория 1</a>
-                        <a class="btn btn-secondary" href="javascript:void(0);">Категория 1</a>
-                        <a class="btn btn-secondary" href="javascript:void(0);">Категория 1</a>
+                        <a class="btn btn-secondary active" href="{{ path('app_poster') }}">Все постеры</a>
+                        {% for category in categories %}
+                            <a class="btn btn-secondary"
+                               href="{{ path('app_poster', {'categoryId': category.id}) }}">{{ category.name }}</a>
+                        {% endfor %}
                     </div>
                     <div class="poster-list accordion" id="accordionPoster">
                         <div class="accordion-item">
@@ -27,10 +22,9 @@
                             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                                  data-bs-parent="#accordionExample">
                                 <ul class="accordion-body">
-                                    <li>Accordion Item #1</li>
-                                    <li>Accordion Item #1</li>
-                                    <li>Accordion Item #1</li>
-                                    <li>Accordion Item #1</li>
+                                    {% for row in posters %}
+                                        <li>{{ row.title }}</li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -47,48 +41,36 @@
                     </div>
 
                     <div class="poster-images row">
-                        <div class="col-md-4" id="poster_1">
-                            <a data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf" data-title="Заголовок 1"
-                               href="javascript:void(0);">
-                                <img src="/assets/img/broadcast/fon.jpg">
-                            </a>
-                            <a href="javascript:void(0);" data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf"
-                               data-title="Заголовок 1" class="btn btn-link">Постер 1</a>
-                        </div>
-                        <div class="col-md-4" id="poster_2">
-                            <a data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd1.pdf" data-title="Заголовок 2"
-                               href="javascript:void(0);">
-                                <img src="/assets/img/broadcast/fon.jpg">
-                            </a>
-                            <a href="javascript:void(0);" data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf"
-                               data-title="Заголовок 2" class="btn btn-link">Постер 2</a>
-                        </div>
-                        <div class="col-md-4" id="poster_3">
-                            <a data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf" data-title="Заголовок 3"
-                               href="javascript:void(0);">
-                                <img src="/assets/img/broadcast/fon.jpg">
-                            </a>
-                            <a href="javascript:void(0);" data-img="/assets/img/broadcast/fon.jpg" data-pdf="sadasd.pdf"
-                               data-title="Заголовок 3" class="btn btn-link">Постер 3</a>
-                        </div>
+                        {% for row in posters %}
+                            <div class="col-md-4" id="poster_{{ row.id }}">
+                                <a data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
+                                   data-pdf="/uploads/poster/pdf/{{ row.file }}" data-title="{{ row.title }}"
+                                   href="javascript:void(0);">
+                                    <img src="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}">
+                                </a>
+                                <a href="javascript:void(0);" data-img="/assets/img/broadcast/fon.jpg"
+                                   data-pdf="sadasd.pdf"
+                                   data-title="{{ row.title }}" class="btn btn-link">Постер {{ row.id }}</a>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
-{#                <div class="col-lg-3 d-none d-lg-block">#}
-{#                    <div class="chatroom">#}
-{#                        <h1>Public chat</h1>#}
-{#                        <ul id="chat-list">#}
-{#                            <li>24 : czxcxz</li>#}
-{#                            <li>24 : xzcxzcz</li>#}
-{#                            <li>24 : zxczxc</li>#}
-{#                            <li>24 : ssafasf</li>#}
-{#                            <li>24 : asfasf</li>#}
-{#                            <li>24 : test</li>#}
-{#                        </ul>#}
-{#                        <hr>#}
-{#                        <textarea id="form-message" placeholder="Your public message here"></textarea>#}
-{#                        <input class="btn btn-secondary" type="button" id="form-submit" value="Send message">#}
-{#                    </div>#}
-{#                </div>#}
+                {# <div class="col-lg-3 d-none d-lg-block"> #}
+                {# <div class="chatroom"> #}
+                {# <h1>Public chat</h1> #}
+                {# <ul id="chat-list"> #}
+                {# <li>24 : czxcxz</li> #}
+                {# <li>24 : xzcxzcz</li> #}
+                {# <li>24 : zxczxc</li> #}
+                {# <li>24 : ssafasf</li> #}
+                {# <li>24 : asfasf</li> #}
+                {# <li>24 : test</li> #}
+                {# </ul> #}
+                {# <hr> #}
+                {# <textarea id="form-message" placeholder="Your public message here"></textarea> #}
+                {# <input class="btn btn-secondary" type="button" id="form-submit" value="Send message"> #}
+                {# </div> #}
+                {# </div> #}
             </div>
         </div>
     </div>
@@ -111,12 +93,12 @@
                     </div>
                     <div class="posterSelected-item">
                         <img src="/assets/img/broadcast/fon.jpg">
-                        <p>Постер 1</p>
+                        <p>Постер 2</p>
                         <a href="javascript:void(0);" target="_blank">Смотреть</a>
                     </div>
                     <div class="posterSelected-item">
                         <img src="/assets/img/broadcast/fon.jpg">
-                        <p>Постер 1</p>
+                        <p>Постер 3</p>
                         <a href="javascript:void(0);" target="_blank">Смотреть</a>
                     </div>
                 </div>
@@ -142,7 +124,6 @@
                     <div class="posterModal-img">
                         <img src="/assets/img/broadcast/fon.jpg">
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <a href="javascript:void(0);" target="_blank" class="open_pdf btn btn-fill">Открыть в формате
@@ -165,6 +146,7 @@
             $('.posterModal .modal-title').text($(this).attr('data-title'));
             $('.posterModal .open_pdf').attr('href', $(this).attr('data-pdf'));
             $('.posterModal .posterModal-img').attr('src', $(this).attr('data-img'));
+            $('.posterModal .posterModal-img img').attr('src', $(this).attr('data-img'));
 
             if ($(this).parent().prev().length) {
                 $('.posterModal .poster-prev').removeClass('hidden');
@@ -215,7 +197,6 @@
                 },
                 async: true,
                 success: function (data) {
-                    console.log(data)
                     $('.poster-voting-btn').show();
                     myModal.hide();
                     $('div#ajax-results').html(data.output);
@@ -240,7 +221,6 @@
                 },
                 async: true,
                 success: function (data) {
-                    console.log(data)
                     $('.poster-voting-btn').show();
                     $('div#ajax-results').html(data.output);
                 }
@@ -255,7 +235,6 @@
                 dataType: "json",
                 async: true,
                 success: function (data) {
-                    console.log(data)
                     $('#voteButton').hide();
                 }
             });

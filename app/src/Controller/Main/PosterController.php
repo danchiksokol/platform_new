@@ -2,7 +2,10 @@
 
 namespace App\Controller\Main;
 
+use App\Repository\PosterCategoryRepository;
+use App\Repository\PosterRepository;
 use App\Services\Poster\PosterService;
+use App\Services\PosterCategory\PosterCategoryService;
 use App\Services\Vote\VoteService;
 use Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,41 +18,59 @@ class PosterController extends BaseController
 {
     private PosterService $posterService;
     private VoteService $voteService;
+    private PosterCategoryService $posterCategoryService;
+    private PosterRepository $posterRepository;
+    private PosterCategoryRepository $posterCategoryRepository;
 
     /**
      * PosterController constructor.
      * @param PosterService $posterService
      * @param VoteService $voteService
+     * @param PosterRepository $posterRepository
+     * @param PosterCategoryRepository $posterCategoryRepository
      */
-    public function __construct(PosterService $posterService, VoteService $voteService)
-    {
+    public function __construct(
+        PosterService $posterService,
+        VoteService $voteService,
+        PosterRepository $posterRepository,
+        PosterCategoryRepository $posterCategoryRepository
+    ) {
         $this->posterService = $posterService;
         $this->voteService = $voteService;
+        $this->posterRepository = $posterRepository;
+        $this->posterCategoryRepository = $posterCategoryRepository;
     }
 
     /**
      * @param Request $request
      * @return Response
      */
-    #[Route('/', name: 'poster')]
+    #[Route('/{categoryId}', name: 'poster', defaults: ['categoryId' => 0])]
     public function indexAction(
         Request $request
     ): Response {
+        $category = $this->posterCategoryRepository->getAll();
+        $categoryId = $request->get('categoryId');
+        $posters = $this->posterRepository->getAll();
+        if ($categoryId) {
+            $posters = $this->posterRepository->getAllByCategory($categoryId);
+        }
         $user = $this->getUser();
         $countVotePoster = $this->posterService->countVotePoster($request, $user);
         $isVote = $this->voteService->isVote($user);
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Постеры';
+        $forRender['categories'] = $category;
+        $forRender['posters'] = $posters;
         $forRender['countVotePoster'] = $countVotePoster;
-        $forRender['isVote'] = $isVote;
+        $forRender['isVote'] = (int)$isVote;
 
         return $this->render(
             'main/poster/index.html.twig',
             $forRender
         );
     }
-
 
     /**
      * @param Request $request
