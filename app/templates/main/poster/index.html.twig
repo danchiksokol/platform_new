@@ -48,9 +48,9 @@
                                    href="javascript:void(0);">
                                     <img src="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}">
                                 </a>
-                                <a href="javascript:void(0);" data-img="/assets/img/broadcast/fon.jpg"
-                                   data-pdf="sadasd.pdf"
-                                   data-title="{{ row.title }}" class="btn btn-link">Постер {{ row.id }}</a>
+                                <a href="javascript:void(0);" data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
+                                   data-pdf="/uploads/poster/pdf/{{ row.file }}"
+                                   data-title="{{ row.title }}" class="btn btn-link">{{ row.title }}</a>
                             </div>
                         {% endfor %}
                     </div>
