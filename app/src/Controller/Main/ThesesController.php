@@ -7,9 +7,11 @@ use App\Form\ThesesFormType;
 use App\Services\FileService\FileManagerServiceInterface;
 use App\Services\Mailer\MailerService;
 use App\Services\Theses\ThesesService;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ThesesController extends AbstractController
@@ -52,6 +54,8 @@ class ThesesController extends AbstractController
     /**
      * @param Request $request
      * @return Response
+     * @throws TransportExceptionInterface
+     * @throws Exception
      */
     #[Route('/theses/create', name: 'theses_create')]
     public function createAction(

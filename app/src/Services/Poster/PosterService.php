@@ -6,8 +6,12 @@ namespace App\Services\Poster;
 
 use App\Entity\Poster;
 use App\Entity\User;
+use App\Repository\PosterCategoryRepository;
 use App\Repository\PosterRepository;
+use App\Services\FileService\FileManagerServiceInterface;
+use DateTime;
 use Exception;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
 class PosterService
@@ -16,14 +20,53 @@ class PosterService
      * @var PosterRepository
      */
     private PosterRepository $posterRepository;
+    private FileManagerServiceInterface $fileManagerService;
+    private PosterCategoryRepository $posterCategoryRepository;
 
     /**
      * PosterService constructor.
      * @param PosterRepository $posterRepository
+     * @param FileManagerServiceInterface $fileManagerService
+     * @param PosterCategoryRepository $posterCategoryRepository
      */
-    public function __construct(PosterRepository $posterRepository)
+    public function __construct(PosterRepository $posterRepository, FileManagerServiceInterface $fileManagerService, PosterCategoryRepository $posterCategoryRepository)
     {
         $this->posterRepository = $posterRepository;
+        $this->fileManagerService = $fileManagerService;
+        $this->fileManagerService->setFileUploadDirectory('poster');
+        $this->posterCategoryRepository = $posterCategoryRepository;
+    }
+
+    /**
+     * @param Poster $poster
+     * @param Form $form
+     * @return $this
+     * @throws Exception
+     */
+    public function handleCreate(Poster $poster, Form $form): static
+    {
+        $poster->setTitle($form->get('title')->getData());
+        $poster->setContent($form->get('content')->getData());
+        $file = $form->get('file')->getData();
+        if ($file) {
+            $this->fileManagerService->setFileUploadDirectory('pdf');
+            $fileName = $this->fileManagerService->uploadFile($file);
+            $poster->setFile($fileName);
+        }
+        $poster->setCreatedAt(new DateTime());
+        $category = $this->posterCategoryRepository->getOne($form->get('posterCategory')->getData());
+        $poster->setPosterCategory($category);
+        $thumbnail = $form->get('thumbnail')->getData();
+        if ($thumbnail) {
+            $this->fileManagerService->setFileUploadDirectory('thumbnail');
+            $thumbnailName = $this->fileManagerService->uploadFile($thumbnail);
+            $poster->setThumbnail($thumbnailName);
+        }
+
+        $this->posterRepository->setCreate($poster);
+        $this->posterRepository->setSave();
+
+        return $this;
     }
 
     /**

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin', name: 'app_')]
+#[Route('/admin', name: 'app_admin_')]
 class AdminQuestionSpeakerController extends AdminBaseController
 {
     private QuestionSpeakerRepository $questionSpeakerRepository;
@@ -34,7 +34,7 @@ class AdminQuestionSpeakerController extends AdminBaseController
      * @param Request $request
      * @return Response
      */
-    #[Route('/question/{chatid}', name: 'admin_question_speaker')]
+    #[Route('/question/{chatid}', name: 'question_speaker')]
     public function indexAction(
         Request $request
     ): Response {
@@ -55,7 +55,7 @@ class AdminQuestionSpeakerController extends AdminBaseController
      * @param Request $request
      * @return Response
      */
-    #[Route('/question/setshow/{id}', name: 'admin_question_speaker_setshow')]
+    #[Route('/question/show/{id}', name: 'question_speaker_show')]
     public function setShowAction(
         Request $request
     ): Response {
@@ -72,7 +72,7 @@ class AdminQuestionSpeakerController extends AdminBaseController
      * @return Response
      * @throws Exception
      */
-    #[Route('/question/delete/{id}', name: 'admin_question_speaker_delete')]
+    #[Route('/question/delete/{id}', name: 'question_speaker_delete')]
     public function deleteAction(
         Request $request
     ): Response {

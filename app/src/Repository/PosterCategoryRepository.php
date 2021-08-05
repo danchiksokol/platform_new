@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\PosterCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,10 +15,48 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PosterCategoryRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private EntityManagerInterface $entityManager;
+
+    /**
+     * @param ManagerRegistry $registry
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, PosterCategory::class);
+        $this->entityManager = $entityManager;
     }
 
+
+    /**
+     * @return PosterCategory[]
+     */
+    public function getAll(): array
+    {
+        return $this->findAll();
+    }
+
+    /**
+     * @param int $id
+     * @return PosterCategory
+     */
+    public function getOne(int $id): PosterCategory
+    {
+        return $this->find($id);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllForRender(): array
+    {
+        $categories = $this->findAll();
+        $result = [];
+        foreach ($categories as $category) {
+            $result[$category->getName()] = $category->getId();
+        }
+
+        return $result;
+    }
 
 }

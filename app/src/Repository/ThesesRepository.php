@@ -6,6 +6,7 @@ use App\Entity\Theses;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method Theses|null find($id, $lockMode = null, $lockVersion = null)
@@ -38,7 +39,7 @@ class ThesesRepository extends ServiceEntityRepository
 
     /**
      * @param Theses $theses
-     * @throws \Exception
+     * @throws Exception
      */
     public function setCreate(Theses $theses)
     {
@@ -48,7 +49,7 @@ class ThesesRepository extends ServiceEntityRepository
             $this->entityManager->flush();
 
             $this->entityManager->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->entityManager->rollback();
             throw $exception;
         }

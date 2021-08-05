@@ -49,12 +49,17 @@ class Poster
     /**
      * @ORM\ManyToOne(targetEntity=PosterCategory::class, inversedBy="poster")
      */
-    private ?PosterCategory $posterCategory;
+    private int|PosterCategory $posterCategory;
 
     /**
      * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="poster", cascade={"persist"})
      */
     private $votes;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $thumbnail;
 
     #[Pure]
     public function __construct()
@@ -174,10 +179,10 @@ class Poster
     }
 
     /**
-     * @param PosterCategory|null $posterCategory
+     * @param int|PosterCategory $posterCategory
      * @return $this
      */
-    public function setPosterCategory(?PosterCategory $posterCategory): self
+    public function setPosterCategory(int|PosterCategory $posterCategory): self
     {
         $this->posterCategory = $posterCategory;
 
@@ -218,6 +223,18 @@ class Poster
                 $vote->setPoster(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }

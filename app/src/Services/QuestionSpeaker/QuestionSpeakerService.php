@@ -90,6 +90,8 @@ class QuestionSpeakerService
         $this->questionSpeakerRepository->setDelete($questionSpeaker);
     }
 
+
+    //TODO вынести в репозиторий
     /**
      * @param int $chatRoomId
      * @return array
