@@ -6,11 +6,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-12">
-                    <div class="broadcast-live">
-                        <iframe width="800" height="600" src="https://www.youtube.com/embed/6-4UX4Poa8I?rel=0&fs=0&playsinline=1" allow="autoplay; encrypted-media" donotallowfullscreen></iframe>
+                    <div class="broadcast">
+                        <div class="broadcast-live">
+                            <iframe width="100%" height="600" src="https://www.youtube.com/embed/6-4UX4Poa8I?rel=0&fs=0&playsinline=1" allow="autoplay; encrypted-media" donotallowfullscreen></iframe>
+                        </div>
+                        {% set questions = questions %}
+                        {% include 'main/question_speaker/index.html.twig' with {questions: questions} %}
                     </div>
-                    {% set questions = questions %}
-                    {% include 'main/question_speaker/index.html.twig' with {questions: questions} %}
                 </div>
                 <div class="col-md-3 col-lg-3 d-none d-lg-block">
                     <div class="chatroom">

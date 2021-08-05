@@ -25,24 +25,47 @@
 <body>
 {% block header %}
     <header>
+        <!--
+        <img class="bg-header" src="/assets/img/bg-header.jpg">
+        -->
         <div class="container">
-            <div class="header-banner">
-                <img src="">
+            <div class="row">
+                <div class="col-lg-2 col-6 header-logo">
+                    <img src="/assets/img/logo.png">
+                </div>
+                <nav class="col-lg-10 col-3 navbar-light navbar navbar-expand-lg">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <div class="nav-container">
+                            <a href="{{ path('app_main_home_index') }}" class="nav-link active">Приветствие</a>
+                            <!--
+                            <a href="{{ path('app_main_home_sponsors') }}" class="nav-link">Организаторы</a>
+                            <a href="{{ path('app_main_home_exhibition') }}" class="nav-link">Выставка</a>
+                            {{ path('app_main_home_exhibition') }}
+                            <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="nav-link">Трансляция</a>
+                            <a href="{{ path('app_company') }}" class="nav-link">Компании</a>
+                            <a href="{{ path('app_poster') }}" class="nav-link">Постеры</a>
+                            -->
+                            <a href="{{ path('app_main_home_programms') }}" class="nav-link">Программа</a>
+                            <a href="{{ path('app_main_home_programms') }}" class="nav-link">Симпозиумы</a>
+                            <a href="{{ path('app_main_home_sponsors') }}"" class="nav-link">Виртуальная выставка</a>
+                            <a href="{{ path('app_main_home_help') }}" class="nav-link link-dark">Техническая поддержка</a>
+                        </div>
+                    </div>
+                </nav>
+                <div class="col-12 d-lg-none title-mob">
+                    <h1 class="title">Интерактивный форум экспертов по вопросам диагностики и лечения лимфопролиферативных заболеваний «Лимфорум», 17-18 сентября 2021 г. </h1>
+                </div>
             </div>
-            <nav>
-                <a href="{{ path('app_main_home_index') }}" class="nav-link">Приветствие</a>
-                <a href="{{ path('app_main_home_sponsors') }}" class="nav-link">Организаторы</a>
-                <a href="{{ path('app_main_home_exhibition') }}" class="nav-link">Выставка</a>
-                <a href="{{ path('app_main_home_programms') }}" class="nav-link">Программа</a>
-                <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="nav-link">Трансляция</a>
-                <a href="{{ path('app_company') }}" class="nav-link">Компании</a>
-                <a href="{{ path('app_poster') }}" class="nav-link">Постеры</a>
-                <a href="{{ path('app_main_home_help') }}" class="nav-link">Поддержка</a>
-            </nav>
         </div>
     </header>
 {% endblock %}
 {% block body %}
 {% endblock %}
+    <footer>
+        <img src="/assets/img/bg-footer.jpg">
+    </footer>
 </body>
 </html>
