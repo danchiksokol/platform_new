@@ -2,10 +2,16 @@
 {% block title %}{{ title }}{% endblock %}
 {% block body %}
     <div class="container">
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                data-bs-target="#modalPosterCategory">
+            Создать категорию
+        </button>
+         <td><a type="button" class="btn btn-success" href="{{path('app_admin_poster_create') }}">Создать постер</a></td>
         <table class="table table-hover table-bordered">
             <thead>
             <tr>
                 <th scope="col">№</th>
+                <th scope="col">Категория</th>
                 <th scope="col">Заголовок</th>
                 <th scope="col">Текст</th>
                 <th scope="col">PDF</th>
@@ -20,15 +26,18 @@
                 <tr>
                     {% set count = count + 1 %}
                     <td>{{ count }}</td>
+                    <td>{{ row.posterCategory.name }}</td>
                     <td>{{ row.title }}</td>
                     <td>{{ row.content }}</td>
                     <td>{{ row.file }}</td>
                     <td>{{ row.thumbnail }}</td>
-{#                    <td><a type="button" class="btn btn-secondary" href="{{path('app_admin_question_speaker_setshow', {'id': row.id}) }}">Отобразить</a></td>#}
-{#                    <td><a type="button" class="btn btn-danger" href="{{path('app_admin_question_speaker_delete', {'id': row.id}) }}">X</a></td>#}
+                    {# <td><a type="button" class="btn btn-secondary" href="{{path('app_admin_question_speaker_setshow', {'id': row.id}) }}">Отобразить</a></td> #}
+                    {# <td><a type="button" class="btn btn-danger" href="{{path('app_admin_question_speaker_delete', {'id': row.id}) }}">X</a></td> #}
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
+    {% set submit_url = path('app_admin_poster') %}
+    {% include 'admin/poster_category/form.html.twig' with {url: submit_url} %}
 {% endblock %}

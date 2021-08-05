@@ -6,6 +6,7 @@ use App\Entity\PosterCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method PosterCategory|null find($id, $lockMode = null, $lockVersion = null)
@@ -27,6 +28,29 @@ class PosterCategoryRepository extends ServiceEntityRepository
         $this->entityManager = $entityManager;
     }
 
+
+    /**
+     * @param PosterCategory $posterCategory
+     * @throws Exception
+     */
+    public function setCreate(PosterCategory $posterCategory)
+    {
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->persist($posterCategory);
+
+            $this->entityManager->commit();
+        } catch (Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
+    }
+
+    public function setSave()
+    {
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+    }
 
     /**
      * @return PosterCategory[]

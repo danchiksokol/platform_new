@@ -1,0 +1,20 @@
+{% block body %}
+    <div class="modal fade" id="modalPosterCategory" tabindex="-1" aria-labelledby="modalPosterCategoryLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {{ form_start(categoryForm, {'action': url}) }}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPosterCategoryLabel">Создать категорию постеров</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ form_row(categoryForm.name) }}
+                </div>
+                <div class="modal-footer">
+                    {{ form_row(categoryForm.save) }}
+                </div>
+                {{ form_end(categoryForm, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

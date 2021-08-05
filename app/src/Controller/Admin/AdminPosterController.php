@@ -3,10 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Poster;
+use App\Entity\PosterCategory;
+use App\Form\PosterCategoryFormType;
 use App\Form\PosterFormType;
 use App\Repository\PosterCategoryRepository;
 use App\Repository\PosterRepository;
 use App\Services\Poster\PosterService;
+use App\Services\PosterCategory\PosterCategoryService;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,22 +21,31 @@ class AdminPosterController extends AdminBaseController
     private PosterService $posterService;
     private PosterRepository $posterRepository;
     private PosterCategoryRepository $posterCategoryRepository;
+    private PosterCategoryService $posterCategoryService;
 
     /**
      * @param PosterService $posterService
      * @param PosterRepository $posterRepository
+     * @param PosterCategoryService $posterCategoryService
      * @param PosterCategoryRepository $posterCategoryRepository
      */
     public function __construct(
         PosterService $posterService,
         PosterRepository $posterRepository,
+        PosterCategoryService $posterCategoryService,
         PosterCategoryRepository $posterCategoryRepository
     ) {
         $this->posterService = $posterService;
         $this->posterRepository = $posterRepository;
         $this->posterCategoryRepository = $posterCategoryRepository;
+        $this->posterCategoryService = $posterCategoryService;
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws Exception
+     */
     #[Route('/poster/', name: 'poster')]
     public function indexAction(Request $request): Response
     {
@@ -42,11 +54,21 @@ class AdminPosterController extends AdminBaseController
         if ($catId) {
             $posters = $this->posterRepository->getAllByCategory($catId);
         }
+        $posterCategory = new PosterCategory();
+        $form = $this->createForm(PosterCategoryFormType::class, $posterCategory);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $this->posterCategoryService->handleCreate($posterCategory, $form);
+            $this->addFlash('Success', 'Создана категория');
+
+            return $this->redirectToRoute('app_admin_poster');
+        }
 
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Админка постеров';
         $forRender['posters'] = $posters;
+        $forRender['categoryForm'] = $form->createView();
         return $this->render('admin/poster/index.html.twig', $forRender);
     }
 
