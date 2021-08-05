@@ -41,7 +41,6 @@ class PosterRepository extends ServiceEntityRepository
         $this->entityManager->beginTransaction();
         try {
             $this->entityManager->persist($poster);
-            $this->entityManager->flush();
 
             $this->entityManager->commit();
         } catch (Exception $exception) {
@@ -91,21 +90,6 @@ class PosterRepository extends ServiceEntityRepository
         return $this->findAll();
     }
 
-//    /**
-//     * @param int $categoryId
-//     * @return array
-//     */
-//    public function getAllByCategory(int $categoryId): array
-//    {
-//        $qb = $this->createQueryBuilder('p')
-//            ->select()
-//            ->where('p.id = :id')
-//            ->setParameter('id', $categoryId)
-//            ->orderBy('p.id', 'ASC');
-//
-//        return $qb->getQuery()->getResult();
-//    }
-
     /**
      * @param int $categoryId
      * @return Poster[]
@@ -114,5 +98,4 @@ class PosterRepository extends ServiceEntityRepository
     {
         return $this->findBy(['poster_category' => $categoryId], ['id' => 'ASC']);
     }
-
 }
