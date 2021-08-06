@@ -25,6 +25,30 @@
     {% endblock %}
 </head>
 <body>
+{% block header %}
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-6 header-logo">
+                    <img src="/assets/img/logo.png">
+                </div>
+                <nav class="col-lg-10 col-3 navbar-light navbar navbar-expand-lg">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <div class="nav-container">
+                            <a href="{{ path('app_admin_adminhome_index') }}" class="nav-link active">Главная страница</a>
+                            <a href="{{ path('app_admin_users') }}" class="nav-link">Пользователи</a>
+                            <a href="{{ path('app_admin_question_speaker' , {'chatid': 1}) }}" class="nav-link">Вопросы спикеру</a>
+                            <a href="{{ path('app_admin_poster') }}" class="nav-link">Постеры</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+{% endblock %}
 {% block body %}
 {% endblock %}
 </body>

@@ -4,16 +4,18 @@
 namespace App\Controller\Admin;
 
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/admin', 'app_admin_')]
 class AdminHomeController extends AdminBaseController
 {
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    #[Route('/admin', 'admin_home')]
-    public function index()
+    #[Route('/', '_home_index')]
+    public function index(): Response
     {
         $forRender = parent::renderDefault();
         return $this->render(

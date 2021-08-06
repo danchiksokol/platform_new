@@ -28,8 +28,8 @@
                     <td>{{ row.email }}</td>
                     <td>{{ row.country }}</td>
                     <td>{{ row.city }}</td>
-                    <td><a type="button" class="btn btn-secondary" href="{{path('admin_users_update', {'userId': row.id}) }}">Изменить</a></td>
-                    <td><a type="button" class="btn btn-danger" href="{{path('admin_users_delete', {'userId': row.id}) }}">X</a></td>
+                    <td><a type="button" class="btn btn-secondary" href="{{path('app_admin_users_update', {'userId': row.id}) }}">Изменить</a></td>
+                    <td><a type="button" class="btn btn-danger" href="{{path('app_admin_users_delete', {'userId': row.id}) }}">X</a></td>
                 </tr>
             {% endfor %}
             </tbody>

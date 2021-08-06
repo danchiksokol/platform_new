@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/admin', name: 'app_admin_')]
 class AdminUserController extends AdminBaseController
 {
     /**
@@ -36,7 +37,7 @@ class AdminUserController extends AdminBaseController
     /**
      * @return Response
      */
-    #[Route('/admin/users', name: 'admin_users')]
+    #[Route('/users', name: 'users')]
     public function indexAction(): Response
     {
         $forRender = parent::renderDefault();
@@ -61,7 +62,7 @@ class AdminUserController extends AdminBaseController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    #[Route('/admin/users/update/{userId}', name: 'admin_users_update')]
+    #[Route('/users/update/{userId}', name: 'users_update')]
     public function updateAction(
         Request $request,
         int $userId
@@ -101,7 +102,7 @@ class AdminUserController extends AdminBaseController
      * @return Response
      * @throws Exception
      */
-    #[Route('/admin/users/delete/{userId}', name: 'admin_users_delete')]
+    #[Route('/users/delete/{userId}', name: 'users_delete')]
     public function deleteAction(
         int $userId
     ): Response {
