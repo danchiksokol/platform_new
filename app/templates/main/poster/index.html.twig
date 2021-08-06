@@ -43,12 +43,12 @@
                     <div class="poster-images row">
                         {% for row in posters %}
                             <div class="col-md-4" id="poster_{{ row.id }}">
-                                <a data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
+                                <a class="poster-images-img" data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
                                    data-pdf="/uploads/poster/pdf/{{ row.file }}" data-title="{{ row.title }}"
                                    href="javascript:void(0);">
                                     <img src="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}">
                                 </a>
-                                <a href="javascript:void(0);" data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
+                                <a class="poster-images-title" href="javascript:void(0);" data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
                                    data-pdf="/uploads/poster/pdf/{{ row.file }}"
                                    data-title="{{ row.title }}" class="btn btn-link">{{ row.title }}</a>
                             </div>
@@ -87,17 +87,26 @@
                 </div>
                 <div class="modal-body">
                     <div class="posterSelected-item">
-                        <img src="/assets/img/broadcast/fon.jpg">
+                        <button type="button" class="x-close" aria-label="Close"></button>
+                        <div class="posterSelected-item-img">
+                            <img src="/assets/img/broadcast/fon.jpg">
+                        </div>
                         <p>Постер 1</p>
                         <a href="javascript:void(0);" target="_blank">Смотреть</a>
                     </div>
                     <div class="posterSelected-item">
-                        <img src="/assets/img/broadcast/fon.jpg">
+                        <button type="button" class="x-close" aria-label="Close"></button>
+                        <div class="posterSelected-item-img">
+                            <img src="/assets/img/broadcast/fon.jpg">
+                        </div>
                         <p>Постер 2</p>
                         <a href="javascript:void(0);" target="_blank">Смотреть</a>
                     </div>
                     <div class="posterSelected-item">
-                        <img src="/assets/img/broadcast/fon.jpg">
+                        <button type="button" class="x-close" aria-label="Close"></button>
+                        <div class="posterSelected-item-img">
+                            <img src="/assets/img/broadcast/fon.jpg">
+                        </div>
                         <p>Постер 3</p>
                         <a href="javascript:void(0);" target="_blank">Смотреть</a>
                     </div>

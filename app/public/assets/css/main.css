@@ -15,6 +15,7 @@ body,section {
 }
 img {
     max-width: 100%;
+    max-height: 100%;
 }
 input, textarea {
     outline-color: #d8d8d8;
@@ -396,8 +397,12 @@ header .container {
 }
 .poster-images {
     margin-top: 16px;
+    margin-bottom: 32px;
 }
-.poster-images a {
+.poster-images > div {
+    margin-bottom: 16px;
+}
+.poster-images-title {
     margin-bottom: 8px;
     text-align: center;
     display: block;
@@ -454,12 +459,39 @@ header .container {
     max-width: calc(100% / 3 - 8px);
     text-align: center;
     margin-bottom: 8px;
+    width: 100%;
+    position: relative;
+    padding-top: 16px;
 }
-.posterSelected-item img {
-    margin-bottom: 4px;
+.x-close {
+    position: absolute;
+    right: -8px;
+    top: 0;
+    height: 12px;
+    width: 12px;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0 3px 9px #bfbfbf;
+    border-radius: 50%;
+    padding: 12px;
+    background-image: url(/assets/img/close.svg);
+    border: none;
+    background-size: contain;
+    opacity: .5;
+}
+.x-close:hover {
+    opacity: 1;
+}
+.posterSelected-item-img {
+    height: 147px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
 }
 .posterSelected-item p {
     margin-bottom: 4px;
+    word-wrap: break-word;
 }
 .posterSelected .modal-header {
     display: block;
@@ -479,6 +511,7 @@ header .container {
 .posterSelected .modal-footer {
     justify-content: center;
     border-top: none;
+    margin-top: 24px;
 }
 .faq .accordion {
     margin: 24px 0;
@@ -659,6 +692,23 @@ footer img {
 .programs-page.main-block {
     background: url(/assets/img/bg-program.jpg);
     background-size: cover;
+}
+.poster-images-img {
+    max-height: 306px;
+    height: 100%;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+.posterModal-img img {
+    max-height: 466px;
+    height: 100%;
+    max-width: 100%;
+}
+.posterModal-img {
+    text-align: center;
 }
 @media (max-width: 991px) {
     nav {
@@ -872,6 +922,19 @@ footer img {
     }
     .nav-container {
         max-width: 100%;
+    }
+    .posterSelected .modal-body {
+        padding: 0;
+    }
+    .poster-voting, .poster-voting button {
+        display: block;
+    }
+    .posterSelected-item {
+        max-width: calc(100% / 2 - 8px);
+        margin-bottom: 12px;
+    }
+    .posterSelected .modal-footer {
+        margin-top: 12px;
     }
 }
 
