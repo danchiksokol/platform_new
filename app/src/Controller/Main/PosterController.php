@@ -127,4 +127,22 @@ class PosterController extends BaseController
 
         return new Response('This is not ajax!', 400);
     }
+
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws Exception
+     */
+    #[Route('/ajax/vote/view', name: 'poster_ajax_vote_view')]
+    public function voteViewAction(Request $request): Response
+    {
+        $user = $this->getUser();
+        if ($request->isXMLHttpRequest()) {
+            $posters = $this->posterService->getPostersFromSession($request, $user);
+            return new JsonResponse(array('output' => $posters));
+        }
+
+        return new Response('This is not ajax!', 400);
+    }
 }

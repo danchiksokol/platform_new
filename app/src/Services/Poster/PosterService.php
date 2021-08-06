@@ -29,8 +29,11 @@ class PosterService
      * @param FileManagerServiceInterface $fileManagerService
      * @param PosterCategoryRepository $posterCategoryRepository
      */
-    public function __construct(PosterRepository $posterRepository, FileManagerServiceInterface $fileManagerService, PosterCategoryRepository $posterCategoryRepository)
-    {
+    public function __construct(
+        PosterRepository $posterRepository,
+        FileManagerServiceInterface $fileManagerService,
+        PosterCategoryRepository $posterCategoryRepository
+    ) {
         $this->posterRepository = $posterRepository;
         $this->fileManagerService = $fileManagerService;
         $this->fileManagerService->setFileUploadDirectory('poster');
@@ -94,28 +97,27 @@ class PosterService
         }
     }
 
+
     /**
      * @param Request $request
      * @param User $user
      * @param int $posterId
-     * @return mixed
+     * @return array
      * @throws Exception
      */
-    public function handleDeleteVotePosterFromSession(Request $request, User $user, int $posterId): mixed
+    public function handleDeleteVotePosterFromSession(Request $request, User $user, int $posterId): array
     {
         try {
             $userId = $user->getId();
             $session = $request->getSession();
-            if ($session->has("vote_$userId")) {
-                $votePosterSession = $session->get("vote_$userId");
-                if ($this->hasVotePosterSession($posterId, $votePosterSession)) {
-                    $session->remove("vote_$userId");
-                    $votePosterSession = $this->deleteVotePosterFromArray($posterId, $votePosterSession);
-                    $session->set("vote_$userId", $votePosterSession);
-                }
+            $votePosterSession = $session->get("vote_$userId");
+            if ($this->hasVotePosterSession($posterId, $votePosterSession)) {
+                $session->remove("vote_$userId");
+                $votePosterSession = $this->deleteVotePosterFromArray($posterId, $votePosterSession);
+                $session->set("vote_$userId", $votePosterSession);
             }
 
-            return $session->get("vote_$userId");
+            return $votePosterSession;
         } catch (Exception $exception) {
             throw new Exception($exception->getMessage());
         }
@@ -129,8 +131,7 @@ class PosterService
     public function deleteVotePosterFromArray(int $posterId, array $votePosterSession): array
     {
         foreach ($votePosterSession as $key => $vote) {
-            $voteId = $vote['id'];
-            if ($voteId == $posterId) {
+            if ($vote == $posterId) {
                 unset($votePosterSession[$key]);
             }
         }
@@ -188,5 +189,35 @@ class PosterService
         return count($votePosterSession);
     }
 
+    /**
+     * @param Request $request
+     * @param User $user
+     * @return array
+     * @throws Exception
+     */
+    public function getPostersFromSession(Request $request, User $user): array
+    {
+        try {
+            $result = [];
+            $userId = $user->getId();
+            $session = $request->getSession();
+            if ($session->has("vote_$userId")) {
+                $votePosterSession = $session->get("vote_$userId");
+                foreach ($votePosterSession as $vote) {
+                    $voteObject = $this->posterRepository->getOne((int)$vote);
+                    $result[] = [
+                        'id' => $voteObject->getId(),
+                        'title' => $voteObject->getTitle(),
+                        'file' => $voteObject->getFile(),
+                        'thumbnail' => $voteObject->getThumbnail()
+                    ];
+                }
+            }
+
+            return $result;
+        } catch (Exception $exception) {
+            throw new Exception($exception->getMessage());
+        }
+    }
 
 }
