@@ -235,15 +235,26 @@ header .container {
     top: 0;
     background-size: cover;
 }
-.sponsor-logo a:hover {
+.spon-logo a:hover {
     text-decoration: none;
 }
-.sponsor-logo .col-sm-6 {
+.spon-logo a {
+    display: block;
+}
+.spon-logo .col-sm-6 {
     margin-bottom: 16px;
     text-align: center;
 }
-.sponsor-logo img {
+.spon-logo img {
     margin-bottom: 8px;
+}
+.spon-title {
+    color: #24196c;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+    margin-top: 24px;
 }
 .company-info img {
     margin: 0 auto 16px;
@@ -709,6 +720,53 @@ footer img {
 }
 .posterModal-img {
     text-align: center;
+}
+.programs-title {
+    margin: 24px 0 24px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+.table-subtitle {
+    font-weight: 600;
+    text-align: center;
+}
+thead th {
+    vertical-align: middle;
+}
+.table {
+    font-size: 14px;
+}
+.program-right {
+    border: 4px solid #24196c;
+    border-radius: 12px;
+    padding: 46px 24px;
+    margin-top: 42px;
+    position: relative;
+    background: #fff;
+}
+.program-right:before, .program-right:after {
+    content: '';
+    width: 100%;
+    height: 22px;
+    background: #24196c;
+    position: absolute;
+    left: 0;
+    display: block;
+}
+.program-right:before {
+    top: 0;
+}
+.program-right:after {
+    bottom: 0;
+    height: 26px;
+}
+.program-right a {
+    display: block;
+    margin-bottom: 18px;
+}
+.program-right a:last-child {
+    margin-bottom: 0;
 }
 @media (max-width: 991px) {
     nav {
