@@ -68,7 +68,7 @@ class ChatRoomController extends BaseController
      * @return Response
      * @throws Exception
      */
-    #[Route('/{chatid}', name: 'broadcast')]
+    #[Route('/{chatid}', name: 'broadcast', defaults: ['chatid' => 1])]
     public function indexAction(
         Request $request
     ): Response {

@@ -1,0 +1,7 @@
+<div class="program-right">
+    {% for row in news %}
+        <a href="{{ path(row.href) }}">
+            <img src="{{ asset('uploads/news/' ~ row.file) }}">
+        </a>
+    {% endfor %}
+</div>

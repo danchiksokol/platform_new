@@ -231,14 +231,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 d-none d-lg-block">
-                    <div class="program-right">
-                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}">
-                            <img src="{{ asset('uploads/news/Session1.png') }}">
-                        </a>
-                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}">
-                            <img src="{{ asset('uploads/news/Session2.png') }}">
-                        </a>
-                    </div>
+                    {% include 'main/news/index.html.twig' with news %}
                 </div>
             </div>
         </div>

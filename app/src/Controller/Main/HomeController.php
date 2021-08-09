@@ -6,6 +6,7 @@ namespace App\Controller\Main;
 use App\Entity\ChatRoom;
 use App\Repository\ChatRoomRepository;
 use App\Repository\MessageRepository;
+use App\Repository\NewsRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,7 @@ class HomeController extends BaseController
      * @var MessageRepository
      */
     private $messageRepository;
+    private NewsRepository $newsRepository;
 
     /**
      * HomeController constructor.
@@ -36,17 +38,20 @@ class HomeController extends BaseController
      * @param EntityManagerInterface $entityManager
      * @param ChatRoomRepository $chatRoomRepository
      * @param MessageRepository $messageRepository
+     * @param NewsRepository $newsRepository
      */
     public function __construct(
         UserRepository $userRepository,
         EntityManagerInterface $entityManager,
         ChatRoomRepository $chatRoomRepository,
-        MessageRepository $messageRepository
+        MessageRepository $messageRepository,
+        NewsRepository $newsRepository
     ) {
         $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
         $this->chatRoomRepository = $chatRoomRepository;
         $this->messageRepository = $messageRepository;
+        $this->newsRepository = $newsRepository;
     }
 
     #[Route('/', 'app_main_home_index')]
@@ -71,7 +76,7 @@ class HomeController extends BaseController
         $forRender['title'] = 'Главная страница';
         $forRender['messages'] = $messages;
         $forRender['user'] = $this->getUser()->getId();
-        $forRender['chatid'] = ChatRoom::MEGA_CHAT;
+        $forRender['news'] = $this->newsRepository->getAllIsShow();
         return $this->render('main/index.html.twig', $forRender);
     }
 
@@ -80,6 +85,7 @@ class HomeController extends BaseController
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Программы';
+        $forRender['news'] = $this->newsRepository->getAllIsShow();
         return $this->render('main/programms/index.html.twig', $forRender);
     }
 
@@ -88,6 +94,7 @@ class HomeController extends BaseController
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Спонсоры';
+        $forRender['news'] = $this->newsRepository->getAllIsShow();
         return $this->render('main/sponsors/index.html.twig', $forRender);
     }
 
@@ -104,6 +111,7 @@ class HomeController extends BaseController
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Поддержка';
+        $forRender['news'] = $this->newsRepository->getAllIsShow();
         return $this->render('main/help/index.html.twig', $forRender);
     }
 

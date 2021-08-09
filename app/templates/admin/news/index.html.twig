@@ -1,0 +1,36 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="container">
+        <td><a type="button" class="btn btn-success" href="{{ path('app_admin_news_create') }}">Создать новость</a></td>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Заголовок</th>
+                <th scope="col">URL</th>
+                <th scope="col">File</th>
+                <th scope="col">Отображен</th>
+                <th>Редактировать</th>
+                <th>Удалить</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set count = 0 %}
+            {% for row in news %}
+                <tr>
+                    {% set count = count + 1 %}
+                    <td>{{ count }}</td>
+                    <td>{{ row.title }}</td>
+                    <td>{{ row.href }}</td>
+                    <td>{{ row.file }}</td>
+                    <td>{{ (row.isShow) ? 'Да': 'Нет' }}</td>
+                    <td><a type="button" class="btn btn-secondary"
+                           href="{{ path('app_admin_news_update', {'id': row.id}) }}">Редактировать</a></td>
+                    <td><a type="button" class="btn btn-danger" href="{{path('app_admin_news_delete', {'id': row.id}) }}">X</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
