@@ -23,7 +23,7 @@
                     <td>{{ count }}</td>
                     <td>{{ row.title }}</td>
                     <td>{{ row.href }}</td>
-                    <td>{{ row.file }}</td>
+                    <td width="100px"><img src="{{ asset('uploads/news/' ~ row.file) }}"></td>
                     <td>{{ (row.isShow) ? 'Да': 'Нет' }}</td>
                     <td><a type="button" class="btn btn-secondary"
                            href="{{ path('app_admin_news_update', {'id': row.id}) }}">Редактировать</a></td>
