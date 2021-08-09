@@ -609,7 +609,14 @@ header .container {
     text-align: right;
 }
 .program-table-scroll {
-    overflow-x: scroll;
+
+}
+.program-table-scroll table {
+    width: 100%;
+    max-width: 100%;
+}
+.program-table-scroll th, .program-table-scroll td {
+    white-space: inherit;
 }
 .login-form .btn {
     margin: 0 auto;
@@ -767,6 +774,14 @@ thead th {
 }
 .program-right a:last-child {
     margin-bottom: 0;
+}
+@media (max-width: 1199px) {
+    .program-table-scroll th:nth-child(3), .program-table-scroll td:nth-child(3) {
+        max-width: 170px;
+    }
+    .program-table-scroll td {
+        word-break: break-word;
+    }
 }
 @media (max-width: 991px) {
     nav {
