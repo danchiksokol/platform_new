@@ -7,6 +7,7 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/framework/bootstrap-5.0.1/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+        <link rel="icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon"/>
     {% endblock %}
 
     {% block javascripts %}
@@ -34,7 +35,8 @@
                     <img src="/assets/img/logo.png">
                 </div>
                 <nav class="col-lg-10 col-3 navbar-light navbar navbar-expand-lg">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarContent">
@@ -50,13 +52,17 @@
                             -->
                             <a href="{{ path('app_main_home_programms') }}" class="nav-link">Программа</a>
                             <a href="{{ path('app_main_home_programms') }}" class="nav-link">Симпозиумы</a>
+                            <a href="{{ path('app_poster') }}" class="nav-link"> Постерная сессия</a>
                             <a href="{{ path('app_main_home_sponsors') }}"" class="nav-link">Виртуальная выставка</a>
-                            <a href="{{ path('app_main_home_help') }}" class="nav-link link-dark">Техническая поддержка</a>
+                            <a href="{{ path('app_main_home_help') }}" class="nav-link link-dark">Техническая
+                                поддержка</a>
                         </div>
                     </div>
                 </nav>
                 <div class="col-12 d-lg-none title-mob">
-                    <h1 class="title">Интерактивный форум экспертов по вопросам диагностики и лечения лимфопролиферативных заболеваний «Лимфорум», 17-18 сентября 2021 г. </h1>
+                    <h1 class="title">Интерактивный форум экспертов по вопросам диагностики и лечения
+                        лимфопролиферативных
+                        заболеваний «Лимфорум», 17-18 сентября 2021 г. </h1>
                 </div>
             </div>
         </div>
@@ -64,8 +70,8 @@
 {% endblock %}
 {% block body %}
 {% endblock %}
-    <footer>
-        <img src="/assets/img/bg-footer.jpg">
-    </footer>
+<footer>
+    <img src="/assets/img/bg-footer.jpg">
+</footer>
 </body>
 </html>
