@@ -7,8 +7,8 @@
             <div class="row">
                 <div class="col-lg-9 col-12">
                     <div class="program-date d-none d-lg-block">
-                        <a href="javascript:void(0);" class="btn btn-fill active">26 февраля</a>
-                        <a href="javascript:void(0);" class="btn btn-fill">27 февраля</a>
+                        <a href="javascript:void(0);" class="btn btn-fill active">17 сентября</a>
+                        <a href="javascript:void(0);" class="btn btn-fill">18 сентября</a>
                     </div>
                     <div class="programs-title">17 сентября 2021 г.</div>
                     <div class="programs-title">Председатель: Поддубная Ирина Владимировна, академик РАН, проф., проректор по лечебной работе и международному сотрудничеству, заведующая кафедрой онкологии и паллиативной медицины им. акад. А.И. Савицкого ФГБОУ ДПО РМАНПО Минздрава России, председатель Российского профессионального общества онкогематологов, Москва</div>
@@ -102,7 +102,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a href="javascript:void(0);" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
                     </div>
                     <div class="programs-title">18 сентября 2021 г. </div>
                     <div class="program-table d-none d-lg-block">
@@ -185,11 +185,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a href="javascript:void(0);" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
                     </div>
                     <div class="program-pdf">
-                        <a href="javascript:void(0);" target="_blank" class="btn btn-bluez">Поключиться к онлайн трансляции</a>
-                        <a href="/limforum.pdf" target="_blank" class="btn btn-bluez btn-down">Открыть программу</a>
+                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}" target="_blank" class="btn btn-bluez">Поключиться к онлайн трансляции</a>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank" class="btn btn-bluez btn-down">Открыть программу</a>
                     </div>
                     <div class="program-dop d-none d-lg-flex">
                         <div class="program-dop-item">
@@ -199,7 +199,7 @@
                             <div class="program-dop-item-title">
                                 Сателлитный симпозиум компании Сателлитный симпозиум компании
                             </div>
-                            <a href="javascript:void(0);" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                            <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
                         </div>
                         <div class="program-dop-item">
                             <div class="program-dop-item-time">
@@ -208,7 +208,7 @@
                             <div class="program-dop-item-title">
                                 Сателлитный симпозиум компании Сателлитный симпозиум компании
                             </div>
-                            <a href="javascript:void(0);" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                            <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
                         </div>
                         <div class="program-dop-item">
                             <div class="program-dop-item-time">
@@ -217,7 +217,7 @@
                             <div class="program-dop-item-title">
                                 Сателлитный симпозиум
                             </div>
-                            <a href="javascript:void(0);" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                            <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
                         </div>
                         <div class="program-dop-item">
                             <div class="program-dop-item-time">
@@ -226,16 +226,16 @@
                             <div class="program-dop-item-title">
                                 Сателлитный симпозиум компании Сателлитный симпозиум компании
                             </div>
-                            <a href="javascript:void(0);" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                            <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="program-right">
-                        <a href="javascript:void(0);">
+                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}">
                             <img src="{{ asset('uploads/news/Session1.png') }}">
                         </a>
-                        <a href="javascript:void(0);">
+                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}">
                             <img src="{{ asset('uploads/news/Session2.png') }}">
                         </a>
                     </div>
