@@ -71,6 +71,24 @@ class NewsService
 
     /**
      * @param News $news
+     */
+    public function handleShow(News $news): void
+    {
+        $news->setIsShow(1);
+        $this->newsRepository->setSave();
+    }
+
+    /**
+     * @param News $news
+     */
+    public function handleHide(News $news): void
+    {
+        $news->setIsShow(0);
+        $this->newsRepository->setSave();
+    }
+
+    /**
+     * @param News $news
      * @param Form $form
      */
     public function setObjectsFromForm(News $news, Form $form): void

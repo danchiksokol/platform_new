@@ -38,12 +38,12 @@ class AdminNewsController extends AdminBaseController
     }
 
     #[Route('/news/create', name: 'news_create')]
-    public function createAction(Request $request):Response
+    public function createAction(Request $request): Response
     {
         $news = new News();
         $form = $this->createForm(NewsFormType::class, $news);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->newsService->handleCreate($news, $form);
             $this->addFlash('Success', 'Добавлен успешно');
 
@@ -63,13 +63,13 @@ class AdminNewsController extends AdminBaseController
      * @return Response
      */
     #[Route('/news/update/{id}', name: 'news_update')]
-    public function updateAction(Request $request, int $id):Response
+    public function updateAction(Request $request, int $id): Response
     {
         $news = $this->newsRepository->getOne($id);
         $file = $news->getFile();
         $form = $this->createForm(NewsFormType::class, $news);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('save')->isClicked()) {
                 $this->newsService->handleUpdate($news, $form, $file);
                 $this->addFlash('success', 'Изменения сохранены');
@@ -96,7 +96,7 @@ class AdminNewsController extends AdminBaseController
      * @return Response
      */
     #[Route('/news/delete/{id}', name: 'news_delete')]
-    public function deleteAction(int $id):Response
+    public function deleteAction(int $id): Response
     {
         $news = $this->newsRepository->getOne($id);
         $this->newsService->handleDelete($news);
@@ -104,4 +104,33 @@ class AdminNewsController extends AdminBaseController
 
         return $this->redirectToRoute('app_admin_news');
     }
+
+    /**
+     * @param int $id
+     * @return Response
+     */
+    #[Route('/news/show/{id}', name: 'news_show')]
+    public function showAction(int $id): Response
+    {
+        $news = $this->newsRepository->getOne($id);
+        $this->newsService->handleShow($news);
+        $this->addFlash('success', 'Новость Отображена');
+
+        return $this->redirectToRoute('app_admin_news');
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     */
+    #[Route('/news/hide/{id}', name: 'news_hide')]
+    public function hideAction(int $id): Response
+    {
+        $news = $this->newsRepository->getOne($id);
+        $this->newsService->handleHide($news);
+        $this->addFlash('success', 'Новость Скрыта');
+
+        return $this->redirectToRoute('app_admin_news');
+    }
+
 }
