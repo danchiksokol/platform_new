@@ -36,7 +36,7 @@ class FileManagerService implements FileManagerServiceInterface
      */
     public function setFileUploadDirectory(string $path): static
     {
-        $this->fileUploadDirectory = $this->fileUploadDirectory . '/' . $path;
+        $this->fileUploadDirectory = $this->fileUploadDirectory . '/' . $path . '/';
 
         return $this;
     }

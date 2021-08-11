@@ -37,22 +37,22 @@
                             Генеральные спонсоры
                         </div>
                         <div class="col-sm-6">
-                            <a href="/company">
+                            <a href="{{ path('app_company') }}">
                                 <img src="assets/img/sponsor/1.png">
                             </a>
                         </div>
                         <div class="col-sm-6">
-                            <a href="javascript:void(0);">
+                            <a href="{{ path('app_company') }}">
                                 <img src="assets/img/sponsor/2.png">
                             </a>
                         </div>
                         <div class="col-sm-6">
-                            <a href="javascript:void(0);">
+                            <a href="{{ path('app_company') }}">
                                 <img src="assets/img/sponsor/3.png">
                             </a>
                         </div>
                         <div class="col-sm-6">
-                            <a href="javascript:void(0);">
+                            <a href="{{ path('app_company') }}">
                                 <img src="assets/img/sponsor/3.png">
                             </a>
                         </div>
@@ -60,36 +60,29 @@
                             Cпонсоры
                         </div>
                         <div class="col-sm-6">
-                            <a href="/company">
+                            <a href="{{ path('app_company') }}">
                                 <img src="assets/img/sponsor/1.png">
                             </a>
                         </div>
                         <div class="col-sm-6">
-                            <a href="javascript:void(0);">
+                            <a href="{{ path('app_company') }}">
                                 <img src="assets/img/sponsor/2.png">
                             </a>
                         </div>
                         <div class="col-sm-6">
-                            <a href="javascript:void(0);">
+                            <a href="{{ path('app_company') }}">
                                 <img src="assets/img/sponsor/3.png">
                             </a>
                         </div>
                         <div class="col-sm-6">
-                            <a href="javascript:void(0);">
+                            <a href="{{ path('app_company') }}">
                                 <img src="assets/img/sponsor/3.png">
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 d-none d-lg-block">
-                    <div class="program-right">
-                        <a href="javascript:void(0);">
-                            <img src="{{ asset('uploads/news/Session1.png') }}">
-                        </a>
-                        <a href="javascript:void(0);">
-                            <img src="{{ asset('uploads/news/Session2.png') }}">
-                        </a>
-                    </div>
+                    {% include 'main/news/index.html.twig' with news %}
                 </div>
             </div>
         </div>

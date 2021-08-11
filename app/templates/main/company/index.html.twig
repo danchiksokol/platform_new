@@ -19,7 +19,7 @@
                     </div>
                     <div class="company-info">
                         <span class="company-label">О компании</span>
-                        <img src="assets/img/sponsor/1.png">
+                        <img src="{{ asset('assets/img/sponsor/1.png') }}">
                         <p>Add captions to your slides easily with the .carousel-caption element within any .carousel-item. They can be easily hidden on smaller viewports, as shown below, with optional display utilities. We hide them initially with .d-none and bring them back on medium-sized devices with .d-md-block. Add captions to your slides easily with the .carousel-caption element within any .carousel-item. They can be easily hidden on smaller viewports, as shown below, with optional display utilities. We hide them initially with .d-none and bring them back on medium-sized devices with .d-md-block.</p>
                     </div>
                     <div class="company-content">
@@ -27,12 +27,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <a target="_blank" href="javascript:void(0);">
-                                    <img src="assets/img/sponsor/1.png">
+                                    <img src="{{ asset('assets/img/sponsor/1.png') }}">
                                 </a>
                             </div>
                             <div class="col-md-6">
                                 <a target="_blank" href="javascript:void(0);">
-                                    <img src="assets/img/sponsor/1.png">
+                                    <img src="{{ asset('assets/img/sponsor/1.png') }}">
                                 </a>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                     <div class="company-video">
                         <span class="company-label">Видео</span>
                         <div class="company-video-item">
-                            <img src="assets/img/broadcast/fon.jpg">
+                            <img src="{{ asset('assets/img/broadcast/fon.jpg') }}">
                             <button type="button" data-bs-toggle="modal" data-bs-target="#companyVideo">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="#fff" class="bi bi-play-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -51,21 +51,8 @@
                     </div>
                     <a href="javascript:void(0);" class="btn btn-fill company-link">Перейти к виртуальному стенду</a>
                 </div>
-                <div class="col-md-3 col-lg-3 d-none d-lg-block">
-                    <div class="chatroom">
-                        <h1>Public chat</h1>
-                        <ul id="chat-list">
-                            <li>24 : czxcxz</li>
-                            <li>24 : xzcxzcz</li>
-                            <li>24 : zxczxc</li>
-                            <li>24 : ssafasf</li>
-                            <li>24 : asfasf</li>
-                            <li>24 : test</li>
-                        </ul>
-                        <hr>
-                        <textarea id="form-message" placeholder="Your public message here"></textarea>
-                        <input class="btn btn-secondary" type="button" id="form-submit" value="Send message">
-                    </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    {% include 'main/news/index.html.twig' with news %}
                 </div>
             </div>
         </div>

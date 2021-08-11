@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Form\RegistrationFormType;
 use App\Form\UserFormType;
 use App\Repository\UserRepository;
 use App\Services\User\UserService;
@@ -14,24 +13,17 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin', name: 'app_admin_')]
 class AdminUserController extends AdminBaseController
 {
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
-    /**
-     * @var UserService
-     */
-    private $userService;
+    private UserService $userService;
+    private UserRepository $userRepository;
 
     /**
-     * AdminUserController constructor.
      * @param UserService $userService
      * @param UserRepository $userRepository
      */
     public function __construct(UserService $userService, UserRepository $userRepository)
     {
-        $this->userRepository = $userRepository;
         $this->userService = $userService;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -49,11 +41,11 @@ class AdminUserController extends AdminBaseController
             'admin/user/index.html.twig',
             [
                 'title' => $forRender,
-                'controller_name' => 'AdminUserController',
                 'users' => $usersAll
             ]
         );
     }
+
 
     /**
      * @param Request $request
@@ -82,7 +74,7 @@ class AdminUserController extends AdminBaseController
                 $this->addFlash('success', 'Пользователь удален');
             }
 
-            return $this->redirectToRoute('admin_users');
+            return $this->redirectToRoute('users');
         }
 
         $forRender = parent::renderDefault();
@@ -110,6 +102,6 @@ class AdminUserController extends AdminBaseController
         $this->userService->handleDelete($user);
         $this->addFlash('success', 'Пользователь удален');
 
-        return $this->redirectToRoute('admin_users');
+        return $this->redirectToRoute('users');
     }
 }
