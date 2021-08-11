@@ -34,6 +34,17 @@ input, textarea {
     background-color: rgba(20, 1, 41, 0.02);
     margin-bottom: 0.7rem;
 }
+.form .form-select {
+    margin-bottom: 16px;
+}
+.form .modal-header, .form .modal-footer {
+    border-top: none;
+    border-bottom: none;
+    border-color: #fff;
+}
+.form h1 {
+    color: #000;
+}
 .file-label {
     font-size: 14px;
     margin-bottom: 16px;
@@ -480,6 +491,19 @@ header .container {
 .poster-voting-btn:hover span:first-child {
     display: none;
 }
+.poster-voting-btn:before {
+    content: '';
+    display: inline-block;
+    background: url(/assets/img/star-fill.svg) no-repeat center;
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    margin-right: 7px;
+}
+.poster-voting-btn {
+    align-items: center;
+    display: flex;
+}
 .posterSelected-item {
     max-width: calc(100% / 3 - 8px);
     text-align: center;
@@ -631,13 +655,19 @@ header .container {
 }
 .program-table-scroll th, .program-table-scroll td {
     white-space: inherit;
+    vertical-align: middle;
 }
 .login-form .btn {
     margin: 0 auto;
     display: block;
 }
 .login-form {
-    margin: 24px 0;
+    margin: 150px auto 15px;
+    background: #fff;
+    box-shadow: 0 3px 9px #bfbfbf;
+    border-radius: 24px;
+    padding: 24px;
+    max-width: calc(100% - 30px);
 }
 .chatroom #form-submit {
     background: url(/assets/img/send.svg);
@@ -688,6 +718,7 @@ footer img {
 .broadcast-live {
     margin-top: 42px;
     background: #fff;
+    position: relative;
 }
 .broadcast {
     box-shadow: 0 3px 9px #bfbfbf;
@@ -791,6 +822,53 @@ thead th {
 .program-right a:last-child {
     margin-bottom: 0;
 }
+.registration-banner img {
+    box-shadow: 0 3px 9px #bfbfbf;
+}
+.fullscreen-btn {
+    border: none;
+    user-select: none;
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    background-image: url('/assets/img/fullscreen.svg');
+    background-size: 86%;
+    box-shadow: 0 3px 9px #bfbfbf;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    -moz-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    -webkit-transition: all 0.5s ease-out;
+}
+.fullscreen-btn:hover {
+    -webkit-transform: scale(1.07);
+    -moz-transform: scale(1.07);
+    -o-transform: scale(1.07);
+}
+.fullscreen-btn.active {
+    background-image: url('/assets/img/fullscreen-exit.svg');
+}
+.fullscreen-btn.active:hover {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+}
+.fullscreen .broadcast-live {
+    width: 1296px;
+    z-index: 1;
+}
+.fullscreen .chatroom {
+    margin-top: 650px;
+}
+@media (max-width: 1399px) {
+    .fullscreen .broadcast-live {
+        width: 1116px;
+    }
+}
 @media (max-width: 1199px) {
     .program-table-scroll th:nth-child(3), .program-table-scroll td:nth-child(3) {
         max-width: 170px;
@@ -804,6 +882,9 @@ thead th {
     }
     .nav-link {
         margin-bottom: 8px;
+    }
+    .fullscreen .broadcast-live {
+        width: 936px;
     }
 }
 @media (max-width: 991px) {
@@ -915,10 +996,17 @@ thead th {
         width: 100%;
         position: fixed;
         background: #fff;
-        top: 118px;
+        top: 195px;
         left: 0;
         padding: 12px;
         z-index: 1;
+        box-shadow: 0 3px 9px #bfbfbf;
+    }
+    .fullscreen .broadcast-live {
+        width: 100%;
+    }
+    .fullscreen-btn {
+        display: none;
     }
 }
 @media (max-width: 767px) {
@@ -939,6 +1027,9 @@ thead th {
     }
     .nav-container {
         max-width: 540px;
+    }
+    .login-form {
+        margin-top: 75px;
     }
 }
 @media (max-width: 640px) {
@@ -1029,6 +1120,12 @@ thead th {
     }
     .posterSelected .modal-footer {
         margin-top: 12px;
+    }
+    .header-logo img {
+        max-width: 136px;
+    }
+    nav .navbar-collapse {
+        top: 150px;
     }
 }
 

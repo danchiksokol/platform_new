@@ -10,7 +10,9 @@
                         <div class="broadcast-live">
                             <iframe width="100%" height="600"
                                     src="https://www.youtube.com/embed/6-4UX4Poa8I?rel=0&fs=0&playsinline=1"
-                                    allow="autoplay; encrypted-media" donotallowfullscreen></iframe>
+                                    allow="autoplay; encrypted-media" donotallowfullscreen>
+                            </iframe>
+                            <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
                         </div>
                         {% set questions = questions %}
                         {% include 'main/question_speaker/index.html.twig' with {questions: questions} %}
@@ -74,6 +76,11 @@
                 }
             });
         }, 5000);
+
+        $('#fullscreen-btn').click(function () {
+            $(this).toggleClass('active');
+            $('.main-block').toggleClass('fullscreen');
+        });
     </script>
     {% set submit_url = path('app_broadcast', {'chatid': chatid}) %}
     {% include 'main/question_speaker/form.html.twig' with {url: submit_url} %}
