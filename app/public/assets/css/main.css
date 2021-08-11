@@ -266,6 +266,8 @@ header .container {
     padding: 80px 16px 16px 16px;
     margin-bottom: 24px;
     position: relative;
+    box-shadow: 0 3px 9px #bfbfbf;
+    overflow: hidden;
 }
 .company-content {
     text-align: center;
@@ -286,12 +288,12 @@ header .container {
     border: none;
 }
 .company-nav {
-    border: 1px solid #464465;
     border-radius: 16px;
     padding-left: 16px;
     display: flex;
     align-items: center;
     margin: 16px 0;
+    box-shadow: 0 3px 9px #bfbfbf;
 }
 .company-nav-link {
     text-decoration: none;
@@ -299,11 +301,14 @@ header .container {
     margin: 4px 0 4px 16px;
     padding: 4px 0;
 }
+.company-nav-link:hover {
+    color: #8a1e83;
+}
 .company-nav-link svg {
     margin-right: 8px;
 }
 .company-nav-link:first-child {
-    border-right: 3px solid #000;
+    border-right: 3px solid #8a1e83;
     display: flex;
     align-items: center;
     padding-right: 16px;
@@ -317,8 +322,10 @@ header .container {
     -moz-border-radius-bottomright: 32px;
     -webkit-border-bottom-right-radius: 32px;
     border-bottom-right-radius: 32px;
-    border: 5px solid #ece3f0;
+    /*border: 5px solid #ece3f0;*/
     width: 134px;
+    box-shadow: 0 3px 9px #bfbfbf;
+    text-align: center;
 }
 .poster-category a, .program-date a {
     margin-bottom: 4px;
@@ -328,10 +335,17 @@ header .container {
     background-color: #f8f9fa;
     border-color: #f8f9fa;
 }
-.poster-category, .program-date {
+.program-date .active:hover {
+    color: #000;
+}
+.poster-category, .program-header {
     margin-top: 16px;
 }
-
+.program-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .program-table thead {
     background: #24196c;
     color: #fff;
@@ -397,7 +411,7 @@ header .container {
     box-shadow: 0 3px 9px #bfbfbf;
 }
 .program-dop .btn {
-    margin-top: auto;
+    margin: auto;
 }
 .program-dop-item:last-child {
     margin-right: 0;
@@ -678,7 +692,7 @@ footer img {
 .broadcast {
     box-shadow: 0 3px 9px #bfbfbf;
 }
-.program-pdf a:not(.btn-down){
+.program-pdf {
     display: none;
 }
 .program-pdf a {
@@ -700,6 +714,7 @@ footer img {
     height: 18px;
     background-size: contain;
     margin-right: 12px;
+    background-repeat: no-repeat;
 }
 .registration h1 {
     color: #24196c;
@@ -707,7 +722,7 @@ footer img {
     margin: 18px 0 12px;
     text-align: center;
 }
-.programs-page.main-block {
+.main-block {
     background: url(/assets/img/bg-program.jpg);
     background-size: cover;
 }
@@ -751,6 +766,7 @@ thead th {
     margin-top: 42px;
     position: relative;
     background: #fff;
+    box-shadow: 0 3px 9px #bfbfbf;
 }
 .program-right:before, .program-right:after {
     content: '';
@@ -781,6 +797,13 @@ thead th {
     }
     .program-table-scroll td {
         word-break: break-word;
+    }
+    .nav-container {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    .nav-link {
+        margin-bottom: 8px;
     }
 }
 @media (max-width: 991px) {
@@ -855,8 +878,6 @@ thead th {
         background: #fff;
         box-shadow: 0 3px 9px #bfbfbf;
         padding: 0 10px 60px;
-    }
-    .program-pdf a:not(.btn-down) {
         display: block;
     }
     .program-pdf:after {
