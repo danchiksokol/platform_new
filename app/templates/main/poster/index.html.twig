@@ -141,20 +141,35 @@
                 <div class="modal-footer">
                     <a href="javascript:void(0);" target="_blank" class="open_pdf btn btn-fill">Открыть в формате
                         pdf</a>
-                    <button type="button" class="btn btn-fill addToVoteButton">Отобрать данный постер
-                    </button>
+                    <button type="button" class="btn btn-fill addToVoteButton">Отобрать данный постер</button>
                 </div>
             </div>
         </div>
     </div>
     <script>
+        let selectedPosters = [];
+        {% for row in selectedPosters %}
+        selectedPosters.push({{ row.id }})
+        {% endfor %}
+
         if (0 == {{ countVotePoster }} || {{ isVote }} ) {
             $('.poster-voting-btn').hide();
         }
         if ({{ isVote }}) {
             $('.addToVoteButton').hide();
         }
-        var myModal = new bootstrap.Modal(document.getElementById('posterModal'));
+
+        function isVote(objectId) {
+            let id = objectId.split('_', 2).pop();
+            for (let i = 0; i < selectedPosters.length; i++) {
+                if (id == selectedPosters[i]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        let myModal = new bootstrap.Modal(document.getElementById('posterModal'));
         $('.poster-images a').click(function () {
             $('.posterModal .modal-title').text($(this).attr('data-title'));
             $('.posterModal .open_pdf').attr('href', $(this).attr('data-pdf'));
@@ -174,13 +189,20 @@
             }
             $('.posterModal .poster-prev, .posterModal .poster-next').attr('data-id', $(this).parent().attr('id'));
             let posterId = $('.poster-prev, .posterModal .poster-next').attr('data-id');
-            $('.addToVoteButton').attr('id', posterId);
+            $('.addToVoteButton').attr('id', 'button' + posterId);
+            if (isVote($(this).parent().attr('id'))) {
+                $('#button' + posterId).text('Постер отобран');
+                $('#button' + posterId).attr("disabled", true);
+            } else {
+                $('#button' + posterId).removeAttr("disabled");
+                $('#button' + posterId).text('Отобрать данный постер');
+            }
             myModal.show();
         });
 
         $('.posterModal .poster-next').click(function () {
             myModal.hide();
-            var id = $(this).attr('data-id');
+            let id = $(this).attr('data-id');
             setTimeout(function () {
                 $('#' + id).next().find('a').eq(0).click();
             }, 500);
@@ -188,7 +210,7 @@
 
         $('.posterModal .poster-prev').click(function () {
             myModal.hide();
-            var id = $(this).attr('data-id');
+            let id = $(this).attr('data-id');
             setTimeout(function () {
                 $('#' + id).prev().find('a').eq(0).click();
             }, 500);
@@ -211,7 +233,9 @@
                 async: true,
                 success: function (data) {
                     $('.poster-voting-btn').show();
-                    myModal.hide();
+                    $('#buttonposter_' + id).text('Постер отобран');
+                    $('#buttonposter_' + id).attr("disabled", true);
+                    selectedPosters.push(Number(id));
                 }
             });
             return false;
@@ -233,10 +257,16 @@
                 },
                 async: true,
                 success: function (data) {
-                    $('#posterSelected_id_'+id).remove();
-                    if(data.output.length == 0) {
+                    $('#posterSelected_id_' + id).remove();
+                    if (data.output.length == 0) {
                         $('#posterSelected').modal('hide');
                         $('.poster-voting-btn').hide();
+                    }
+                    for (let i = 0; i < selectedPosters.length; i++) {
+                        if (id == selectedPosters[i]) {
+                            selectedPosters.splice(i, 1);
+                        }
+
                     }
                 }
             });

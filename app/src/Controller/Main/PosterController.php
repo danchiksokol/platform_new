@@ -44,6 +44,7 @@ class PosterController extends BaseController
     /**
      * @param Request $request
      * @return Response
+     * @throws Exception
      */
     #[Route('/{categoryId}', name: 'poster', defaults: ['categoryId' => 0])]
     public function indexAction(
@@ -58,11 +59,13 @@ class PosterController extends BaseController
         $user = $this->getUser();
         $countVotePoster = $this->posterService->countVotePoster($request, $user);
         $isVote = $this->voteService->isVote($user);
+        $selectedPosters = $this->posterService->getPostersFromSession($request, $user);
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Постеры';
         $forRender['categories'] = $category;
         $forRender['posters'] = $posters;
+        $forRender['selectedPosters'] = $selectedPosters;
         $forRender['countVotePoster'] = $countVotePoster;
         $forRender['isVote'] = (int)$isVote;
 
