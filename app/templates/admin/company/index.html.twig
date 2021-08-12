@@ -1,0 +1,30 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="container">
+        <td><a type="button" class="btn btn-success" href="{{ path('app_admin_company_create') }}">Создать Компанию</a></td>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Заголовок</th>
+                <th scope="col">Logo</th>
+                <th scope="col">Отображен</th>
+                <th>Редактировать</th>
+                <th>Удалить</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set count = 0 %}
+            {% for row in company %}
+                <tr>
+                    {% set count = count + 1 %}
+                    <td>{{ count }}</td>
+                    <td>{{ row.title }}</td>
+                    <td width="100px"><img src="{{ asset('uploads/company/' ~ row.id ~'/logo/' ~ row.logo) }}"></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

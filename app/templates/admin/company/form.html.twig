@@ -1,0 +1,23 @@
+{% extends 'admin/base.html.twig' %}
+{% block body %}
+    {{ form_start(companyForm) }}
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover table-bordered">
+                <tbody>
+                <tr>
+                    <td>Заголовок</td>
+                    <td>{{ form_row(companyForm.title) }}</td>
+                </tr>
+                    <td>Logo</td>
+                    <td>{{ form_row(companyForm.logo) }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-6">{{ form_row(companyForm.save) }}</div>
+        </div>
+    </div>
+    {{ form_end(companyForm) }}
+{% endblock %}
