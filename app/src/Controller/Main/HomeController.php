@@ -89,6 +89,15 @@ class HomeController extends BaseController
         return $this->render('main/programms/index.html.twig', $forRender);
     }
 
+    #[Route('/symposium', 'app_main_home_symposium')]
+    public function symposiumAction(): Response
+    {
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Симпозиумы';
+        $forRender['news'] = $this->newsRepository->getAllIsShow();
+        return $this->render('main/programms/index.html.twig', $forRender);
+    }
+
     #[Route('/sponsors', 'app_main_home_sponsors')]
     public function sponsorsAction(): Response
     {

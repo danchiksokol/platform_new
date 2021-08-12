@@ -32,7 +32,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-6 header-logo">
-                    <img src="/assets/img/logo.png">
+                    <img src="{{ asset('assets/img/logo.png') }}">
                 </div>
                 <nav class="col-lg-10 col-3 navbar-light navbar navbar-expand-lg">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -41,20 +41,20 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarContent">
                         <div class="nav-container">
-                            <a href="{{ path('app_main_home_index') }}" class="nav-link active">Главная</a>
-                            <!--
-                            <a href="{{ path('app_main_home_sponsors') }}" class="nav-link">Организаторы</a>
-                            <a href="{{ path('app_main_home_exhibition') }}" class="nav-link">Выставка</a>
-                            {{ path('app_main_home_exhibition') }}
-                            <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="nav-link">Трансляция</a>
-                            <a href="{{ path('app_company') }}" class="nav-link">Компании</a>
-                            <a href="{{ path('app_poster') }}" class="nav-link">Постеры</a>
-                            -->
-                            <a href="{{ path('app_main_home_programms') }}" class="nav-link">Программа</a>
-                            <a href="{{ path('app_main_home_programms') }}" class="nav-link">Симпозиумы</a>
-                            <a href="{{ path('app_poster') }}" class="nav-link"> Постерная сессия</a>
-                            <a href="{{ path('app_main_home_sponsors') }}"" class="nav-link">Виртуальная выставка</a>
-                            <a href="{{ path('app_main_home_help') }}" class="nav-link link-dark">Техническая
+                            <a href="{{ path('app_main_home_index') }}"
+                               class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_index' %}active{% endif %}">Главная</a>
+                            <a href="{{ path('app_main_home_programms') }}"
+                               class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_programms' %}active{% endif %}">Программа</a>
+                            <a href="{{ path('app_main_home_symposium') }}"
+                               class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_symposium' %}active{% endif %}">Симпозиумы</a>
+                            <a href="{{ path('app_poster') }}"
+                               class="nav-link {% if app.request.attributes.get('_route') == 'app_poster' %}active{% endif %}">
+                                Постерная сессия</a>
+                            <a href="{{ path('app_main_home_sponsors') }}"
+                               class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_sponsors' %}active{% endif %}">Виртуальная
+                                выставка</a>
+                            <a href="{{ path('app_main_home_help') }}"
+                               class="nav-link link-dark {% if app.request.attributes.get('_route') == 'app_main_home_help' %}active{% endif %}">Техническая
                                 поддержка</a>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
 {% block body %}
 {% endblock %}
 <footer>
-    <img src="/assets/img/bg-footer.jpg">
+    <img src="{{ asset('assets/img/bg-footer.jpg') }}">
 </footer>
 </body>
 </html>
