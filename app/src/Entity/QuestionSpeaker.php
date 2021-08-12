@@ -34,7 +34,7 @@ class QuestionSpeaker
     /**
      * @ORM\ManyToOne(targetEntity=Speaker::class, inversedBy="questionSpeakers")
      */
-    private ?Speaker $speaker;
+    private null|int|Speaker $speaker;
 
     /**
      * @ORM\ManyToOne(targetEntity=ChatRoom::class, inversedBy="questionSpeakers")
@@ -54,7 +54,7 @@ class QuestionSpeaker
     /**
      * @ORM\OneToMany(targetEntity=AnswerSpeaker::class, mappedBy="questionSpeaker")
      */
-    private $answerSpeakers;
+    private Collection $answerSpeakers;
 
     #[Pure]
     public function __construct()
@@ -115,6 +115,7 @@ class QuestionSpeaker
     {
         return $this->speaker;
     }
+
 
     /**
      * @param int|Speaker $speaker

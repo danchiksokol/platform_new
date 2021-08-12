@@ -24,7 +24,7 @@
                     <td>{{ row.user }}</td>
                     <td>{{ row.chat }}</td>
                     <td>{{ row.content }}</td>
-                    <td><a type="button" class="btn btn-secondary" href="{{path('app_admin_question_speaker_setshow', {'id': row.id}) }}">Отобразить</a></td>
+                    <td><a type="button" class="btn btn-secondary" href="{{path('app_admin_question_speaker_show', {'id': row.id}) }}">Отобразить</a></td>
                     <td><a type="button" class="btn btn-danger" href="{{path('app_admin_question_speaker_delete', {'id': row.id}) }}">X</a></td>
                 </tr>
             {% endfor %}

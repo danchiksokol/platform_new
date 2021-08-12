@@ -29,6 +29,9 @@ class QuestionSpeakerFormType extends AbstractType
                 ChoiceType::class,
                 [
                     'choices' => $options['speakers'],
+                    'attr' => [
+                        'class' => 'form-select'
+                    ]
                 ]
             )
             ->add(
@@ -37,7 +40,7 @@ class QuestionSpeakerFormType extends AbstractType
                 [
                     'label' => 'Отправить',
                     'attr' => [
-                        'class' => 'btn btn-outline-secondary'
+                        'class' => 'btn btn-fill'
                     ]
                 ]
             );

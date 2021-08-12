@@ -8,12 +8,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <select class="form-select"></select>
                     {{ form_row(questionForm.speaker) }}
                     {{ form_row(questionForm.content) }}
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-fill" type="button">Отправить</button>
                     {{ form_row(questionForm.send) }}
                 </div>
                 {{ form_end(questionForm, {'render_rest': false}) }}
