@@ -64,7 +64,7 @@ class AdminQuestionSpeakerController extends AdminBaseController
         $this->questionSpeakerService->handleShow($question);
         $this->addFlash('success', 'Вопрос отображен');
 
-        return $this->redirectToRoute('question_speaker');
+        return $this->redirectToRoute('app_admin_question_speaker');
     }
 
     /**
@@ -81,6 +81,6 @@ class AdminQuestionSpeakerController extends AdminBaseController
         $this->questionSpeakerService->handleDelete($question);
         $this->addFlash('success', 'Вопрос удален');
 
-        return $this->redirectToRoute('question_speaker');
+        return $this->redirectToRoute('app_admin_question_speaker');
     }
 }
