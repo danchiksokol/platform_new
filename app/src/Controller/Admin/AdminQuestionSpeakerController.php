@@ -34,7 +34,7 @@ class AdminQuestionSpeakerController extends AdminBaseController
      * @param Request $request
      * @return Response
      */
-    #[Route('/question/{chatid}', name: 'question_speaker')]
+    #[Route('/question/{chatid}', name: 'question_speaker', defaults: ['chatid' => 1])]
     public function indexAction(
         Request $request
     ): Response {
@@ -64,7 +64,7 @@ class AdminQuestionSpeakerController extends AdminBaseController
         $this->questionSpeakerService->handleShow($question);
         $this->addFlash('success', 'Вопрос отображен');
 
-        return $this->redirectToRoute('admin_users');
+        return $this->redirectToRoute('question_speaker');
     }
 
     /**
@@ -81,6 +81,6 @@ class AdminQuestionSpeakerController extends AdminBaseController
         $this->questionSpeakerService->handleDelete($question);
         $this->addFlash('success', 'Вопрос удален');
 
-        return $this->redirectToRoute('admin_users');
+        return $this->redirectToRoute('question_speaker');
     }
 }
