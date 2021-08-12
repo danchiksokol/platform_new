@@ -8,6 +8,7 @@
             <div class="col-lg-8 col-12">
                 <div class="theses-create">
                     <h1>Подача тезисов</h1>
+                    <p><br></p>
                     <p>Глубокоуважаемые коллеги!</p>
                     <p>Для отправки постера, пожалуйста, заполните строчки с личной информацией ниже.</p>
                     <p>Тезис (краткую аннотацию) постера с длинной не более 2500 символов впишете в раздел "Тезис".</p>
@@ -16,6 +17,7 @@
                     <p>На указанный e-mail придет письмо с подтверждением.</p>
                     <p>Если у Вас возникли проблемы с отправкой постера, сообщите в службу поддержки: <a
                                 href="mailto:lymphoma@tsoncology.com">lymphoma@tsoncology.com</a></p>
+                    <p><br></p>
                     <p>Спасибо!</p>
                     <div class="form">
                         {{ form_start(thesesForm) }}
@@ -29,6 +31,7 @@
                         {{ form_row(thesesForm.theses) }}
                         <span class="textarea-symbol">Осталось <span>2500</span> символов</span>
                         {{ form_row(thesesForm.file) }}
+                        <button class="btn btn-outline-primary" onclick="document.getElementById('theses_form_file').click()">Выберите файл</button>
                         <span class="file-label">Размер ограничения файла 100 MB</span>
                         {{ form_row(thesesForm.send) }}
                         {{ form_end(thesesForm) }}

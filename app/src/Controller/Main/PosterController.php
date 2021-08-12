@@ -50,6 +50,9 @@ class PosterController extends BaseController
     public function indexAction(
         Request $request
     ): Response {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
         $category = $this->posterCategoryRepository->getAll();
         $categoryId = $request->get('categoryId');
         $posters = $this->posterRepository->getAll();

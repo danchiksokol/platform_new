@@ -57,25 +57,25 @@ class HomeController extends BaseController
     #[Route('/', 'app_main_home_index')]
     public function indexAction(): Response
     {
-        $chatRoom = $this->chatRoomRepository->getOne(ChatRoom::MEGA_CHAT);
-        if (is_null($chatRoom)) {
-            throw new \Exception('Такого чата нет!');
-        }
-        $messages = $this->messageRepository->findAllMessagesByChatRoomId(ChatRoom::MEGA_CHAT);
-        array_map(
-            function ($message) {
-                $message->setMine(
-                    $message->getParticipant()->getUser()->getId() === $this->getUser()->getId()
-                        ? true : false
-                );
-            },
-            $messages
-        );
+//        $chatRoom = $this->chatRoomRepository->getOne(ChatRoom::MEGA_CHAT);
+//        if (is_null($chatRoom)) {
+//            throw new \Exception('Такого чата нет!');
+//        }
+//        $messages = $this->messageRepository->findAllMessagesByChatRoomId(ChatRoom::MEGA_CHAT);
+//        array_map(
+//            function ($message) {
+//                $message->setMine(
+//                    $message->getParticipant()->getUser()->getId() === $this->getUser()->getId()
+//                        ? true : false
+//                );
+//            },
+//            $messages
+//        );
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Главная страница';
-        $forRender['messages'] = $messages;
-        $forRender['user'] = $this->getUser()->getId();
+//        $forRender['messages'] = $messages;
+//        $forRender['user'] = $this->getUser()->getId();
         $forRender['news'] = $this->newsRepository->getAllIsShow();
         return $this->render('main/index.html.twig', $forRender);
     }

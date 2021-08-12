@@ -88,7 +88,10 @@ class ThesesFormType extends AbstractType
                 FileType::class,
                 [
                     'label' => 'Загрузка файлов',
-                    'required' => true
+                    'required' => true,
+                    "row_attr" => [
+                        "class" => "d-none"
+                    ],
                 ]
             )
             ->add(
