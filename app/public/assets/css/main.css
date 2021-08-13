@@ -65,8 +65,18 @@ h4 {
     padding: 25px 15px;
     text-align: center;
 }
+.registration-buttons a {
+    max-width: 228px;
+    font-size: 20px;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+}
 .registration-buttons .btn:nth-child(2) {
     margin-left: 24px;
+    max-width: 328px;
+    font-size: 20px;
+    width: 100%;
 }
 .registration-checkbox > * {
     width: auto;
@@ -170,9 +180,10 @@ header {
     padding-top: 16px;
     position: relative;
     min-height: 225px;
-    background: url(/assets/img/bg-header.jpg);
+    background: url(/assets/img/header.png);
     background-repeat: no-repeat;
     background-size: cover;
+    border-bottom: 10px solid #f4f4f4;
 }
 header .container {
     margin-top: 5px;
@@ -305,6 +316,7 @@ header .container {
     align-items: center;
     margin: 16px 0;
     box-shadow: 0 3px 9px #bfbfbf;
+    background: #fff;
 }
 .company-nav-link {
     text-decoration: none;
@@ -754,8 +766,11 @@ footer img {
     text-align: center;
 }
 .main-block {
-    background: url(/assets/img/bg-program.jpg);
+    background: url(/assets/img/bgfoot.png);
     background-size: cover;
+    padding-bottom: 170px;
+    background-position-y: bottom;
+    background-position-x: center;
 }
 .poster-images-img {
     max-height: 306px;
@@ -863,6 +878,27 @@ thead th {
 }
 .fullscreen .chatroom {
     margin-top: 650px;
+}
+.bg-lilac {
+    background: #c5a2c8;
+}
+.bg-gray {
+    background: #d9d8e8;
+}
+.justify-center {
+    justify-content: center;
+}
+#carouselExampleIndicators {
+    margin-bottom: 18px;
+    margin-top: 24px;
+}
+.sponlogo-main-item {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 12px;
 }
 @media (max-width: 1399px) {
     .fullscreen .broadcast-live {
@@ -1126,6 +1162,9 @@ thead th {
     }
     nav .navbar-collapse {
         top: 150px;
+    }
+    .main-block {
+        padding-bottom: 130px;
     }
 }
 
