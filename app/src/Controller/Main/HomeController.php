@@ -17,19 +17,19 @@ class HomeController extends BaseController
     /**
      * @var UserRepository
      */
-    private $userRepository;
+    private UserRepository $userRepository;
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
     /**
      * @var ChatRoomRepository
      */
-    private $chatRoomRepository;
+    private ChatRoomRepository $chatRoomRepository;
     /**
      * @var MessageRepository
      */
-    private $messageRepository;
+    private MessageRepository $messageRepository;
     private NewsRepository $newsRepository;
 
     /**
@@ -80,13 +80,22 @@ class HomeController extends BaseController
         return $this->render('main/index.html.twig', $forRender);
     }
 
-    #[Route('/programms', 'app_main_home_programms')]
-    public function programmsAction(): Response
+    #[Route('/programms/17', 'app_main_home_programms17')]
+    public function programms17Action(): Response
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Программы';
         $forRender['news'] = $this->newsRepository->getAllIsShow();
-        return $this->render('main/programms/index.html.twig', $forRender);
+        return $this->render('main/programms/index17.html.twig', $forRender);
+    }
+
+    #[Route('/programms/18', 'app_main_home_programms18')]
+    public function programms18Action(): Response
+    {
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Программы';
+        $forRender['news'] = $this->newsRepository->getAllIsShow();
+        return $this->render('main/programms/index18.html.twig', $forRender);
     }
 
     #[Route('/symposium', 'app_main_home_symposium')]
@@ -95,7 +104,7 @@ class HomeController extends BaseController
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Симпозиумы';
         $forRender['news'] = $this->newsRepository->getAllIsShow();
-        return $this->render('main/programms/index.html.twig', $forRender);
+        return $this->render('main/programms/index17.html.twig', $forRender);
     }
 
     #[Route('/sponsors', 'app_main_home_sponsors')]
