@@ -3,6 +3,7 @@
 namespace App\Controller\Main;
 
 use App\Controller\Main\BaseController;
+use App\Repository\CompanyRepository;
 use App\Repository\NewsRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,20 +12,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompanyController extends BaseController
 {
     private NewsRepository $newsRepository;
+    private CompanyRepository $companyRepository;
 
     /**
      * @param NewsRepository $newsRepository
+     * @param CompanyRepository $companyRepository
      */
-    public function __construct(NewsRepository $newsRepository)
+    public function __construct(NewsRepository $newsRepository, CompanyRepository $companyRepository)
     {
         $this->newsRepository = $newsRepository;
+        $this->companyRepository = $companyRepository;
     }
 
-    #[Route('/', name: 'company')]
-    public function indexAction(): Response
+    #[Route('/{id}', name: 'company' ,defaults: ['id' => 10])]
+    public function indexAction(int $id): Response
     {
+        $company = $this->companyRepository->getOne($id);
+        $materials = $company->getCompanyMaterials();
+
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Карточка компании';
+        $forRender['company'] = $company;
+        $forRender['materials'] = $materials;
         $forRender['news'] = $this->newsRepository->getAllIsShow();
         return $this->render('main/company/index.html.twig', $forRender);
     }
