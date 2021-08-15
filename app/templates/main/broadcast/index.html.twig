@@ -8,8 +8,8 @@
                 <div class="col-lg-9 col-12">
                     <div class="broadcast">
                         <div class="broadcast-live">
-                            <iframe width="100%" height="600"
-                                    src="https://www.youtube.com/embed/6-4UX4Poa8I?rel=0&fs=0&playsinline=1&showinfo=0&controls=0"
+                            <iframe width="100%" height="700"
+                                    src="https://www.youtube.com/embed/6-4UX4Poa8I?rel=0&fs=0&playsinline=1&showinfo=0&controls=2&modestbranding=1"
                                     allow="autoplay; encrypted-media" frameborder="0" donotallowfullscreen>
                             </iframe>
                             <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
@@ -39,11 +39,11 @@
         </div>
     </div>
     <script>
-        var myModal = new bootstrap.Modal(document.getElementById('modalControl'));
+        let myModal = new bootstrap.Modal(document.getElementById('modalControl'));
 
         setInterval(function () {
             myModal.show();
-        }, 10000);
+        }, 100000);
 
         setInterval(function () {
             $.ajax({

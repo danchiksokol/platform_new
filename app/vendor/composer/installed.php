@@ -877,6 +877,15 @@
             'reference' => 'bd53358e3eccec6a670b5f33ab680d8dbe1d4ae1',
             'dev_requirement' => false,
         ),
+        'symfony/translation' => array(
+            'pretty_version' => 'v5.3.4',
+            'version' => '5.3.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/translation',
+            'aliases' => array(),
+            'reference' => 'd89ad7292932c2699cbe4af98d72c5c6bbc504c1',
+            'dev_requirement' => false,
+        ),
         'symfony/translation-contracts' => array(
             'pretty_version' => 'v2.4.0',
             'version' => '2.4.0.0',
@@ -885,6 +894,12 @@
             'aliases' => array(),
             'reference' => '95c812666f3e91db75385749fe219c5e494c7f95',
             'dev_requirement' => false,
+        ),
+        'symfony/translation-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '2.3',
+            ),
         ),
         'symfony/twig-bridge' => array(
             'pretty_version' => 'v5.3.3',

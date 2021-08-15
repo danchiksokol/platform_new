@@ -53,7 +53,7 @@ security:
       form_login:
         login_path: /login
         check_path: /login_check
-        default_target_path: /login
+        default_target_path: /register
         username_parameter: email
         password_parameter: password
       guard:
@@ -64,13 +64,13 @@ security:
       logout:
         path: app_logout
         # where to redirect after logout
-        target: /login
+        target: /register
 
 
   # Easy way to control access for large sections of your site
   # Note: Only the *first* access control that matches will be used
   access_control:
-    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/verify, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

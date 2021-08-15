@@ -7,22 +7,22 @@
             <div class="row">
                 <div class="col-lg-9 col-12">
                     <div class="company-nav">
-                        <a href="javascript:void(0);" class="company-nav-link">
+                        <a href="{{ path('app_main_home_sponsors') }}" class="company-nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                             </svg>
                             Назад
                         </a>
-                        <a href="javascript:void(0);" class="company-nav-link">О компании</a>
-                        <a href="javascript:void(0);" class="company-nav-link">Материалы</a>
-                        <a href="javascript:void(0);" class="company-nav-link">Видео</a>
+                        <a href="#company" class="company-nav-link">О компании</a>
+                        <a href="#matherials" class="company-nav-link">Материалы</a>
+                        <a href="#video" class="company-nav-link">Видео</a>
                     </div>
                     <div class="company-info">
-                        <span class="company-label">О компании</span>
+                        <span id="company" class="company-label">О компании</span>
                         <img src="{{ asset('assets/img/sponsor/1.png') }}">
                         <p>Add captions to your slides easily with the .carousel-caption element within any .carousel-item. They can be easily hidden on smaller viewports, as shown below, with optional display utilities. We hide them initially with .d-none and bring them back on medium-sized devices with .d-md-block. Add captions to your slides easily with the .carousel-caption element within any .carousel-item. They can be easily hidden on smaller viewports, as shown below, with optional display utilities. We hide them initially with .d-none and bring them back on medium-sized devices with .d-md-block.</p>
                     </div>
-                    <div class="company-content">
+                    <div id="matherials" class="company-content">
                         <span class="company-label">Материалы</span>
                         <div class="row">
                             <div class="col-md-6">
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="company-video">
+                    <div id="video" class="company-video">
                         <span class="company-label">Видео</span>
                         <div class="company-video-item">
                             <img src="{{ asset('assets/img/broadcast/fon.jpg') }}">

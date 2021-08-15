@@ -15,17 +15,17 @@ class CompanyVideo
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $video;
+    private ?string $video;
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="companyVideos")
      */
-    private $company;
+    private int|Company $company;
 
     public function getId(): ?int
     {
@@ -49,7 +49,7 @@ class CompanyVideo
         return $this->company;
     }
 
-    public function setCompany(?Company $company): self
+    public function setCompany(int|Company $company): self
     {
         $this->company = $company;
 

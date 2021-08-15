@@ -2,41 +2,33 @@
 
 namespace App\Form;
 
-use App\Entity\Company;
+use App\Entity\CompanyVideo;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CompanyFormType extends AbstractType
+class CompanyVideoFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add(
-                'logo',
+                'video',
                 FileType::class,
                 [
-                    'label' => 'Загрузка картинки',
+                    'label' => 'Загрузка видео',
                     'required' => false,
                     'data_class' => null
                 ]
             )
             ->add(
-                'title',
-                TextType::class,
+                'company',
+                ChoiceType::class,
                 [
-                    'required' => false
-                ]
-            )
-            ->add(
-                'content',
-                TextareaType::class,
-                [
-                    'required' => false
+                    'choices' => $options['company'],
                 ]
             )
             ->add(
@@ -53,8 +45,15 @@ class CompanyFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-                                   'data_class' => Company::class,
-                               ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => CompanyVideo::class,
+            ]
+        );
+        $resolver->setRequired(
+            [
+                'company',
+            ]
+        );
     }
 }

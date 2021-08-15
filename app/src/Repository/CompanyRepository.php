@@ -47,6 +47,20 @@ class CompanyRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return array
+     */
+    public function getAllForRender(): array
+    {
+        $companies = $this->findAll();
+        $result = [];
+        foreach ($companies as $company) {
+            $result[$company->getTitle()] = $company->getId();
+        }
+
+        return $result;
+    }
+
+    /**
      * @param Company $company
      * @throws Exception
      */

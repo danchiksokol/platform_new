@@ -26,7 +26,7 @@ class CompanyMaterial
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="companyMaterials")
      */
-    private ?Company $company;
+    private int|Company $company;
 
     /**
      * @ORM\Column(type="datetime")
@@ -37,6 +37,11 @@ class CompanyMaterial
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?DateTimeInterface $updated_at;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $thumbnail;
 
     /**
      * @return int|null
@@ -73,11 +78,12 @@ class CompanyMaterial
         return $this->company;
     }
 
+
     /**
-     * @param Company|null $company
+     * @param int|Company $company
      * @return $this
      */
-    public function setCompany(?Company $company): self
+    public function setCompany(int|Company $company): self
     {
         $this->company = $company;
 
@@ -118,6 +124,18 @@ class CompanyMaterial
     public function setUpdatedAt(?DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }

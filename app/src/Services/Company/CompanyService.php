@@ -37,6 +37,7 @@ class CompanyService
     public function handleCreate(Company $company, Form $form): static
     {
         $company->setTitle($form->get('title')->getData());
+        $company->setContent($form->get('content')->getData());
         $company->setCreatedAt(new DateTimeImmutable());
         $this->companyRepository->setCreate($company);
         $lastId = $company->getId();
@@ -58,7 +59,12 @@ class CompanyService
      */
     public function handleDelete(Company $company)
     {
+        $file = $company->getLogo();
+        if ($file) {
+            $this->fileManagerService->removeFile($file);
+        }
         $this->companyRepository->setDelete($company);
+        $this->companyRepository->setSave();
     }
 
 }
