@@ -8,6 +8,7 @@ use App\Entity\Theses;
 use App\Repository\ThesesRepository;
 use App\Services\FileService\FileManagerService;
 use App\Services\FileService\FileManagerServiceInterface;
+use DateTimeImmutable;
 use Exception;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Form\Form;
@@ -49,6 +50,13 @@ class ThesesService
             $theses->setFile($fileName);
         }
         $theses->setFIO($form->get('FIO')->getData());
+        $theses->setEmail($form->get('email')->getData());
+        $theses->setPhone($form->get('phone')->getData());
+        $theses->setCity($form->get('city')->getData());
+        $theses->setTitle($form->get('work')->getData());
+        $theses->setAuthors($form->get('authors')->getData());
+        $theses->setTheses($form->get('theses')->getData());
+        $theses->setCreatedAt(new DateTimeImmutable());
         $this->thesesRepository->setCreate($theses);
 
         return $this;

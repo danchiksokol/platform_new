@@ -7,24 +7,22 @@ use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use App\Services\User\UserService;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
-class RegistrationController extends AbstractController
+class RegistrationController extends BaseController
 {
     /**
      * @var EmailVerifier
      */
-    private $emailVerifier;
+    private EmailVerifier $emailVerifier;
     /**
      * @var UserService
      */
-    private $userService;
+    private UserService $userService;
 
     /**
      * RegistrationController constructor.
@@ -37,10 +35,12 @@ class RegistrationController extends AbstractController
         $this->userService = $userService;
     }
 
+
     /**
      * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     #[Route('/register', name: 'app_register')]
     public function register(

@@ -14,7 +14,7 @@ class MailerService
     /**
      * @var MailerInterface
      */
-    private $mailer;
+    private MailerInterface $mailer;
 
     /**
      * MailerService constructor.
@@ -45,9 +45,16 @@ class MailerService
             ->to($emailTo)
             ->subject($title)
             ->text('Sending emails is fun again!')
-            ->html('<p>See Twig integration for better HTML integration!</p>')
+            ->html(
+                "<p>ФИО: $fio</p>
+                      <p>Телефон: $phone</p>
+                      <p>Город: $city</p>
+                      <p>Место работы: $work</p>
+                      <p>Авторы: $authors</p>
+                      <p>Тезисы: $theses</p>"
+            )
             ->attachFromPath($filePath);
-//TODO:: Отверстать письмо для тезисов
+
         $this->mailer->send($email);
     }
 
