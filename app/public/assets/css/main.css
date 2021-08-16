@@ -361,6 +361,9 @@ header .container {
 .program-date .active:hover {
     color: #000;
 }
+.poster-category .active:hover {
+    color: #000;
+}
 .poster-category, .program-header {
     margin-top: 16px;
 }

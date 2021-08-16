@@ -203,6 +203,9 @@ class PosterService
             $session = $request->getSession();
             if ($session->has("vote_$userId")) {
                 $votePosterSession = $session->get("vote_$userId");
+                if (isset($votePosterSession['is_vote'])) {
+                    return [];
+                }
                 foreach ($votePosterSession as $vote) {
                     $voteObject = $this->posterRepository->getOne((int)$vote);
                     $result[] = [
