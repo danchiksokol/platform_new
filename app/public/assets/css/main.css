@@ -172,6 +172,9 @@ nav .navbar-collapse {
 .nav-container {
     display: flex;
 }
+.main {
+    text-align: center;
+}
 .main-block {
     background: #ede4f0;
 }

@@ -46,10 +46,12 @@
                             <a href="{{ path('app_main_home_programms17') }}"
                                class="nav-link {% if app.request.attributes.get('_route') starts with 'app_main_home_programms' %}active{% endif %}">Программа</a>
                             <a href="{{ path('app_main_home_symposium') }}"
-                               class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_symposium' %}active{% endif %}">Симпозиумы</a>
-                            <a href="{{ path('app_poster') }}"
-                               class="nav-link {% if app.request.attributes.get('_route') == 'app_poster' %}active{% endif %}">
-                                Постерная сессия</a>
+                               class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_symposium' %}active{% endif %}">Сателлитные Симпозиумы</a>
+                            <a href="{{ path('app_main_home_nmo') }}"
+                               class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_nmo' %}active{% endif %}">НМО</a>
+{#                            <a href="{{ path('app_poster') }}"#}
+{#                               class="nav-link {% if app.request.attributes.get('_route') == 'app_poster' %}active{% endif %}">#}
+{#                                Постерная сессия</a>#}
                             <a href="{{ path('app_main_home_sponsors') }}"
                                class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_sponsors' %}active{% endif %}">Виртуальная
                                 выставка</a>

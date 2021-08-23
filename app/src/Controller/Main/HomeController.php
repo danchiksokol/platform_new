@@ -107,6 +107,15 @@ class HomeController extends BaseController
         return $this->render('main/programms/index17.html.twig', $forRender);
     }
 
+    #[Route('/nmo', 'app_main_home_nmo')]
+    public function nmoAction(): Response
+    {
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'НМО';
+        $forRender['news'] = $this->newsRepository->getAllIsShow();
+        return $this->render('main/nmo/index.html.twig', $forRender);
+    }
+
     #[Route('/sponsors', 'app_main_home_sponsors')]
     public function sponsorsAction(): Response
     {

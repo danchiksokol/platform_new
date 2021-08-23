@@ -65,13 +65,16 @@ class RegistrationController extends BaseController
 
             return $this->redirectToRoute('app_login');
         }
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Регистрация';
 
-        return $this->render(
-            'main/registration/register.html.twig',
-            [
-                'registrationForm' => $form->createView(),
-            ]
-        );
+//        return $this->render(
+//            'main/registration/register.html.twig',
+//            [
+//                'registrationForm' => $form->createView(),
+//            ]
+//        );
+        return $this->render('main/start/index.html.twig', $forRender);
     }
 
     /**
