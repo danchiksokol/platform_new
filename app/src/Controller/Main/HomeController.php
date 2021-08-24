@@ -80,6 +80,14 @@ class HomeController extends BaseController
         return $this->render('main/index.html.twig', $forRender);
     }
 
+    #[Route('/start', 'app_main_home_start')]
+    public function startAction(): Response
+    {
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Старт';
+        return $this->render('main/start/index.html.twig', $forRender);
+    }
+
     #[Route('/programms/17', 'app_main_home_programms17')]
     public function programms17Action(): Response
     {

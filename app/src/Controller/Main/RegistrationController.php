@@ -68,13 +68,12 @@ class RegistrationController extends BaseController
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Регистрация';
 
-//        return $this->render(
-//            'main/registration/register.html.twig',
-//            [
-//                'registrationForm' => $form->createView(),
-//            ]
-//        );
-        return $this->render('main/start/index.html.twig', $forRender);
+        return $this->render(
+            'main/registration/register.html.twig',
+            [
+                'registrationForm' => $form->createView(),
+            ]
+        );
     }
 
     /**
