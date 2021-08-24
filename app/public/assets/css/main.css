@@ -281,6 +281,8 @@ header .container {
 .company-info img {
     margin: 0 auto 16px;
     display: block;
+    max-width: 66%;
+    width: 100%;
 }
 .company-info, .company-content, .company-video {
     background: #fff;
@@ -930,11 +932,25 @@ thead th {
 .programs-logo-img img {
     margin-right: 24px;
 }
+.programs-logo-img img:last-child {
+    margin-right: 0;
+}
+.programs-logo-img {
+    text-align: center;
+    margin-bottom: 30px;
+}
 .programs-logo-text {
     margin-top: 14px;
 }
 .modal-dialog.registration-modal {
     max-width: 767px;
+}
+.accordion-item {
+    border: 0;
+}
+.accordion-item .accordion-body {
+    border: 2px solid #8a1983;
+    border-radius: 0.25rem;
 }
 @media (min-width: 1200px) {
     .program-table tr td:nth-child(1), .program-table tr th:nth-child(1) {
