@@ -108,11 +108,11 @@
                                     <td>Байков В.В.<br>Санкт-Петербург</td>
                                     <td>Воробьев В.И.<br>Москва</td>
                                 </tr>
-                                <tr class="bg-gray">
-                                    <td>16:00 - 17:45</td>
-                                    <td colspan="4"><em>Сателлитный симпозиум компании Bristol-Myers Squibb</em></td>
+{#                                <tr class="bg-gray">#}
+{#                                    <td>16:00 - 17:45</td>#}
+{#                                    <td colspan="4"><em>Сателлитный симпозиум компании Bristol-Myers Squibb</em></td>#}
 {#                                    <td colspan="2"><em>Сателлитный симпозиум</em></td>#}
-                                </tr>
+{#                                </tr>#}
                                 </tbody>
                             </table>
                         </div>
@@ -131,22 +131,23 @@
                                 16:00 – 17:45
                             </div>
                             <div class="program-dop-item-title">
-                                Сателлитный симпозиум компании Bristol-Myers Squibb
+                                Сателлитный симпозиум компании Bristol Myers Squibb<br>
+                                <em>* Не обеспечивается кредитами НМО</em>
                             </div>
                             <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к
                                 онлайн трансляции</a>
                         </div>
-                        <div class="program-dop-item">
-                            <div class="program-dop-item-time">
-                                16:00 – 17:45
-                            </div>
-                            <div class="program-dop-item-title">
-                                Сателлитный симпозиум компании Bristol-Myers Squibb
-                            </div>
-                            <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к
-                                онлайн трансляции</a>
-                        </div>
-                    </div>
+{#                        <div class="program-dop-item">#}
+{#                            <div class="program-dop-item-time">#}
+{#                                16:00 – 17:45#}
+{#                            </div>#}
+{#                            <div class="program-dop-item-title">#}
+{#                                Сателлитный симпозиум компании Bristol-Myers Squibb#}
+{#                            </div>#}
+{#                            <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к#}
+{#                                онлайн трансляции</a>#}
+{#                        </div>#}
+{#                    </div>#}
                 </div>
                 <div class="col-lg-3 d-none d-lg-block">
                     {% include 'main/news/index.html.twig' with news %}

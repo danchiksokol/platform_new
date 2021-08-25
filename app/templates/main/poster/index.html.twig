@@ -24,7 +24,7 @@
                                  data-bs-parent="#accordionPoster">
                                 <ul class="accordion-body">
                                     {% for row in posters %}
-                                        <li>{{ row.title }}</li>
+                                        <li><a href="{{ asset('uploads/poster/pdf/' ~ row.file) }}" target="_blank">{{ row.title }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>
