@@ -952,6 +952,10 @@ thead th {
     border: 2px solid #8a1983;
     border-radius: 0.25rem;
 }
+.accordion-button:focus, .btn-check:focus + .btn, .btn:focus {
+    box-shadow: none;
+}
+
 @media (min-width: 1200px) {
     .program-table tr td:nth-child(1), .program-table tr th:nth-child(1) {
         width: 108px;
