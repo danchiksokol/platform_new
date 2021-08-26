@@ -955,6 +955,11 @@ thead th {
 .accordion-button:focus, .btn-check:focus + .btn, .btn:focus {
     box-shadow: none;
 }
+.program-dop-item.program-dop-item-one {
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 0;
+}
 
 @media (min-width: 1200px) {
     .program-table tr td:nth-child(1), .program-table tr th:nth-child(1) {
