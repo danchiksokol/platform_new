@@ -24,31 +24,33 @@
                         <img src="{{ asset('uploads/company/'~ company.id ~ '/logo/' ~ company.logo) }}">
                         <p>{{ company.content }}</p>
                     </div>
+                    {% if(materials|length > 0) %}
                     <div id="matherials" class="company-content">
                         <span class="company-label">Материалы</span>
                         <div class="row">
                             {% for row in materials %}
-                                <div class="col-md-6">
-                                    <a target="_blank" href="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.file) }}">
-                                        <img src="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.thumbnail) }}">
-                                    </a>
-                                </div>
+                                {% if(row.isShow) %}
+                                    <div class="col-md-6">
+                                        <a target="_blank"
+                                           href="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.file) }}">
+                                            <img src="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.thumbnail) }}">
+                                        </a>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
-                    <div id="video" class="company-video">
-                        <span class="company-label">Видео</span>
-                        <div class="company-video-item">
-                            <img src="{{ asset('assets/img/broadcast/fon.jpg') }}">
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#companyVideo">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="#fff"
-                                     class="bi bi-play-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+                    {% endif %}
+                    {% for row in video %}
+                        {% if(row.isShow) %}
+                            <div id="video" class="company-video">
+                                <span class="company-label">Видео</span>
+                                <div class="company-video-item">
+                                    <video src="{{ asset('uploads/company/'~ company.id ~ '/video/' ~ row.video) }}"></video>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                     <a href="javascript:void(0);" class="btn btn-fill company-link">Перейти к виртуальному стенду</a>
                 </div>
                 <div class="col-lg-3 d-none d-lg-block">

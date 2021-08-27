@@ -44,6 +44,7 @@ class CompanyMaterialService
         $company = $this->companyRepository->getOne($form->get('company')->getData());
         $companyMaterial->setCompany($company);
         $companyMaterial->setCreatedAt(new DateTimeImmutable());
+        $companyMaterial->setIsShow(0);
         $file = $form->get('file')->getData();
         if ($file) {
             $this->fileManagerService->setFileUploadDirectory($company->getId().'/materials');
@@ -71,6 +72,7 @@ class CompanyMaterialService
      */
     public function handleDelete(CompanyMaterial $companyMaterial)
     {
+        $this->fileManagerService->setFileUploadDirectory($companyMaterial->getCompany()->getId().'/materials/');
         $file = $companyMaterial->getFile();
         if ($file) {
             $this->fileManagerService->removeFile($file);
@@ -80,6 +82,25 @@ class CompanyMaterialService
             $this->fileManagerService->removeFile($thumbnail);
         }
         $this->companyMaterialRepository->setDelete($companyMaterial);
+        $this->companyMaterialRepository->setSave();
+    }
+
+
+    /**
+     * @param CompanyMaterial $companyMaterial
+     */
+    public function handleShow(CompanyMaterial $companyMaterial): void
+    {
+        $companyMaterial->setIsShow(1);
+        $this->companyMaterialRepository->setSave();
+    }
+
+    /**
+     * @param CompanyMaterial $companyMaterial
+     */
+    public function handleHide(CompanyMaterial $companyMaterial): void
+    {
+        $companyMaterial->setIsShow(0);
         $this->companyMaterialRepository->setSave();
     }
 }

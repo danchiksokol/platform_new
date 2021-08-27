@@ -2,7 +2,8 @@
 {% block title %}{{ title }}{% endblock %}
 {% block body %}
     <div class="container">
-        <span><a type="button" class="btn btn-success" href="{{ path('app_admin_company_create') }}">Создать Компанию</a></span>
+        <span><a type="button" class="btn btn-success"
+                 href="{{ path('app_admin_company_create') }}">Создать Компанию</a></span>
         <span><a type="button" class="btn btn-success" href="{{ path('app_admin_company_material_create') }}">Добавить Материал</a></span>
         <span><a type="button" class="btn btn-success" href="{{ path('app_admin_company_video_create') }}">Добавить Видео</a></span>
         <table class="table table-hover table-bordered">
@@ -12,7 +13,8 @@
                 <th scope="col">Заголовок</th>
                 <th scope="col">Текст</th>
                 <th scope="col">Logo</th>
-                <th scope="col">Отображен</th>
+                <th scope="col">Материал</th>
+                <th scope="col">Видео</th>
                 <th>Редактировать</th>
                 <th>Удалить</th>
             </tr>
@@ -22,10 +24,13 @@
             {% for row in company %}
                 <tr>
                     {% set count = count + 1 %}
-                    <td>{{ count }}</td>
-                    <td>{{ row.title }}</td>
-                    <td>{{ row.content }}</td>
+                    {# <td>{{ count }}</td> #}
+                    <td><a href="{{ path('app_admin_company_material', {'id': row.id}) }}">{{ row.id }}</a></td>
+                    <td><a href="{{ path('app_admin_company_material', {'id': row.id}) }}">{{ row.title }}</a></td>
                     <td width="100px"><img src="{{ asset('uploads/company/' ~ row.id ~'/logo/' ~ row.logo) }}"></td>
+                    <td>{{ row.content }}</td>
+                    <td><a type="button" class="btn btn-secondary" href="{{ path('app_admin_company_material', {'id': row.id}) }}">Материал</a></td>
+                    <td><a type="button" class="btn btn-secondary" href="{{ path('app_admin_company_video', {'id': row.id}) }}">Видео</a></td>
                 </tr>
             {% endfor %}
             </tbody>

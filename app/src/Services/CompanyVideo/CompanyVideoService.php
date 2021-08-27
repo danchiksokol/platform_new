@@ -56,14 +56,37 @@ class CompanyVideoService
         
     }
 
+    /**
+     * @param CompanyVideo $companyVideo
+     * @throws Exception
+     */
     public function handleDelete(CompanyVideo $companyVideo)
     {
+        $this->fileManagerService->setFileUploadDirectory($companyVideo->getCompany()->getId().'/video/');
         $file = $companyVideo->getVideo();
         if ($file) {
             $this->fileManagerService->removeFile($file);
         }
-        $this->companyMaterialRepository->setDelete($companyVideo);
-        $this->companyMaterialRepository->setSave();
+        $this->companyVideoRepository->setDelete($companyVideo);
+        $this->companyVideoRepository->setSave();
+    }
+
+    /**
+     * @param CompanyVideo $companyVideo
+     */
+    public function handleShow(CompanyVideo $companyVideo): void
+    {
+        $companyVideo->setIsShow(1);
+        $this->companyVideoRepository->setSave();
+    }
+
+    /**
+     * @param CompanyVideo $companyVideo
+     */
+    public function handleHide(CompanyVideo $companyVideo): void
+    {
+        $companyVideo->setIsShow(0);
+        $this->companyVideoRepository->setSave();
     }
     
 }

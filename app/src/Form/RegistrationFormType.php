@@ -65,7 +65,7 @@ class RegistrationFormType extends AbstractType
                 'surname',
                 TextType::class,
                 [
-                    'required' => false,
+                    'required' => true,
                     'attr' => ['placeholder' => "Фамилия"]
                 ]
             )
@@ -73,7 +73,7 @@ class RegistrationFormType extends AbstractType
                 'name',
                 TextType::class,
                 [
-                    'required' => false,
+                    'required' => true,
                     'attr' => ['placeholder' => "Имя"]
                 ]
             )
@@ -81,7 +81,7 @@ class RegistrationFormType extends AbstractType
                 'patronymic',
                 TextType::class,
                 [
-                    'required' => false,
+                    'required' => true,
                     'attr' => ['placeholder' => "Отчество"]
                 ]
             )
@@ -89,7 +89,7 @@ class RegistrationFormType extends AbstractType
                 'specialization',
                 TextType::class,
                 [
-                    'required' => false,
+                    'required' => true,
                     'attr' => ['placeholder' => "Специализация"]
                 ]
             )
@@ -97,7 +97,7 @@ class RegistrationFormType extends AbstractType
                 'job',
                 TextType::class,
                 [
-                    'required' => false,
+                    'required' => true,
                     'attr' => ['placeholder' => "Место работы"]
                 ]
             )
@@ -105,7 +105,7 @@ class RegistrationFormType extends AbstractType
                 'position',
                 TextType::class,
                 [
-                    'required' => false,
+                    'required' => true,
                     'attr' => ['placeholder' => "Должность"]
                 ]
             )
@@ -113,7 +113,7 @@ class RegistrationFormType extends AbstractType
                 'phone',
                 TelType::class,
                 [
-                    'required' => false,
+                    'required' => true,
                     'attr' => ['placeholder' => "Телефон"]
                 ]
             )
@@ -122,7 +122,7 @@ class RegistrationFormType extends AbstractType
                 ,
                 TextType::class,
                 [
-                    'required' => false,
+                    'required' => true,
                     'attr' => ['placeholder' => "Страна"]
                 ]
             )
@@ -130,7 +130,7 @@ class RegistrationFormType extends AbstractType
                 'city',
                 TextType::class,
                 [
-                    'required' => false,
+                    'required' => true,
                     'attr' => ['placeholder' => "Город"]
                 ]
             );

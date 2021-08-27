@@ -29,11 +29,13 @@ class CompanyController extends BaseController
     {
         $company = $this->companyRepository->getOne($id);
         $materials = $company->getCompanyMaterials();
+        $video = $company->getCompanyVideos();
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Карточка компании';
         $forRender['company'] = $company;
         $forRender['materials'] = $materials;
+        $forRender['video'] = $video;
         $forRender['news'] = $this->newsRepository->getAllIsShow();
         return $this->render('main/company/index.html.twig', $forRender);
     }

@@ -57,6 +57,11 @@ class Company
      */
     private $content;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_show;
+
 
     #[Pure]
     public function __construct()
@@ -198,6 +203,18 @@ class Company
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getIsShow(): ?bool
+    {
+        return $this->is_show;
+    }
+
+    public function setIsShow(?bool $is_show): self
+    {
+        $this->is_show = $is_show;
 
         return $this;
     }

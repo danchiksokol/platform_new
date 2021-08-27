@@ -32,12 +32,17 @@ class AdminCompanyVideoController extends AdminBaseController
         $this->companyVideoRepository = $companyVideoRepository;
     }
 
-    #[Route('/', name: 'company_video')]
-    public function indexAction(): Response
+    #[Route('/index/{id}', name: 'company_video')]
+    public function indexAction(ind $id): Response
     {
-        return $this->render('admin_company_video/index.html.twig', [
-            'controller_name' => 'AdminCompanyVideoController',
-        ]);
+        $company = $this->companyRepository->getOne($id);
+        $video = $company->getCompanyVideos();
+
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Видео компании';
+        $forRender['company'] = $company;
+        $forRender['video'] = $video;
+        return $this->render('admin/company_material/index.html.twig', $forRender);
     }
 
     /**
@@ -74,11 +79,42 @@ class AdminCompanyVideoController extends AdminBaseController
     #[Route('/delete/{id}', name: 'company_video_delete')]
     public function deleteAction(int $id):Response
     {
-        $companyMaterial = $this->companyVideoRepository->getOne($id);
-        $this->companyVideoService->handleDelete($companyMaterial);
+        $companyVideo = $this->companyVideoRepository->getOne($id);
+        $this->companyVideoService->handleDelete($companyVideo);
         $this->addFlash('success', 'Материал удален');
+        $companyId = $companyVideo->getCompany()->getId();
 
-        return $this->redirectToRoute('app_admin_company');
+        return $this->redirectToRoute('app_admin_company_video', ['id' => $companyId]);
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     */
+    #[Route('/show/{id}', name: 'video_show')]
+    public function showAction(int $id): Response
+    {
+        $companyVideo = $this->companyVideoRepository->getOne($id);
+        $this->companyVideoService->handleShow($companyVideo);
+        $this->addFlash('success', 'Материал Отображена');
+        $companyId = $companyVideo->getCompany()->getId();
+
+        return $this->redirectToRoute('app_admin_company_video', ['id' => $companyId]);
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     */
+    #[Route('/hide/{id}', name: 'material_hide')]
+    public function hideAction(int $id): Response
+    {
+        $companyVideo = $this->companyMaterialRepository->getOne($id);
+        $this->companyVideoService->handleHide($companyVideo);
+        $this->addFlash('success', 'Материал Скрыт');
+        $companyId = $companyVideo->getCompany()->getId();
+
+        return $this->redirectToRoute('app_admin_company_video', ['id' => $companyId]);
     }
 
 }

@@ -34,12 +34,17 @@ class AdminCompanyMaterialController extends AdminBaseController
         $this->companyMaterialRepository = $companyMaterialRepository;
     }
 
-    #[Route('/', name: 'material')]
-    public function indexAction(): Response
+    #[Route('/index/{id}', name: 'material')]
+    public function indexAction($id): Response
     {
-        return $this->render('admin_company_material/index.html.twig', [
-            'controller_name' => 'AdminCompanyMaterialController',
-        ]);
+        $company = $this->companyRepository->getOne($id);
+        $materials = $company->getCompanyMaterials();
+
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Карточка компании';
+        $forRender['company'] = $company;
+        $forRender['materials'] = $materials;
+        return $this->render('admin/company_material/index.html.twig', $forRender);
     }
 
 
@@ -85,4 +90,35 @@ class AdminCompanyMaterialController extends AdminBaseController
 
         return $this->redirectToRoute('app_admin_company');
     }
+
+    /**
+     * @param int $id
+     * @return Response
+     */
+    #[Route('/show/{id}', name: 'material_show')]
+    public function showAction(int $id): Response
+    {
+        $companyMaterial = $this->companyMaterialRepository->getOne($id);
+        $this->companyMaterialService->handleShow($companyMaterial);
+        $this->addFlash('success', 'Материал Отображена');
+        $companyId = $companyMaterial->getCompany()->getId();
+
+        return $this->redirectToRoute('app_admin_company_material', ['id' => $companyId]);
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     */
+    #[Route('/hide/{id}', name: 'material_hide')]
+    public function hideAction(int $id): Response
+    {
+        $companyMaterial = $this->companyMaterialRepository->getOne($id);
+        $this->companyMaterialService->handleHide($companyMaterial);
+        $this->addFlash('success', 'Материал Скрыт');
+        $companyId = $companyMaterial->getCompany()->getId();
+
+        return $this->redirectToRoute('app_admin_company_material', ['id' => $companyId]);
+    }
+
 }

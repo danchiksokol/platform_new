@@ -15,6 +15,7 @@ services:
       - db
     environment:
       XDEBUG_CONFIG: ${XDEBUG_CONFIG}
+      UPLOAD_LIMIT: 64M
     restart: always
   db:
     image: mysql:8.0.21

@@ -1,0 +1,158 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="main-block programs-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-12">
+                    <div class="program-header d-none d-lg-flex">
+                        <div class="program-date">
+                            <a href="{{ path('app_main_home_programms17') }}" class="btn btn-fill">17 сентября</a>
+                            <a href="#prog2" class="btn btn-fill active">18 сентября</a>
+                        </div>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                    <div class="programs-logo">
+                        <div class="programs-logo-img">
+                            <img src="/assets/img/prog-logo1.jpg">
+                            <img src="/assets/img/prog-logo2.jpg">
+                        </div>
+                        <div class="programs-logo-text">
+                            <div class="programs-title d-none d-lg-block" id="prog2">18 сентября 2021 г.</div>
+                            <div class="programs-title d-none d-lg-block">Председатель: Поддубная Ирина Владимировна, академик
+                                РАН, проф., проректор по лечебной работе и международному сотрудничеству, заведующая кафедрой
+                                онкологии и паллиативной медицины им. акад. А.И. Савицкого ФГБОУ ДПО РМАНПО Минздрава России,
+                                председатель Российского профессионального общества онкогематологов, Москва
+                            </div>
+                        </div>
+                    </div>
+{#                    <div class="programs-title d-none d-lg-block" id="prog2">18 сентября 2021 г.</div>#}
+                    <div class="program-table d-none d-lg-block">
+                        <div class="program-table-scroll">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Время</th>
+                                    <th>Лектор</th>
+                                    <th>Название</th>
+                                    <th>Эксперт-патоморфолог</th>
+                                    <th>Эксперт-клиницист</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="bg-lilac">
+                                    <td colspan="5" class="text-center"><b>Сессия IV. Разбор клинических случаев по
+                                            вопросах лечения аНХЛ </b><br>Модератор – Птушкин В.В.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td nowrap="">09:00 - 10:00</td>
+                                    <td nowrap="">Рябчикова В.В.<br>Санкт-Петербург</td>
+                                    <td>ДВККЛ</td>
+                                    <td>Байков В.В.<br>Санкт-Петербург</td>
+                                    <td>Бабичева Л.Г.<br>Москва</td>
+                                </tr>
+                                <tr>
+                                    <td nowrap="">10:00 - 11:10</td>
+                                    <td>Данилова М.А.<br>Обнинск</td>
+                                    <td>Посттрансплантационная лимфома Беркитта</td>
+                                    <td>Ковригина А.М.<br>Москва</td>
+                                    <td nowrap="">Самойлова О.С.<br>Нижний Новгород</td>
+                                </tr>
+                                <tr class="bg-gray">
+                                    <td>11:10 - 11:30</td>
+                                    <td colspan="4"><em>Перерыв</em></td>
+                                </tr>
+                                <tr class="bg-lilac">
+                                    <td colspan="5" class="text-center"><b>Сессия V. Разбор клинических случаев по
+                                            вопросам лечения ММ</b><br>Модератор – Менделеева Л.П.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>11:30 - 12:20</td>
+                                    <td nowrap="">Жеребцова В.А.<br>Москва</td>
+                                    <td>Множественная миелома G-каппа, протекающая с образованием мягкотканого
+                                        компонента в области шейки левой бедренной кости
+                                    </td>
+                                    <td></td>
+                                    <td>Бессмельцев С.С.<br>Санкт-Петербург</td>
+                                </tr>
+                                <tr>
+                                    <td>12:20 - 13:10</td>
+                                    <td nowrap="">Скворцова Н.С.<br>Новосибирск</td>
+                                    <td>Терапия множественной миеломы высокого цитогенетического риска</td>
+                                    <td></td>
+                                    <td>Соловьев М.В.<br>Москва</td>
+                                </tr>
+                                <tr>
+                                    <td>13:10 - 14:00</td>
+                                    <td nowrap="">Клиточенко Т.Ю.<br>Волгоград</td>
+                                    <td>Выбор терапии – первый рецидив множественной миеломы</td>
+                                    <td></td>
+                                    <td>Семочкин С.В.<br>Москва</td>
+                                </tr>
+                                <tr>
+                                    <td>14:00 - 14:50</td>
+                                    <td nowrap="">Лучинин А.С.<br>Киров</td>
+                                    <td>Длительное лечение пациента с ММ</td>
+                                    <td></td>
+                                    <td>Гарифуллин А.Д.<br>Санкт-Петербург</td>
+                                </tr>
+                                <tr>
+                                    <td>14:50 - 15:40</td>
+                                    <td nowrap="">Зубкова Е.В.<br>Иркутск</td>
+                                    <td>Первично множественные синхронные лимфопролиферативные заболевания: ХЛЛ и ММ
+                                    </td>
+                                    <td>Байков В.В.<br>Санкт-Петербург</td>
+                                    <td>Воробьев В.И.<br>Москва</td>
+                                </tr>
+{#                                <tr class="bg-gray">#}
+{#                                    <td>16:00 - 17:45</td>#}
+{#                                    <td colspan="4"><em>Сателлитный симпозиум компании Bristol-Myers Squibb</em></td>#}
+{#                                    <td colspan="2"><em>Сателлитный симпозиум</em></td>#}
+{#                                </tr>#}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн
+                            трансляции</a>
+                    </div>
+                    <div class="program-pdf">
+                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}" target="_blank" class="btn btn-bluez">Поключиться
+                            к онлайн трансляции</a>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                    <div class="program-dop d-none d-lg-flex">
+                        <div class="program-dop-item program-dop-item-one">
+                            <div class="program-dop-item-time">
+                                16:00 – 17:45
+                            </div>
+                            <div class="program-dop-item-title">
+                                Сателлитный симпозиум компании Bristol Myers Squibb<br>
+                                <em>* Не обеспечивается кредитами НМО</em>
+                            </div>
+                            <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к
+                                онлайн трансляции</a>
+                        </div>
+{#                        <div class="program-dop-item">#}
+{#                            <div class="program-dop-item-time">#}
+{#                                16:00 – 17:45#}
+{#                            </div>#}
+{#                            <div class="program-dop-item-title">#}
+{#                                Сателлитный симпозиум компании Bristol-Myers Squibb#}
+{#                            </div>#}
+{#                            <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к#}
+{#                                онлайн трансляции</a>#}
+{#                        </div>#}
+                    </div>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    {% include 'main/news/index.html.twig' with news %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

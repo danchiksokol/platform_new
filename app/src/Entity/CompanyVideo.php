@@ -27,6 +27,11 @@ class CompanyVideo
      */
     private int|Company $company;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_show;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class CompanyVideo
     public function setCompany(int|Company $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    public function getIsShow(): ?bool
+    {
+        return $this->is_show;
+    }
+
+    public function setIsShow(?bool $is_show): self
+    {
+        $this->is_show = $is_show;
 
         return $this;
     }
