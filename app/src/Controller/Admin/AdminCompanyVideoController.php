@@ -33,7 +33,7 @@ class AdminCompanyVideoController extends AdminBaseController
     }
 
     #[Route('/index/{id}', name: 'company_video')]
-    public function indexAction(ind $id): Response
+    public function indexAction(int $id): Response
     {
         $company = $this->companyRepository->getOne($id);
         $video = $company->getCompanyVideos();
@@ -42,7 +42,7 @@ class AdminCompanyVideoController extends AdminBaseController
         $forRender['title'] = 'Видео компании';
         $forRender['company'] = $company;
         $forRender['video'] = $video;
-        return $this->render('admin/company_material/index.html.twig', $forRender);
+        return $this->render('admin/company_video/index.html.twig', $forRender);
     }
 
     /**
