@@ -24,19 +24,27 @@ class CompanyController extends BaseController
         $this->companyRepository = $companyRepository;
     }
 
-    #[Route('/{id}', name: 'company' ,defaults: ['id' => 10])]
+    #[Route('/{id}', name: 'company', defaults: ['id' => 10])]
     public function indexAction(int $id): Response
     {
         $company = $this->companyRepository->getOne($id);
         $materials = $company->getCompanyMaterials();
         $video = $company->getCompanyVideos();
+        $materialIsShow = false;
+        foreach ($materials->getValues() as $value) {
+            if ($value->getIsShow()) {
+                $materialIsShow = true;
+            }
+        }
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Карточка компании';
         $forRender['company'] = $company;
         $forRender['materials'] = $materials;
+        $forRender['materialShow'] = $materialIsShow;
         $forRender['video'] = $video;
         $forRender['news'] = $this->newsRepository->getAllIsShow();
+        $forRender['hrefShow'] = !empty($company->getHref());
         return $this->render('main/company/index.html.twig', $forRender);
     }
 }

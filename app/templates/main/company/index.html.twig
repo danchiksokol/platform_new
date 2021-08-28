@@ -24,22 +24,22 @@
                         <img src="{{ asset('uploads/company/'~ company.id ~ '/logo/' ~ company.logo) }}">
                         <p>{{ company.content }}</p>
                     </div>
-                    {% if(materials|length > 0) %}
-                    <div id="matherials" class="company-content">
-                        <span class="company-label">Материалы</span>
-                        <div class="row">
-                            {% for row in materials %}
-                                {% if(row.isShow) %}
-                                    <div class="col-md-6">
-                                        <a target="_blank"
-                                           href="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.file) }}">
-                                            <img src="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.thumbnail) }}">
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
+                    {% if( materialShow ) %}
+                        <div id="matherials" class="company-content">
+                            <span class="company-label">Материалы</span>
+                            <div class="row">
+                                {% for row in materials %}
+                                    {% if(row.isShow) %}
+                                        <div class="col-md-6">
+                                            <a target="_blank"
+                                               href="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.file) }}">
+                                                <img src="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.thumbnail) }}">
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
                     {% endif %}
                     {% for row in video %}
                         {% if(row.isShow) %}
@@ -51,7 +51,10 @@
                             </div>
                         {% endif %}
                     {% endfor %}
-                    <a href="javascript:void(0);" class="btn btn-fill company-link">Перейти к виртуальному стенду</a>
+                    {% if(hrefShow) %}
+                        <a href="{{ company.href }}" class="btn btn-fill company-link">Перейти к виртуальному
+                            стенду</a>
+                    {% endif %}
                 </div>
                 <div class="col-lg-3 d-none d-lg-block">
                     {% include 'main/news/index.html.twig' with news %}

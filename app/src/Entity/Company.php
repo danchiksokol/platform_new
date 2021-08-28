@@ -62,6 +62,11 @@ class Company
      */
     private $is_show;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $href;
+
 
     #[Pure]
     public function __construct()
@@ -215,6 +220,18 @@ class Company
     public function setIsShow(?bool $is_show): self
     {
         $this->is_show = $is_show;
+
+        return $this;
+    }
+
+    public function getHref(): ?string
+    {
+        return $this->href;
+    }
+
+    public function setHref(?string $href): self
+    {
+        $this->href = $href;
 
         return $this;
     }
