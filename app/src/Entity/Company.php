@@ -53,7 +53,7 @@ class Company
     private $updated_at;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $content;
 
@@ -67,12 +67,18 @@ class Company
      */
     private $href;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UserStatistics::class, mappedBy="company")
+     */
+    private $userStatistics;
+
 
     #[Pure]
     public function __construct()
     {
         $this->companyMaterials = new ArrayCollection();
         $this->companyVideos = new ArrayCollection();
+        $this->userStatistics = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -232,6 +238,36 @@ class Company
     public function setHref(?string $href): self
     {
         $this->href = $href;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserStatistics[]
+     */
+    public function getUserStatistics(): Collection
+    {
+        return $this->userStatistics;
+    }
+
+    public function addUserStatistic(UserStatistics $userStatistic): self
+    {
+        if (!$this->userStatistics->contains($userStatistic)) {
+            $this->userStatistics[] = $userStatistic;
+            $userStatistic->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserStatistic(UserStatistics $userStatistic): self
+    {
+        if ($this->userStatistics->removeElement($userStatistic)) {
+            // set the owning side to null (unless already changed)
+            if ($userStatistic->getCompany() === $this) {
+                $userStatistic->setCompany(null);
+            }
+        }
 
         return $this;
     }

@@ -124,6 +124,11 @@ class User implements UserInterface
      */
     private $answerSpeakers;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=UserStatistics::class, inversedBy="user")
+     */
+    private $userStatistics;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
@@ -523,6 +528,18 @@ class User implements UserInterface
                 $answerSpeaker->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUserStatistics(): ?UserStatistics
+    {
+        return $this->userStatistics;
+    }
+
+    public function setUserStatistics(?UserStatistics $userStatistics): self
+    {
+        $this->userStatistics = $userStatistics;
 
         return $this;
     }

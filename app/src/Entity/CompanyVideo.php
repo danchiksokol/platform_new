@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CompanyVideoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class CompanyVideo
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $is_show;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserStatistics::class, mappedBy="companyVideo")
+     */
+    private $userStatistics;
+
+    public function __construct()
+    {
+        $this->userStatistics = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,36 @@ class CompanyVideo
     public function setIsShow(?bool $is_show): self
     {
         $this->is_show = $is_show;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserStatistics[]
+     */
+    public function getUserStatistics(): Collection
+    {
+        return $this->userStatistics;
+    }
+
+    public function addUserStatistic(UserStatistics $userStatistic): self
+    {
+        if (!$this->userStatistics->contains($userStatistic)) {
+            $this->userStatistics[] = $userStatistic;
+            $userStatistic->setCompanyVideo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserStatistic(UserStatistics $userStatistic): self
+    {
+        if ($this->userStatistics->removeElement($userStatistic)) {
+            // set the owning side to null (unless already changed)
+            if ($userStatistic->getCompanyVideo() === $this) {
+                $userStatistic->setCompanyVideo(null);
+            }
+        }
 
         return $this;
     }

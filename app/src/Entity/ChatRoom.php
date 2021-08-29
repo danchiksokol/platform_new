@@ -46,12 +46,18 @@ class ChatRoom
      */
     private $answerSpeakers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UserStatistics::class, mappedBy="broadcast")
+     */
+    private $userStatistics;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
         $this->speakers = new ArrayCollection();
         $this->questionSpeakers = new ArrayCollection();
         $this->answerSpeakers = new ArrayCollection();
+        $this->userStatistics = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -185,6 +191,36 @@ class ChatRoom
             // set the owning side to null (unless already changed)
             if ($answerSpeaker->getChatroom() === $this) {
                 $answerSpeaker->setChatroom(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserStatistics[]
+     */
+    public function getUserStatistics(): Collection
+    {
+        return $this->userStatistics;
+    }
+
+    public function addUserStatistic(UserStatistics $userStatistic): self
+    {
+        if (!$this->userStatistics->contains($userStatistic)) {
+            $this->userStatistics[] = $userStatistic;
+            $userStatistic->setBroadcast($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserStatistic(UserStatistics $userStatistic): self
+    {
+        if ($this->userStatistics->removeElement($userStatistic)) {
+            // set the owning side to null (unless already changed)
+            if ($userStatistic->getBroadcast() === $this) {
+                $userStatistic->setBroadcast(null);
             }
         }
 

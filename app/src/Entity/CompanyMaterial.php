@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CompanyMaterialRepository;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,6 +49,16 @@ class CompanyMaterial
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $is_show;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserStatistics::class, mappedBy="companyMaterial")
+     */
+    private $userStatistics;
+
+    public function __construct()
+    {
+        $this->userStatistics = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -153,6 +165,36 @@ class CompanyMaterial
     public function setIsShow(?bool $is_show): self
     {
         $this->is_show = $is_show;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserStatistics[]
+     */
+    public function getUserStatistics(): Collection
+    {
+        return $this->userStatistics;
+    }
+
+    public function addUserStatistic(UserStatistics $userStatistic): self
+    {
+        if (!$this->userStatistics->contains($userStatistic)) {
+            $this->userStatistics[] = $userStatistic;
+            $userStatistic->setCompanyMaterial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserStatistic(UserStatistics $userStatistic): self
+    {
+        if ($this->userStatistics->removeElement($userStatistic)) {
+            // set the owning side to null (unless already changed)
+            if ($userStatistic->getCompanyMaterial() === $this) {
+                $userStatistic->setCompanyMaterial(null);
+            }
+        }
 
         return $this;
     }
