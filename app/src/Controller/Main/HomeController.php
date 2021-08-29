@@ -106,13 +106,22 @@ class HomeController extends BaseController
         return $this->render('main/programms/index18.html.twig', $forRender);
     }
 
-    #[Route('/symposium', 'app_main_home_symposium')]
-    public function symposiumAction(): Response
+    #[Route('/symposium/17', 'app_main_home_symposium17')]
+    public function symposium17Action(): Response
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Симпозиумы';
         $forRender['news'] = $this->newsRepository->getAllIsShow();
-        return $this->render('main/programms/index17.html.twig', $forRender);
+        return $this->render('main/simposium/index17.html.twig', $forRender);
+    }
+
+    #[Route('/symposium/18', 'app_main_home_symposium18')]
+    public function symposium18Action(): Response
+    {
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Симпозиумы';
+        $forRender['news'] = $this->newsRepository->getAllIsShow();
+        return $this->render('main/simposium/index18.html.twig', $forRender);
     }
 
     #[Route('/nmo', 'app_main_home_nmo')]
