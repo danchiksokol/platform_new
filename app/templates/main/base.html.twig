@@ -21,6 +21,29 @@
                 $('label').remove();
             });
         </script>
+        <script>
+            document.addEventListener('click', function (event) {
+                let id = event.target.getAttribute('id');
+                if (!!id && 'sponsors' == id) {
+                    setAjax(id);
+                }
+            });
+            function setAjax(id) {
+                $.ajax({
+                    url: '{{ (path('app_user_statistics_ajax')) }}',
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        "sponsors": true // Данные которые отправляем на сервер
+                    },
+                    async: true,
+                    success: function (data) {
+                        console.log(data)
+                    }
+                });
+                return false;
+            };
+        </script>
     {% endblock %}
 </head>
 <body>
@@ -52,7 +75,7 @@
 {#                            <a href="{{ path('app_poster') }}"#}
 {#                               class="nav-link {% if app.request.attributes.get('_route') == 'app_poster' %}active{% endif %}">#}
 {#                                Постерная сессия</a>#}
-                            <a href="{{ path('app_main_home_sponsors') }}"
+                            <a href="{{ path('app_main_home_sponsors') }}" id="sponsors"
                                class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_sponsors' %}active{% endif %}">Виртуальная
                                 выставка</a>
                             <a href="{{ path('app_main_home_help') }}"

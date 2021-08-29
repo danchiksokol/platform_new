@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\UserStatistics;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,37 +15,72 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class UserStatisticsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private EntityManagerInterface $entityManager;
+
+    /**
+     * @param ManagerRegistry $registry
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, UserStatistics::class);
+        $this->entityManager = $entityManager;
     }
 
-    // /**
-    //  * @return UserStatistics[] Returns an array of UserStatistics objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param int $id
+     * @return object
+     */
+    public function getOne(int $id): object
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->find($id);
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?UserStatistics
+    /**
+     * @return UserStatistics[]
+     */
+    public function getAll(): array
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->findAll();
     }
-    */
+
+    /**
+     * @param UserStatistics $statistics
+     */
+    public function setCreate(UserStatistics $statistics)
+    {
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->persist($statistics);
+
+            $this->entityManager->commit();
+        } catch (Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
+    }
+
+    public function setSave()
+    {
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+    }
+
+
+    /**
+     * @param UserStatistics $statistics
+     */
+    public function setDelete(UserStatistics $statistics)
+    {
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->remove($statistics);
+
+            $this->entityManager->commit();
+        } catch (Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
+    }
+
 }

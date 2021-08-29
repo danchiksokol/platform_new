@@ -125,7 +125,7 @@ class User implements UserInterface
     private $answerSpeakers;
 
     /**
-     * @ORM\ManyToOne(targetEntity=UserStatistics::class, inversedBy="user")
+     * @ORM\OneToMany(targetEntity=UserStatistics::class, mappedBy="user")
      */
     private $userStatistics;
 
@@ -532,15 +532,34 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getUserStatistics(): ?UserStatistics
+    /**
+     * @return Collection|AnswerSpeaker[]
+     */
+    public function getUserStatistics(): Collection
     {
         return $this->userStatistics;
     }
 
-    public function setUserStatistics(?UserStatistics $userStatistics): self
+    public function addUserStatistics(UserStatistics $userStatistics): self
     {
-        $this->userStatistics = $userStatistics;
+        if (!$this->userStatistics->contains($userStatistics)) {
+            $this->userStatistics[] = $userStatistics;
+            $userStatistics->setUser($this);
+        }
 
         return $this;
     }
+
+    public function removeUserStatistics(UserStatistics $userStatistics): self
+    {
+        if ($this->$userStatistics->removeElement($userStatistics)) {
+            // set the owning side to null (unless already changed)
+            if ($userStatistics->getUser() === $this) {
+                $userStatistics->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

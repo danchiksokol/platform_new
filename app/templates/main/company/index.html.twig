@@ -25,16 +25,16 @@
                         <p>{{ company.content }}</p>
                     </div>
                     {% if( materialShow ) %}
-                        <div id="matherials" class="company-content">
-                            <span class="company-label">Материалы</span>
+                        <div class="company-content">
+                            <span id="matherials" class="company-label">Материалы</span>
                             <div class="row">
                                 {% for row in materials %}
                                     {% if(row.isShow) %}
                                         <div class="col-md-6">
-                                            <a target="_blank"
-                                               href="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.file) }}">
-                                                <img src="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.thumbnail) }}">
-                                            </a>
+{#                                            <a target="_blank"#}
+{#                                               href="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.file) }}">#}
+                                                <img id="material_{{ row.id }}" src="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.thumbnail) }}">
+{#                                            </a>#}
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -46,7 +46,7 @@
                             <div id="video" class="company-video">
                                 <span class="company-label">Видео</span>
                                 <div class="company-video-item">
-                                    <video src="{{ asset('uploads/company/'~ company.id ~ '/video/' ~ row.video) }}"></video>
+                                    <video id="video_{{ row.id }}" src="{{ asset('uploads/company/'~ company.id ~ '/video/' ~ row.video) }}"></video>
                                 </div>
                             </div>
                         {% endif %}
@@ -77,4 +77,34 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('click', function (event) {
+            let nameId = event.target.getAttribute('id');
+            if(!!nameId) {
+                let name = nameId.split('_', 1).pop();
+                let id = nameId.split('_', 2).pop();
+                if (!!id && ('material' == name || 'video' == name)) {
+                    let data = {};
+                    data[name] = id;
+                    setAjax(data);
+                }
+            }
+        });
+        function setAjax(data) {
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                }
+            });
+            return false;
+        };
+    </script>
 {% endblock %}
+

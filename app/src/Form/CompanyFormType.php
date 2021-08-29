@@ -40,6 +40,13 @@ class CompanyFormType extends AbstractType
                 ]
             )
             ->add(
+                'href',
+                TextType::class,
+                [
+                    'required' => false
+                ]
+            )
+            ->add(
                 'save',
                 SubmitType::class,
                 [

@@ -20,7 +20,7 @@ class UserStatistics
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="userStatistics")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="userStatistics")
      */
     private $user;
 
@@ -59,32 +59,14 @@ class UserStatistics
         return $this->id;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUser(): Collection
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function addUser(User $user): self
+    public function setUser(?User $user): self
     {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
-            $user->setUserStatistics($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->user->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getUserStatistics() === $this) {
-                $user->setUserStatistics(null);
-            }
-        }
+        $this->user = $user;
 
         return $this;
     }

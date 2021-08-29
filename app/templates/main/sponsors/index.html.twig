@@ -46,17 +46,17 @@
                             </div>
                             <div class="col-sm-6">
                                 <a href="{{ path('app_company') }}">
-                                    <img src="assets/img/sponsor/gen2.png">
+                                    <img id="company_10" src="assets/img/sponsor/gen2.png">
                                 </a>
                             </div>
                             <div class="col-sm-6">
                                 <a href="{{ path('app_company', {'id': 12}) }}">
-                                    <img src="assets/img/sponsor/gen3.png">
+                                    <img id="company_12" src="assets/img/sponsor/gen3.png">
                                 </a>
                             </div>
                             <div class="col-sm-6">
                                 <a href="{{ path('app_company') }}">
-                                    <img src="assets/img/sponsor/gen4.png">
+                                    <img id="company_10" src="assets/img/sponsor/gen4.png">
                                 </a>
                             </div>
                         </div>
@@ -68,17 +68,17 @@
                             </div>
                             <div class="col-sm-4">
                                 <a href="{{ path('app_company') }}">
-                                    <img src="assets/img/sponsor/gen1.png">
+                                    <img id="company_10" src="assets/img/sponsor/gen1.png">
                                 </a>
                             </div>
                             <div class="col-sm-4">
                                 <a href="{{ path('app_company') }}">
-                                    <img src="assets/img/sponsor/sp1.png">
+                                    <img id="company_10" src="assets/img/sponsor/sp1.png">
                                 </a>
                             </div>
                             <div class="col-sm-4">
                                 <a href="{{ path('app_company') }}">
-                                    <img src="assets/img/sponsor/sp2.png">
+                                    <img id="company_10" src="assets/img/sponsor/sp2.png">
                                 </a>
                             </div>
                             <div class="row">
@@ -86,12 +86,12 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <a href="{{ path('app_company') }}">
-                                        <img src="assets/img/sponsor/sp3.png">
+                                        <img id="company_10" src="assets/img/sponsor/sp3.png">
                                     </a>
                                 </div>
                                 <div class="col-sm-4">
                                     <a href="{{ path('app_company') }}">
-                                        <img src="assets/img/sponsor/sp4.png">
+                                        <img id="company_10" src="assets/img/sponsor/sp4.png">
                                     </a>
                                 </div>
                                 <div class="col-sm-1">
@@ -102,12 +102,12 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <a href="{{ path('app_company') }}">
-                                        <img src="assets/img/sponsor/sp6.png">
+                                        <img id="company_10" src="assets/img/sponsor/sp6.png">
                                     </a>
                                 </div>
                                 <div class="col-sm-4">
                                     <a href="{{ path('app_company', {'id': 11}) }}">
-                                        <img src="assets/img/sponsor/sp5.png">
+                                        <img id="company_11" src="assets/img/sponsor/sp5.png">
                                     </a>
                                 </div>
                                 <div class="col-sm-1">
@@ -122,4 +122,34 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('click', function (event) {
+            let nameId = event.target.getAttribute('id');
+            if(!!nameId) {
+                let name = nameId.split('_', 1).pop();
+                console.log(name);
+                let id = nameId.split('_', 2).pop();
+                if (!!id && ('company' == name)) {
+                    let data = {};
+                    data[name] = id;
+                    setAjax(data);
+                }
+            }
+        });
+        function setAjax(data) {
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                }
+            });
+            return false;
+        };
+    </script>
 {% endblock %}

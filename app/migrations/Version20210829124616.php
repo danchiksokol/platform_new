@@ -25,9 +25,9 @@ final class Version20210829124616 extends AbstractMigration
         $this->addSql('ALTER TABLE user_statistics ADD CONSTRAINT FK_45B44DCEFAD914F7 FOREIGN KEY (company_material_id) REFERENCES company_material (id)');
         $this->addSql('ALTER TABLE user_statistics ADD CONSTRAINT FK_45B44DCE31561523 FOREIGN KEY (company_video_id) REFERENCES company_video (id)');
         $this->addSql('ALTER TABLE user_statistics ADD CONSTRAINT FK_45B44DCE9C7E80E0 FOREIGN KEY (broadcast_id) REFERENCES chat_room (id)');
-        $this->addSql('ALTER TABLE user ADD user_statistics_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D64974AB38E2 FOREIGN KEY (user_statistics_id) REFERENCES user_statistics (id)');
-        $this->addSql('CREATE INDEX IDX_8D93D64974AB38E2 ON user (user_statistics_id)');
+        $this->addSql('ALTER TABLE user_statistics ADD user_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE user_statistics ADD CONSTRAINT FK_45B44DCEA76ED395 FOREIGN KEY (user_id) REFERENCES `user` (id)');
+        $this->addSql('CREATE INDEX IDX_45B44DCEA76ED395 ON user_statistics (user_id)');
     }
 
     public function down(Schema $schema): void
