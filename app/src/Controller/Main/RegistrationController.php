@@ -57,13 +57,14 @@ class RegistrationController extends BaseController
                 'app_login',
                 $user,
                 (new TemplatedEmail())
-                    ->from(new Address('lymphorum@tsoncology.com', 'Registration Mail Bot'))
+                    ->from(new Address('lymphorum@tsoncology.com', 'Подтверждение регистрации на Интерактивный форум экспертов "Лимфорум" 17-18 сентября 2021 г.'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Подтверждение регистрации на Интерактивный форум экспертов "Лимфорум" 17-18 сентября 2021 г.')
                     ->htmlTemplate('main/registration/confirmation_email.html.twig')
             );
+            $this->addFlash('success', 'Вы успешно зарегистрировались на Лимфорум.');
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('app_register');
         }
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Регистрация';
