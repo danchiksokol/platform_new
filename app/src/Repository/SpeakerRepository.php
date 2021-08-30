@@ -55,7 +55,9 @@ class SpeakerRepository extends ServiceEntityRepository
         $result = [];
         foreach ($speakers as $speaker) {
             $id = $speaker->getId();
-            $fio = $speaker->getUser()->getSurname() . ' ' . $speaker->getUser()->getName();
+            $fio = $speaker->getUser()->getSurname() . ' '
+                . substr($speaker->getUser()->getName(),0,1  ) . '. '
+                . substr($speaker->getUser()->getPatronymic(), 0, 1) . '.';;
             $result[$fio] = $id;
         }
 

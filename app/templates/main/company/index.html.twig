@@ -31,11 +31,11 @@
                                 {% for row in materials %}
                                     {% if(row.isShow) %}
                                         <div class="col-md-6">
-                                            {# <a target="_blank" #}
-                                            {# href="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.file) }}"> #}
+                                            <a target="_blank"
+                                               href="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.file) }}">
                                             <img id="material_{{ row.id }}"
                                                  src="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.thumbnail) }}">
-                                            {# </a> #}
+                                             </a>
                                         </div>
                                     {% endif %}
                                 {% endfor %}

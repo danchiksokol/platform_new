@@ -57,7 +57,7 @@ class RegistrationController extends BaseController
                 'app_login',
                 $user,
                 (new TemplatedEmail())
-                    ->from(new Address('danchiksokol@mail.ru', 'Registration Mail Bot'))
+                    ->from(new Address('lymphorum@tsoncology.com', 'Registration Mail Bot'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('main/registration/confirmation_email.html.twig')
