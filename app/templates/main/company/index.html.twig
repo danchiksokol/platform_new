@@ -16,8 +16,8 @@
                             Назад
                         </a>
                         <a href="#company" class="company-nav-link">О компании</a>
-                        <a href="#matherials" class="company-nav-link">Материалы</a>
-                        <a href="#video" class="company-nav-link">Видео</a>
+                        {% if( materialShow ) %}<a href="#matherials" class="company-nav-link">Материалы</a>{% endif %}
+                        {% if(videoShow) %}<a href="#video" class="company-nav-link">Видео</a>{% endif %}
                     </div>
                     <div class="company-info">
                         <span id="company" class="company-label">О компании</span>
@@ -31,26 +31,28 @@
                                 {% for row in materials %}
                                     {% if(row.isShow) %}
                                         <div class="col-md-6">
-{#                                            <a target="_blank"#}
-{#                                               href="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.file) }}">#}
-                                                <img id="material_{{ row.id }}" src="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.thumbnail) }}">
-{#                                            </a>#}
+                                            {# <a target="_blank" #}
+                                            {# href="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.file) }}"> #}
+                                            <img id="material_{{ row.id }}"
+                                                 src="{{ asset('uploads/company/'~ company.id ~ '/materials/' ~ row.thumbnail) }}">
+                                            {# </a> #}
                                         </div>
                                     {% endif %}
                                 {% endfor %}
                             </div>
                         </div>
                     {% endif %}
-                    {% for row in video %}
-                        {% if(row.isShow) %}
+                    {% if(videoShow) %}
+                        {% for row in video %}
                             <div id="video" class="company-video">
                                 <span class="company-label">Видео</span>
                                 <div class="company-video-item">
-                                    <video id="video_{{ row.id }}" src="{{ asset('uploads/company/'~ company.id ~ '/video/' ~ row.video) }}"></video>
+                                    <video id="video_{{ row.id }}"
+                                           src="{{ asset('uploads/company/'~ company.id ~ '/video/' ~ row.video) }}"></video>
                                 </div>
                             </div>
-                        {% endif %}
-                    {% endfor %}
+                        {% endfor %}
+                    {% endif %}
                     {% if(hrefShow) %}
                         <a href="{{ company.href }}" class="btn btn-fill company-link">Перейти к виртуальному
                             стенду</a>
@@ -80,7 +82,7 @@
     <script>
         document.addEventListener('click', function (event) {
             let nameId = event.target.getAttribute('id');
-            if(!!nameId) {
+            if (!!nameId) {
                 let name = nameId.split('_', 1).pop();
                 let id = nameId.split('_', 2).pop();
                 if (!!id && ('material' == name || 'video' == name)) {
@@ -90,6 +92,7 @@
                 }
             }
         });
+
         function setAjax(data) {
             $.ajax({
                 url: '{{ (path('app_user_statistics_ajax')) }}',

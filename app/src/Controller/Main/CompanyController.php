@@ -36,6 +36,12 @@ class CompanyController extends BaseController
                 $materialIsShow = true;
             }
         }
+        $videoShow = false;
+        foreach ($video->getValues() as $value){
+            if($value->getIsShow()){
+                $videoShow = true;
+            }
+        }
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Карточка компании';
@@ -43,6 +49,7 @@ class CompanyController extends BaseController
         $forRender['materials'] = $materials;
         $forRender['materialShow'] = $materialIsShow;
         $forRender['video'] = $video;
+        $forRender['videoShow'] = $videoShow;
         $forRender['news'] = $this->newsRepository->getAllIsShow();
         $forRender['hrefShow'] = !empty($company->getHref());
         return $this->render('main/company/index.html.twig', $forRender);

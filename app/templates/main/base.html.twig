@@ -69,7 +69,7 @@
                             <a href="{{ path('app_main_home_programms17') }}"
                                class="nav-link {% if app.request.attributes.get('_route') starts with 'app_main_home_programms' %}active{% endif %}">Программа</a>
                             <a href="{{ path('app_main_home_symposium17') }}"
-                               class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_symposium' %}active{% endif %}">Сателлитные Симпозиумы</a>
+                               class="nav-link {% if app.request.attributes.get('_route') starts with 'app_main_home_symposium' %}active{% endif %}">Сателлитные Симпозиумы</a>
                             <a href="{{ path('app_main_home_nmo') }}"
                                class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_nmo' %}active{% endif %}">НМО</a>
 {#                            <a href="{{ path('app_poster') }}"#}
