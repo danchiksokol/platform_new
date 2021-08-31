@@ -57,7 +57,7 @@ class RegistrationController extends BaseController
                 'app_login',
                 $user,
                 (new TemplatedEmail())
-                    ->from(new Address('lymphorum@tsoncology.com', 'Подтверждение регистрации на Интерактивный форум экспертов "Лимфорум" 17-18 сентября 2021 г.'))
+                    ->from(new Address('lymphorum@tsoncology.com', mb_convert_encoding('Лимфорум', "UTF-8")))
                     ->to($user->getEmail())
                     ->subject('Подтверждение регистрации на Интерактивный форум экспертов "Лимфорум" 17-18 сентября 2021 г.')
                     ->htmlTemplate('main/registration/confirmation_email.html.twig')
