@@ -2,39 +2,36 @@
 
 namespace App\Form;
 
-use App\Entity\QuestionSpeaker;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class QuestionSpeakerFormType extends AbstractType
+class RegistrationHelpFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add(
-                'content',
+                'email',
+                EmailType::class,
+                [
+                    'required' => true,
+                    'attr' => ['placeholder' => "Введите свой e-mail"]
+                ]
+            )
+            ->add(
+                'question',
                 TextareaType::class,
                 [
                     'required' => true,
-                    'attr' => ['placeholder' => "Вопрос", 'maxlength' => 1000]
+                    'attr' => ['placeholder' => "Введите свой вопрос"]
                 ]
             )
             ->add(
-                'speaker',
-                ChoiceType::class,
-                [
-                    'choices' => $options['speakers'],
-                    'attr' => [
-                        'class' => 'form-select'
-                    ]
-                ]
-            )
-            ->add(
-                'send',
+                'helpButton',
                 SubmitType::class,
                 [
                     'label' => 'Отправить',
@@ -47,15 +44,8 @@ class QuestionSpeakerFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            [
-                'data_class' => QuestionSpeaker::class,
-            ]
-        );
-        $resolver->setRequired(
-            [
-                'speakers',
-            ]
-        );
+        $resolver->setDefaults([
+                                   // Configure your form options here
+                               ]);
     }
 }

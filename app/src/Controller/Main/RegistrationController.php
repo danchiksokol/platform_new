@@ -4,11 +4,16 @@ namespace App\Controller\Main;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\RegistrationHelpFormType;
 use App\Security\EmailVerifier;
+use App\Services\Mailer\MailerService;
 use App\Services\User\UserService;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -23,35 +28,39 @@ class RegistrationController extends BaseController
      * @var UserService
      */
     private UserService $userService;
+    private MailerService $mailerService;
 
     /**
      * RegistrationController constructor.
      * @param EmailVerifier $emailVerifier
      * @param UserService $userService
+     * @param MailerService $mailerService
      */
-    public function __construct(EmailVerifier $emailVerifier, UserService $userService)
+    public function __construct(EmailVerifier $emailVerifier, UserService $userService, MailerService $mailerService)
     {
         $this->emailVerifier = $emailVerifier;
         $this->userService = $userService;
+        $this->mailerService = $mailerService;
     }
 
 
     /**
      * @param Request $request
      * @return Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws TransportExceptionInterface
      */
     #[Route('/register', name: 'app_register')]
-    public function register(
+    public function registerAction(
         Request $request
     ): Response {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->userService->handleCreate($user, $form);
+        $registryForm = $this->createForm(RegistrationFormType::class, $user);
+        $registryForm->handleRequest($request);
+        if ($registryForm->get('registryButton')->isClicked()
+            && $registryForm->isSubmitted() && $registryForm->isValid()) {
+            $this->userService->handleCreate($user, $registryForm);
 
             $this->emailVerifier->sendEmailConfirmation(
                 'app_login',
@@ -59,21 +68,32 @@ class RegistrationController extends BaseController
                 (new TemplatedEmail())
                     ->from(new Address('lymphorum@tsoncology.com', mb_convert_encoding('Лимфорум', "UTF-8")))
                     ->to($user->getEmail())
-                    ->subject('Подтверждение регистрации на Интерактивный форум экспертов "Лимфорум" 17-18 сентября 2021 г.')
+                    ->subject(
+                        'Подтверждение регистрации на Интерактивный форум экспертов "Лимфорум" 17-18 сентября 2021 г.'
+                    )
                     ->htmlTemplate('main/registration/confirmation_email.html.twig')
             );
             $this->addFlash('success', 'Вы успешно зарегистрировались на Лимфорум.');
 
             return $this->redirectToRoute('app_register');
         }
+
+        $helpFrom = $this->createForm(RegistrationHelpFormType::class);
+        $helpFrom->handleRequest($request);
+        if ($helpFrom->get('helpButton')->isClicked() && $helpFrom->isSubmitted()) {
+            $this->mailerService->handleSendRegistrationHelpEmail($helpFrom);
+            return $this->redirectToRoute('app_register');
+        }
+
+
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Регистрация';
+        $forRender['registrationForm'] = $registryForm->createView();
+        $forRender['helpForm'] = $helpFrom->createView();
 
         return $this->render(
             'main/registration/register.html.twig',
-            [
-                'registrationForm' => $form->createView(),
-            ]
+            $forRender
         );
     }
 
@@ -82,7 +102,7 @@ class RegistrationController extends BaseController
      * @return Response
      */
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(
+    public function verifyUserEmailAction(
         Request $request
     ): Response {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');

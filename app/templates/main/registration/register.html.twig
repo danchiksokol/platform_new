@@ -1,6 +1,6 @@
 {% extends 'main/base_without_menu.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Регистрация{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -89,11 +89,11 @@
                             </div>
                         </div>
                         <div class="registration-btn">
-                            <button type="submit" class="btn btn-outline-secondary">Зарегистрироваться</button>
+                            {{ form_row(registrationForm.registryButton) }}
                             {# <a href="/login">Войти на платформу</a> #}
                         </div>
                         {{ form_end(registrationForm) }}
-                        <button class="btn btn-link registration-help" type="button" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-link registration-help" data-bs-toggle="modal"
                                 data-bs-target="#callbackModal">Помощь
                         </button>
                     </div>
@@ -147,23 +147,6 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="callbackModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Форма обратной связи</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body form">
-                        <form>
-                            <input type="email" placeholder="Введите свой e-mail" required>
-                            <textarea required placeholder="Введите свой вопрос"></textarea>
-                            <button type="button" class="btn btn-primary">Отправить</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         {% for message in app.flashes('success') %}
             <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel"
                  aria-hidden="true">
@@ -203,4 +186,6 @@
         document.getElementById('registration_form_plainPassword').value = "1234567";
         document.getElementById('registration_form_plainPassword').hidden = true;
     </script>
+    {% set submit_url = path('app_register') %}
+    {% include 'main/registration/form_help.html.twig' with {url: submit_url} %}
 {% endblock %}

@@ -5,12 +5,13 @@ namespace App\Services\Mailer;
 
 
 use Symfony\Component\Form\Form;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
 class MailerService
 {
-    public const EMAIL = 'danchiksokol@gmail.com';
+    public const EMAIL = 'lymphorum@tsoncology.com';
     /**
      * @var MailerInterface
      */
@@ -28,7 +29,7 @@ class MailerService
     /**
      * @param Form $form
      * @param string $filePath
-     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     * @throws TransportExceptionInterface
      */
     public function handleSendEmail(Form $form, string $filePath)
     {
@@ -54,6 +55,27 @@ class MailerService
                       <p>Тезисы: $theses</p>"
             )
             ->attachFromPath($filePath);
+
+        $this->mailer->send($email);
+    }
+
+    /**
+     * @param Form $form
+     * @throws TransportExceptionInterface
+     */
+    public function handleSendRegistrationHelpEmail(Form $form)
+    {
+        $title = 'Помощь в регистрации Лимфорум';
+        $question = $form->get('question')->getData();
+        $emailTo = $form->get('email')->getData();
+        $email = (new Email())
+            ->from(self::EMAIL)
+            ->to($emailTo)
+            ->subject($title)
+            ->text('Sending emails is fun again!')
+            ->html(
+                "<p>$question</p>"
+            );
 
         $this->mailer->send($email);
     }

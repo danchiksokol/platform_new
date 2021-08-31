@@ -1,0 +1,21 @@
+{% block body %}
+    <div class="modal fade callbackModal" id="callbackModal" tabindex="-1" aria-labelledby="callbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content form">
+                {{ form_start(helpForm, {'action': url}) }}
+                <div class="modal-header">
+                    <h5 class="modal-title">Форма обратной связи</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ form_row(helpForm.email) }}
+                    {{ form_row(helpForm.question) }}
+                </div>
+                <div class="modal-footer">
+                    {{ form_row(helpForm.helpButton) }}
+                </div>
+                {{ form_end(helpForm, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
