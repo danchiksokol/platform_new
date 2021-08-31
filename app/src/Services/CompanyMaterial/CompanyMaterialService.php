@@ -47,7 +47,7 @@ class CompanyMaterialService
         $companyMaterial->setIsShow(0);
         $file = $form->get('file')->getData();
         if ($file) {
-            $this->fileManagerService->setFileUploadDirectory($company->getId().'/materials');
+            $this->fileManagerService->setFileUploadDirectory($company->getId() . '/materials');
             $fileName = $this->fileManagerService->uploadFile($file);
             $companyMaterial->setFile($fileName);
         }
@@ -62,8 +62,29 @@ class CompanyMaterialService
         return $this;
     }
 
-    public function handleUpdate()
+    public function handleUpdate(CompanyMaterial $companyMaterial, Form $form, string|null $file, string|null $thumbnail): static
     {
+        $company = $this->companyRepository->getOne($form->get('company')->getData());
+        $companyMaterial->setCompany($company);
+        $companyMaterial->setUpdatedAt(new DateTimeImmutable());
+        $companyMaterial->setFile($file);
+        $companyMaterial->setThumbnail($thumbnail);
+        $this->fileManagerService->setFileUploadDirectory($company->getId() . '/materials/');
+        $newFile = $form->get('file')->getData();
+        if ($newFile) {
+            $this->fileManagerService->removeFile($file);
+            $fileName = $this->fileManagerService->uploadFile($newFile);
+            $companyMaterial->setFile($fileName);
+        }
+        $newThumbnail = $form->get('thumbnail')->getData();
+        if ($newThumbnail) {
+            $this->fileManagerService->removeFile($thumbnail);
+            $thumbnailName = $this->fileManagerService->uploadFile($newThumbnail);
+            $companyMaterial->setThumbnail($thumbnailName);
+        }
+        $this->companyMaterialRepository->setSave();
+
+        return $this;
     }
 
     /**
@@ -72,7 +93,7 @@ class CompanyMaterialService
      */
     public function handleDelete(CompanyMaterial $companyMaterial)
     {
-        $this->fileManagerService->setFileUploadDirectory($companyMaterial->getCompany()->getId().'/materials/');
+        $this->fileManagerService->setFileUploadDirectory($companyMaterial->getCompany()->getId() . '/materials/');
         $file = $companyMaterial->getFile();
         if ($file) {
             $this->fileManagerService->removeFile($file);

@@ -75,11 +75,6 @@ class AdminNewsController extends AdminBaseController
                 $this->addFlash('success', 'Изменения сохранены');
             }
 
-//            if ($form->get('delete')->isClicked()) {
-//                $this->newsService->handleDelete($news, $file);
-//                $this->addFlash('success', 'Новость удалена');
-//            }
-
             return $this->redirectToRoute('app_admin_news');
         }
         return $this->render(

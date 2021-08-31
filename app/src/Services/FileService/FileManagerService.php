@@ -36,7 +36,9 @@ class FileManagerService implements FileManagerServiceInterface
      */
     public function setFileUploadDirectory(string $path): static
     {
-        $this->fileUploadDirectory = $this->fileUploadDirectory . '/' . $path;
+        if ($path !== $this->getLastDirectory()) {
+            $this->fileUploadDirectory = $this->fileUploadDirectory . '/' . $path;
+        }
 
         return $this;
     }
@@ -73,5 +75,29 @@ class FileManagerService implements FileManagerServiceInterface
         }
     }
 
+    /**
+     * @return string
+     */
+    public function getLastDirectory(): string
+    {
+        $path = $this->fileUploadDirectory;
+        $pathArray = explode('/', $path);
+
+        return end($pathArray);
+    }
+
+
+    /**
+     * @param string $path
+     */
+    public function removeDirectory(string $path)
+    {
+        try {
+            $fileSystem = new Filesystem();
+            $fileSystem->remove($path);
+        } catch (FileException $exception) {
+            echo $exception->getMessage();
+        };
+    }
 
 }

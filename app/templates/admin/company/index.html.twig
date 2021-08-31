@@ -11,10 +11,11 @@
             <tr>
                 <th scope="col">№</th>
                 <th scope="col">Заголовок</th>
-                <th scope="col">Текст</th>
                 <th scope="col">Logo</th>
+                <th scope="col">Текст</th>
                 <th scope="col">Материал</th>
                 <th scope="col">Видео</th>
+                <th scope="col">URL</th>
                 <th>Редактировать</th>
                 <th>Удалить</th>
             </tr>
@@ -25,12 +26,15 @@
                 <tr>
                     {% set count = count + 1 %}
                     {# <td>{{ count }}</td> #}
-                    <td><a href="{{ path('app_admin_company_material', {'id': row.id}) }}">{{ row.id }}</a></td>
-                    <td><a href="{{ path('app_admin_company_material', {'id': row.id}) }}">{{ row.title }}</a></td>
+                    <td><a href="{{ path('app_admin_company_update', {'id': row.id}) }}">{{ row.id }}</a></td>
+                    <td><a href="{{ path('app_admin_company_update', {'id': row.id}) }}">{{ row.title }}</a></td>
                     <td width="100px"><img src="{{ asset('uploads/company/' ~ row.id ~'/logo/' ~ row.logo) }}"></td>
                     <td>{{ row.content }}</td>
                     <td><a type="button" class="btn btn-secondary" href="{{ path('app_admin_company_material', {'id': row.id}) }}">Материал</a></td>
                     <td><a type="button" class="btn btn-secondary" href="{{ path('app_admin_company_video', {'id': row.id}) }}">Видео</a></td>
+                    <td><a href="{{ path('app_admin_company_update', {'id': row.id}) }}">{{ row.href }}</a></td>
+                    <td><a type="button" class="btn btn-secondary" href="{{ path('app_admin_company_update', {'id': row.id}) }}">Редактировать</a></td>
+                    <td><a type="button" class="btn btn-danger" href="{{ path('app_admin_company_delete', {'id': row.id}) }}">X</a></td>
                 </tr>
             {% endfor %}
             </tbody>

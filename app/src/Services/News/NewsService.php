@@ -32,6 +32,11 @@ class NewsService
     public function handleCreate(News $news, Form $form): static
     {
         $this->setObjectsFromForm($news, $form);
+        $file = $form->get('file')->getData();
+        if ($file) {
+            $fileName = $this->fileManagerService->uploadFile($file);
+            $news->setFile($fileName);
+        }
         $this->newsRepository->setCreate($news);
         $this->newsRepository->setSave();
 
@@ -45,10 +50,14 @@ class NewsService
      */
     public function handleUpdate(News $news, Form $form, string|null $file): static
     {
-        if ($file) {
-            $this->fileManagerService->removeFile($file);
-        }
         $this->setObjectsFromForm($news, $form);
+        $news->setFile($file);
+        $newFile = $form->get('file')->getData();
+        if ($newFile) {
+            $this->fileManagerService->removeFile($file);
+            $fileName = $this->fileManagerService->uploadFile($newFile);
+            $news->setFile($fileName);
+        }
         $news->setUpdatedAt(new DateTimeImmutable());
 
         $this->newsRepository->setSave();
@@ -97,11 +106,6 @@ class NewsService
         $news->setHref($form->get('href')->getData());
         $news->setIsShow($form->get('is_show')->getData());
         $news->setCreatedAt(new DateTimeImmutable());
-        $file = $form->get('file')->getData();
-        if ($file) {
-            $fileName = $this->fileManagerService->uploadFile($file);
-            $news->setFile($fileName);
-        }
     }
 
 }

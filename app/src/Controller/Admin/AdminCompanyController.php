@@ -64,4 +64,48 @@ class AdminCompanyController extends AdminBaseController
             ]
         );
     }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return Response
+     * @throws Exception
+     */
+    #[Route('/company/update/{id}', name: 'company_update')]
+    public function updateAction(Request $request, int $id):Response
+    {
+        $company = $this->companyRepository->getOne($id);
+        $logo = $company->getLogo();
+        $form = $this->createForm(CompanyFormType::class, $company);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->companyService->handleUpdate($company, $form, $logo);
+            $this->addFlash('Success', 'Изменена успешно');
+
+            return $this->redirectToRoute('app_admin_company');
+        }
+
+        return $this->render(
+            'admin/company/form.html.twig',
+            [
+                'companyForm' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     * @throws Exception
+     */
+    #[Route('/company/delete/{id}', name: 'company_delete')]
+    public function deleteAction(int $id):Response
+    {
+        $company = $this->companyRepository->getOne($id);
+        $this->companyService->handleDelete($company);
+        $this->addFlash('success', 'Компания удалена');
+
+        return $this->redirectToRoute('app_admin_company');
+    }
+
 }

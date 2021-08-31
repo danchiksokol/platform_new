@@ -33,7 +33,7 @@ class Company
     private $title;
 
     /**
-     * @ORM\OneToMany(targetEntity=CompanyMaterial::class, mappedBy="company")
+     * @ORM\OneToMany(targetEntity=CompanyMaterial::class, mappedBy="company", cascade={"persist", "remove"})
      */
     private $companyMaterials;
 

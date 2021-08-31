@@ -8,7 +8,6 @@
                 <th scope="col">№</th>
                 <th scope="col">Video</th>
                 <th scope="col">Отображен</th>
-                <th>Редактировать</th>
                 <th>Удалить</th>
             </tr>
             </thead>
@@ -29,7 +28,6 @@
                        href="{{ path('app_admin_company_video_show', {'id': row.id}) }}">Отобразить</a></td>
                     {% endif %}
                     </td>
-                    <td></td>
                     <td><a type="button" class="btn btn-danger"
                            href="{{ path('app_admin_company_video_delete', {'id': row.id}) }}">X</a></td>
                 </tr>

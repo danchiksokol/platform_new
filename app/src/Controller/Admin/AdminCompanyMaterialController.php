@@ -61,10 +61,37 @@ class AdminCompanyMaterialController extends AdminBaseController
         $form = $this->createForm(CompanyMaterialFormType::class, $companyMaterial, ['company' => $company]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $companyId = $form->get('company')->getData();
             $this->companyMaterialService->handleCreate($companyMaterial, $form);
             $this->addFlash('Success', 'Добавлена успешно');
 
-            return $this->redirectToRoute('app_admin_company');
+            return $this->redirectToRoute('app_admin_company_material', ['id' => $companyId]);
+        }
+
+        return $this->render(
+            'admin/company_material/form.html.twig',
+            [
+                'companyMaterialForm' => $form->createView(),
+            ]
+        );
+    }
+
+    #[Route('/update/{id}', name: 'material_update')]
+    public function updateAction(Request $request, int $id): Response
+    {
+        $companyMaterial = $this->companyMaterialRepository->getOne($id);
+        $companyId = $companyMaterial->getCompany()->getId();
+        $companyMaterial->setCompany($companyId);
+        $file = $companyMaterial->getFile();
+        $thumbnail = $companyMaterial->getThumbnail();
+        $company = $this->companyRepository->getAllForRender();
+        $form = $this->createForm(CompanyMaterialFormType::class, $companyMaterial, ['company' => $company]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->companyMaterialService->handleUpdate($companyMaterial, $form, $file, $thumbnail);
+            $this->addFlash('Success', 'Добавлена успешно');
+
+            return $this->redirectToRoute('app_admin_company_material', ['id' => $companyId]);
         }
 
         return $this->render(
@@ -85,10 +112,11 @@ class AdminCompanyMaterialController extends AdminBaseController
     public function deleteAction(int $id): Response
     {
         $companyMaterial = $this->companyMaterialRepository->getOne($id);
+        $companyId = $companyMaterial->getCompany()->getId();
         $this->companyMaterialService->handleDelete($companyMaterial);
         $this->addFlash('success', 'Материал удален');
 
-        return $this->redirectToRoute('app_admin_company');
+        return $this->redirectToRoute('app_admin_company_material', ['id' => $companyId]);
     }
 
     /**

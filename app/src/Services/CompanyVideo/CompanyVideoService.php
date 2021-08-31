@@ -51,11 +51,6 @@ class CompanyVideoService
         $this->companyVideoRepository->setSave();
     }
 
-    public function handleUpdate()
-    {
-        
-    }
-
     /**
      * @param CompanyVideo $companyVideo
      * @throws Exception

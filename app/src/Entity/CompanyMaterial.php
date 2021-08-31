@@ -88,9 +88,9 @@ class CompanyMaterial
     }
 
     /**
-     * @return Company|null
+     * @return Company|int
      */
-    public function getCompany(): ?Company
+    public function getCompany(): int|Company
     {
         return $this->company;
     }
