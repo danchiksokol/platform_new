@@ -147,39 +147,13 @@
                 </div>
             </div>
         </div>
-        {% for message in app.flashes('success') %}
-            <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="messageModalLabel">{{ message }}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>
-                                На указанную Вами почту было отправлено письмо с подтверждение регистрации.<br>
-                                <em>
-                                    Если Вы не можете найти письмо,<br>
-                                    проверьте, пожалуйста, папку "Спам".
-                                </em>
-                            </p>
-                            <p>
-                                Если Вам не пришло письмо, пожалуйста, направьте обращение в поддержку,<br>
-                                нажав на кнопку "Помощь" на странице регистрации.
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-fill" data-bs-dismiss="modal">Закрыть</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script>
-                let messageModal = document.getElementById('messageModal');
-                let myModal = new bootstrap.Modal(messageModal);
-                myModal.show();
-            </script>
+        {% for message in app.flashes('successRegistration') %}
+            {% set message = {message} %}
+            {% include 'main/registration/successRegistrationModal.html.twig' with message %}
+        {% endfor %}
+        {% for message in app.flashes('successHelpSend') %}
+            {% set message = {message} %}
+            {% include 'main/registration/successHelpModal.html.twig' with message %}
         {% endfor %}
     </div>
     <script>

@@ -73,7 +73,7 @@ class RegistrationController extends BaseController
                     )
                     ->htmlTemplate('main/registration/confirmation_email.html.twig')
             );
-            $this->addFlash('success', 'Вы успешно зарегистрировались на Лимфорум.');
+            $this->addFlash('successRegistration', 'Вы успешно зарегистрировались на Лимфорум.');
 
             return $this->redirectToRoute('app_register');
         }
@@ -82,6 +82,7 @@ class RegistrationController extends BaseController
         $helpFrom->handleRequest($request);
         if ($helpFrom->get('helpButton')->isClicked() && $helpFrom->isSubmitted()) {
             $this->mailerService->handleSendRegistrationHelpEmail($helpFrom);
+            $this->addFlash('successHelpSend', 'Ваше обращение отправлено');
             return $this->redirectToRoute('app_register');
         }
 

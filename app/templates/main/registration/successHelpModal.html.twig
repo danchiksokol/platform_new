@@ -1,0 +1,24 @@
+{% block body %}
+    <div class="modal fade" id="messageHelpModal" tabindex="-1" aria-labelledby="messageHelpLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageHelpLabel">{{ message }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Ответ будет направлен Вам письмом на указанный адрес электронной почты в ближайшее время.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-fill" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let messageHelpModal = document.getElementById('messageHelpModal');
+        let helpModal = new bootstrap.Modal(messageHelpModal);
+        helpModal.show();
+    </script>
+{% endblock %}
