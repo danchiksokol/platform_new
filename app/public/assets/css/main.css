@@ -960,6 +960,43 @@ thead th {
     margin-right: 0;
     margin-bottom: 0;
 }
+.carousel-control-prev, .carousel-control-next {
+    opacity: 1;
+}
+.carousel-control-next {
+    justify-content: flex-end;
+}
+.carousel-control-prev {
+    justify-content: flex-start;
+}
+.symposium-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+.symposium-title {
+    text-align: center;
+    margin-bottom: 42px;
+    margin-top: 42px;
+}
+.symposium-list {
+    padding: 0;
+    list-style: none;
+    margin-bottom: 36px;
+}
+.symposium-list li {
+    display: flex;
+    margin-bottom: 7px;
+}
+.symposium-list li i {
+    font-size: 14px;
+}
+.symposium-list li span:first-child {
+    width: 100px;
+    display: block;
+    margin-right: 7px;
+    flex: none;
+}
 
 @media (min-width: 1200px) {
     .program-table tr td:nth-child(1), .program-table tr th:nth-child(1) {
@@ -1121,6 +1158,9 @@ thead th {
     .main-block {
         min-height: calc(100vh - 336px);
     }
+    .programs-logo {
+        padding: 1px 16px;
+    }
 }
 @media (max-width: 767px) {
 
@@ -1146,6 +1186,12 @@ thead th {
     }
     .main-block {
         min-height: 100%;
+    }
+    .program-table:after {
+        display: none;
+    }
+    .program-table {
+        padding: 24px 16px 24px 16px;
     }
 }
 @media (max-width: 640px) {
@@ -1245,6 +1291,22 @@ thead th {
     }
     .main-block {
         padding-bottom: 130px;
+    }
+    .symposium-list li {
+        display: block;
+    }
+    .symposium-list li span:first-child {
+        width: 100%;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .symposium-row {
+        display: block;
+    }
+    .symposium-row div:first-child {
+        font-weight: 600;
+        margin-bottom: 10px;
     }
 }
 
