@@ -72,6 +72,37 @@ class AdminCompanyVideoController extends AdminBaseController
         );
     }
 
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return Response
+     * @throws Exception
+     */
+    #[Route('/update/{id}', name: 'video_update')]
+    public function updateAction(Request $request, int $id):Response
+    {
+        $companyVideo = $this->companyVideoRepository->getOne($id);
+        $companyId = $companyVideo->getCompany()->getId();
+        $companyVideo->setCompany($companyId);
+        $company = $this->companyRepository->getAllForRender();
+        $form = $this->createForm(CompanyVideoFormType::class, $companyVideo, ['company' => $company]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->companyVideoService->handleUpdate($companyVideo, $form);
+            $this->addFlash('Success', 'Изменено успешно');
+
+            return $this->redirectToRoute('app_admin_company');
+        }
+
+        return $this->render(
+            'admin/company_video/form.html.twig',
+            [
+                'companyVideoForm' => $form->createView(),
+            ]
+        );
+    }
+
     /**
      * @param int $id
      * @return Response

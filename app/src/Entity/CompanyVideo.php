@@ -61,7 +61,7 @@ class CompanyVideo
         return $this;
     }
 
-    public function getCompany(): ?Company
+    public function getCompany(): int|Company
     {
         return $this->company;
     }
