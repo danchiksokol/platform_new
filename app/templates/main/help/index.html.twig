@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-12 faq">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#askQuestion"
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#callbackModal"
                             class="btn btn-fill">Задать вопрос
                     </button>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -142,21 +142,10 @@
             </div>
         </div>
     </div>
-    <div class="modal fade askQuestion" id="askQuestion" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Форма обратной связи</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body form">
-                    <form>
-                        <input type="email" placeholder="Введите свой e-mail" required>
-                        <textarea required placeholder="Введите свой вопрос"></textarea>
-                        <button type="button" class="btn btn-fill">Отправить</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% for message in app.flashes('successHelpSend') %}
+        {% set message = {message} %}
+        {% include 'main/help/successHelpModal.html.twig' with message %}
+    {% endfor %}
+    {% set submit_url = path('app_main_home_help') %}
+    {% include 'main/help/form_help.html.twig' with {url: submit_url} %}
 {% endblock %}
