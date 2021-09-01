@@ -52,8 +52,8 @@ security:
       lazy: true
       provider: app_user_provider
       form_login:
-#        login_path: app_register
-        login_path: app_main_home_start
+        login_path: app_register
+#        login_path: app_main_home_start
         check_path: /login_check
         default_target_path: /
         always_use_default_target_path: true
@@ -77,6 +77,6 @@ security:
     - { path: ^/verify, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/start, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/start, roles: ROLE_ADMIN }
     - { path: ^/theses, roles: ROLE_USER }
     - { path: ^/, roles: ROLE_USER }

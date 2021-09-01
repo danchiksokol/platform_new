@@ -4,54 +4,49 @@
 namespace App\Controller\Main;
 
 use App\Entity\ChatRoom;
+use App\Form\RegistrationHelpFormType;
 use App\Repository\ChatRoomRepository;
 use App\Repository\MessageRepository;
 use App\Repository\NewsRepository;
 use App\Repository\UserRepository;
+use App\Services\Mailer\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends BaseController
 {
-    /**
-     * @var UserRepository
-     */
     private UserRepository $userRepository;
-    /**
-     * @var EntityManagerInterface
-     */
     private EntityManagerInterface $entityManager;
-    /**
-     * @var ChatRoomRepository
-     */
     private ChatRoomRepository $chatRoomRepository;
-    /**
-     * @var MessageRepository
-     */
     private MessageRepository $messageRepository;
     private NewsRepository $newsRepository;
+    private MailerService $mailerService;
+
 
     /**
-     * HomeController constructor.
      * @param UserRepository $userRepository
      * @param EntityManagerInterface $entityManager
      * @param ChatRoomRepository $chatRoomRepository
      * @param MessageRepository $messageRepository
      * @param NewsRepository $newsRepository
+     * @param MailerService $mailerService
      */
     public function __construct(
         UserRepository $userRepository,
         EntityManagerInterface $entityManager,
         ChatRoomRepository $chatRoomRepository,
         MessageRepository $messageRepository,
-        NewsRepository $newsRepository
+        NewsRepository $newsRepository,
+        MailerService $mailerService
     ) {
         $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
         $this->chatRoomRepository = $chatRoomRepository;
         $this->messageRepository = $messageRepository;
         $this->newsRepository = $newsRepository;
+        $this->mailerService = $mailerService;
     }
 
     #[Route('/', 'app_main_home_index')]
@@ -151,10 +146,19 @@ class HomeController extends BaseController
     }
 
     #[Route('/help', 'app_main_home_help')]
-    public function helpAction(): Response
+    public function helpAction(Request $request): Response
     {
+        $helpFrom = $this->createForm(RegistrationHelpFormType::class);
+        $helpFrom->handleRequest($request);
+        if ($helpFrom->get('helpButton')->isClicked() && $helpFrom->isSubmitted()) {
+            $this->mailerService->handleSendRegistrationHelpEmail($helpFrom);
+            $this->addFlash('successHelpSend', 'Ваше обращение отправлено');
+            return $this->redirectToRoute('app_main_home_help');
+        }
+
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Поддержка';
+        $forRender['helpForm'] = $helpFrom->createView();
         $forRender['news'] = $this->newsRepository->getAllIsShow();
         return $this->render('main/help/index.html.twig', $forRender);
     }

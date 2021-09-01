@@ -7,19 +7,19 @@
             <div class="row">
                 <div class="col-lg-9 col-12">
                     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                    class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                                    aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                                    aria-label="Slide 3"></button>
-                        </div>
+                        {# <div class="carousel-indicators"> #}
+                        {# <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" #}
+                        {# class="active" aria-current="true" aria-label="Slide 1"></button> #}
+                        {# <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" #}
+                        {# aria-label="Slide 2"></button> #}
+                        {# <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" #}
+                        {# aria-label="Slide 3"></button> #}
+                        {# </div> #}
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <a href="{{ path('app_company') }}"><img
-                                            src="{{ asset('assets/img/sponsor/baner1.jpg') }}"
-                                            class="d-block w-100"></a>
+                                <a href="{{ path('app_company') }}">
+                                    <img src="{{ asset('assets/img/sponsor/baner1.jpg') }}" class="d-block w-100">
+                                </a>
                             </div>
                             <div class="carousel-item">
                                 <img src="{{ asset('assets/img/sponsor/baner2.jpg') }}" class="d-block w-100">
@@ -50,7 +50,7 @@
                                 </a>
                             </div>
                             <div class="col-sm-6">
-                                <a href="{{ path('app_company', {'id': 23}) }}">
+                                <a href="{{ path('app_company', {'id': 12}) }}">
                                     <img id="company_12" src="assets/img/sponsor/gen3.png">
                                 </a>
                             </div>
@@ -125,7 +125,7 @@
     <script>
         document.addEventListener('click', function (event) {
             let nameId = event.target.getAttribute('id');
-            if(!!nameId) {
+            if (!!nameId) {
                 let name = nameId.split('_', 1).pop();
                 console.log(name);
                 let id = nameId.split('_', 2).pop();
@@ -136,6 +136,7 @@
                 }
             }
         });
+
         function setAjax(data) {
             $.ajax({
                 url: '{{ (path('app_user_statistics_ajax')) }}',

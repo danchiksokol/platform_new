@@ -70,11 +70,14 @@ class MailerService
         $emailTo = $form->get('email')->getData();
         $email = (new Email())
             ->from($emailTo)
-            ->to(self::EMAIL)
+            ->to('info@tsoncology.com')
             ->subject($title)
             ->text('Sending emails is fun again!')
             ->html(
-                "<p>$question</p>"
+                "
+                        <p>e-mail: $emailTo</p>
+                        <p>$question</p>
+                      "
             );
 
         $this->mailer->send($email);

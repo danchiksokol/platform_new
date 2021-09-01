@@ -24,7 +24,7 @@
                             <source src="{{ asset('uploads/company/' ~ row.company.id ~'/video/' ~ row.video) }}" type="video/webm"><!-- WebM/VP8 для Firefox4, Opera, и Chrome -->
                             <source src="{{ asset('uploads/company/' ~ row.company.id ~'/video/' ~ row.video) }}" type="video/ogg"><!-- Ogg/Vorbis для старых версий браузеров Firefox и Opera -->
                             <object data="{{ asset('uploads/company/' ~ row.company.id ~'/video/' ~ row.video) }}" type="application/x-shockwave-flash"><!-- добавляем видеоконтент для устаревших браузеров, в которых нет поддержки элемента video -->
-                                <param name="movie" value="video.swf">
+                                <param name="movie" value="{{ asset('uploads/company/' ~ row.company.id ~'/video/' ~ row.video) }}">
                             </object>
                         </video>
                     </td>
