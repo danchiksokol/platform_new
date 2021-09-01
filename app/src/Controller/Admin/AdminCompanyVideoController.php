@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/company/video', name: 'app_admin_')]
+#[Route('/admin/company/video', name: 'app_admin_company_')]
 class AdminCompanyVideoController extends AdminBaseController
 {
     private CompanyRepository $companyRepository;
@@ -32,7 +32,7 @@ class AdminCompanyVideoController extends AdminBaseController
         $this->companyVideoRepository = $companyVideoRepository;
     }
 
-    #[Route('/index/{id}', name: 'company_video')]
+    #[Route('/index/{id}', name: 'video')]
     public function indexAction(int $id): Response
     {
         $company = $this->companyRepository->getOne($id);
@@ -50,7 +50,7 @@ class AdminCompanyVideoController extends AdminBaseController
      * @return Response
      * @throws Exception
      */
-    #[Route('/create', name: 'company_video_create')]
+    #[Route('/create', name: 'video_create')]
     public function createAction(Request $request):Response
     {
         $companyVideo = new CompanyVideo();
@@ -76,7 +76,7 @@ class AdminCompanyVideoController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    #[Route('/delete/{id}', name: 'company_video_delete')]
+    #[Route('/delete/{id}', name: 'video_delete')]
     public function deleteAction(int $id):Response
     {
         $companyVideo = $this->companyVideoRepository->getOne($id);
@@ -96,7 +96,7 @@ class AdminCompanyVideoController extends AdminBaseController
     {
         $companyVideo = $this->companyVideoRepository->getOne($id);
         $this->companyVideoService->handleShow($companyVideo);
-        $this->addFlash('success', 'Материал Отображена');
+        $this->addFlash('success', 'Видео Отображено');
         $companyId = $companyVideo->getCompany()->getId();
 
         return $this->redirectToRoute('app_admin_company_video', ['id' => $companyId]);
@@ -106,12 +106,12 @@ class AdminCompanyVideoController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    #[Route('/hide/{id}', name: 'material_hide')]
+    #[Route('/hide/{id}', name: 'video_hide')]
     public function hideAction(int $id): Response
     {
-        $companyVideo = $this->companyMaterialRepository->getOne($id);
+        $companyVideo = $this->companyVideoRepository->getOne($id);
         $this->companyVideoService->handleHide($companyVideo);
-        $this->addFlash('success', 'Материал Скрыт');
+        $this->addFlash('success', 'Видео Скрыто');
         $companyId = $companyVideo->getCompany()->getId();
 
         return $this->redirectToRoute('app_admin_company_video', ['id' => $companyId]);

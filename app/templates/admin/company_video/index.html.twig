@@ -2,6 +2,7 @@
 {% block title %}{{ title }}{% endblock %}
 {% block body %}
     <div class="container">
+        <span><a type="button" class="btn btn-success" href="{{ path('app_admin_company_video_create') }}">Добавить Видео</a></span>
         <table class="table table-hover table-bordered">
             <thead>
             <tr>
@@ -18,7 +19,14 @@
                     {% set count = count + 1 %}
                     <td>{{ row.id }}</td>
                     <td width="100px">
-                        <video src="{{ asset('uploads/company/' ~ row.company.id ~'/video/' ~ row.video) }}"></video>
+                        <video controls width="200" height="100">
+                            <source src="{{ asset('uploads/company/' ~ row.company.id ~'/video/' ~ row.video) }}" type="video/mp4"><!-- MP4 для Safari, IE9, iPhone, iPad, Android, и Windows Phone 7 -->
+                            <source src="{{ asset('uploads/company/' ~ row.company.id ~'/video/' ~ row.video) }}" type="video/webm"><!-- WebM/VP8 для Firefox4, Opera, и Chrome -->
+                            <source src="{{ asset('uploads/company/' ~ row.company.id ~'/video/' ~ row.video) }}" type="video/ogg"><!-- Ogg/Vorbis для старых версий браузеров Firefox и Opera -->
+                            <object data="{{ asset('uploads/company/' ~ row.company.id ~'/video/' ~ row.video) }}" type="application/x-shockwave-flash"><!-- добавляем видеоконтент для устаревших браузеров, в которых нет поддержки элемента video -->
+                                <param name="movie" value="video.swf">
+                            </object>
+                        </video>
                     </td>
                     <td>{% if row.isShow %}
                         <a type="button" class="btn btn-success"
