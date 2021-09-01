@@ -1125,7 +1125,8 @@ thead th {
 
 .programs-logo-img {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .programs-logo-text {
@@ -1391,6 +1392,10 @@ thead th {
     .programs-logo {
         padding: 1px 16px;
     }
+    .program-header .btn-down {
+        display: none;
+    }
+
 }
 
 @media (max-width: 767px) {
