@@ -69,8 +69,8 @@ class MailerService
         $question = $form->get('question')->getData();
         $emailTo = $form->get('email')->getData();
         $email = (new Email())
-            ->from(self::EMAIL)
-            ->to($emailTo)
+            ->from($emailTo)
+            ->to(self::EMAIL)
             ->subject($title)
             ->text('Sending emails is fun again!')
             ->html(
