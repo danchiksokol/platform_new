@@ -336,7 +336,7 @@ header .container {
 .company-info img {
     margin: 0 auto 16px;
     display: block;
-    max-width: 66%;
+    max-width: 30%;
     width: 100%;
 }
 
@@ -1191,6 +1191,10 @@ thead th {
     margin-right: 7px;
     flex: none;
 }
+.program-dop-item-time {
+    text-align: center;
+    width: 100%;
+}
 
 @media (min-width: 1200px) {
     .program-table tr td:nth-child(1), .program-table tr th:nth-child(1) {
@@ -1425,6 +1429,9 @@ thead th {
     }
     .program-table {
         padding: 24px 16px 24px 16px;
+    }
+    .company-info img {
+        max-width: 66%;
     }
 }
 
