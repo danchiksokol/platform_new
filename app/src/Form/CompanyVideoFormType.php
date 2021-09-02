@@ -6,7 +6,7 @@ use App\Entity\CompanyVideo;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +17,7 @@ class CompanyVideoFormType extends AbstractType
         $builder
             ->add(
                 'video',
-                TextType::class,
+                UrlType::class,
                 [
                     'label' => 'Ссылка на видео',
                     'required' => true,

@@ -361,6 +361,7 @@ header .container {
     position: relative;
     border-radius: 4px;
     overflow: hidden;
+    text-align: center;
 }
 
 .company-video-item button {
