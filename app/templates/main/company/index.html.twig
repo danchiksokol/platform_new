@@ -22,7 +22,7 @@
                     <div class="company-info">
                         <span id="company" class="company-label">О компании</span>
                         <img src="{{ asset('uploads/company/'~ company.id ~ '/logo/' ~ company.logo) }}">
-                        <p>{{ company.content }}</p>
+                        <p>{{ company.content|raw }}</p>
                     </div>
                     {% if( materialShow ) %}
                         <div class="company-content">

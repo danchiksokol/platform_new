@@ -38,7 +38,6 @@ class CompanyFormType extends AbstractType
                 TextareaType::class,
                 [
                     'attr' => ['class' => 'tinymce'],
-                    'required' => false
                 ]
             )
             ->add(
