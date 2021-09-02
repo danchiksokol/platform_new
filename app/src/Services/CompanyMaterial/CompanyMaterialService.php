@@ -72,13 +72,17 @@ class CompanyMaterialService
         $this->fileManagerService->setFileUploadDirectory($company->getId() . '/materials/');
         $newFile = $form->get('file')->getData();
         if ($newFile) {
-            $this->fileManagerService->removeFile($file);
+            if (!empty($file)) {
+                $this->fileManagerService->removeFile($file);
+            }
             $fileName = $this->fileManagerService->uploadFile($newFile);
             $companyMaterial->setFile($fileName);
         }
         $newThumbnail = $form->get('thumbnail')->getData();
         if ($newThumbnail) {
-            $this->fileManagerService->removeFile($thumbnail);
+            if (!empty($thumbnail)) {
+                $this->fileManagerService->removeFile($thumbnail);
+            }
             $thumbnailName = $this->fileManagerService->uploadFile($newThumbnail);
             $companyMaterial->setThumbnail($thumbnailName);
         }

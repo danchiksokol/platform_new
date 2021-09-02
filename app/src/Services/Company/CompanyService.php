@@ -82,7 +82,9 @@ class CompanyService
         $newLogo = $form->get('logo')->getData();
         if ($newLogo) {
             $this->fileManagerService->setFileUploadDirectory($company->getId() . '/logo/');
-            $this->fileManagerService->removeFile($file);
+            if (!empty($file)) {
+                $this->fileManagerService->removeFile($file);
+            }
             $fileName = $this->fileManagerService->uploadFile($newLogo);
             $company->setLogo($fileName);
         }
@@ -98,7 +100,7 @@ class CompanyService
      */
     public function handleDelete(Company $company)
     {
-        $path = $this->fileManagerService->getFileUploadDirectory().'/'.$company->getId();
+        $path = $this->fileManagerService->getFileUploadDirectory() . '/' . $company->getId();
         $this->fileManagerService->removeDirectory($path);
         $materials = $company->getCompanyMaterials();
         foreach ($materials as $material) {
