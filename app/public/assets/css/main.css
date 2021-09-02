@@ -1438,6 +1438,15 @@ thead th {
     .company-info img {
         max-width: 66%;
     }
+    .programs-logo-img {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .programs-logo-img img {
+        margin-right: 0;
+        max-width: calc(50% - 3px);
+    }
 }
 
 @media (max-width: 640px) {
