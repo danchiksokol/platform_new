@@ -11,7 +11,8 @@ use Symfony\Component\Mime\Email;
 
 class MailerService
 {
-    public const EMAIL = 'lymphorum@tsoncology.com';
+    public const LYMPHORUM_EMAIL = 'lymphorum@tsoncology.com';
+    public const INFO_EMAIL = 'info@tsoncology.com';
     /**
      * @var MailerInterface
      */
@@ -42,7 +43,7 @@ class MailerService
         $theses = $form->get('theses')->getData();
         $emailTo = $form->get('email')->getData();
         $email = (new Email())
-            ->from(self::EMAIL)
+            ->from(self::LYMPHORUM_EMAIL)
             ->to($emailTo)
             ->subject($title)
             ->text('Sending emails is fun again!')
@@ -59,18 +60,19 @@ class MailerService
         $this->mailer->send($email);
     }
 
+
     /**
      * @param Form $form
+     * @param string $title
      * @throws TransportExceptionInterface
      */
-    public function handleSendRegistrationHelpEmail(Form $form)
+    public function handleSendRegistrationHelpEmail(Form $form, string $title)
     {
-        $title = 'Помощь в регистрации Лимфорум';
         $question = $form->get('question')->getData();
         $emailTo = $form->get('email')->getData();
         $email = (new Email())
             ->from($emailTo)
-            ->to('info@tsoncology.com')
+            ->to(self::INFO_EMAIL)
             ->subject($title)
             ->text('Sending emails is fun again!')
             ->html(

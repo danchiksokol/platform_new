@@ -6,6 +6,7 @@ namespace App\Services\User;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Exception;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -31,14 +32,14 @@ class UserService
         $this->passwordEncoder = $passwordEncoder;
     }
 
+
     /**
      * @param User $user
      * @param Form $form
      * @return $this
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws Exception
      */
-    public function handleCreate(User $user, Form $form)
+    public function handleCreate(User $user, Form $form):static
     {
         $user->setPassword(
             $this->passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData())
@@ -59,14 +60,13 @@ class UserService
         return $this;
     }
 
+
     /**
      * @param User $user
      * @param Form $form
      * @return $this
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handleUpdate(User $user, Form $form)
+    public function handleUpdate(User $user, Form $form):static
     {
         $user->setEmail($form->get('email')->getData());
         $user->setSurname($form->get('surname')->getData());
@@ -85,7 +85,7 @@ class UserService
 
     /**
      * @param User $user
-     * @throws \Exception
+     * @throws Exception
      */
     public function handleDelete(User $user)
     {

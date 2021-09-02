@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
 use App\Form\UserFormType;
 use App\Repository\UserRepository;
 use App\Services\User\UserService;
@@ -46,13 +47,41 @@ class AdminUserController extends AdminBaseController
         );
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/users/create', name: 'users_create')]
+    public function createAction(Request $request): Response
+    {
+        $user = new User();
+        $formUser = $this->createForm(UserFormType::class, $user);
+        $formUser->handleRequest($request);
+
+        if ($formUser->isSubmitted() && $formUser->isValid()) {
+            if ($formUser->get('save')->isClicked()) {
+                $this->userService->handleUpdate($user, $formUser);
+                $this->addFlash('success', 'Пользователь добавлен');
+            }
+
+            return $this->redirectToRoute('users');
+        }
+
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Создание пользователя';
+        $forRender['userForm'] = $formUser->createView();
+
+        return $this->render(
+            'admin/user/form.html.twig',
+            $forRender
+        );
+    }
 
     /**
      * @param Request $request
      * @param int $userId
      * @return Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws Exception
      */
     #[Route('/users/update/{userId}', name: 'users_update')]
     public function updateAction(
@@ -79,13 +108,11 @@ class AdminUserController extends AdminBaseController
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Редактирование пользователя';
+        $forRender['userForm'] = $formUser->createView();
 
         return $this->render(
             'admin/user/form.html.twig',
-            [
-                'forRender' => $forRender,
-                'userForm' => $formUser->createView(),
-            ]
+            $forRender
         );
     }
 

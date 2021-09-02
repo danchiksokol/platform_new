@@ -81,7 +81,8 @@ class RegistrationController extends BaseController
         $helpFrom = $this->createForm(RegistrationHelpFormType::class);
         $helpFrom->handleRequest($request);
         if ($helpFrom->get('helpButton')->isClicked() && $helpFrom->isSubmitted()) {
-            $this->mailerService->handleSendRegistrationHelpEmail($helpFrom);
+            $title = 'Помощь в регистрации Лимфорум';
+            $this->mailerService->handleSendRegistrationHelpEmail($helpFrom, $title);
             $this->addFlash('successHelpSend', 'Ваше обращение отправлено');
             return $this->redirectToRoute('app_register');
         }

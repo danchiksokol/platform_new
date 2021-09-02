@@ -13,6 +13,7 @@ use App\Services\Mailer\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends BaseController
@@ -145,13 +146,19 @@ class HomeController extends BaseController
         return $this->render('main/exhibition/index.html.twig', $forRender);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws TransportExceptionInterface
+     */
     #[Route('/help', 'app_main_home_help')]
     public function helpAction(Request $request): Response
     {
         $helpFrom = $this->createForm(RegistrationHelpFormType::class);
         $helpFrom->handleRequest($request);
         if ($helpFrom->get('helpButton')->isClicked() && $helpFrom->isSubmitted()) {
-            $this->mailerService->handleSendRegistrationHelpEmail($helpFrom);
+            $title = 'Вопрос из технической поддержки Лимфорум';
+            $this->mailerService->handleSendRegistrationHelpEmail($helpFrom, $title);
             $this->addFlash('successHelpSend', 'Ваше обращение отправлено');
             return $this->redirectToRoute('app_main_home_help');
         }
