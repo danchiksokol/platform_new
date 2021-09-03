@@ -95,11 +95,12 @@ class SpeakerRepository extends ServiceEntityRepository
         }
     }
 
+
     /**
-     * @param Speaker $speakers
+     * @param array|Speaker $speakers
      * @return array
      */
-    public function setSpeakersForChoiceType(Speaker $speakers): array
+    public function setSpeakersForChoiceType(array|Speaker $speakers): array
     {
         $result = [];
         foreach ($speakers as $speaker) {
