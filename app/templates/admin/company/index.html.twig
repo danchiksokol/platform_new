@@ -29,12 +29,25 @@
                     <td><a href="{{ path('app_admin_company_update', {'id': row.id}) }}">{{ row.id }}</a></td>
                     <td><a href="{{ path('app_admin_company_update', {'id': row.id}) }}">{{ row.title }}</a></td>
                     <td width="100px"><img src="{{ asset('uploads/company/' ~ row.id ~'/logo/' ~ row.logo) }}"></td>
-                    <td>{{ row.content|raw }}</td>
-                    <td><a type="button" class="btn btn-secondary" href="{{ path('app_admin_company_material', {'id': row.id}) }}">Материал</a></td>
-                    <td><a type="button" class="btn btn-secondary" href="{{ path('app_admin_company_video', {'id': row.id}) }}">Видео</a></td>
+                    <td>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#content_{{ row.id }}" aria-expanded="false"
+                                aria-controls="content_{{ row.id }}">
+                            Развернуть
+                        </button>
+                        <div class="collapse" id="content_{{ row.id }}">
+                            {{ row.content|raw }}
+                        </div>
+                    </td>
+                    <td><a type="button" class="btn btn-secondary"
+                           href="{{ path('app_admin_company_material', {'id': row.id}) }}">Материал</a></td>
+                    <td><a type="button" class="btn btn-secondary"
+                           href="{{ path('app_admin_company_video', {'id': row.id}) }}">Видео</a></td>
                     <td><a href="{{ path('app_admin_company_update', {'id': row.id}) }}">{{ row.href }}</a></td>
-                    <td><a type="button" class="btn btn-secondary" href="{{ path('app_admin_company_update', {'id': row.id}) }}">Редактировать</a></td>
-                    <td><a type="button" class="btn btn-danger" href="{{ path('app_admin_company_delete', {'id': row.id}) }}">X</a></td>
+                    <td><a type="button" class="btn btn-secondary"
+                           href="{{ path('app_admin_company_update', {'id': row.id}) }}">Редактировать</a></td>
+                    <td><a type="button" class="btn btn-danger"
+                           href="{{ path('app_admin_company_delete', {'id': row.id}) }}">X</a></td>
                 </tr>
             {% endfor %}
             </tbody>
