@@ -57,11 +57,13 @@ class AdminCompanyController extends AdminBaseController
             return $this->redirectToRoute('app_admin_company');
         }
 
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Добавление компании';
+        $forRender['companyForm'] = $form->createView();
+
         return $this->render(
             'admin/company/form.html.twig',
-            [
-                'companyForm' => $form->createView(),
-            ]
+            $forRender
         );
     }
 
@@ -72,7 +74,7 @@ class AdminCompanyController extends AdminBaseController
      * @throws Exception
      */
     #[Route('/company/update/{id}', name: 'company_update')]
-    public function updateAction(Request $request, int $id):Response
+    public function updateAction(Request $request, int $id): Response
     {
         $company = $this->companyRepository->getOne($id);
         $logo = $company->getLogo();
@@ -85,11 +87,13 @@ class AdminCompanyController extends AdminBaseController
             return $this->redirectToRoute('app_admin_company');
         }
 
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Редактирование компании';
+        $forRender['companyForm'] = $form->createView();
+
         return $this->render(
             'admin/company/form.html.twig',
-            [
-                'companyForm' => $form->createView(),
-            ]
+            $forRender
         );
     }
 
@@ -99,7 +103,7 @@ class AdminCompanyController extends AdminBaseController
      * @throws Exception
      */
     #[Route('/company/delete/{id}', name: 'company_delete')]
-    public function deleteAction(int $id):Response
+    public function deleteAction(int $id): Response
     {
         $company = $this->companyRepository->getOne($id);
         $this->companyService->handleDelete($company);

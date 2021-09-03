@@ -29,4 +29,28 @@ class ChatRoomRepository extends ServiceEntityRepository
         return $this->find($id);
     }
 
+    /**
+     * @return ChatRoom[]
+     */
+    public function getAll(): array
+    {
+        return $this->findAll();
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllForChoiceType(): array
+    {
+        $chatRooms = $this->getAll();
+        $result = [];
+        foreach ($chatRooms as $chatRoom) {
+            $id = $chatRoom->getId();
+            $name = $chatRoom->getName();;
+            $result[$name] = $id;
+        }
+
+        return $result;
+    }
+
 }

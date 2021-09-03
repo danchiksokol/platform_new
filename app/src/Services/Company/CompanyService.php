@@ -6,8 +6,6 @@ use App\Entity\Company;
 use App\Repository\CompanyMaterialRepository;
 use App\Repository\CompanyRepository;
 use App\Repository\CompanyVideoRepository;
-use App\Services\CompanyMaterial\CompanyMaterialService;
-use App\Services\CompanyVideo\CompanyVideoService;
 use App\Services\FileService\FileManagerServiceInterface;
 use DateTimeImmutable;
 use Exception;

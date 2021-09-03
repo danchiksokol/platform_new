@@ -35,15 +35,11 @@ class AdminUserController extends AdminBaseController
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Пользователи';
-
-        $usersAll = $this->userRepository->getAll();
+        $forRender['users'] = $this->userRepository->getAll();
 
         return $this->render(
             'admin/user/index.html.twig',
-            [
-                'title' => $forRender,
-                'users' => $usersAll
-            ]
+            $forRender
         );
     }
 

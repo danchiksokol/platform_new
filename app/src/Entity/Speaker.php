@@ -60,24 +60,24 @@ class Speaker
         return $this->id;
     }
 
-    public function getUser(): ?User
+    public function getUser(): null|int|User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(null|int|User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getChatroom(): ?ChatRoom
+    public function getChatroom(): null|int|ChatRoom
     {
         return $this->chatroom;
     }
 
-    public function setChatroom(?ChatRoom $chatroom): self
+    public function setChatroom(int|ChatRoom $chatroom): self
     {
         $this->chatroom = $chatroom;
 

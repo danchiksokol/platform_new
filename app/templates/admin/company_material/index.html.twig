@@ -22,13 +22,14 @@
                     <td width="100px"><img
                                 src="{{ asset('uploads/company/' ~ row.company.id ~'/materials/' ~ row.thumbnail) }}">
                     </td>
-                    <td>{% if row.isShow %}
-                        <a type="button" class="btn btn-success"
-                           href="{{ path('app_admin_company_material_hide', {'id': row.id}) }}">Скрыть</a></td>
-                {% else %}
-                    <a type="button" class="btn btn-warning"
-                       href="{{ path('app_admin_company_material_show', {'id': row.id}) }}">Отобразить</a></td>
-                    {% endif %}
+                    <td>
+                        {% if row.isShow %}
+                            <a type="button" class="btn btn-success"
+                               href="{{ path('app_admin_company_material_hide', {'id': row.id}) }}">Скрыть</a>
+                        {% else %}
+                            <a type="button" class="btn btn-warning"
+                               href="{{ path('app_admin_company_material_show', {'id': row.id}) }}">Отобразить</a>
+                        {% endif %}
                     </td>
                     <td><a type="button" class="btn btn-secondary"
                            href="{{ path('app_admin_company_material_update', {'id': row.id}) }}">Редактировать</a></td>

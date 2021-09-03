@@ -130,4 +130,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         return $this->findOneBy(['secret' => $secret]);
     }
+
+    public function getAllForChoiceType(): array
+    {
+        $users = $this->getAll();
+        $result = [];
+        foreach ($users as $user) {
+            $id = $user->getId();
+            $fio = $user->getSurname() . ' '
+                . $user->getName() . ' '
+                . $user->getPatronymic();;
+            $result[$fio] = $id;
+        }
+
+        return $result;
+    }
 }
