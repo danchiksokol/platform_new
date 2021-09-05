@@ -129,6 +129,11 @@ class User implements UserInterface
      */
     private $userStatistics;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=VisitControl::class, inversedBy="user")
+     */
+    private $visitControl;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
@@ -558,6 +563,18 @@ class User implements UserInterface
                 $userStatistics->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getVisitControl(): ?VisitControl
+    {
+        return $this->visitControl;
+    }
+
+    public function setVisitControl(?VisitControl $visitControl): self
+    {
+        $this->visitControl = $visitControl;
 
         return $this;
     }

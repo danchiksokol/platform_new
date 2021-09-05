@@ -39,11 +39,41 @@
         </div>
     </div>
     <script>
-        let myModal = new bootstrap.Modal(document.getElementById('modalControl'));
-
+        function getModalControl() {
+            let myModal = new bootstrap.Modal(document.getElementById('modalControl'));
+            let time = [
+                '9:44',
+                '10:36',
+                '11:51',
+                '12:33',
+                '13:12',
+                '15:42',
+                '16:29',
+                '17:15'
+            ];
+            let date;
+            let now = new Date();
+            for (let i = 0; i < time.length; i++) {
+                date = new Date("2021-09-17 " + time[i]);
+                let timeDiff = Math.abs(now.getTime() - date.getTime());
+                let diffMinutes = Math.round(timeDiff / (1000 * 60));
+                console.log(diffMinutes);
+                if (0 == diffMinutes) {
+                    myModal.show();
+                    setTimeout(function () {
+                        myModal.hide();
+                    }, 60000)
+                }
+            }
+        }
+        getModalControl();
         setInterval(function () {
-            myModal.show();
-        }, 100000);
+            getModalControl();
+        }, 60000);
+
+        // setInterval(function () {
+        //     myModal.show();
+        // }, 100000);
 
         setInterval(function () {
             $.ajax({
