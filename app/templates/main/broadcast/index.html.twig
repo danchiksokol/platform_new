@@ -33,7 +33,7 @@
                 </div>
                 <div class="modal-body">
                     <h5 class="modal-title">Вы смотрите трансляцию?</h5>
-                    <button type="button" class="btn btn-fill">Подтвердите присутствие</button>
+                    <button type="button" id="visitControl" class="btn btn-fill">Подтвердите присутствие</button>
                 </div>
             </div>
         </div>
@@ -57,7 +57,6 @@
                 date = new Date("2021-09-17 " + time[i]);
                 let timeDiff = Math.abs(now.getTime() - date.getTime());
                 let diffMinutes = Math.round(timeDiff / (1000 * 60));
-                console.log(diffMinutes);
                 if (0 == diffMinutes) {
                     myModal.show();
                     setTimeout(function () {
@@ -66,14 +65,25 @@
                 }
             }
         }
+
         getModalControl();
         setInterval(function () {
             getModalControl();
         }, 60000);
 
-        // setInterval(function () {
-        //     myModal.show();
-        // }, 100000);
+        $('#visitControl').click(function (event) {
+            $.ajax({
+                url: '{{ (path('app_visit_control_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                },
+                async: true,
+                success: function (data) {
+                    $('#modalControl').modal('hide');
+                }
+            });
+        });
 
         setInterval(function () {
             $.ajax({

@@ -130,9 +130,11 @@ class User implements UserInterface
     private $userStatistics;
 
     /**
-     * @ORM\ManyToOne(targetEntity=VisitControl::class, inversedBy="user")
+     * @ORM\OneToMany(targetEntity=VisitControl::class, mappedBy="User")
      */
-    private $visitControl;
+    private $visitControls;
+
+
 
     public function __construct()
     {
@@ -142,6 +144,7 @@ class User implements UserInterface
         $this->speakers = new ArrayCollection();
         $this->questionSpeakers = new ArrayCollection();
         $this->answerSpeakers = new ArrayCollection();
+        $this->visitControls = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -567,16 +570,34 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getVisitControl(): ?VisitControl
+    /**
+     * @return Collection|VisitControl[]
+     */
+    public function getVisitControls(): Collection
     {
-        return $this->visitControl;
+        return $this->visitControls;
     }
 
-    public function setVisitControl(?VisitControl $visitControl): self
+    public function addVisitControl(VisitControl $visitControl): self
     {
-        $this->visitControl = $visitControl;
+        if (!$this->visitControls->contains($visitControl)) {
+            $this->visitControls[] = $visitControl;
+            $visitControl->setUser($this);
+        }
 
         return $this;
     }
 
+    public function removeVisitControl(VisitControl $visitControl): self
+    {
+        if ($this->visitControls->removeElement($visitControl)) {
+            // set the owning side to null (unless already changed)
+            if ($visitControl->getUser() === $this) {
+                $visitControl->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+    
 }

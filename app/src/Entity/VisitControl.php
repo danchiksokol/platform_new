@@ -29,6 +29,11 @@ class VisitControl
      */
     private $created_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="visitControls")
+     */
+    private $User;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
@@ -77,6 +82,13 @@ class VisitControl
     public function setCreatedAt(\DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }

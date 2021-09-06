@@ -25,20 +25,20 @@ class VisitControlService
         $this->visitControlRepository = $visitControlRepository;
     }
 
+
     /**
-     * @param Request $request
      * @param User $user
      * @return $this
      * @throws Exception
      */
-    public function handleCreate(Request $request, User $user):static
+    public function handleCreate(User $user):static
     {
         $visitControl =new VisitControl();
         $user = $this->userRepository->getOne($user->getId());
         $visitControl->setUser($user);
         $visitControl->setCreatedAt(new DateTimeImmutable());
 
-        $this->visitControlRepository->setCreate();
+        $this->visitControlRepository->setCreate($visitControl);
         $this->visitControlRepository->setSave();
 
         return $this;
