@@ -891,6 +891,7 @@ footer img {
     margin-top: 42px;
     background: #fff;
     position: relative;
+    height: 540px;
 }
 
 .broadcast {
@@ -1036,7 +1037,7 @@ thead th {
     background-repeat: no-repeat;
     background-position: center;
     position: absolute;
-    bottom: 6px;
+    top: 6px;
     right: 6px;
     -moz-transition: all 0.5s ease-out;
     -o-transition: all 0.5s ease-out;
@@ -1062,10 +1063,14 @@ thead th {
 .fullscreen .broadcast-live {
     width: 1296px;
     z-index: 1;
+    height: 725px;
 }
 
 .fullscreen .chatroom {
-    margin-top: 740px;
+    margin-top: 770px;
+}
+.fullscreen {
+    min-height: 1430px;
 }
 
 .bg-lilac {
@@ -1220,6 +1225,13 @@ thead th {
 @media (max-width: 1399px) {
     .fullscreen .broadcast-live {
         width: 1116px;
+        height: 635px;
+    }
+    .broadcast-live {
+        height: 475px;
+    }
+    .fullscreen .chatroom {
+        margin-top: 678px;
     }
 }
 
@@ -1243,6 +1255,13 @@ thead th {
 
     .fullscreen .broadcast-live {
         width: 936px;
+        height: 530px;
+    }
+    .broadcast-live {
+        height: 400px;
+    }
+    .fullscreen .chatroom {
+        margin-top: 575px;
     }
 }
 
@@ -1399,6 +1418,12 @@ thead th {
     .program-header .btn-down {
         display: none;
     }
+    .fullscreen .chatroom {
+        margin-top: 42px;
+    }
+    .fullscreen .broadcast-live {
+        height: 400px;
+    }
 
 }
 
@@ -1454,26 +1479,9 @@ thead th {
     .company-video-item iframe {
         min-height: 300px;
     }
-}
-
-@media (max-width: 640px) {
-
     .broadcast-live {
-        position: relative;
-        padding-bottom: 56.25%;
-        padding-top: 30px;
-        height: 0;
-        overflow: hidden;
+        height: 300px;
     }
-
-    .broadcast-live iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-
 }
 
 @media (max-width: 575px) {
@@ -1587,6 +1595,10 @@ thead th {
     .symposium-row div:first-child {
         font-weight: 600;
         margin-bottom: 10px;
+    }
+    .broadcast-live {
+        max-width: calc(177.778vh);
+        height: calc(55.25vw);
     }
 }
 
