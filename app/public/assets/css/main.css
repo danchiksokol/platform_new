@@ -294,6 +294,7 @@ header .container {
     box-shadow: 0 3px 9px #bfbfbf;
     position: relative;
     overflow: hidden;
+    text-align: justify;
 }
 
 .main-block-left:after {
@@ -1069,6 +1070,7 @@ thead th {
 .fullscreen .chatroom {
     margin-top: 770px;
 }
+
 .fullscreen {
     min-height: 1430px;
 }
@@ -1161,47 +1163,58 @@ thead th {
     margin-right: 0;
     margin-bottom: 0;
 }
+
 .carousel-control-prev, .carousel-control-next {
     opacity: 1;
 }
+
 .carousel-control-next {
     justify-content: flex-end;
 }
+
 .carousel-control-prev {
     justify-content: flex-start;
 }
+
 .symposium-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 24px;
 }
+
 .symposium-title {
     text-align: center;
     margin-bottom: 42px;
     margin-top: 42px;
 }
+
 .symposium-list {
     padding: 0;
     list-style: none;
     margin-bottom: 36px;
 }
+
 .symposium-list li {
     display: flex;
     margin-bottom: 7px;
 }
+
 .symposium-list li i {
     font-size: 14px;
 }
+
 .symposium-list li span:first-child {
     width: 100px;
     display: block;
     margin-right: 7px;
     flex: none;
 }
+
 .program-dop-item-time {
     text-align: center;
     width: 100%;
 }
+
 .company-video-item iframe {
     min-height: 400px;
 }
@@ -1227,9 +1240,11 @@ thead th {
         width: 1116px;
         height: 635px;
     }
+
     .broadcast-live {
         height: 475px;
     }
+
     .fullscreen .chatroom {
         margin-top: 678px;
     }
@@ -1257,9 +1272,11 @@ thead th {
         width: 936px;
         height: 530px;
     }
+
     .broadcast-live {
         height: 400px;
     }
+
     .fullscreen .chatroom {
         margin-top: 575px;
     }
@@ -1412,15 +1429,19 @@ thead th {
     .main-block {
         min-height: calc(100vh - 336px);
     }
+
     .programs-logo {
         padding: 1px 16px;
     }
+
     .program-header .btn-down {
         display: none;
     }
+
     .fullscreen .chatroom {
         margin-top: 42px;
     }
+
     .fullscreen .broadcast-live {
         height: 400px;
     }
@@ -1458,27 +1479,34 @@ thead th {
     .main-block {
         min-height: 100%;
     }
+
     .program-table:after {
         display: none;
     }
+
     .program-table {
         padding: 24px 16px 24px 16px;
     }
+
     .company-info img {
         max-width: 66%;
     }
+
     .programs-logo-img {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
+
     .programs-logo-img img {
         margin-right: 0;
         max-width: calc(50% - 3px);
     }
+
     .company-video-item iframe {
         min-height: 300px;
     }
+
     .broadcast-live {
         height: 300px;
     }
@@ -1580,22 +1608,27 @@ thead th {
     .main-block {
         padding-bottom: 130px;
     }
+
     .symposium-list li {
         display: block;
     }
+
     .symposium-list li span:first-child {
         width: 100%;
         font-weight: 600;
         text-align: center;
         margin-bottom: 10px;
     }
+
     .symposium-row {
         display: block;
     }
+
     .symposium-row div:first-child {
         font-weight: 600;
         margin-bottom: 10px;
     }
+
     .broadcast-live {
         max-width: calc(177.778vh);
         height: calc(55.25vw);

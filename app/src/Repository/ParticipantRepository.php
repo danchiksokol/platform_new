@@ -59,7 +59,7 @@ class ParticipantRepository extends ServiceEntityRepository
      * @param int $userId
      * @return bool|null
      */
-    public function isParticipantBlock(int $chatRoomId, int $userId)
+    public function isParticipantBlock(int $chatRoomId, int $userId): ?bool
     {
         $participant = $this->findOneBy(['chatroom_id' => $chatRoomId, 'user_id' => $userId]);
 
@@ -70,11 +70,13 @@ class ParticipantRepository extends ServiceEntityRepository
         return false;
     }
 
+
     /**
      * @param int $chatRoomId
      * @param int $userId
+     * @return Participant|false
      */
-    public function isParticipantExist(int $chatRoomId, int $userId)
+    public function isParticipantExist(int $chatRoomId, int $userId): bool|Participant
     {
         $participant = $this->findOneBy(['chatroom' => $chatRoomId, 'user' => $userId]);
         if ($participant) {

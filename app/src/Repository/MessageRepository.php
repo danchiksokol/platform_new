@@ -6,7 +6,10 @@ use App\Entity\Message;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+
+use Exception;
 
 use function Doctrine\ORM\QueryBuilder;
 
@@ -43,7 +46,7 @@ class MessageRepository extends ServiceEntityRepository
      * @param int $chatRoomId
      * @return Message[]
      */
-    public function findAllMessagesByChatRoomId(int $chatRoomId)
+    public function findAllMessagesByChatRoomId(int $chatRoomId): array
     {
         $qb = $this->createQueryBuilder('m');
         $qb->select()
@@ -78,7 +81,7 @@ class MessageRepository extends ServiceEntityRepository
 
     /**
      * @param Message $message
-     * @throws \Doctrine\ORM\ORMException
+     * @throws ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function setCreate(Message $message)
@@ -89,14 +92,14 @@ class MessageRepository extends ServiceEntityRepository
             $this->entityManager->flush();
 
             $this->entityManager->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->entityManager->rollback();
             throw $exception;
         }
     }
 
     /**
-     * @throws \Doctrine\ORM\ORMException
+     * @throws ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Doctrine\Persistence\Mapping\MappingException
      */
@@ -106,35 +109,22 @@ class MessageRepository extends ServiceEntityRepository
         $this->entityManager->clear();
     }
 
+
     /**
      * @param Message $message
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
      */
     public function setDelete(Message $message)
     {
         $this->entityManager->beginTransaction();
         try {
             $this->entityManager->remove($message);
-            $this->entityManager->flush();
 
             $this->entityManager->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->entityManager->rollback();
             throw $exception;
         }
     }
 
-    /**
-     * @param Message $message
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Doctrine\Persistence\Mapping\MappingException
-     */
-    public function setHide(Message $message)
-    {
-        $this->entityManager->setIsShow(0);
-        $this->entityManager->persist($message);
-        $this->setSave();
-    }
 }

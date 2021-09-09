@@ -8,10 +8,10 @@
                 <div class="col-lg-9 col-12">
                     <div class="broadcast">
                         <div class="broadcast-live">
-                            <iframe width="100%" height="100%"
-                                    src="https://player.vimeo.com/video/597052985?h=7f8b21dc0d?rel=0&fs=0&playsinline=1&showinfo=0&controls=2&modestbranding=1"
-                                    allow="autoplay; encrypted-media" frameborder="0" webkitdonotallowfullscreen mozdonotallowfullscreen donotallowfullscreen>
-                            </iframe>
+                            <div id="player"></div>
+                            <script>
+                                let player = new Playerjs({id:"player", file:"//vimeo.com/video/594511469"});
+                            </script>
                             <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
                         </div>
                         {% set questions = questions %}
@@ -54,7 +54,7 @@
             let date;
             let now = new Date();
             for (let i = 0; i < time.length; i++) {
-                date = new Date("2021-09-17 " + time[i]);
+                date = new Date("2021/09/08 " + time[i]);
                 let timeDiff = Math.abs(now.getTime() - date.getTime());
                 let diffMinutes = Math.round(timeDiff / (1000 * 60));
                 if (0 == diffMinutes) {
@@ -76,8 +76,7 @@
                 url: '{{ (path('app_visit_control_ajax')) }}',
                 type: "POST",
                 dataType: "json",
-                data: {
-                },
+                data: {},
                 async: true,
                 success: function (data) {
                     $('#modalControl').modal('hide');
