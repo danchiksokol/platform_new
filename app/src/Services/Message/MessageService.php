@@ -24,14 +24,15 @@ class MessageService
         $this->messageRepository = $messageRepository;
     }
 
+
     /**
+     * @param Participant $participant
      * @param string $content
-     * @param string $file
      * @return $this
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handleCreate(Participant $participant, string $content)
+    public function handleCreate(Participant $participant, string $content):static
     {
         $message = new Message();
         $message->setContent($content);

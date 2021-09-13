@@ -10,7 +10,11 @@
                         <div class="broadcast-live">
                             <div id="player"></div>
                             <script>
-                                let player = new Playerjs({id:"player", file:"//vimeo.com/video/594511469"});
+                                let player = new Playerjs({
+                                    id: "player",
+                                    file: "//vimeo.com/video/594511469",
+                                    autoplay: 1
+                                });
                             </script>
                             <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
                         </div>

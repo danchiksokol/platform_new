@@ -36,13 +36,14 @@ class ParticipantService
         $this->chatRoomRepository = $chatRoomRepository;
     }
 
+
     /**
      * @param int $chatRoomId
      * @param int $userId
-     * @return ParticipantService
+     * @return ParticipantService|Participant
      * @throws Exception
      */
-    public function handleCreate(int $chatRoomId, int $userId): ParticipantService
+    public function handleCreate(int $chatRoomId, int $userId): static|Participant
     {
         $participant = $this->participantRepository->isParticipantExist($chatRoomId, $userId);
         if ($participant) {

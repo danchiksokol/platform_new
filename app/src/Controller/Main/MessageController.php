@@ -18,7 +18,11 @@ class MessageController extends BaseController
     /**
      * @var MessageRepository
      */
-    private $messageRepository;
+    private MessageRepository $messageRepository;
+    private UserRepository $userRepository;
+    private EntityManagerInterface $entityManager;
+    private ChatRoomRepository $chatRoomRepository;
+    private ParticipantRepository $participantRepository;
 
     /**
      * MessageController constructor.
@@ -41,8 +45,8 @@ class MessageController extends BaseController
         $this->participantRepository = $participantRepository;
         $this->messageRepository = $messageRepository;
     }
-    
-    
+
+
     #[Route('/message', name: 'message')]
     public function indexAction(): Response
     {
@@ -51,14 +55,13 @@ class MessageController extends BaseController
         ]);
     }
 
+
     /**
      * @param Request $request
-     * @param Participant $participant
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     * @throws \Exception
+     * @return Response
      */
     #[Route('/newmessage/{chatid}', name: 'newMessage', methods: ['POST'])]
-    public function sendAction(Request $request)
+    public function sendAction(Request $request): Response
     {
         $chatRoomId = $request->get('chatid');
         $chatRoom = $this->chatRoomRepository->find($chatRoomId);
