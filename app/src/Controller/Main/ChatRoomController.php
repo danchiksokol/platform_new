@@ -118,6 +118,7 @@ class ChatRoomController extends BaseController
         $forRender['chatid'] = $chatRoomId;
         $forRender['speakers'] = $speakers;
         $forRender['questions'] = $questions;
+        $forRender['broadcast'] = $chatRoom->getBroadcast();
         $forRender['questionForm'] = $form->createView();
 
         return $this->render(

@@ -51,6 +51,11 @@ class ChatRoom
      */
     private $userStatistics;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $broadcast;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
@@ -223,6 +228,18 @@ class ChatRoom
                 $userStatistic->setBroadcast(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBroadcast(): ?string
+    {
+        return $this->broadcast;
+    }
+
+    public function setBroadcast(?string $broadcast): self
+    {
+        $this->broadcast = $broadcast;
 
         return $this;
     }
