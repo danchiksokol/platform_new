@@ -27,6 +27,7 @@ RUN echo 'opcache.max_accelerated_files = 20000' >> /usr/local/etc/php/conf.d/do
 
 # Apache config
 RUN a2enmod rewrite
+RUN a2enmod proxy_wstunnel
 
 # git config
 #RUN git config --global user.email "danchiksokol@mail.ru"

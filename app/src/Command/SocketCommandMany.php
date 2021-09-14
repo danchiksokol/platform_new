@@ -69,9 +69,9 @@ class SocketCommandMany extends Command
         // to prevent any error related to localhost :
         // $app = new \Ratchet\App('sandbox', 8080,'0.0.0.0');
         // Domain as first parameter
-        $app = new App('platform.local', 8080,'172.20.0.3');
+        $app = new App('platform.local', 8080,'172.18.0.3');
         // Add route to chat with the handler as second parameter
-        $app->route('/chatroom', new Chat($this->participantService, $this->messageService));
+        $app->route('/broadcast/1', new Chat($this->participantService, $this->messageService));
 
         // To add another routes, then you can use :
         //$app->route('/america-chat', new AmericaChat);
