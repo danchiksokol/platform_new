@@ -218,10 +218,10 @@ header {
     padding-top: 16px;
     position: relative;
     min-height: 225px;
-    background: url(/assets/img/header.png);
+    /*background: url(/assets/img/header.png);*/
     background-repeat: no-repeat;
     background-size: cover;
-    border-bottom: 10px solid #f4f4f4;
+    /*border-bottom: 10px solid #f4f4f4;*/
 }
 
 header .container {
@@ -935,7 +935,7 @@ footer img {
 }
 
 .main-block {
-    background: url(/assets/img/bgfoot.png);
+    background: url(/uploads/backrgounds/bottom.png);
     background-size: cover;
     padding-bottom: 170px;
     background-position-y: bottom;
@@ -984,11 +984,12 @@ thead th {
 }
 
 .program-right {
-    border: 4px solid #24196c;
-    border-radius: 12px;
-    padding: 46px 24px;
+    border: 10px solid #24196c;
+    border-radius: 15px;
+    /*padding: 46px 24px;*/
+    padding: 1.5px;
     margin-top: 42px;
-    position: relative;
+    /*position: relative;*/
     background: #fff;
     box-shadow: 0 3px 9px #bfbfbf;
 }
@@ -1001,6 +1002,7 @@ thead th {
     position: absolute;
     left: 0;
     display: block;
+    display: none;
 }
 
 .program-right:before {
@@ -1115,8 +1117,17 @@ thead th {
     margin-bottom: 24px;
 }
 
+.white_block_hello {
+    box-shadow: 0 3px 9px #bfbfbf;
+    background: url(/uploads/backrgounds/helloback.png);
+    background-size: cover;
+    border-radius: 32px;
+    padding: 24px;
+}
+
 .programs-logo {
     background: #f8f9fa;
+    background-position: center;
     border-radius: 32px;
     padding: 2px 16px;
     margin: 2px 0;
@@ -1139,6 +1150,15 @@ thead th {
 
 .programs-logo-text {
     margin-top: 14px;
+}
+
+.programs-logo-symp {
+    background: url(/uploads/backrgounds/headsymppage.png);
+    background-position: center;
+    border-radius: 32px;
+    padding: 2px 16px;
+    margin: 2px 0;
+    box-shadow: 0 3px 9px #bfbfbf;
 }
 
 .modal-dialog.registration-modal {
@@ -1189,7 +1209,7 @@ thead th {
 }
 
 .symposium-list {
-    padding: 0;
+    /*padding: 0;*/
     list-style: none;
     margin-bottom: 36px;
 }
@@ -1634,4 +1654,3 @@ thead th {
         height: calc(55.25vw);
     }
 }
-
