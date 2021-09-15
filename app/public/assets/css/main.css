@@ -248,11 +248,11 @@ header .container {
     background: #fff;
     margin-top: 42px;
     box-shadow: 0 3px 9px #bfbfbf;
+    display: flex;
+    flex-wrap: wrap;
 }
-
-.chatroom ul {
-    /*height: calc(100% - 44px);*/
-    overflow-y: scroll;
+.chatroom > * {
+    width: 100%;
 }
 
 .chatroom li {
@@ -262,12 +262,29 @@ header .container {
     border-radius: 4px 4px 4px 0;
     margin-bottom: 12px;
     overflow-wrap: break-word;
+    position: relative;
+}
+.chatroom li.my-message {
+    background: #d9d8e8;
+}
+.chatroom-del {
+    display: none;
+    border: none;
+    background: none;
+    padding: 0;
+    position: absolute;
+    right: 2px;
+    top: 0;
+}
+.chatroom li.my-message .chatroom-del {
+    display: block;
 }
 
 .chatroom ul {
     padding: 0;
     max-height: 467px;
     overflow-y: scroll;
+    height: 100%;
 }
 
 .chatroom textarea {
@@ -847,6 +864,7 @@ header .container {
 .chatroom-bottom {
     position: relative;
     border-top: 1px solid #dcdcdc;
+    margin-top: auto;
 }
 
 .chatroom-date {
@@ -1240,20 +1258,25 @@ thead th {
 .company-video-item iframe {
     min-height: 400px;
 }
-
+.table-border {
+    border: 2px solid #24196c;
+}
+.table-border thead tr, .table-border thead tr th:first-child, .table-border thead tr th:last-child, .bg-lilac td {
+    border-width: 0 0;
+}
 @media (min-width: 1200px) {
     .program-table tr td:nth-child(1), .program-table tr th:nth-child(1) {
-        width: 108px;
+        width: 110px;
     }
 
     .program-table tr td:nth-child(3), .program-table tr th:nth-child(3) {
-        width: 100px;
+        width: 250px;
     }
 }
 
 @media (min-width: 992px) {
     .program-table tr td:nth-child(2), .program-table tr th:nth-child(2) {
-        width: 132px;
+        width: 140px;
     }
 }
 
