@@ -45,14 +45,17 @@ class MessageService
         return $this;
     }
 
+
     /**
      * @param Message $message
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\Persistence\Mapping\MappingException
      */
     public function handleDelete(Message $message)
     {
         $this->messageRepository->setDelete($message);
+        $this->messageRepository->setSave();
     }
 
     /**
