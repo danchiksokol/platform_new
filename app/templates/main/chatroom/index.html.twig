@@ -70,6 +70,7 @@
             Chat.sendMessage(msg);
             // Empty text area
             document.getElementById("form-message").value = "";
+            document.getElementById("chat-list").scrollTop = document.getElementById("chat-list").scrollHeight;
         }, false);
 
         // Mini API to send a message with the socket and append a message in a UL element.
@@ -117,5 +118,8 @@
                 this.appendMessage(clientInformation.username, clientInformation.message);
             }
         };
+        $(document).ready(function () {
+            document.getElementById("chat-list").scrollTop = document.getElementById("chat-list").scrollHeight;
+        });
     </script>
 {% endblock %}
