@@ -27,6 +27,7 @@ RUN echo 'xdebug.discover_client_host = 1' >> /usr/local/etc/php/php.ini #зак
 RUN echo 'opcache.max_accelerated_files = 20000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini #закоммнетировать для vps
 
 # Apache config
+RUN a2enmod ssl
 RUN a2enmod rewrite
 RUN a2enmod proxy_wstunnel
 
