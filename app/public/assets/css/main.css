@@ -268,16 +268,12 @@ header .container {
     background: #d9d8e8;
 }
 .chatroom-del {
-    display: none;
     border: none;
     background: none;
     padding: 0;
     position: absolute;
     right: 2px;
     top: 0;
-}
-.chatroom li.my-message .chatroom-del {
-    display: block;
 }
 
 .chatroom ul {
