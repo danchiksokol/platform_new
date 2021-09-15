@@ -491,6 +491,7 @@ header .container {
     box-shadow: 0 3px 9px #bfbfbf;
     position: relative;
     overflow: hidden;
+    border: 2px solid #24196c;
 }
 
 /*.program-table:after {*/
@@ -1123,6 +1124,7 @@ thead th {
     background-size: cover;
     border-radius: 32px;
     padding: 24px;
+    border: 2px solid #24196c;
 }
 
 .programs-logo {
@@ -1653,4 +1655,34 @@ thead th {
         max-width: calc(177.778vh);
         height: calc(55.25vw);
     }
+}
+
+.regback {
+    background: #f8f9fa;
+    border-radius: 16px;
+}
+
+.table {
+    border-radius: 32px;
+    border-top: 1px solid #24196c;
+}
+
+.sympprogback {
+    background: url(/uploads/backrgounds/proglogsymptop.png);
+    background-size: cover;
+}
+
+.sympprogbacklong {
+    background: url(/uploads/backrgounds/proglogsymptoplong.png);
+    background-size: cover;
+}
+
+.sympprogbacktop {
+    background: url(/uploads/backrgounds/progsymptopedge.png);
+    background-size: cover;
+}
+
+.proglogback {
+    background: url(/uploads/backrgounds/proglogtop.png);
+    background-size: cover;
 }
