@@ -2,13 +2,14 @@ FROM php:8.0.3-apache
 
 RUN apt-get update && apt-get install -y curl \
         zip \
+        make \
         zlib1g \
         zlib1g-dev \
         libpng-dev \
         libzip-dev \
         libonig-dev \
-    && pecl install xdebug \
-    && docker-php-ext-enable xdebug \
+    && pecl install xdebug \          #закоммнетировать для vps
+    && docker-php-ext-enable xdebug \ #закоммнетировать для vps
     && docker-php-ext-install gd \
     && docker-php-ext-install zip \
     && docker-php-ext-install mysqli \
@@ -21,9 +22,9 @@ RUN apt-get update && apt-get install -y curl \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 
 RUN echo 'date.timezone = "UTC"' >> /usr/local/etc/php/php.ini
-RUN echo 'xdebug.mode = debug' >> /usr/local/etc/php/php.ini
-RUN echo 'xdebug.discover_client_host = 1' >> /usr/local/etc/php/php.ini
-RUN echo 'opcache.max_accelerated_files = 20000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+RUN echo 'xdebug.mode = debug' >> /usr/local/etc/php/php.ini   #закоммнетировать для vps
+RUN echo 'xdebug.discover_client_host = 1' >> /usr/local/etc/php/php.ini #закоммнетировать для vps
+RUN echo 'opcache.max_accelerated_files = 20000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini #закоммнетировать для vps
 
 # Apache config
 RUN a2enmod rewrite
