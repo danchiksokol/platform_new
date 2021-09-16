@@ -14,9 +14,9 @@ services:
       - 443:443
     links:
       - db
-    environment: #закоммнетировать для vps
-      XDEBUG_CONFIG: ${XDEBUG_CONFIG} #закоммнетировать для vps
-      UPLOAD_LIMIT: 64M #закоммнетировать для vps
+    environment: #закоммнетировать для vps от
+      XDEBUG_CONFIG: ${XDEBUG_CONFIG} #закоммнетировать для vps от
+      UPLOAD_LIMIT: 64M #закоммнетировать для vps до
     restart: always
   db:
     image: mysql:8.0.21
@@ -29,6 +29,18 @@ services:
       - ../mysql:/var/lib/mysql
     environment:
       MYSQL_USER: root
-      MYSQL_PASSWORD: 123
+      MYSQL_PASSWORD: dnc1987
       MYSQL_DATABASE: platform
       MYSQL_ROOT_PASSWORD: 123
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 9090:80
+    links:
+      - db
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_USER=root
+      - PMA_PASSWORD=dnc1987
