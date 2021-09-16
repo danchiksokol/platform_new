@@ -2,6 +2,10 @@
 {% block title %}{{ title }}{% endblock %}
 {% block body %}
     <div class="container">
+        <span><a type="button" class="btn btn-success" href="{{ path('app_admin_question_speaker') }}">Основная трансляция</a></span>
+        <span><a type="button" class="btn btn-success" href="{{ path('app_admin_question_speaker', {'chatid': 2}) }}">AstraZeneca</a></span>
+        <span><a type="button" class="btn btn-success" href="{{ path('app_admin_question_speaker', {'chatid': 3}) }}">Нанолек</a></span>
+        <span><a type="button" class="btn btn-success" href="{{ path('app_admin_question_speaker', {'chatid': 4}) }}">БМС</a></span>
         <table class="table table-hover table-bordered">
             <thead>
             <tr>
