@@ -243,18 +243,13 @@ header .container {
 
 .chatroom {
     padding: 8px;
-    height: 100%;
-    max-height: 600px;
+    height: 600px;
     background: #fff;
     margin-top: 42px;
     box-shadow: 0 3px 9px #bfbfbf;
     display: flex;
     flex-wrap: wrap;
 }
-.chatroom > * {
-    width: 100%;
-}
-
 .chatroom li {
     list-style: none;
     background: #dcdcdc;
@@ -278,9 +273,8 @@ header .container {
 
 .chatroom ul {
     padding: 0;
-    max-height: 467px;
+    height: 467px;
     overflow-y: scroll;
-    height: 100%;
 }
 
 .chatroom textarea {
@@ -1321,6 +1315,12 @@ thead th {
     .fullscreen .chatroom {
         margin-top: 575px;
     }
+    .chatroom {
+        height: 530px;
+    }
+    .chatroom ul {
+        height: 415px;
+    }
 }
 
 @media (max-width: 991px) {
@@ -1485,6 +1485,12 @@ thead th {
 
     .fullscreen .broadcast-live {
         height: 400px;
+    }
+    .chatroom {
+        height: 400px;
+    }
+    .chatroom ul {
+        height: 230px;
     }
 
 }
