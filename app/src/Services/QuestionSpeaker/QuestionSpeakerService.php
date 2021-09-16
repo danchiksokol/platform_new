@@ -120,12 +120,14 @@ class QuestionSpeakerService
                 )->getName();
             $content = $question->getContent();
             $chat = $question->getChatroom()->getName();
+            $show = $question->getIsShow();
             $result[$id] = [
                 'id' => $id,
                 'user' => $user,
                 'speaker' => $speaker,
                 'content' => $content,
-                'chat' => $chat
+                'chat' => $chat,
+                'isShow' => $show,
             ];
         }
 

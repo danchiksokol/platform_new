@@ -28,7 +28,15 @@
                     <td>{{ row.user }}</td>
                     <td>{{ row.chat }}</td>
                     <td>{{ row.content }}</td>
-                    <td><a type="button" class="btn btn-secondary" href="{{path('app_admin_question_speaker_show', {'id': row.id}) }}">Отобразить</a></td>
+                    <td>
+                        {% if row.isShow %}
+                            <a type="button" class="btn btn-success"
+                               href="{{ path('app_admin_question_speaker_hide', {'id': row.id}) }}">Скрыть</a>
+                        {% else %}
+                            <a type="button" class="btn btn-warning"
+                               href="{{ path('app_admin_question_speaker_show', {'id': row.id}) }}">Отобразить</a>
+                        {% endif %}
+                    </td>
                     <td><a type="button" class="btn btn-danger" href="{{path('app_admin_question_speaker_delete', {'id': row.id}) }}">X</a></td>
                 </tr>
             {% endfor %}
