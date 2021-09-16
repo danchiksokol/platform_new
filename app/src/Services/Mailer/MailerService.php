@@ -4,9 +4,12 @@
 namespace App\Services\Mailer;
 
 
+use App\Entity\User;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 
 class MailerService
@@ -81,6 +84,23 @@ class MailerService
                         <p>$question</p>
                       "
             );
+
+        $this->mailer->send($email);
+    }
+
+    /**
+     * @param User $user
+     * @throws TransportExceptionInterface
+     */
+    public function handleSendTemplateEmail(User $user)
+    {
+        $email = (new TemplatedEmail())
+            ->from(new Address('lymphorum@tsoncology.com', mb_convert_encoding('Лимфорум', "UTF-8")))
+            ->to($user->getEmail())
+            ->subject(
+                'Подтверждение регистрации на Интерактивный форум экспертов "Лимфорум" 17-18 сентября 2021 г.'
+            )
+            ->htmlTemplate('main/registration/confirmation_email.html.twig');
 
         $this->mailer->send($email);
     }

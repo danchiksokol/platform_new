@@ -123,7 +123,7 @@ class QuestionSpeakerRepository extends ServiceEntityRepository
      */
     public function getAllByChatRoomForAdmin(int $chatRoomId): array
     {
-        return $this->findBy(['chatroom' => $chatRoomId, 'is_show' => 0], ['id' => 'DESC']);
+        return $this->findBy(['chatroom' => $chatRoomId], ['id' => 'DESC']);
     }
 
     public function getAllByChatRoomForUser(int $chatRoomId): array

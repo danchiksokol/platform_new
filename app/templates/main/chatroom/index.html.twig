@@ -3,12 +3,15 @@
         <h4 style="color: #8a1e83">Чат трансляции</h4>
         <ul id="chat-list">
             {% for message in messages %}
-                <li>
-                    <button class="chatroom-del">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                    </button>
+                <li id="message_{{ message.id }}" class={{ message.mine ? "my-message" : "" }}>
+                    {% if(delete) %}
+                        <button onclick="deleteMessageAjax({{ message.id }})" class="chatroom-del">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                 class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </button>
+                    {% endif %}
                     <div class="chatroom-message">{{ message.content }}</div>
                     <span class="chatroom-user">{{ message.mine ? 'Я' : user }}</span>
                     <span class="chatroom-date">{{ message.createdAt|date("d-m-Y H:m:s") }}</span>
@@ -20,106 +23,124 @@
             <input type="button" id="form-submit"/>
         </div>
     </div>
-    <script>
-        // This object will be sent everytime you submit a message in the sendMessage function.
-        let clientInformation = {
-            chatroom: '{{ chatid }}',
-            username: '{{ user }}'
-            // You can add more information in a static object
-        };
+{#    <script>#}
+{#        // This object will be sent everytime you submit a message in the sendMessage function.#}
+{#        let clientInformation = {#}
+{#            chatroom: '{{ chatid }}',#}
+{#            username: '{{ user }}'#}
+{#            // You can add more information in a static object#}
+{#        };#}
 
-        // START SOCKET CONFIG
-        /**
-         * Note that you need to change the "sandbox" for the URL of your project.
-         * According to the configuration in Sockets/Chat.php , change the port if you need to.
-         * @type WebSocket
-         */
-        let protocol = 'ws://';
-        if (window.location.protocol === 'https:') {
-            protocol = 'wss://';
-        }
-        let wsUri = protocol + "localhost/wss2/:8080";
-        let conn = new WebSocket(wsUri);
+{#        // START SOCKET CONFIG#}
+{#        /**#}
+{#         * Note that you need to change the "sandbox" for the URL of your project.#}
+{#         * According to the configuration in Sockets/Chat.php , change the port if you need to.#}
+{#         * @type WebSocket#}
+{#         */#}
+{#        let protocol = 'ws://';#}
+{#        if (window.location.protocol === 'https:') {#}
+{#            protocol = 'wss://';#}
+{#        }#}
+{#        let wsUri = protocol + "localhost/wss2/:8080";#}
+{#        let conn = new WebSocket(wsUri);#}
 
-        conn.onopen = function (e) {
-            console.info("Connection established succesfully");
-        };
+{#        conn.onopen = function (e) {#}
+{#            console.info("Connection established succesfully");#}
+{#        };#}
 
-        conn.onmessage = function (e) {
-            let data = JSON.parse(e.data);
-            Chat.appendMessage(data.username, data.message);
+{#        conn.onmessage = function (e) {#}
+{#            let data = JSON.parse(e.data);#}
+{#            Chat.appendMessage(data.username, data.message);#}
 
-            console.log(data);
-        };
+{#            console.log(data);#}
+{#        };#}
 
-        conn.onerror = function (e) {
-            alert("Error: something went wrong with the socket.");
-            console.error(e);
-        };
-        // END SOCKET CONFIG
+{#        conn.onerror = function (e) {#}
+{#            alert("Error: something went wrong with the socket.");#}
+{#            console.error(e);#}
+{#        };#}
+{#        // END SOCKET CONFIG#}
 
 
-        /// Some code to add the messages to the list element and the message submit.
-        document.getElementById("form-submit").addEventListener("click", function () {
-            let msg = document.getElementById("form-message").value;
+{#        /// Some code to add the messages to the list element and the message submit.#}
+{#        document.getElementById("form-submit").addEventListener("click", function () {#}
+{#            let msg = document.getElementById("form-message").value;#}
 
-            if (!msg) {
-                alert("Please send something on the chat");
-            }
+{#            if (!msg) {#}
+{#                alert("Please send something on the chat");#}
+{#            }#}
 
-            Chat.sendMessage(msg);
-            // Empty text area
-            document.getElementById("form-message").value = "";
-            document.getElementById("chat-list").scrollTop = document.getElementById("chat-list").scrollHeight;
-        }, false);
+{#            Chat.sendMessage(msg);#}
+{#            // Empty text area#}
+{#            document.getElementById("form-message").value = "";#}
+{#            document.getElementById("chat-list").scrollTop = document.getElementById("chat-list").scrollHeight;#}
+{#        }, false);#}
 
-        // Mini API to send a message with the socket and append a message in a UL element.
-        let Chat = {
-            appendMessage: function (username, message) {
-                let from;
+{#        // Mini API to send a message with the socket and append a message in a UL element.#}
+{#        let Chat = {#}
+{#            appendMessage: function (username, message) {#}
+{#                let from;#}
 
-                if (username == clientInformation.username) {
-                    from = "Я";
-                } else {
-                    from = clientInformation.username;
-                }
+{#                if (username == clientInformation.username) {#}
+{#                    from = "Я";#}
+{#                } else {#}
+{#                    from = clientInformation.username;#}
+{#                }#}
 
-                // Append List Item
-                let ul = document.getElementById("chat-list");
-                let li = document.createElement("li");
-                let div = document.createElement("div");
-                div.className = 'chatroom-message';
-                div.innerHTML = message;
-                li.prepend(div);
-                let user = document.createElement("span");
-                user.className = 'chatroom-user';
-                user.innerHTML = from;
-                li.appendChild(user);
-                let date = document.createElement("span");
-                date.className = 'chatroom-date';
-                let now = new Date();
-                let day = now.getDate() < 10 ? now.getDate() : '0' + now.getDate();
-                let month = now.getMonth() < 10 ? now.getMonth() : '0' + now.getMonth();
-                let year = now.getFullYear() < 10 ? now.getFullYear() : '0' + now.getFullYear();
-                let hours = now.getHours() < 10 ? now.getHours() : '0' + now.getHours();
-                let minutes = now.getMinutes() < 10 ? now.getMinutes() : '0' + now.getMinutes();
-                let seconds = now.getSeconds() < 10 ? now.getSeconds() : '0' + now.getSeconds();
-                let todayString = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
-                date.innerHTML = todayString;
-                li.appendChild(date);
-                ul.appendChild(li);
-            },
-            sendMessage: function (text) {
-                clientInformation.message = text;
-                // Send info as JSON
-                conn.send(JSON.stringify(clientInformation));
-                console.log(JSON.stringify(clientInformation));
-                // Add my own message to the list
-                this.appendMessage(clientInformation.username, clientInformation.message);
-            }
-        };
-        $(document).ready(function () {
-            document.getElementById("chat-list").scrollTop = document.getElementById("chat-list").scrollHeight;
-        });
-    </script>
+{#                // Append List Item#}
+{#                let ul = document.getElementById("chat-list");#}
+{#                let li = document.createElement("li");#}
+{#                li.className = 'my-message';#}
+{#                let div = document.createElement("div");#}
+{#                div.className = 'chatroom-message';#}
+{#                div.innerHTML = message;#}
+{#                li.prepend(div);#}
+{#                let user = document.createElement("span");#}
+{#                user.className = 'chatroom-user';#}
+{#                user.innerHTML = from;#}
+{#                li.appendChild(user);#}
+{#                let date = document.createElement("span");#}
+{#                date.className = 'chatroom-date';#}
+{#                let now = new Date();#}
+{#                let day = now.getDate() > 10 ? now.getDate() : '0' + now.getDate();#}
+{#                let month = now.getMonth() > 10 ? now.getMonth() : '0' + now.getMonth();#}
+{#                let year = now.getFullYear() > 10 ? now.getFullYear() : '0' + now.getFullYear();#}
+{#                let hours = now.getHours() > 10 ? now.getHours() : '0' + now.getHours();#}
+{#                let minutes = now.getMinutes() > 10 ? now.getMinutes() : '0' + now.getMinutes();#}
+{#                let seconds = now.getSeconds() > 10 ? now.getSeconds() : '0' + now.getSeconds();#}
+{#                let todayString = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;#}
+{#                date.innerHTML = todayString;#}
+{#                li.appendChild(date);#}
+{#                ul.appendChild(li);#}
+{#            },#}
+{#            sendMessage: function (text) {#}
+{#                clientInformation.message = text;#}
+{#                // Send info as JSON#}
+{#                conn.send(JSON.stringify(clientInformation));#}
+{#                console.log(JSON.stringify(clientInformation));#}
+{#                // Add my own message to the list#}
+{#                this.appendMessage(clientInformation.username, clientInformation.message);#}
+{#            }#}
+{#        };#}
+
+{#        $(document).ready(function () {#}
+{#            document.getElementById("chat-list").scrollTop = document.getElementById("chat-list").scrollHeight;#}
+{#        });#}
+
+{#        function deleteMessageAjax(id) {#}
+{#            $.ajax({#}
+{#                url: '{{ (path('app_message_ajax_delete')) }}',#}
+{#                type: "POST",#}
+{#                dataType: "json",#}
+{#                data: {#}
+{#                    "messageId": id // Данные которые отправляем на сервер messageId#}
+{#                },#}
+{#                async: true,#}
+{#                success: function (data) {#}
+{#                    $('#message_' + id).remove();#}
+{#                }#}
+{#            });#}
+{#            return false;#}
+{#        };#}
+{#    </script>#}
 {% endblock %}

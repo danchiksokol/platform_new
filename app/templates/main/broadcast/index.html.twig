@@ -100,6 +100,10 @@
                 success: function (data) {
                     let output = data.output;
                     let idArray = Object.keys(output);
+                    let divArray = document.getElementsByClassName('broadcast-questions-item');
+                    for (let j=0; j < divArray.length; j++) {
+                        divArray[j].remove();
+                    }
                     for (let i = 0; i < idArray.length; i++) {
                         let id = "broadcast-question-id-" + idArray[i];
                         if (!document.getElementById(id)) {

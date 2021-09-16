@@ -131,6 +131,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->findOneBy(['secret' => $secret]);
     }
 
+    /**
+     * @return array
+     */
     public function getAllForChoiceType(): array
     {
         $users = $this->getAll();
@@ -145,4 +148,28 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         return $result;
     }
+
+    /**
+     * @param string $search
+     * @return array
+     */
+    public function findByAllFields(string $search):array
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->where("u.surname like :query")
+            ->orWhere("u.name like :query")
+            ->orWhere("u.patronymic like :query")
+            ->orWhere("u.specialization like :query")
+            ->orWhere("u.job like :query")
+            ->orWhere("u.position like :query")
+            ->orWhere("u.phone like :query")
+            ->orWhere("u.email like :query")
+            ->orWhere("u.city like :query")
+            ->orWhere("u.country like :query")
+            ->orderBy('u.id', "ASC")
+            ->setParameter('query', '%' . $search . '%');
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

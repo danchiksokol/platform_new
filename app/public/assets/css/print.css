@@ -1,0 +1,38 @@
+@media print {
+    body {
+        position: relative;
+    }
+
+    .date {
+        position: absolute;
+        writing-mode: tb-rl;
+        transform: rotate(-180deg);
+        text-align: center;
+        width: 5px;
+        top: 35%;
+        left: 10%;
+        font-size: 200%;
+    }
+
+    .print {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    p {
+        margin: 0px;
+        padding-top: -5px;
+        padding-bottom: -5px;
+        color: black;
+        font-weight: bold;
+        font-size: 105px;
+        text-align: center;
+        font-family: arial;
+    }
+}

@@ -31,11 +31,17 @@ class AdminUserController extends AdminBaseController
      * @return Response
      */
     #[Route('/users', name: 'users')]
-    public function indexAction(): Response
+    public function indexAction(Request $request): Response
     {
+        $search = $request->get('search', null);
+        $users = $this->userRepository->getAll();
+        if (!empty($search)) {
+            $users = $this->userRepository->findByAllFields($search);
+        }
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Пользователи';
-        $forRender['users'] = $this->userRepository->getAll();
+        $forRender['users'] = $users;
+        $forRender['search'] = $search;
 
         return $this->render(
             'admin/user/index.html.twig',
@@ -44,8 +50,28 @@ class AdminUserController extends AdminBaseController
     }
 
     /**
+     * @return Response
+     */
+    public function searchBarAction(): Response
+    {
+        $form = $this->createFormBuilder(null)->add('query', SearchType::class)
+            ->add(
+                'search',
+                SubmitType::class,
+                ['attr' => ['class' => 'btn btn-ptymary']]
+            )->getForm();
+
+        return $this->render(
+            'search/searchBar.html.twig',
+            ['form' => $form->createView()]
+        );
+    }
+
+
+    /**
      * @param Request $request
      * @return Response
+     * @throws Exception
      */
     #[Route('/users/create', name: 'users_create')]
     public function createAction(Request $request): Response
@@ -55,12 +81,10 @@ class AdminUserController extends AdminBaseController
         $formUser->handleRequest($request);
 
         if ($formUser->isSubmitted() && $formUser->isValid()) {
-            if ($formUser->get('save')->isClicked()) {
-                $this->userService->handleUpdate($user, $formUser);
-                $this->addFlash('success', 'Пользователь добавлен');
-            }
+            $this->userService->handleCreateUser($user, $formUser);
+            $this->addFlash('success', 'Пользователь добавлен');
 
-            return $this->redirectToRoute('users');
+            return $this->redirectToRoute('app_admin_users');
         }
 
         $forRender = parent::renderDefault();
@@ -99,7 +123,7 @@ class AdminUserController extends AdminBaseController
                 $this->addFlash('success', 'Пользователь удален');
             }
 
-            return $this->redirectToRoute('users');
+            return $this->redirectToRoute('app_admin_users');
         }
 
         $forRender = parent::renderDefault();
@@ -112,19 +136,36 @@ class AdminUserController extends AdminBaseController
         );
     }
 
+
     /**
      * @param int $userId
      * @return Response
      * @throws Exception
      */
-    #[Route('/users/delete/{userId}', name: 'users_delete')]
-    public function deleteAction(
-        int $userId
-    ): Response {
+    #[Route('/users/attend/{userId}', name: 'users_attend')]
+    public function setAttendAction(int $userId): Response {
         $user = $this->userRepository->getOne($userId);
-        $this->userService->handleDelete($user);
-        $this->addFlash('success', 'Пользователь удален');
+        $this->userService->handleAttend($user);
+        $this->addFlash('success', 'Пользователь пришел');
 
-        return $this->redirectToRoute('users');
+        return $this->redirectToRoute('app_admin_users');
     }
+
+
+/**
+ * @param int $userId
+ * @return Response
+ * @throws Exception
+ */
+#[
+Route('/users/delete/{userId}', name: 'users_delete')]
+    public function deleteAction(
+    int $userId
+): Response {
+    $user = $this->userRepository->getOne($userId);
+    $this->userService->handleDelete($user);
+    $this->addFlash('success', 'Пользователь удален');
+
+    return $this->redirectToRoute('app_admin_users');
+}
 }

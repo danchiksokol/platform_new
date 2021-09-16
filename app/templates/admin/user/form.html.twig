@@ -48,13 +48,20 @@
                     <td>Город</td>
                     <td>{{ form_row(userForm.city) }}</td>
                 </tr>
+                <tr id="password">
+                    <td>password</td>
+                    <td>{{ form_row(userForm.password) }}</td>
+                </tr>
                 </tbody>
             </table>
         </div>
         <div class="row">
             <div class="col-md-6">{{ form_row(userForm.save) }}</div>
-            <div class="col-md-6">{{ form_row(userForm.delete) }}</div>
         </div>
     </div>
     {{ form_end(userForm) }}
+    <script>
+        document.getElementById('user_form_password').value="1234567";
+        document.getElementById('password').hidden=true;
+    </script>
 {% endblock %}

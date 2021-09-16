@@ -70,6 +70,22 @@ class AdminQuestionSpeakerController extends AdminBaseController
     /**
      * @param Request $request
      * @return Response
+     */
+    #[Route('/question/hide/{id}', name: 'question_speaker_hide')]
+    public function setHideAction(
+        Request $request
+    ): Response {
+        $questionId = (int)$request->get('id');
+        $question = $this->questionSpeakerRepository->getOne($questionId);
+        $this->questionSpeakerService->handleHide($question);
+        $this->addFlash('success', 'Вопрос скрыт');
+
+        return $this->redirectToRoute('app_admin_question_speaker');
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
      * @throws Exception
      */
     #[Route('/question/delete/{id}', name: 'question_speaker_delete')]

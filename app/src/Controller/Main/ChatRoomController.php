@@ -111,9 +111,12 @@ class ChatRoomController extends BaseController
         }
 
         $questions = $this->questionSpeakerService->getQuestionSpeakerForRender($chatRoomId);
+
+        $userRoles = $this->getUser()->getRoles();
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Трансляция сессии';
         $forRender['user'] = $userId;
+        $forRender['delete'] = in_array("ROLE_ADMIN", $userRoles);
         $forRender['messages'] = $messages;
         $forRender['chatid'] = $chatRoomId;
         $forRender['speakers'] = $speakers;
