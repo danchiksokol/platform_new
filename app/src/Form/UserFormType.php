@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -81,6 +82,13 @@ class UserFormType extends AbstractType
                 ]
             )
             ->add(
+                'password',
+                PasswordType::class,
+                [
+                    'required' => false
+                ]
+            )
+            ->add(
                 'save',
                 SubmitType::class,
                 [
@@ -89,17 +97,17 @@ class UserFormType extends AbstractType
                         'class' => 'btn btn-outline-secondary'
                     ]
                 ]
-            )
-            ->add(
-                'delete',
-                SubmitType::class,
-                [
-                    'label' => 'Удалить',
-                    'attr' => [
-                        'class' => 'btn btn-danger'
-                    ]
-                ]
             );
+//            ->add(
+//                'delete',
+//                SubmitType::class,
+//                [
+//                    'label' => 'Удалить',
+//                    'attr' => [
+//                        'class' => 'btn btn-danger'
+//                    ]
+//                ]
+//            );
 //            ->add('isVerified', CheckboxType::class)
 //            ->add('secret', TextType::class);
     }

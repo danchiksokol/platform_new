@@ -42,7 +42,35 @@ class UserService
     public function handleCreate(User $user, Form $form):static
     {
         $user->setPassword(
-            $this->passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData())
+            $this->passwordEncoder->encodePassword($user, $form->get('password')->getData())
+        );
+        $user->setSurname($form->get('surname')->getData());
+        $user->setName($form->get('name')->getData());
+        $user->setPatronymic($form->get('patronymic')->getData());
+        $user->setSpecialization($form->get('specialization')->getData());
+        $user->setJob($form->get('job')->getData());
+        $user->setPosition($form->get('position')->getData());
+        $user->setPhone($form->get('phone')->getData());
+        $user->setCountry($form->get('country')->getData());
+        $user->setCity($form->get('city')->getData());
+        $user->setRoles(['ROLE_USER']);
+        $user->setSecret(md5(uniqid()));
+        $this->userRepository->setCreate($user);
+
+        return $this;
+    }
+
+    /**
+     * TODO::Провести рефакторинг метода
+     * @param User $user
+     * @param Form $form
+     * @return $this
+     * @throws Exception
+     */
+    public function handleCreateUser(User $user, Form $form):static
+    {
+        $user->setPassword(
+            $this->passwordEncoder->encodePassword($user, $form->get('password')->getData())
         );
         $user->setSurname($form->get('surname')->getData());
         $user->setName($form->get('name')->getData());

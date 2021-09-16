@@ -43,9 +43,11 @@ class AdminUserController extends AdminBaseController
         );
     }
 
+
     /**
      * @param Request $request
      * @return Response
+     * @throws Exception
      */
     #[Route('/users/create', name: 'users_create')]
     public function createAction(Request $request): Response
@@ -55,12 +57,10 @@ class AdminUserController extends AdminBaseController
         $formUser->handleRequest($request);
 
         if ($formUser->isSubmitted() && $formUser->isValid()) {
-            if ($formUser->get('save')->isClicked()) {
-                $this->userService->handleUpdate($user, $formUser);
+                $this->userService->handleCreateUser($user, $formUser);
                 $this->addFlash('success', 'Пользователь добавлен');
-            }
 
-            return $this->redirectToRoute('users');
+            return $this->redirectToRoute('app_admin_users');
         }
 
         $forRender = parent::renderDefault();
@@ -99,7 +99,7 @@ class AdminUserController extends AdminBaseController
                 $this->addFlash('success', 'Пользователь удален');
             }
 
-            return $this->redirectToRoute('users');
+            return $this->redirectToRoute('app_admin_users');
         }
 
         $forRender = parent::renderDefault();
@@ -125,6 +125,6 @@ class AdminUserController extends AdminBaseController
         $this->userService->handleDelete($user);
         $this->addFlash('success', 'Пользователь удален');
 
-        return $this->redirectToRoute('users');
+        return $this->redirectToRoute('app_admin_users');
     }
 }
