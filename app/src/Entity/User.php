@@ -134,6 +134,11 @@ class User implements UserInterface
      */
     private $visitControls;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_attend;
+
 
 
     public function __construct()
@@ -596,6 +601,18 @@ class User implements UserInterface
                 $visitControl->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsAttend(): ?bool
+    {
+        return $this->is_attend;
+    }
+
+    public function setIsAttend(?bool $is_attend): self
+    {
+        $this->is_attend = $is_attend;
 
         return $this;
     }

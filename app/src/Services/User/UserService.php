@@ -96,6 +96,7 @@ class UserService
      */
     public function handleUpdate(User $user, Form $form):static
     {
+        $user->setIsAttend($form->get('is_attend')->getData());
         $user->setEmail($form->get('email')->getData());
         $user->setSurname($form->get('surname')->getData());
         $user->setName($form->get('name')->getData());
@@ -109,6 +110,16 @@ class UserService
         $this->userRepository->setSave($user);
 
         return $this;
+    }
+
+    /**
+     * @param User $user
+     * @throws Exception
+     */
+    public function handleAttend(User $user)
+    {
+        $user->setIsAttend(1);
+        $this->userRepository->setSave();
     }
 
     /**
