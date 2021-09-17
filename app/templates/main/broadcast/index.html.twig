@@ -18,12 +18,19 @@
                             </script>
                             <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
                         </div>
-                        {% set questions = questions %}
-                        {% include 'main/question_speaker/index.html.twig' with {questions: questions} %}
+                        {% if app.request.requesturi != '/broadcast/2' %}
+                            {% set questions = questions %}
+                            {% include 'main/question_speaker/index.html.twig' with {questions: questions} %}
+                        {% endif %}
                     </div>
                 </div>
-                <div class="col-lg-3 col-12">
-                    {% include 'main/chatroom/index.html.twig' with messages %}
+                <div id="messages" class="col-lg-3 col-12">
+                    {% set chatid = chatid %}
+                    {% include 'main/chatroom/index.html.twig' with {chatid: chatid} %}
+                </div>
+                <div  class="chatroom chatroom-bottom">
+                    <textarea id="form-message" placeholder="Сообщение"></textarea>
+                    <input onclick="sendMessageAjax({{ chatid }})" type="button" id="form-submit"/>
                 </div>
             </div>
         </div>
@@ -58,7 +65,7 @@
             let date;
             let now = new Date();
             for (let i = 0; i < time.length; i++) {
-                date = new Date("2021/09/08 " + time[i]);
+                date = new Date("2021/09/17 " + time[i]);
                 let timeDiff = Math.abs(now.getTime() - date.getTime());
                 let diffMinutes = Math.round(timeDiff / (1000 * 60));
                 if (0 == diffMinutes) {
@@ -101,7 +108,7 @@
                     let output = data.output;
                     let idArray = Object.keys(output);
                     let divArray = document.getElementsByClassName('broadcast-questions-item');
-                    for (let j=0; j < divArray.length; j++) {
+                    for (let j = 0; j < divArray.length; j++) {
                         divArray[j].remove();
                     }
                     for (let i = 0; i < idArray.length; i++) {
@@ -128,7 +135,39 @@
             $(this).toggleClass('active');
             $('.main-block').toggleClass('fullscreen');
         });
+
+        function sendMessageAjax(id) {
+            let content = $("#form-message").val();
+            $.ajax({
+                url: '{{ (path('app_message_send_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "chatId": id, // Данные которые отправляем на сервер messageId
+                    "content": content, // Данные которые отправляем на сервер messageId
+                },
+                async: true,
+                success: function (data) {
+                    $("#form-message").val('');
+                }
+            });
+            return false;
+        };
     </script>
     {% set submit_url = path('app_broadcast', {'chatid': chatid}) %}
     {% include 'main/question_speaker/form.html.twig' with {url: submit_url} %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        setInterval(function () {
+            $.ajax({
+                method: 'POST',
+                url: '{{ path('app_messages', {'chatid':chatid}) }}'
+            }).done(function (data) {
+                console.log(data);
+                $('#messages').html(data);
+            });
+        }, 5000);
+    </script>
 {% endblock %}

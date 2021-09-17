@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Repository\UserRepository;
+use App\Services\Mailer\MailerService;
 use App\Services\User\UserService;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,15 +17,18 @@ class AdminUserController extends AdminBaseController
 {
     private UserService $userService;
     private UserRepository $userRepository;
+    private MailerService $mailerService;
 
     /**
      * @param UserService $userService
      * @param UserRepository $userRepository
+     * @param MailerService $mailerService
      */
-    public function __construct(UserService $userService, UserRepository $userRepository)
+    public function __construct(UserService $userService, UserRepository $userRepository, MailerService $mailerService)
     {
         $this->userService = $userService;
         $this->userRepository = $userRepository;
+        $this->mailerService = $mailerService;
     }
 
     /**
@@ -143,7 +147,8 @@ class AdminUserController extends AdminBaseController
      * @throws Exception
      */
     #[Route('/users/attend/{userId}', name: 'users_attend')]
-    public function setAttendAction(int $userId): Response {
+    public function setAttendAction(int $userId): Response
+    {
         $user = $this->userRepository->getOne($userId);
         $this->userService->handleAttend($user);
         $this->addFlash('success', 'Пользователь пришел');
@@ -152,20 +157,32 @@ class AdminUserController extends AdminBaseController
     }
 
 
-/**
- * @param int $userId
- * @return Response
- * @throws Exception
- */
-#[
-Route('/users/delete/{userId}', name: 'users_delete')]
-    public function deleteAction(
-    int $userId
-): Response {
-    $user = $this->userRepository->getOne($userId);
-    $this->userService->handleDelete($user);
-    $this->addFlash('success', 'Пользователь удален');
+    /**
+     * @param int $userId
+     * @return Response
+     * @throws Exception
+     */
+    #[Route('/users/delete/{userId}', name: 'users_delete')]
+    public function deleteAction(int $userId): Response {
+        $user = $this->userRepository->getOne($userId);
+        $this->userService->handleDelete($user);
+        $this->addFlash('success', 'Пользователь удален');
 
-    return $this->redirectToRoute('app_admin_users');
-}
+        return $this->redirectToRoute('app_admin_users');
+    }
+
+    /**
+     * @param int $userId
+     * @return Response
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     */
+    #[Route('/users/email/{userId}', name: 'users_send_email')]
+    public function sendEmailAction(int $userId):Response
+    {
+        $user = $this->userRepository->getOne($userId);
+        $this->mailerService->handleSendTemplateEmail($user);
+        $this->addFlash('success', 'Письмо отправлено удален');
+
+        return $this->redirectToRoute('app_admin_users');
+    }
 }

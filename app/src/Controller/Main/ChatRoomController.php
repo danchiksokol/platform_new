@@ -69,9 +69,8 @@ class ChatRoomController extends BaseController
      * @throws Exception
      */
     #[Route('/{chatid}', name: 'broadcast', defaults: ['chatid' => 1])]
-    public function indexAction(
-        Request $request
-    ): Response {
+    public function indexAction(Request $request): Response
+    {
         $chatRoomId = $request->get('chatid');
         $chatRoom = $this->chatRoomRepository->getOne($chatRoomId);
         $userId = $this->getUser()->getId();

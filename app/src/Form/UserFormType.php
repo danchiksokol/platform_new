@@ -18,7 +18,10 @@ class UserFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('is_attend', CheckboxType::class)
+            ->add('is_attend', CheckboxType::class,
+                  [
+                      'required' => false
+                  ])
             ->add('email', EmailType::class)
             ->add(
                 'surname',

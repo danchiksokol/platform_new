@@ -5,6 +5,7 @@ namespace App\Services\Mailer;
 
 
 use App\Entity\User;
+use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -20,14 +21,17 @@ class MailerService
      * @var MailerInterface
      */
     private MailerInterface $mailer;
+    private EmailVerifier $emailVerifier;
 
     /**
      * MailerService constructor.
      * @param MailerInterface $mailer
+     * @param EmailVerifier $emailVerifier
      */
-    public function __construct(MailerInterface $mailer)
+    public function __construct(MailerInterface $mailer, EmailVerifier $emailVerifier)
     {
         $this->mailer = $mailer;
+        $this->emailVerifier = $emailVerifier;
     }
 
     /**
@@ -94,15 +98,17 @@ class MailerService
      */
     public function handleSendTemplateEmail(User $user)
     {
-        $email = (new TemplatedEmail())
-            ->from(new Address('lymphorum@tsoncology.com', mb_convert_encoding('Лимфорум', "UTF-8")))
-            ->to($user->getEmail())
-            ->subject(
-                'Подтверждение регистрации на Интерактивный форум экспертов "Лимфорум" 17-18 сентября 2021 г.'
-            )
-            ->htmlTemplate('main/registration/confirmation_email.html.twig');
-
-        $this->mailer->send($email);
+        $this->emailVerifier->sendEmailConfirmation(
+            'app_login',
+            $user,
+            (new TemplatedEmail())
+                ->from(new Address('lymphorum@tsoncology.com', mb_convert_encoding('Лимфорум', "UTF-8")))
+                ->to($user->getEmail())
+                ->subject(
+                    'Началась трансляция Интерактивного форума экспертов "Лимфорум" 17-18 сентября 2021 г. на платформе.'
+                )
+                ->htmlTemplate('main/registration/confirmation_email_send.html.twig')
+        );
     }
 
 }
