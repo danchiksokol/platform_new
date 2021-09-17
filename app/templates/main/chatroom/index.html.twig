@@ -1,5 +1,5 @@
 {% block body %}
-    <div class="chatroom">
+    <div class="">
         <h4 style="color: #8a1e83">Чат трансляции</h4>
         <ul id="chat-list">
             {% for message in messages %}
@@ -22,6 +22,7 @@
 {#            <textarea id="form-message" placeholder="Сообщение"></textarea>#}
 {#            <input onclick="sendMessageAjax({{ chatid }})" type="button" id="form-submit"/>#}
 {#        </div>#}
+
     </div>
     <script>
         $(document).ready(function () {

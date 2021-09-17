@@ -247,8 +247,6 @@ header .container {
     background: #fff;
     margin-top: 42px;
     box-shadow: 0 3px 9px #bfbfbf;
-    display: flex;
-    flex-wrap: wrap;
 }
 .chatroom li {
     list-style: none;
