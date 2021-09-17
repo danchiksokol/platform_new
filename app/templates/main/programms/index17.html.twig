@@ -98,7 +98,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн
+                        <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 1}) }}"
+                           class="btn btn-bluez">Подключиться к онлайн
                             трансляции</a>
                     </div>
                     <div class="program-dop d-none d-lg-flex">
@@ -110,7 +111,8 @@
                                 <b>Сателлитный симпозиум компании<br>AstraZeneca</b><br>
                                 <em>* Не обеспечивается кредитами НМО</em>
                             </div>
-                            <a href="{{ path('app_broadcast', {'chatid': 2}) }}" class="btn btn-bluez">Подключиться к
+                            <a onclick="setUserStatistics(2);" href="{{ path('app_broadcast', {'chatid': 2}) }}"
+                               class="btn btn-bluez">Подключиться к
                                 онлайн трансляции</a>
                         </div>
                         <div class="program-dop-item sympprogback">
@@ -121,7 +123,8 @@
                                 <b>Сателлитный симпозиум компании<br>Нанолек</b><br>
                                 <em>* Не обеспечивается кредитами НМО</em>
                             </div>
-                            <a href="{{ path('app_broadcast', {'chatid': 3}) }}" class="btn btn-bluez">Подключиться к
+                            <a onclick="setUserStatistics(3);" href="{{ path('app_broadcast', {'chatid': 3}) }}"
+                               class="btn btn-bluez">Подключиться к
                                 онлайн трансляции</a>
                         </div>
                     </div>
@@ -173,7 +176,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн
+                        <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 1}) }}"
+                           class="btn btn-bluez">Подключиться к онлайн
                             трансляции</a>
                     </div>
 
@@ -190,4 +194,22 @@
             </div>
         </div>
     </div>
+    <script>
+        function setUserStatistics(id) {
+            let data = {'broadcast': id};
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                }
+            });
+            return false;
+        };
+    </script>
 {% endblock %}

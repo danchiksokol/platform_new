@@ -4,6 +4,7 @@ namespace App\Services\UserStatistics;
 
 use App\Entity\User;
 use App\Entity\UserStatistics;
+use App\Repository\ChatRoomRepository;
 use App\Repository\CompanyMaterialRepository;
 use App\Repository\CompanyRepository;
 use App\Repository\CompanyVideoRepository;
@@ -18,6 +19,7 @@ class UserStatisticsService
     private CompanyMaterialRepository $companyMaterialRepository;
     private CompanyVideoRepository $companyVideoRepository;
     private CompanyRepository $companyRepository;
+    private ChatRoomRepository $chatRoomRepository;
 
     /**
      * @param UserStatisticsRepository $statisticsRepository
@@ -25,19 +27,22 @@ class UserStatisticsService
      * @param CompanyMaterialRepository $companyMaterialRepository
      * @param CompanyVideoRepository $companyVideoRepository
      * @param CompanyRepository $companyRepository
+     * @param ChatRoomRepository $chatRoomRepository
      */
     public function __construct(
         UserStatisticsRepository $statisticsRepository,
         UserRepository $userRepository,
         CompanyMaterialRepository $companyMaterialRepository,
         CompanyVideoRepository $companyVideoRepository,
-        CompanyRepository $companyRepository
+        CompanyRepository $companyRepository,
+        ChatRoomRepository $chatRoomRepository
     ) {
         $this->statisticsRepository = $statisticsRepository;
         $this->userRepository = $userRepository;
         $this->companyMaterialRepository = $companyMaterialRepository;
         $this->companyVideoRepository = $companyVideoRepository;
         $this->companyRepository = $companyRepository;
+        $this->chatRoomRepository = $chatRoomRepository;
     }
 
 
@@ -61,6 +66,10 @@ class UserStatisticsService
             if ('video' == $key) {
                 $companyVideo = $this->companyVideoRepository->getOne($id);
                 $userStatistics->setCompanyVideo($companyVideo);
+            }
+            if ('broadcast' == $key) {
+                $broadcast = $this->chatRoomRepository->getOne($id);
+                $userStatistics->setBroadcast($broadcast);
             }
         }
 

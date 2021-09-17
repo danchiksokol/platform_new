@@ -130,11 +130,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн
+                        <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн
                             трансляции</a>
                     </div>
                     <div class="program-pdf">
-                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}" target="_blank" class="btn btn-bluez">Поключиться
+                        <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 1}) }}" target="_blank" class="btn btn-bluez">Поключиться
                             к онлайн трансляции</a>
                         <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
                            class="btn btn-bluez btn-down">Открыть программу в формате PDF</a>
@@ -148,7 +148,7 @@
                                 <b>Сателлитный симпозиум компании Bristol Myers Squibb</b><br>
                                 <em>* Не обеспечивается кредитами НМО</em>
                             </div>
-                            <a href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к
+                            <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к
                                 онлайн трансляции</a>
                         </div>
                         {# <div class="program-dop-item"> #}
@@ -169,4 +169,21 @@
             </div>
         </div>
     </div>
+    <script>
+        function setUserStatistics(id) {
+            let data = {'broadcast': id};
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                }
+            });
+            return false;
+        };
+    </script>
 {% endblock %}

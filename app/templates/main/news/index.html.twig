@@ -1,7 +1,34 @@
 <div class="program-right">
     {% for row in news %}
-        <a href="{{ row.href }}">
+        <a onclick="setUserStatisticsNews('{{ row.href }}')" href="{{ row.href }}">
             <img src="{{ asset('uploads/news/' ~ row.file) }}">
         </a>
     {% endfor %}
 </div>
+<script>
+    function setUserStatisticsNews(url) {
+        let urlArray = url.split('/');
+        let lastItem = urlArray.pop();
+        let data = {};
+        if ('broadcast' == lastItem) {
+            data = {'broadcast': 1}
+        } else {
+            data = {'broadcast': lastItem}
+        }
+        if (Object.keys(data).length !== 0) {
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                }
+            });
+        }
+
+        return false;
+    };
+</script>

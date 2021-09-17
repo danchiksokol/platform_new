@@ -144,7 +144,6 @@
             let nameId = event.target.getAttribute('id');
             if (!!nameId) {
                 let name = nameId.split('_', 1).pop();
-                console.log(name);
                 let id = nameId.split('_', 2).pop();
                 if (!!id && ('company' == name)) {
                     let data = {};
