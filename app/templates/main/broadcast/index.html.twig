@@ -13,7 +13,7 @@
                                 let player = new Playerjs({
                                     id: "player",
                                     file: "{{ broadcast }}",
-                                    autoplay: 1
+                                    autoplay: 1,
                                 });
                             </script>
                             <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
@@ -28,7 +28,7 @@
                     <div class="chatroom">
                         {% set chatid = chatid %}
                         {% include 'main/chatroom/index.html.twig' with {chatid: chatid} %}
-                        <div  class="chatroom-bottom">
+                        <div class="chatroom-bottom">
                             <textarea id="form-message" placeholder="Сообщение"></textarea>
                             <input onclick="sendMessageAjax({{ chatid }})" type="button" id="form-submit"/>
                         </div>
@@ -53,22 +53,23 @@
         </div>
     </div>
     <script>
+        {% if app.request.requesturi == '/broadcast' %}
         function getModalControl() {
             let myModal = new bootstrap.Modal(document.getElementById('modalControl'));
             let time = [
-                '9:44',
-                '10:36',
-                '11:51',
-                '12:33',
-                '13:12',
-                '15:42',
-                '16:29',
-                '17:15'
+                '9:09',
+                '10:10',
+                '11:11',
+                '12:02',
+                '12:41',
+                '13:59',
+                '14:46',
+                '15:19',
             ];
             let date;
             let now = new Date();
             for (let i = 0; i < time.length; i++) {
-                date = new Date("2021/09/17 " + time[i]);
+                date = new Date("2021/09/18 " + time[i]);
                 let timeDiff = Math.abs(now.getTime() - date.getTime());
                 let diffMinutes = Math.round(timeDiff / (1000 * 60));
                 if (0 == diffMinutes) {
@@ -84,6 +85,7 @@
         setInterval(function () {
             getModalControl();
         }, 60000);
+        {% endif %}
 
         $('#visitControl').click(function (event) {
             $.ajax({
@@ -168,8 +170,7 @@
                 method: 'POST',
                 url: '{{ path('app_messages', {'chatid':chatid}) }}'
             }).done(function (data) {
-                console.log(data);
-                $('#messages').html(data);
+                $('#chat-list').html(data);
             });
         }, 5000);
     </script>
