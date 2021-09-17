@@ -45,8 +45,14 @@
                         <a type="button" class="btn btn-primary" id="print"
                            onclick="CallPrint('{{ row.surname }}', '{{ row.name }}', '{{ row.patronymic }}')">Печать</a>
                     </td>
-                    <td><a type="button" class="btn btn-secondary"
-                           href="{{ path('app_admin_users_update', {'userId': row.id}) }}">Изменить</a></td>
+                    <td>
+                        <a type="button" class="btn btn-info"
+                           href="{{ path('app_admin_users_send_email', {'userId': row.id}) }}">Письмо</a>
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-secondary"
+                           href="{{ path('app_admin_users_update', {'userId': row.id}) }}">Изменить</a>
+                    </td>
                     <td><a type="button" class="btn btn-danger"
                            href="{{ path('app_admin_users_delete', {'userId': row.id}) }}">X</a></td>
                 </tr>
@@ -58,20 +64,20 @@
         function CallPrint(f, i, o) {
             var now = new Date();
             var day = now.getDate();
-            var month = now.getMonth()+1;
-            month = month > 9 ? month : '0'+month;
+            var month = now.getMonth() + 1;
+            month = month > 9 ? month : '0' + month;
             var year = now.getFullYear();
-            var date = day+'.'+month+'.'+year;
+            var date = day + '.' + month + '.' + year;
             var prtCSS = '<link rel="stylesheet" href="{{ asset('assets/css/print.css') }}" type="text/css" />';
-            var WinPrint = window.open('','','left=50,top=50,width=800,height=640,toolbar=0,scrollbars=1,status=0');
+            var WinPrint = window.open('', '', 'left=50,top=50,width=800,height=640,toolbar=0,scrollbars=1,status=0');
             WinPrint.document.write("<div class='date'>");
             WinPrint.document.write(date);
             WinPrint.document.write("</div>");
             WinPrint.document.write("<div class='print'>");
             WinPrint.document.write(prtCSS);
-            WinPrint.document.write("<p>"+f+"</p>");
-            WinPrint.document.write("<p>"+i+"</p>");
-            WinPrint.document.write("<p>"+o+"</p>");
+            WinPrint.document.write("<p>" + f + "</p>");
+            WinPrint.document.write("<p>" + i + "</p>");
+            WinPrint.document.write("<p>" + o + "</p>");
             WinPrint.document.write("</div>");
             WinPrint.document.close();
             WinPrint.focus();

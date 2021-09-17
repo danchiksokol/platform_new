@@ -42,7 +42,7 @@ class UserService
     public function handleCreate(User $user, Form $form):static
     {
         $user->setPassword(
-            $this->passwordEncoder->encodePassword($user, $form->get('password')->getData())
+            $this->passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData())
         );
         $user->setSurname($form->get('surname')->getData());
         $user->setName($form->get('name')->getData());
