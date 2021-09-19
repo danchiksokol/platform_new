@@ -3,6 +3,7 @@ services:
   site:
     depends_on:
       - db
+      - memcached
     volumes:
       - ../:/var/www/html/
       -  ./webconfig:/etc/apache2/sites-enabled
@@ -11,7 +12,6 @@ services:
     container_name: site
     ports:
       - 80:80
-      - 443:443
     links:
       - db
     environment: #закоммнетировать для vps от
@@ -33,9 +33,17 @@ services:
       MYSQL_DATABASE: platform
       MYSQL_ROOT_PASSWORD: 123
 
+  memcached:
+    image: memcached:latest
+    restart: always
+    container_name: memcached
+    ports:
+      - "11211:11211"
+
   phpmyadmin:
     image: phpmyadmin
     restart: always
+    container_name: phpmyadmin
     ports:
       - 9090:80
     links:

@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y curl \
         libpng-dev \
         libzip-dev \
         libonig-dev \
+        libmemcached-dev \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && docker-php-ext-install gd \
@@ -19,6 +20,8 @@ RUN apt-get update && apt-get install -y curl \
     && docker-php-source delete \
     && docker-php-ext-install opcache \
     && docker-php-ext-enable opcache \
+    && pecl install memcached \
+    && docker-php-ext-enable memcached \
     && apt-get autoremove -y && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 
