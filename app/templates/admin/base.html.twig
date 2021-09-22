@@ -13,10 +13,7 @@
     {% endblock %}
 
     {% block javascripts %}
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-                crossorigin="anonymous">
-        </script>
+        <script src="{{ asset('assets/js/jquery-3.6.0.js') }}"></script>
         <script src="{{ asset('assets/framework/bootstrap-5.0.1/js/bootstrap.js') }}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -48,6 +45,7 @@
                             <a href="{{ path('app_admin_poster') }}" class="nav-link">Постеры</a>
                             <a href="{{ path('app_admin_news') }}" class="nav-link">Новости</a>
                             <a href="{{ path('app_admin_company') }}" class="nav-link">Компании</a>
+                            <a href="{{ path('app_admin_chat_rooms') }}" class="nav-link">Трансляции</a>
                         </div>
                     </div>
                 </nav>

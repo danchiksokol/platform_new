@@ -35,9 +35,8 @@ class AdminQuestionSpeakerController extends AdminBaseController
      * @return Response
      */
     #[Route('/question/{chatid}', name: 'question_speaker', defaults: ['chatid' => 1])]
-    public function indexAction(
-        Request $request
-    ): Response {
+    public function indexAction(Request $request): Response
+    {
         $chatRoomId = (int)$request->get('chatid');
         $questions = $this->questionSpeakerService->getQuestionSpeakerForRenderAdmin($chatRoomId);
 
@@ -56,9 +55,8 @@ class AdminQuestionSpeakerController extends AdminBaseController
      * @return Response
      */
     #[Route('/question/show/{id}', name: 'question_speaker_show')]
-    public function setShowAction(
-        Request $request
-    ): Response {
+    public function setShowAction(Request $request): Response
+    {
         $questionId = (int)$request->get('id');
         $question = $this->questionSpeakerRepository->getOne($questionId);
         $this->questionSpeakerService->handleShow($question);
@@ -72,9 +70,8 @@ class AdminQuestionSpeakerController extends AdminBaseController
      * @return Response
      */
     #[Route('/question/hide/{id}', name: 'question_speaker_hide')]
-    public function setHideAction(
-        Request $request
-    ): Response {
+    public function setHideAction(Request $request): Response
+    {
         $questionId = (int)$request->get('id');
         $question = $this->questionSpeakerRepository->getOne($questionId);
         $this->questionSpeakerService->handleHide($question);
@@ -89,9 +86,8 @@ class AdminQuestionSpeakerController extends AdminBaseController
      * @throws Exception
      */
     #[Route('/question/delete/{id}', name: 'question_speaker_delete')]
-    public function deleteAction(
-        Request $request
-    ): Response {
+    public function deleteAction(Request $request): Response
+    {
         $questionId = (int)$request->get('id');
         $question = $this->questionSpeakerRepository->getOne($questionId);
         $this->questionSpeakerService->handleDelete($question);

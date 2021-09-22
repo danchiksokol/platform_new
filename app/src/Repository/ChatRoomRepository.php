@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\ChatRoom;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method ChatRoom|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,10 +16,16 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ChatRoomRepository extends ServiceEntityRepository
 {
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @param ManagerRegistry $registry
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, ChatRoom::class);
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -35,6 +43,48 @@ class ChatRoomRepository extends ServiceEntityRepository
     public function getAll(): array
     {
         return $this->findAll();
+    }
+
+
+    /**
+     * @param ChatRoom $chatRoom
+     * @throws Exception
+     */
+    public function setCreate(ChatRoom $chatRoom)
+    {
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->persist($chatRoom);
+
+            $this->entityManager->commit();
+        } catch (Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
+    }
+
+    public function setSave()
+    {
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+    }
+
+
+    /**
+     * @param ChatRoom $chatRoom
+     * @throws Exception
+     */
+    public function setDelete(ChatRoom $chatRoom)
+    {
+        $this->entityManager->beginTransaction();
+        try {
+            $this->entityManager->remove($chatRoom);
+
+            $this->entityManager->commit();
+        } catch (Exception $exception) {
+            $this->entityManager->rollback();
+            throw $exception;
+        }
     }
 
     /**

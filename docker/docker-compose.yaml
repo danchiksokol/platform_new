@@ -29,7 +29,7 @@ services:
       - ../mysql:/var/lib/mysql
     environment:
       MYSQL_USER: root
-      MYSQL_PASSWORD: dnc1987
+      MYSQL_PASSWORD: 123
       MYSQL_DATABASE: platform
       MYSQL_ROOT_PASSWORD: 123
 
@@ -51,4 +51,4 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_USER=root
-      - PMA_PASSWORD=dnc1987
+      - PMA_PASSWORD=123
