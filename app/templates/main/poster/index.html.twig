@@ -24,7 +24,11 @@
                                  data-bs-parent="#accordionPoster">
                                 <ul class="accordion-body">
                                     {% for row in posters %}
-                                        <li><a href="{{ asset('uploads/poster/pdf/' ~ row.file) }}" target="_blank">{{ row.title }}</a></li>
+                                        <li>
+                                            <a href="{{ asset('uploads/poster/pdf/' ~ row.file) }}" target="_blank">{{ row.title }}</a>
+                                            <br>
+                                            <a href="{{ asset('uploads/poster/pdf/' ~ row.file) }}" target="_blank">{{ row.content }}</a>
+                                        </li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -46,14 +50,22 @@
                             <div class="col-md-4" id="poster_{{ row.id }}">
                                 <a class="poster-images-img"
                                    data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
-                                   data-pdf="/uploads/poster/pdf/{{ row.file }}" data-title="{{ row.title }}"
+                                   data-pdf="/uploads/poster/pdf/{{ row.file }}"
+                                   data-title="{{ row.title }}"
+                                   data-category-name="{{ row.content }}"
                                    href="javascript:void(0);">
                                     <img src="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}">
                                 </a>
                                 <a class="poster-images-title" href="javascript:void(0);"
                                    data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
                                    data-pdf="/uploads/poster/pdf/{{ row.file }}"
-                                   data-title="{{ row.title }}" class="btn btn-link">{{ row.title }}</a>
+                                   data-title="{{ row.title }}" class="btn btn-link">{{ row.title }}
+                                </a>
+                                <a class="poster-images-title" href="javascript:void(0);"
+                                   data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
+                                   data-pdf="/uploads/poster/pdf/{{ row.file }}"
+                                   data-title="{{ row.title }}" class="btn btn-link">{{ row.content }}
+                                </a>
                             </div>
                         {% endfor %}
                     </div>
@@ -118,7 +130,8 @@
                         <a class="btn btn-fill poster-prev" href="javascript:void(0);">Предыдущий постер</a>
                         <a class="btn btn-fill poster-next" href="javascript:void(0);">Следующий постер</a>
                     </div>
-                    <h5 class="modal-title" id="posterModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="posterModalLabel">Poster title</h5>
+                    <h6 class="modal-title-category" id="posterModalLabel">Category name</h6>
                     <div class="posterModal-img">
                         <img src="/assets/img/broadcast/fon.jpg">
                     </div>
@@ -158,6 +171,7 @@
         let myModal = new bootstrap.Modal(document.getElementById('posterModal'));
         $('.poster-images a').click(function () {
             $('.posterModal .modal-title').text($(this).attr('data-title'));
+            $('.posterModal .modal-title-category').text($(this).attr('data-category-name'));
             $('.posterModal .open_pdf').attr('href', $(this).attr('data-pdf'));
             $('.posterModal .posterModal-img').attr('src', $(this).attr('data-img'));
             $('.posterModal .posterModal-img img').attr('src', $(this).attr('data-img'));
