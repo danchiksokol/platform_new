@@ -29,9 +29,9 @@ services:
       - ../mysql:/var/lib/mysql
     environment:
       MYSQL_USER: root
-      MYSQL_PASSWORD: 123
+      MYSQL_PASSWORD: NtEd5!31_o5NY4X
       MYSQL_DATABASE: platform
-      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: NtEd5!31_o5NY4X
 
   memcached:
     image: memcached:latest
@@ -51,4 +51,4 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_USER=root
-      - PMA_PASSWORD=123
+      - PMA_PASSWORD=NtEd5!31_o5NY4X
