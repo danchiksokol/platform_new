@@ -70,9 +70,9 @@
                                class="nav-link {% if app.request.attributes.get('_route') starts with 'app_main_home_symposium' %}active{% endif %}">Сателлитные Симпозиумы</a>
                             <a href="{{ path('app_main_home_nmo') }}"
                                class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_nmo' %}active{% endif %}">НМО</a>
-{#                            <a href="{{ path('app_poster') }}"#}
-{#                               class="nav-link {% if app.request.attributes.get('_route') == 'app_poster' %}active{% endif %}">#}
-{#                                Постерная сессия</a>#}
+                            <a href="{{ path('app_poster') }}"
+                               class="nav-link {% if app.request.attributes.get('_route') == 'app_poster' %}active{% endif %}">
+                                Постерная сессия</a>
                             <a href="{{ path('app_main_home_sponsors') }}" id="sponsors"
                                class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_sponsors' %}active{% endif %}">Виртуальная
                                 выставка</a>
