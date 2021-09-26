@@ -24,10 +24,27 @@
                                  data-bs-parent="#accordionPoster">
                                 <ul class="accordion-body">
                                     {% for row in posters %}
-                                        <li>
-                                            <a href="{{ asset('uploads/poster/pdf/' ~ row.file) }}" target="_blank">{{ row.title }}</a>
+                                        <li id="poster_{{ row.id }}">
+                                            <a class="poster-images-img"
+                                               data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
+                                               data-pdf="/uploads/poster/pdf/{{ row.file }}"
+                                               data-title="{{ row.title }}"
+                                               data-category-name="{{ row.content }}"
+                                               href="javascript:void(0);">
+                                                {{ row.title }}
+                                            </a>
                                             <br>
-                                            <a href="{{ asset('uploads/poster/pdf/' ~ row.file) }}" target="_blank">{{ row.content }}</a>
+                                            <a class="poster-images-img"
+                                               data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
+                                               data-pdf="/uploads/poster/pdf/{{ row.file }}"
+                                               data-title="{{ row.title }}"
+                                               data-category-name="{{ row.content }}"
+                                               href="javascript:void(0);">
+                                                {{ row.content }}
+                                            </a>
+                                            {# <a href="{{ asset('uploads/poster/pdf/' ~ row.file) }}" target="_blank">{{ row.title }}</a> #}
+                                            {# <br> #}
+                                            {# <a href="{{ asset('uploads/poster/pdf/' ~ row.file) }}" target="_blank">{{ row.content }}</a> #}
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -155,7 +172,7 @@
         }
         if ({{ isVote }}) {
             $('.addToVoteButton').hide();
-            $( ".modal-footer" ).append( "<p><b>Вы уже проголосовали</b></p>" );
+            $(".modal-footer").append("<p><b>Вы уже проголосовали</b></p>");
         }
 
         function isVote(objectId) {
@@ -169,7 +186,7 @@
         }
 
         let myModal = new bootstrap.Modal(document.getElementById('posterModal'));
-        $('.poster-images a').click(function () {
+        $('.poster-images-img').click(function () {
             $('.posterModal .modal-title').text($(this).attr('data-title'));
             $('.posterModal .modal-title-category').text($(this).attr('data-category-name'));
             $('.posterModal .open_pdf').attr('href', $(this).attr('data-pdf'));
@@ -281,7 +298,7 @@
                 async: true,
                 success: function (data) {
                     $('#voteButton').hide();
-                    $( ".modal-footer" ).append( "<p><b>Вы уже проголосовали</b></p>" );
+                    $(".modal-footer").append("<p><b>Вы уже проголосовали</b></p>");
                 }
             });
         });
