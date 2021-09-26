@@ -79,6 +79,16 @@ class PosterService
      */
     public function handleDelete(Poster $poster): void
     {
+        $file = $poster->getFile();
+        $this->fileManagerService->setFileUploadDirectory('pdf');
+        if ($file) {
+            $this->fileManagerService->removeFile('/' . $file);
+        }
+        $thumbnail = $poster->getThumbnail();
+        if ($thumbnail) {
+            $this->fileManagerService->setFileUploadDirectory('thumbnail');
+            $this->fileManagerService->removeFile('/' . $thumbnail);
+        }
         $this->posterRepository->setDelete($poster);
         $this->posterRepository->setSave();
     }
@@ -86,7 +96,7 @@ class PosterService
     /**
      * @param Poster $poster
      */
-    public function handleShow(Poster $poster):void
+    public function handleShow(Poster $poster): void
     {
         $poster->setIsShow(1);
         $this->posterRepository->setSave();
@@ -95,7 +105,7 @@ class PosterService
     /**
      * @param Poster $poster
      */
-    public function handleHide(Poster $poster):void
+    public function handleHide(Poster $poster): void
     {
         $poster->setIsShow(0);
         $this->posterRepository->setSave();
