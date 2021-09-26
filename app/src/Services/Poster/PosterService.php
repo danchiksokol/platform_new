@@ -65,11 +65,40 @@ class PosterService
             $thumbnailName = $this->fileManagerService->uploadFile($thumbnail);
             $poster->setThumbnail($thumbnailName);
         }
+        $poster->setIsShow(0);
 
         $this->posterRepository->setCreate($poster);
         $this->posterRepository->setSave();
 
         return $this;
+    }
+
+    /**
+     * @param Poster $poster
+     * @throws Exception
+     */
+    public function handleDelete(Poster $poster): void
+    {
+        $this->posterRepository->setDelete($poster);
+        $this->posterRepository->setSave();
+    }
+
+    /**
+     * @param Poster $poster
+     */
+    public function handleShow(Poster $poster):void
+    {
+        $poster->setIsShow(1);
+        $this->posterRepository->setSave();
+    }
+
+    /**
+     * @param Poster $poster
+     */
+    public function handleHide(Poster $poster):void
+    {
+        $poster->setIsShow(0);
+        $this->posterRepository->setSave();
     }
 
     /**

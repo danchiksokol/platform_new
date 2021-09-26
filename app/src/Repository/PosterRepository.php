@@ -64,7 +64,6 @@ class PosterRepository extends ServiceEntityRepository
         $this->entityManager->beginTransaction();
         try {
             $this->entityManager->remove($poster);
-            $this->entityManager->flush();
 
             $this->entityManager->commit();
         } catch (Exception $exception) {
@@ -88,6 +87,14 @@ class PosterRepository extends ServiceEntityRepository
     public function getAll(): array
     {
         return $this->findAll();
+    }
+
+    /**
+     * @return Poster[]
+     */
+    public function getAllForRender():array
+    {
+        return $this->findBy(['is_show' => 1], ['id' => 'ASC']);
     }
 
     /**

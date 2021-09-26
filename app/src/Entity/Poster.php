@@ -61,6 +61,11 @@ class Poster
      */
     private $thumbnail;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_show;
+
     #[Pure]
     public function __construct()
     {
@@ -235,6 +240,18 @@ class Poster
     public function setThumbnail(?string $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getIsShow(): ?bool
+    {
+        return $this->is_show;
+    }
+
+    public function setIsShow(?bool $is_show): self
+    {
+        $this->is_show = $is_show;
 
         return $this;
     }

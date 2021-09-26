@@ -24,16 +24,19 @@
                     <td>{{ row.title }}</td>
                     <td>{{ row.href }}</td>
                     <td width="100px"><img src="{{ asset('uploads/news/' ~ row.file) }}"></td>
-                    <td>{% if row.isShow %}
-                        <a type="button" class="btn btn-success"
-                           href="{{ path('app_admin_news_hide', {'id': row.id}) }}">Скрыть</a></td>
+                    <td>
+                        {% if row.isShow %}
+                            <a type="button" class="btn btn-success"
+                               href="{{ path('app_admin_news_hide', {'id': row.id}) }}">Скрыть</a>
                         {% else %}
                             <a type="button" class="btn btn-warning"
-                               href="{{ path('app_admin_news_show', {'id': row.id}) }}">Отобразить</a></td>
+                               href="{{ path('app_admin_news_show', {'id': row.id}) }}">Отобразить</a>
                         {% endif %}
                     </td>
-                    <td><a type="button" class="btn btn-secondary"
-                           href="{{ path('app_admin_news_update', {'id': row.id}) }}">Редактировать</a></td>
+                    <td>
+                        <a type="button" class="btn btn-secondary"
+                           href="{{ path('app_admin_news_update', {'id': row.id}) }}">Редактировать</a>
+                    </td>
                     <td><a type="button" class="btn btn-danger"
                            href="{{ path('app_admin_news_delete', {'id': row.id}) }}">X</a></td>
                 </tr>

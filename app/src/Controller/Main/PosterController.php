@@ -47,15 +47,14 @@ class PosterController extends BaseController
      * @throws Exception
      */
     #[Route('/{categoryId}', name: 'poster', defaults: ['categoryId' => 0])]
-    public function indexAction(
-        Request $request
-    ): Response {
+    public function indexAction(Request $request): Response
+    {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
         $category = $this->posterCategoryRepository->getAll();
         $categoryId = $request->get('categoryId');
-        $posters = $this->posterRepository->getAll();
+        $posters = $this->posterRepository->getAllForRender();
         if ($categoryId) {
             $posters = $this->posterRepository->getAllByCategory($categoryId);
         }

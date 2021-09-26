@@ -98,4 +98,36 @@ class AdminPosterController extends AdminBaseController
             ]
         );
     }
+
+    /**
+     * @param int $id
+     * @return Response
+     * @throws Exception
+     */
+    #[Route('/poster/delete/{id}', name: 'poster_delete')]
+    public function deleteAction(int $id):Response
+    {
+        $poster=$this->posterRepository->getOne($id);
+        $this->posterService->handleDelete($poster);
+
+        return $this->redirectToRoute('app_admin_poster');
+    }
+
+    #[Route('/poster/show/{id}', name: 'poster_show')]
+    public function setShowAction(int $id):Response
+    {
+        $poster = $this->posterRepository->getOne($id);
+        $this->posterService->handleShow($poster);
+
+        return $this->redirectToRoute('app_admin_poster');
+    }
+
+    #[Route('/poster/hide/{id}', name: 'poster_hide')]
+    public function setHideAction(int $id):Response
+    {
+        $poster = $this->posterRepository->getOne($id);
+        $this->posterService->handleHide($poster);
+
+        return $this->redirectToRoute('app_admin_poster');
+    }
 }

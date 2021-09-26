@@ -6,7 +6,8 @@
                 data-bs-target="#modalPosterCategory">
             Создать категорию
         </button>
-         <td><a type="button" class="btn btn-success" href="{{path('app_admin_poster_create') }}">Создать постер</a></td>
+        <td><a type="button" class="btn btn-success" href="{{ path('app_admin_poster_create') }}">Создать постер</a>
+        </td>
         <table class="table table-hover table-bordered">
             <thead>
             <tr>
@@ -31,8 +32,18 @@
                     <td>{{ row.content }}</td>
                     <td>{{ row.file }}</td>
                     <td>{{ row.thumbnail }}</td>
-                    {# <td><a type="button" class="btn btn-secondary" href="{{path('app_admin_question_speaker_setshow', {'id': row.id}) }}">Отобразить</a></td> #}
-                    {# <td><a type="button" class="btn btn-danger" href="{{path('app_admin_question_speaker_delete', {'id': row.id}) }}">X</a></td> #}
+                    <td>
+                        {% if row.isShow %}
+                            <a type="button" class="btn btn-success"
+                               href="{{ path('app_admin_poster_hide', {'id': row.id}) }}">Скрыть</a>
+                        {% else %}
+                            <a type="button" class="btn btn-warning"
+                               href="{{ path('app_admin_poster_show', {'id': row.id}) }}">Отобразить</a>
+                        {% endif %}
+                    </td>
+                     <td>
+                         <a type="button" class="btn btn-danger" href="{{path('app_admin_poster_delete', {'id': row.id}) }}">X</a>
+                     </td>
                 </tr>
             {% endfor %}
             </tbody>
