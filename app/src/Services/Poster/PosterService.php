@@ -10,6 +10,7 @@ use App\Repository\PosterCategoryRepository;
 use App\Repository\PosterRepository;
 use App\Services\FileService\FileManagerServiceInterface;
 use DateTime;
+use DateTimeImmutable;
 use Exception;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,6 +69,43 @@ class PosterService
         $poster->setIsShow(0);
 
         $this->posterRepository->setCreate($poster);
+        $this->posterRepository->setSave();
+
+        return $this;
+    }
+
+    /**
+     * @param Poster $poster
+     * @param Form $form
+     * @return $this
+     */
+    public function handleUpdate(Poster $poster, Form $form, null|string $file, null|string $thumbnail):static
+    {
+        $posterCategoty = $this->posterCategoryRepository->getOne($form->get('posterCategory')->getData());
+        $poster->setTitle($form->get('title')->getData());
+        $poster->setContent($form->get('content')->getData());
+        $poster->setFile($file);
+        $poster->setThumbnail($thumbnail);
+        $poster->setUpdatedAt(new DateTimeImmutable());
+        $poster->setPosterCategory($posterCategoty);
+        $newFile = $form->get('file')->getData();
+        if ($newFile) {
+            if (!empty($file)) {
+                $this->fileManagerService->setFileUploadDirectory('pdf');
+                $this->fileManagerService->removeFile($file);
+            }
+            $fileName = $this->fileManagerService->uploadFile($newFile);
+            $poster->setFile($fileName);
+        }
+        $newThumbnail = $form->get('thumbnail')->getData();
+        if ($newThumbnail) {
+            if (!empty($thumbnail)) {
+                $this->fileManagerService->setFileUploadDirectory('thumbnail');
+                $this->fileManagerService->removeFile($thumbnail);
+            }
+            $thumbnailName = $this->fileManagerService->uploadFile($newThumbnail);
+            $poster->setThumbnail($thumbnailName);
+        }
         $this->posterRepository->setSave();
 
         return $this;

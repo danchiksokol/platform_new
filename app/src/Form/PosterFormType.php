@@ -37,7 +37,8 @@ class PosterFormType extends AbstractType
                 FileType::class,
                 [
                     'label' => 'Загрузка pdf',
-                    'required' => true
+                    'required' => false,
+                    'data_class' => null
                 ]
             )
             ->add(
@@ -45,7 +46,8 @@ class PosterFormType extends AbstractType
                 FileType::class,
                 [
                     'label' => 'Загрузка картинки',
-                    'required' => true
+                    'required' => false,
+                    'data_class' => null
                 ]
             )
             ->add(

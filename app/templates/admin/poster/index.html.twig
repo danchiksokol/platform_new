@@ -17,6 +17,7 @@
                 <th scope="col">Текст</th>
                 <th scope="col">PDF</th>
                 <th scope="col">Preview</th>
+                <th scope="col">Редактировать</th>
                 <th>Отобразить</th>
                 <th>Удалить</th>
             </tr>
@@ -32,6 +33,10 @@
                     <td>{{ row.content }}</td>
                     <td>{{ row.file }}</td>
                     <td>{{ row.thumbnail }}</td>
+                    <td>
+                        <a type="button" class="btn btn-secondary"
+                           href="{{ path('app_admin_poster_update', {'id': row.id}) }}">Редактировать</a>
+                    </td>
                     <td>
                         {% if row.isShow %}
                             <a type="button" class="btn btn-success"

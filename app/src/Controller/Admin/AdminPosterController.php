@@ -99,6 +99,38 @@ class AdminPosterController extends AdminBaseController
         );
     }
 
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return Response
+     */
+    #[Route('/poster/update/{id}', name: 'poster_update')]
+    public function updateAction(Request $request, int $id):Response
+    {
+        $poster = $this->posterRepository->getOne($id);
+        $posterCategoryId = $poster->getPosterCategory()->getId();
+        $poster->setPosterCategory($posterCategoryId);
+        $file = $poster->getFile();
+        $thumbnail = $poster->getThumbnail();
+        $categories = $this->posterCategoryRepository->getAllForRender();
+        $form = $this->createForm(PosterFormType::class, $poster, ['posterCategory' => $categories]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->posterService->handleUpdate($poster, $form, $file, $thumbnail);
+
+            $this->addFlash('Success', 'Изменен успешно');
+            return $this->redirectToRoute('app_admin_poster');
+        }
+
+        return $this->render(
+            'admin/poster/form.html.twig',
+            [
+                'posterForm' => $form->createView(),
+            ]
+        );
+    }
+
     /**
      * @param int $id
      * @return Response

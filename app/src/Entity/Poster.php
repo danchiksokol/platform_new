@@ -176,9 +176,9 @@ class Poster
     }
 
     /**
-     * @return PosterCategory|null
+     * @return int|PosterCategory|null
      */
-    public function getPosterCategory(): ?PosterCategory
+    public function getPosterCategory(): null|int|PosterCategory
     {
         return $this->posterCategory;
     }
