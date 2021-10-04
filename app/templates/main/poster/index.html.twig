@@ -167,10 +167,10 @@
         selectedPosters.push({{ row.id }})
         {% endfor %}
 
-        if (0 == {{ countVotePoster }} || {{ isVote }} ) {
+        if (0 == {{ countVotePoster }} || {{ isVote }}) {
             $('.poster-voting-btn').hide();
         }
-        if ({{ isVote }}) {
+        if (3 == {{ countVotePoster }} || {{ isVote }}) {
             $('.addToVoteButton').hide();
             $(".modal-footer").append("<p><b>Вы уже проголосовали</b></p>");
         }

@@ -25,16 +25,13 @@
                     </div>
                 </div>
                 <div id="messages" class="col-lg-3 col-12">
-                    <div class="chatroom">
-                        {% set chatid = chatid %}
-                        {% include 'main/chatroom/index.html.twig' with {chatid: chatid} %}
-                        <div class="chatroom-bottom">
-                            <textarea id="form-message" placeholder="Сообщение"></textarea>
-                            <input onclick="sendMessageAjax({{ chatid }})" type="button" id="form-submit"/>
-                        </div>
-                    </div>
+                    {% set chatid = chatid %}
+                    {% include 'main/chatroom/index.html.twig' with {chatid: chatid} %}
+{#                    <div class="chatroom-bottom">#}
+{#                        <textarea id="form-message" placeholder="Сообщение"></textarea>#}
+{#                        <input onclick="sendMessageAjax({{ chatid }})" type="button" id="form-submit"/>#}
+{#                    </div>#}
                 </div>
-
             </div>
         </div>
     </div>

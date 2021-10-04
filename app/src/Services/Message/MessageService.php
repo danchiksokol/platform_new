@@ -7,7 +7,6 @@ namespace App\Services\Message;
 use App\Entity\Message;
 use App\Entity\Participant;
 use App\Repository\MessageRepository;
-use App\Services\Participant\ParticipantService;
 use DateTime;
 
 class MessageService
@@ -15,7 +14,7 @@ class MessageService
     /**
      * @var MessageRepository
      */
-    private $messageRepository;
+    private MessageRepository $messageRepository;
 
     /**
      * MessageService constructor.
@@ -28,13 +27,13 @@ class MessageService
 
 
     /**
-     * @param Participant|ParticipantService $participant
+     * @param Participant $participant
      * @param string $content
      * @return $this
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handleCreate(Participant|ParticipantService $participant, string $content):static
+    public function handleCreate(Participant $participant, string $content):static
     {
         $message = new Message();
         $message->setContent($content);

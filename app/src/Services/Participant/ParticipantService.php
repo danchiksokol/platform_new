@@ -59,7 +59,7 @@ class ParticipantService
         $participant->setChatroom($chatRoom);
         $this->participantRepository->setCreate($participant);
 
-        return $this;
+        return $participant;
     }
 
     /**

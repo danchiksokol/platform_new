@@ -114,12 +114,12 @@ class Message
         return $this;
     }
 
-    public function getParticipant(): ?Participant
+    public function getParticipant(): int|Participant
     {
         return $this->participant;
     }
 
-    public function setParticipant(?Participant $participant): self
+    public function setParticipant(null|int|Participant $participant): self
     {
         $this->participant = $participant;
 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost
--- Время создания: Сен 25 2021 г., 16:52
--- Версия сервера: 5.7.27-30
--- Версия PHP: 7.1.30
+-- Хост: db
+-- Время создания: Окт 01 2021 г., 10:02
+-- Версия сервера: 8.0.21
+-- Версия PHP: 7.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `u0484395_lymphorum`
+-- База данных: `platform`
 --
 
 -- --------------------------------------------------------
@@ -28,10 +28,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `id` int(11) NOT NULL,
-  `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int NOT NULL,
+  `email` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `roles` json NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -48,9 +48,9 @@ INSERT INTO `admin` (`id`, `email`, `roles`, `password`) VALUES
 --
 
 CREATE TABLE `answer` (
-  `id` int(11) NOT NULL,
-  `message_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `message_id` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -61,12 +61,12 @@ CREATE TABLE `answer` (
 --
 
 CREATE TABLE `answer_speaker` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `speaker_id` int(11) DEFAULT NULL,
-  `chatroom_id` int(11) DEFAULT NULL,
-  `question_speaker_id` int(11) DEFAULT NULL,
-  `content` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `speaker_id` int DEFAULT NULL,
+  `chatroom_id` int DEFAULT NULL,
+  `question_speaker_id` int DEFAULT NULL,
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `is_show` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -78,9 +78,9 @@ CREATE TABLE `answer_speaker` (
 --
 
 CREATE TABLE `chat_room` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `broadcast` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `broadcast` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -101,14 +101,14 @@ INSERT INTO `chat_room` (`id`, `name`, `broadcast`) VALUES
 --
 
 CREATE TABLE `company` (
-  `id` int(11) NOT NULL,
-  `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` longtext COLLATE utf8mb4_unicode_ci,
+  `id` int NOT NULL,
+  `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `updated_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
-  `content` longtext COLLATE utf8mb4_unicode_ci,
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `is_show` tinyint(1) DEFAULT NULL,
-  `href` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `href` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -134,12 +134,12 @@ INSERT INTO `company` (`id`, `logo`, `title`, `created_at`, `updated_at`, `conte
 --
 
 CREATE TABLE `company_material` (
-  `id` int(11) NOT NULL,
-  `company_id` int(11) DEFAULT NULL,
-  `file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int NOT NULL,
+  `company_id` int DEFAULT NULL,
+  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `thumbnail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_show` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -186,9 +186,9 @@ INSERT INTO `company_material` (`id`, `company_id`, `file`, `created_at`, `updat
 --
 
 CREATE TABLE `company_video` (
-  `id` int(11) NOT NULL,
-  `company_id` int(11) DEFAULT NULL,
-  `video` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int NOT NULL,
+  `company_id` int DEFAULT NULL,
+  `video` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_show` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -214,9 +214,9 @@ INSERT INTO `company_video` (`id`, `company_id`, `video`, `is_show`) VALUES
 --
 
 CREATE TABLE `doctrine_migration_versions` (
-  `version` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `version` varchar(191) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
-  `execution_time` int(11) DEFAULT NULL
+  `execution_time` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -224,19 +224,7 @@ CREATE TABLE `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20210517142119', '2021-05-17 14:21:38', 53),
-('DoctrineMigrations\\Version20210519122013', '2021-05-20 16:23:21', 32),
-('DoctrineMigrations\\Version20210525175858', '2021-05-25 17:59:45', 46),
-('DoctrineMigrations\\Version20210528151935', '2021-05-27 17:21:14', 25),
-('DoctrineMigrations\\Version20210529114207', '2021-05-29 11:54:34', 28),
-('DoctrineMigrations\\Version20210529121522', '2021-05-29 11:54:34', 28),
-('DoctrineMigrations\\Version20210529123316', '2021-05-29 12:38:45', 229),
-('DoctrineMigrations\\Version20210601172250', '2021-06-01 17:26:57', 551),
-('DoctrineMigrations\\Version20210601185253', '2021-06-01 18:53:29', 94),
-('DoctrineMigrations\\Version20210602201137', '2021-06-02 20:13:56', 434),
-('DoctrineMigrations\\Version20210616121424', '2021-06-16 12:15:14', 80),
-('DoctrineMigrations\\Version20210718085350', '2021-07-18 08:54:22', 2377),
-('DoctrineMigrations\\Version20210804105847', '2021-08-04 10:59:08', 97);
+('DoctrineMigrations\\Version20210926215157', '2021-10-01 10:01:37', 85);
 
 -- --------------------------------------------------------
 
@@ -245,10 +233,10 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 --
 
 CREATE TABLE `message` (
-  `id` int(11) NOT NULL,
-  `participant_id` int(11) DEFAULT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_ci,
-  `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` int NOT NULL,
+  `participant_id` int DEFAULT NULL,
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `is_show` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -267,10 +255,10 @@ INSERT INTO `message` (`id`, `participant_id`, `content`, `file`, `created_at`, 
 --
 
 CREATE TABLE `news` (
-  `id` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `href` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` int NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `href` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `updated_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
   `is_show` tinyint(1) NOT NULL
@@ -303,9 +291,9 @@ INSERT INTO `news` (`id`, `title`, `href`, `file`, `created_at`, `updated_at`, `
 --
 
 CREATE TABLE `participant` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `chatroom_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `chatroom_id` int DEFAULT NULL,
   `is_block` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -354,29 +342,30 @@ INSERT INTO `participant` (`id`, `user_id`, `chatroom_id`, `is_block`) VALUES
 --
 
 CREATE TABLE `poster` (
-  `id` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_ci,
-  `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` int NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `poster_category_id` int(11) DEFAULT NULL,
-  `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `poster_category_id` int DEFAULT NULL,
+  `thumbnail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_show` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `poster`
 --
 
-INSERT INTO `poster` (`id`, `title`, `content`, `file`, `created_at`, `updated_at`, `poster_category_id`, `thumbnail`) VALUES
-(6, 'Постер № 1', 'Прогностическая ценность классификационных признаков течения множественной миеломы в современную эру', '611a27b4254c0.pdf', '2021-08-16 11:54:12', NULL, 3, '611a27b42a6d9.png'),
-(7, 'Постер № 02', 'Опыт лечения пациентов с множественной миеломой с применением высокодозной химиотерапии и аутологичной трансплантации гемопоэтических стволовых клеток. Данные отделения гематологии ГБУЗ ИОКБ', '611a281367012.pdf', '2021-08-16 11:55:47', NULL, 3, '611a281367d6d.png'),
-(8, 'Постер № 3', 'Морфофункциональные особенности сосудистой ниши костного мозга и мезенхимных стромальных клеток у пациентов с множественной миеломой после терапии', '611a290385d02.pdf', '2021-08-16 11:59:47', NULL, 3, '611a290387c19.png'),
-(9, 'Постер № 4', 'Динамика показателей клеточного иммунитета у больных множественной миеломой до и после аутологичной трансплантации гемопоэтических стволовых клеток', '611a2928c6199.pdf', '2021-08-16 12:00:24', NULL, 3, '611a2928c7352.png'),
-(10, 'Постер № 7', 'Успешное лечение больного с ишемической болезнью сердца после лучевой терапии по поводу неходжкинской лимфомы', '611a2942dc2a6.pdf', '2021-08-16 12:00:50', NULL, 4, '611a2942ddb4f.png'),
-(11, 'Постер № 8', 'Риск развития тромбоэмболических осложнений у пациентов с неходжкинской лимфомой с антителами к кардиолипинам', '611a295fc4fa1.pdf', '2021-08-16 12:01:19', NULL, 4, '611a295fc6040.png'),
-(12, 'Постер № 28', 'Терапия ингибиторами контрольных точек PD-1 в комбинации с BeGEV у пациентов с рецидивом классической лимфомы Ходжкина', '611a298124f29.pdf', '2021-08-16 12:01:53', NULL, 5, '611a298125d9a.png'),
-(13, 'Постер № 29', 'Ингибиторы контрольных точек и классическая лимфома Ходжкина: эффективность и безопасность пебролизумаба при рецидивах и резистентном течении лимфомы (опыт ФГБУ «НМХЦ им. Н.И. Пирогова» Минздрава России)', '611a29a258adc.pdf', '2021-08-16 12:02:26', NULL, 5, '611a29a25a3d7.png');
+INSERT INTO `poster` (`id`, `title`, `content`, `file`, `created_at`, `updated_at`, `poster_category_id`, `thumbnail`, `is_show`) VALUES
+(6, 'Постер № 1', 'Прогностическая ценность классификационных признаков течения множественной миеломы в современную эру', '611a27b4254c0.pdf', '2021-08-16 11:54:12', NULL, 3, '611a27b42a6d9.png', NULL),
+(7, 'Постер № 02', 'Опыт лечения пациентов с множественной миеломой с применением высокодозной химиотерапии и аутологичной трансплантации гемопоэтических стволовых клеток. Данные отделения гематологии ГБУЗ ИОКБ', '611a281367012.pdf', '2021-08-16 11:55:47', NULL, 3, '611a281367d6d.png', NULL),
+(8, 'Постер № 3', 'Морфофункциональные особенности сосудистой ниши костного мозга и мезенхимных стромальных клеток у пациентов с множественной миеломой после терапии', '611a290385d02.pdf', '2021-08-16 11:59:47', NULL, 3, '611a290387c19.png', NULL),
+(9, 'Постер № 4', 'Динамика показателей клеточного иммунитета у больных множественной миеломой до и после аутологичной трансплантации гемопоэтических стволовых клеток', '611a2928c6199.pdf', '2021-08-16 12:00:24', NULL, 3, '611a2928c7352.png', NULL),
+(10, 'Постер № 7', 'Успешное лечение больного с ишемической болезнью сердца после лучевой терапии по поводу неходжкинской лимфомы', '611a2942dc2a6.pdf', '2021-08-16 12:00:50', NULL, 4, '611a2942ddb4f.png', NULL),
+(11, 'Постер № 8', 'Риск развития тромбоэмболических осложнений у пациентов с неходжкинской лимфомой с антителами к кардиолипинам', '611a295fc4fa1.pdf', '2021-08-16 12:01:19', NULL, 4, '611a295fc6040.png', NULL),
+(12, 'Постер № 28', 'Терапия ингибиторами контрольных точек PD-1 в комбинации с BeGEV у пациентов с рецидивом классической лимфомы Ходжкина', '611a298124f29.pdf', '2021-08-16 12:01:53', NULL, 5, '611a298125d9a.png', NULL),
+(13, 'Постер № 29', 'Ингибиторы контрольных точек и классическая лимфома Ходжкина: эффективность и безопасность пебролизумаба при рецидивах и резистентном течении лимфомы (опыт ФГБУ «НМХЦ им. Н.И. Пирогова» Минздрава России)', '611a29a258adc.pdf', '2021-08-16 12:02:26', NULL, 5, '611a29a25a3d7.png', NULL);
 
 -- --------------------------------------------------------
 
@@ -385,8 +374,8 @@ INSERT INTO `poster` (`id`, `title`, `content`, `file`, `created_at`, `updated_a
 --
 
 CREATE TABLE `poster_category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -407,11 +396,11 @@ INSERT INTO `poster_category` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `question_speaker` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `speaker_id` int(11) DEFAULT NULL,
-  `chatroom_id` int(11) DEFAULT NULL,
-  `content` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `speaker_id` int DEFAULT NULL,
+  `chatroom_id` int DEFAULT NULL,
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `is_show` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -430,9 +419,9 @@ INSERT INTO `question_speaker` (`id`, `user_id`, `speaker_id`, `chatroom_id`, `c
 --
 
 CREATE TABLE `speaker` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `chatroom_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `chatroom_id` int DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `is_show` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -453,16 +442,16 @@ INSERT INTO `speaker` (`id`, `user_id`, `chatroom_id`, `created_at`, `is_show`) 
 --
 
 CREATE TABLE `theses` (
-  `id` int(11) NOT NULL,
-  `fio` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `work` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `authors` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `theses` longtext COLLATE utf8mb4_unicode_ci,
-  `file` longtext COLLATE utf8mb4_unicode_ci,
+  `id` int NOT NULL,
+  `fio` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `work` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `authors` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theses` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `file` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -474,21 +463,21 @@ CREATE TABLE `theses` (
 --
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int NOT NULL,
+  `email` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `roles` json NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `surname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `patronymic` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `specialization` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `job` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `surname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `patronymic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `specialization` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `job` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `position` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_verified` tinyint(1) NOT NULL,
-  `secret` char(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:guid)',
+  `secret` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:guid)',
   `is_attend` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -532,7 +521,7 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `surname`, `name`, `patr
 (86, 'ekateri-koto@yandex.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$KeiRLS4GVD21wBn6GZnwhg$EkrzIDGRsRdiIRkN1Z2AVbRrFWpHK7A/iD4NpK/t+sQ', 'Котова', 'Екатерина', 'Сергеевна', 'Гематология', 'ФГБУ «НМИЦ гематологии» МЗ РФ', 'Врач-гематолог, аспирант', '89165322436', 'Россия', 'Москва', 0, '2a5bc93575312d32dd1c5e9407e476b5', NULL),
 (87, 'blood-60@mail.ru', '[\"ROLE_USER\"]', '$2y$13$RRcanhaSTICfBtQ8GR5BN.nmNxJuklhctrCoie.sdPvx2isqykEqe', 'Балакирева', 'Татьяна', 'Владимировна', 'Гематология', 'ФГБУ ДПО РМАНПО', 'Доцент кафедры', '+79169868660', 'РФ', 'Москва', 1, '4b993879138558fc8f6784b6aa7c1d40', NULL),
 (88, 'slava29393@mail.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$v3ErOFwjWbTMU9bx6FIi5w$Kq0TkKEAzDMhCgl87tmHajTIGATaB1dl9KO68dM8/lA', 'Нестеренко', 'Вячеслав', 'Александрович', 'Гематология', 'Сургутская ОКБ', 'Гематолог', '89829179453', 'Россия', 'Сургут', 0, 'd06c99255bf1640a383267c41e08613b', NULL),
-(89, 'valya.ryltseva@mail.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$U1oWqa48Ah/LagDeWg5FEw$zgHcIPuNNaisbR0NNlqYrzWfVd5j0OTW6dQ+JHKnIK0', 'Куцемелова', 'Валентина', 'Юрьевна', 'Гематология', 'ОКДЦ', 'Врач', '+79094112765', 'Россия', 'Ростов-на-Дону', 0, '7e945bf68c2481cd84b6ecaa5a856c5e', NULL),
+(89, 'valya.ryltseva@mail.ru', '[\"ROLE_USER\"]', '$2y$13$V/OwSQJZrUbCGTJVWZ14hequAHd5CPNDBq0CCFUlNk6ngjwV7Re86', 'Куцемелова', 'Валентина', 'Юрьевна', 'Гематология', 'ОКДЦ', 'Врач', '+79094112765', 'Россия', 'Ростов-на-Дону', 0, '7e945bf68c2481cd84b6ecaa5a856c5e', NULL),
 (90, 'rechmedina_n@mail.ru', '[\"ROLE_USER\"]', '$2y$13$jQKiug8Eh3gj0GXgWUTEqe7.Ll3gWal9bz0UCwUal62bVuLbbhlrm', 'Речмедина', 'Надежда', 'Владимировна', 'Кардиология', 'ГБУЗ Краснодарского края ГП N23 города Краснодара', 'Врач-кардиолог', '+79183772273', 'Россия', 'Краснодар', 0, '98d2ae6d90591495e0e0192afc6dbf63', NULL),
 (91, 'popovaNB@yandex.ru', '[\"ROLE_USER\"]', '$2y$13$U4hS8M4sZj9kB1cOw3aXKeKFf70wpuMLO5fyScL70En8HpSZS/g7e', 'Попова', 'Наталья', 'Борисовна', 'Гематология', 'Сургутская окружная клиническая больница', 'Врач-гематолог', '+79226546304', 'Россия', 'Сургут', 1, 'f2421017a411a7a8add64289c898b977', NULL),
 (92, 'dbudanova@yandex.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$vElm/MfyAF4kn4++gmkJig$HVKMYCsxIV5kEnzm5x3bjWpGaj3Nf6UwgVBcfSWYjCM', 'Буданова', 'Дарья', 'Александровна', 'Гематолог', 'ПМГМУ им.И.М. Сеченова', 'Врач', '89165202050', 'Россия', 'Москва', 1, 'fa7721613c714f9dd6f381940910861c', NULL),
@@ -556,7 +545,7 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `surname`, `name`, `patr
 (110, 'gravity_@mail.ru', '[\"ROLE_USER\"]', '$2y$13$J3OcLh0uJT/Kka.S.86yI.L/wVZeFraGfIa.mEF0fFOtM/zob.lpm', 'Панфилова', 'Виктория', 'Викторовна', 'Клиническая лабораторная диагностика', 'ГОО ВПО ДОННМУ им М Горького', 'ассистент кафедры трансплантологии и клинической лабораторной диагностики', '+70502671875', 'Украина', 'Донецк', 0, '896bbd693152a0a7e074f6ccc829b615', NULL),
 (111, 'isachenkov@mail.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$J4M+VPqgLh1CUfO53Uq6qg$x8b2HzKOtW7TePJzr4PzZtYuOhQE4e/E3e2IdQ4r5yA', 'Исаченков', 'Максим', 'Игоревич', 'гематолог', 'ОП ЦАОП ГКБ им.Д.Д.Плетнева', 'врач-гематолог', '+79031402625', 'Россия', 'Москва', 1, 'faa13c2704f293fed1a043659272b2ad', NULL),
 (112, 'mts71@yandex.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$vFMio7D2LBSgu4iZZCjmAg$Bjg5cfxl04blXiD2b06uNJhx/MupWNd1cnh9qgWaYew', 'Ильичёв', 'Виктор', 'Викторович', 'онкология', 'Мытищинская городская больница', 'Врач', '499 660 98 14', 'Россия', 'Москва', 0, '438c6f8b2e08e11aeb46880a8e67a5d2', 1),
-(113, 'mmar55@list.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$34vM2w2vtYn2wFvuWjKVgQ$428mN9r2y/rSqtnemtJNVvBPu53CpC5RdslvFzyQ0Y8', 'Мельникова', 'Мария', 'Владимировна', 'Патологическая анатомия', 'НМИЦ онкологии им. Н. Н. Блохина', 'Врач-патологоанатом', '89030124773', 'Россия', 'Подольск', 1, 'b0d47b9f0dec168adef53344b6f8678f', NULL),
+(113, 'mmar55@list.ru', '[\"ROLE_USER\"]', '$2y$13$022WWxe14qE2MaJItQwo8OE3GZ2hIvFd3N4APWe7i.GqCmnclykSC', 'Мельникова', 'Мария', 'Владимировна', 'Патологическая анатомия', 'НМИЦ онкологии им. Н. Н. Блохина', 'Врач-патологоанатом', '89030124773', 'Россия', 'Подольск', 1, 'b0d47b9f0dec168adef53344b6f8678f', NULL),
 (114, '4444anna_alekseeva@mail.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$rbLU+mEGyrq7FRb8OIp+zQ$/jDiutLKn2xQMpBaAhwUysI3dvqR0t25TEzXRk7ss6E', 'Алексеева', 'Анна', 'Николаевна', 'гематология', 'ркб им. Семашко', 'врач', '89149831173', 'Россия', 'улан-удэ', 1, '9faafdfa1c411388ab8b085e36a69d72', NULL),
 (115, 'valeryamarckelowa@yandex.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$PVERP8ESvpY5n1naJyOQmg$+1oi8EB87t79ypQBroupIA8tG89191siaA/xb7Tj80Y', 'Маркелова', 'Валерия', 'Александровна', 'Онкология', 'ФГКУ 422 ВГ МО РФ', 'Хирург', '+79030521732', 'Россия', 'Нижний Новгород', 1, '6a3fe67b50f2f6a1aaf6e77b55168883', NULL),
 (116, 'ardana_mak@mail.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$HQbj0trUJDTED00HKdTxZQ$SDUePl2Lr1iP3lq9Z0WZB4iTdTBZWfoH8u3gNJMeHkw', 'Makenova', 'Ardana', 'Abylayevna', 'Гематология', 'Областная больница', 'Гематолог', '+77055652035', 'Казахстан', 'Усть-Каменогорск', 0, 'c58d4a20dcbbebe23e61b4cbbcdec982', NULL),
@@ -918,13 +907,15 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `surname`, `name`, `patr
 (475, 'olikzero@yandex.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$v9fGYShrKpX9F8id3Ocp2g$oQ8axAAk8RGrMVYu/7v+c4W+oSQRQ5sAIw+fgJfX+Mg', 'Аржанухина', 'Ольга', 'Юрьевна', 'Гематология', 'Университетская клиническая больница', 'Врачгематолог', '89053218260', 'Россия', 'Саратов', 1, '607aeeb09972aa3400152dd00a35542d', NULL),
 (476, 'ilmir6@ya.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$ZNDY3XmXMt86dxHqXdgMtw$hELiTZlGsAwCP6bg/x81Rnb9l26FJqzIhiwE6p9OzkQ', 'Юлдаш', 'Юлдаш', 'Амир', 'Психолог', 'Онк.дисп.6', 'Мед.психолог', '+79857642911', 'Рф', 'Астрахань', 0, 'a917af193c59db39ce4dabd4194d9c34', 1),
 (477, 'ivanchikova_d@mail.ru', '[\"ROLE_USER\"]', '$2y$13$YAEsVNqP.4M9Mj3NFiRjAu/Af.LYI4sZfrMk1oFTpFNkjPURtgZN6', 'Иванчикова', 'Дарья', 'Игоревна', 'Гематолог', 'КГБУЗ ККБ 1', 'Врач гематолог', '89145480040', 'Россия', 'Хабаровск', 0, 'f937ff386cd1f1cb7bd0ae3f8b1ff6ab', NULL),
-(478, 'drozdann@mail.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$BZIuhMIZCQEWTjL9b0myOw$rujMEeV/nVHWYkRFhdq4ue2EADxfqmzpfTwzPeAzDtI', 'Дроздова', 'Анна', 'Сергеевна', 'онколог', 'Москва', 'врач', '+79035095469', 'Россия', 'Moscow', 1, '6ae043ed39eca23b3c79fb6101751c07', NULL),
+(478, 'drozdann@mail.ru', '[\"ROLE_USER\"]', '$2y$13$pUzNLSV9.MomiXG.AeSYQ.GDt6HKITnsDkVqtUAiNctRTHVmggcG.', 'Дроздова', 'Анна', 'Сергеевна', 'онколог', 'Москва', 'врач', '+79035095469', 'Россия', 'Moscow', 1, '6ae043ed39eca23b3c79fb6101751c07', NULL),
 (479, 'nimgirovam@mail.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$U+6BwhSrzSQRDk19h9M2/w$X7FMm8zqfTV2Cxu91OAuLTP37MM97t9Vse5db6BCnUA', 'Широкова', 'Мария', 'Николаевна', 'Гематолог', 'ГКБ  им. С. П. БОТКИНА', 'Врач', '89275359848', 'Россия', 'Москва', 1, 'a04a575e2ae720de5d3a17f345f2307f', NULL),
 (480, 'nastyonka.venzenko@mail.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$cupYFC+RQ0s0hl+udqhClg$lbwjbEpXcDdUsjjQQex5XSBj9sJ3/ziAlIWaCLcgFd4', 'Ковалева', 'Анастасия', 'Васильевна', 'гематология', 'Пермский государственный медицинский университет им. ак. Е.А. Вагнера', 'ординатор', '+79097290654', 'Россия', 'Пермь', 1, 'f178cbb4d7a49d28183ddb05288608b6', NULL),
 (481, 'akuzaev@gmail.com', '[\"ROLE_USER\"]', '$2y$13$oehV/prgPUgXk6fEyH1UxuoQ2edmLRmeM5UbeZHhPCl8EgiXeztsC', 'Кузаев', 'Андрей', 'Александрович', 'ИТ', 'ВэллКаст', 'Инженер', '89261160970', 'РФ', 'Москва', 0, '253dcb1ca62b344a3c7529ae1ca4162a', NULL),
 (482, 'annaalbitskaya@ya.ru', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$KVakz9/tp3knyAz68bByuw$u4HCImALVJKWhul5K3R72uqgGFaKqe+dWTPgQU3MOIA', 'Альбицкая', 'Анна', 'Юрьевна', 'Гематология', 'РОШ', 'Партнёр по развитию', '9162720587', 'Россия', 'Москва', 0, '0fb87de3dc65610c88367c74edb855b3', NULL),
 (483, 'korobitsyna3000@mail.ru', '[\"ROLE_USER\"]', '$2y$13$QO3fQgODtkQKTIKmLA6TIOMthzZF4GDvhnEq/NNbJf8I0Dco/oaI2', 'Коробицына', 'Ольга', 'Валерьевна', 'Гематолог', 'ГБУЗ ЧОкб', 'врач', '+79191266158', 'Рф', 'Челябинск', 1, '1d1962a2241ed7d103002cdd966db361', NULL),
-(484, 'drexit@bk.ru', '[\"ROLE_USER\"]', '$2y$13$zZKv0/.mNXQwaP/UHghysOC7zkc8fK4IxHnFFa9eV510FSxlR6s52', 'Vykhodets', 'Tatiana', 'Valerievna', 'PM', 'BMS', 'PM', '89165020959', 'Russia', 'Moscow', 0, '316c8633d44be50f8fc4e5bca709dd11', NULL);
+(484, 'drexit@bk.ru', '[\"ROLE_USER\"]', '$2y$13$zZKv0/.mNXQwaP/UHghysOC7zkc8fK4IxHnFFa9eV510FSxlR6s52', 'Vykhodets', 'Tatiana', 'Valerievna', 'PM', 'BMS', 'PM', '89165020959', 'Russia', 'Moscow', 0, '316c8633d44be50f8fc4e5bca709dd11', NULL),
+(485, 'ellizzaru@yandex.ru', '[\"ROLE_USER\"]', '$2y$13$b8qROblBrdyBIuVRbnbpL.lLFHFmOBsEEDNyaNGP29L5kt95y9JX2', 'Трофимова', 'Надежда', 'у', 'у', 'РОНЦ', 'врач', '89268350853', 'Россия', '115409', 1, '4ac3a1664b694ff019c520d55b68d94e', NULL),
+(486, 'olgamukhortova@yandex.ru', '[\"ROLE_USER\"]', '$2y$13$QVuQ/ikZY7XJ7bTMa6o1JOUeF/aEllphSLyiGTVY3oeDi.9kqb/0S', 'Мухортова', 'Ольга', 'Валентиновна', 'ПЭТ-диагностика', 'ФГБУ НМИЦ ССХ им А.Н.Бакулева МЗ РФ', 'ведущий научный сотрудник отела ядерной диагностики', '89031122208', 'Россия', 'Москва', 0, '130bb51f951d85c91ac3062b50d979a6', NULL);
 
 -- --------------------------------------------------------
 
@@ -933,13 +924,13 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `surname`, `name`, `patr
 --
 
 CREATE TABLE `user_statistics` (
-  `id` int(11) NOT NULL,
-  `company_id` int(11) DEFAULT NULL,
-  `company_material_id` int(11) DEFAULT NULL,
-  `company_video_id` int(11) DEFAULT NULL,
-  `broadcast_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `company_id` int DEFAULT NULL,
+  `company_material_id` int DEFAULT NULL,
+  `company_video_id` int DEFAULT NULL,
+  `broadcast_id` int DEFAULT NULL,
   `is_sponsors` tinyint(1) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1588,7 +1579,43 @@ INSERT INTO `user_statistics` (`id`, `company_id`, `company_material_id`, `compa
 (1218, NULL, NULL, NULL, 1, 0, 24),
 (1219, NULL, NULL, NULL, 2, 0, 397),
 (1220, NULL, NULL, NULL, 3, 0, 397),
-(1221, NULL, NULL, NULL, 1, 0, 195);
+(1221, NULL, NULL, NULL, 1, 0, 195),
+(1222, NULL, NULL, NULL, 1, 0, 97),
+(1223, NULL, NULL, NULL, NULL, 1, 397),
+(1224, NULL, NULL, NULL, NULL, 1, 397),
+(1225, NULL, NULL, NULL, NULL, 1, 397),
+(1226, 11, NULL, NULL, NULL, 0, 397),
+(1227, NULL, NULL, NULL, NULL, 1, 397),
+(1228, 18, NULL, NULL, NULL, 0, 397),
+(1229, 16, NULL, NULL, NULL, 0, 397),
+(1230, NULL, NULL, NULL, 1, 0, 397),
+(1231, NULL, NULL, NULL, 1, 0, 89),
+(1232, NULL, NULL, NULL, 1, 0, 437),
+(1233, NULL, NULL, NULL, NULL, 1, 437),
+(1234, 12, NULL, NULL, NULL, 0, 437),
+(1235, NULL, NULL, NULL, 1, 0, 437),
+(1236, NULL, NULL, NULL, 1, 0, 437),
+(1237, NULL, NULL, NULL, 1, 0, 437),
+(1238, NULL, NULL, NULL, 4, 0, 478),
+(1239, NULL, NULL, NULL, NULL, 1, 485),
+(1240, 17, NULL, NULL, NULL, 0, 485),
+(1241, NULL, NULL, NULL, 1, 0, 437),
+(1242, NULL, NULL, NULL, 1, 0, 437),
+(1243, NULL, NULL, NULL, 4, 0, 437),
+(1244, NULL, NULL, NULL, NULL, 1, 437),
+(1245, 12, NULL, NULL, NULL, 0, 437),
+(1246, NULL, NULL, NULL, NULL, 1, 1),
+(1247, NULL, NULL, NULL, 1, 0, 1),
+(1248, NULL, NULL, NULL, NULL, 1, 24),
+(1249, NULL, NULL, NULL, 1, 0, 486),
+(1250, NULL, NULL, NULL, 1, 0, 486),
+(1251, NULL, NULL, NULL, 1, 0, 486),
+(1252, NULL, NULL, NULL, 1, 0, 486),
+(1253, NULL, NULL, NULL, 1, 0, 74),
+(1254, NULL, NULL, NULL, NULL, 1, 24),
+(1255, NULL, NULL, NULL, 1, 0, 195),
+(1256, NULL, NULL, NULL, 1, 0, 195),
+(1257, NULL, NULL, NULL, NULL, 1, 24);
 
 -- --------------------------------------------------------
 
@@ -1597,9 +1624,9 @@ INSERT INTO `user_statistics` (`id`, `company_id`, `company_material_id`, `compa
 --
 
 CREATE TABLE `visit_control` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2460,9 +2487,9 @@ INSERT INTO `visit_control` (`id`, `created_at`, `user_id`) VALUES
 --
 
 CREATE TABLE `vote` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `poster_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `poster_id` int DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2626,115 +2653,115 @@ ALTER TABLE `vote`
 -- AUTO_INCREMENT для таблицы `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `answer_speaker`
 --
 ALTER TABLE `answer_speaker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `chat_room`
 --
 ALTER TABLE `chat_room`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `company`
 --
 ALTER TABLE `company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT для таблицы `company_material`
 --
 ALTER TABLE `company_material`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT для таблицы `company_video`
 --
 ALTER TABLE `company_video`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT для таблицы `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT для таблицы `participant`
 --
 ALTER TABLE `participant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT для таблицы `poster`
 --
 ALTER TABLE `poster`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `poster_category`
 --
 ALTER TABLE `poster_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `question_speaker`
 --
 ALTER TABLE `question_speaker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT для таблицы `speaker`
 --
 ALTER TABLE `speaker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT для таблицы `theses`
 --
 ALTER TABLE `theses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=485;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=487;
 
 --
 -- AUTO_INCREMENT для таблицы `user_statistics`
 --
 ALTER TABLE `user_statistics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1222;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1258;
 
 --
 -- AUTO_INCREMENT для таблицы `visit_control`
 --
 ALTER TABLE `visit_control`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=846;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=846;
 
 --
 -- AUTO_INCREMENT для таблицы `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

@@ -4,13 +4,15 @@ namespace App\Sockets;
 
 use App\Services\Message\MessageService;
 use App\Services\Participant\ParticipantService;
+use Exception;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use SplObjectStorage;
 
 class Chat implements MessageComponentInterface
 {
     /**
-     * @var \SplObjectStorage
+     * @var SplObjectStorage
      */
     protected $clients;
     /**
@@ -29,7 +31,7 @@ class Chat implements MessageComponentInterface
      */
     public function __construct(ParticipantService $participantService, MessageService $messageService)
     {
-        $this->clients = new \SplObjectStorage();
+        $this->clients = new SplObjectStorage();
         $this->participantService = $participantService;
         $this->messageService = $messageService;
     }
@@ -50,6 +52,7 @@ class Chat implements MessageComponentInterface
      * @param string $msg
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws Exception
      */
     public function onMessage(ConnectionInterface $from, $msg)
     {
@@ -91,9 +94,9 @@ class Chat implements MessageComponentInterface
 
     /**
      * @param ConnectionInterface $conn
-     * @param \Exception $e
+     * @param Exception $e
      */
-    public function onError(ConnectionInterface $conn, \Exception $e)
+    public function onError(ConnectionInterface $conn, Exception $e)
     {
         echo "An error has occurred: {$e->getMessage()}\n";
 
