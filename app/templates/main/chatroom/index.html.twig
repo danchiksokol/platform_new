@@ -51,13 +51,14 @@
         conn.onmessage = function (e) {
             let data = JSON.parse(e.data);
             Chat.appendMessage(data.username, data.message);
-
             console.log(data);
         };
 
         conn.onerror = function (e) {
-            alert("Error: something went wrong with the socket.");
-            console.error(e);
+            setInterval(function () {
+                console.error(e);
+                document.location.reload();
+            }, 7000);
         };
         // END SOCKET CONFIG
 
@@ -140,7 +141,28 @@
                     $('#message_' + id).remove();
                 }
             });
-            return false;
         };
+
+        function isReloadPage() {
+            $.ajax({
+                url: '{{ (path('app_broadcast_reload_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "chatId": {{ chatid }}
+                },
+                async: true,
+                success: function (data) {
+                    if (data.reload) {
+                        document.location.reload();
+                    }
+                }
+            });
+        }
+
+        setInterval(function () {
+            console.log('test');
+            isReloadPage();
+        }, 60000);
     </script>
 {% endblock %}

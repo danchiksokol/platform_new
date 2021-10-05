@@ -56,6 +56,11 @@ class ChatRoom
      */
     private $broadcast;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_reload_page;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
@@ -240,6 +245,18 @@ class ChatRoom
     public function setBroadcast(?string $broadcast): self
     {
         $this->broadcast = $broadcast;
+
+        return $this;
+    }
+
+    public function getIsReloadPage(): ?bool
+    {
+        return $this->is_reload_page;
+    }
+
+    public function setIsReloadPage(?bool $is_reload_page): self
+    {
+        $this->is_reload_page = $is_reload_page;
 
         return $this;
     }

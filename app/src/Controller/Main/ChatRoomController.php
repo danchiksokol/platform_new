@@ -11,6 +11,7 @@ use App\Repository\UserRepository;
 use App\Services\QuestionSpeaker\QuestionSpeakerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -127,6 +128,21 @@ class ChatRoomController extends BaseController
             'main/broadcast/index.html.twig',
             $forRender
         );
+    }
+
+
+    #[Route('reload/ajax', name: 'broadcast_reload_ajax')]
+    public function reloadPageAction(Request $request):Response
+    {
+        if ($request->isXMLHttpRequest() && $request->get('chatId')) {
+            $chatRoomId = $request->get('chatId');
+            $chatRoom = $this->chatRoomRepository->getOne($chatRoomId);
+            $isReload = $chatRoom->getIsReloadPage();
+
+            return new JsonResponse(array('reload' => $isReload));
+        }
+
+        return new Response('This is not ajax!', 400);
     }
 
 }

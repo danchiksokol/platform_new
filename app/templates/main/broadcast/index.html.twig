@@ -97,41 +97,41 @@
             });
         });
 
-        setInterval(function () {
-            $.ajax({
-                url: '{{ (path('app_question_ajax')) }}',
-                type: "POST",
-                dataType: "json",
-                data: {
-                    "chatRoomId": {{ chatid }} // Данные которые отправляем на сервер
-                },
-                async: true,
-                success: function (data) {
-                    let output = data.output;
-                    let idArray = Object.keys(output);
-                    let divArray = document.getElementsByClassName('broadcast-questions-item');
-                    for (let j = 0; j < divArray.length; j++) {
-                        divArray[j].remove();
-                    }
-                    for (let i = 0; i < idArray.length; i++) {
-                        let id = "broadcast-question-id-" + idArray[i];
-                        if (!document.getElementById(id)) {
-                            let divBroadcast = document.createElement("div");
-                            divBroadcast.className = "broadcast-questions-item";
-                            divBroadcast.setAttribute("id", id);
-                            let span = document.createElement("span");
-                            span.innerHTML = output[idArray[i]]['fio'];
-                            let divQuestion = document.createElement("div");
-                            divQuestion.innerHTML = output[idArray[i]]['content'];
-                            divBroadcast.prepend(divQuestion);
-                            divBroadcast.prepend(span);
-                            let broadQuestTitle = document.getElementById('broadcast-questions-title-id');
-                            broadQuestTitle.after(divBroadcast);
-                        }
-                    }
-                }
-            });
-        }, 5000);
+        {#setInterval(function () {#}
+        {#    $.ajax({#}
+        {#        url: '{{ (path('app_question_ajax')) }}',#}
+        {#        type: "POST",#}
+        {#        dataType: "json",#}
+        {#        data: {#}
+        {#            "chatRoomId": {{ chatid }} // Данные которые отправляем на сервер#}
+        {#        },#}
+        {#        async: true,#}
+        {#        success: function (data) {#}
+        {#            let output = data.output;#}
+        {#            let idArray = Object.keys(output);#}
+        {#            let divArray = document.getElementsByClassName('broadcast-questions-item');#}
+        {#            for (let j = 0; j < divArray.length; j++) {#}
+        {#                divArray[j].remove();#}
+        {#            }#}
+        {#            for (let i = 0; i < idArray.length; i++) {#}
+        {#                let id = "broadcast-question-id-" + idArray[i];#}
+        {#                if (!document.getElementById(id)) {#}
+        {#                    let divBroadcast = document.createElement("div");#}
+        {#                    divBroadcast.className = "broadcast-questions-item";#}
+        {#                    divBroadcast.setAttribute("id", id);#}
+        {#                    let span = document.createElement("span");#}
+        {#                    span.innerHTML = output[idArray[i]]['fio'];#}
+        {#                    let divQuestion = document.createElement("div");#}
+        {#                    divQuestion.innerHTML = output[idArray[i]]['content'];#}
+        {#                    divBroadcast.prepend(divQuestion);#}
+        {#                    divBroadcast.prepend(span);#}
+        {#                    let broadQuestTitle = document.getElementById('broadcast-questions-title-id');#}
+        {#                    broadQuestTitle.after(divBroadcast);#}
+        {#                }#}
+        {#            }#}
+        {#        }#}
+        {#    });#}
+        {#}, 5000);#}
 
         $('#fullscreen-btn').click(function () {
             $(this).toggleClass('active');
@@ -159,16 +159,16 @@
     {% set submit_url = path('app_broadcast', {'chatid': chatid}) %}
     {% include 'main/question_speaker/form.html.twig' with {url: submit_url} %}
 {% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        setInterval(function () {
-            $.ajax({
-                method: 'POST',
-                url: '{{ path('app_messages', {'chatid':chatid}) }}'
-            }).done(function (data) {
-                $('#chat-list').html(data);
-            });
-        }, 5000);
-    </script>
-{% endblock %}
+{#{% block javascripts %}#}
+{#    {{ parent() }}#}
+{#    <script>#}
+{#        setInterval(function () {#}
+{#            $.ajax({#}
+{#                method: 'POST',#}
+{#                url: '{{ path('app_messages', {'chatid':chatid}) }}'#}
+{#            }).done(function (data) {#}
+{#                $('#chat-list').html(data);#}
+{#            });#}
+{#        }, 5000);#}
+{#    </script>#}
+{#{% endblock %}#}
