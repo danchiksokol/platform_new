@@ -881,15 +881,15 @@ header .container {
 }
 
 .chatroom-date {
-    font-size: 14px;
+    font-size: 12px;
     text-align: right;
-    width: 60%;
+    /*width: 60%;*/
     display: inline-block;
 }
 
 .chatroom-user {
-    font-size: 14px;
-    width: 38%;
+    font-size: 12px;
+    width: 100%;
     display: inline-block;
 }
 

@@ -75,7 +75,7 @@ class Chat implements MessageComponentInterface
 
         $data = json_decode($msg);
         $chatRoomId = intval($data->chatroom);
-        $userId = $data->username;
+        $userId = intval($data->userId);
         $content = $data->message;
         $participant = $this->participantService->handleCreate($chatRoomId, $userId);
         $this->messageService->handleCreate($participant, $content);

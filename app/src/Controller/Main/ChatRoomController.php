@@ -75,6 +75,7 @@ class ChatRoomController extends BaseController
         $chatRoomId = $request->get('chatid');
         $chatRoom = $this->chatRoomRepository->getOne($chatRoomId);
         $userId = $this->getUser()->getId();
+        $user = $this->userRepository->getOne($userId);
         if (is_null($chatRoom)) {
             throw new Exception('Такого чата нет!');
         }
@@ -112,10 +113,12 @@ class ChatRoomController extends BaseController
 
         $questions = $this->questionSpeakerService->getQuestionSpeakerForRender($chatRoomId);
 
+        $fio = $user->getSurname().' '.$user->getName().' '.$user->getPatronymic();
         $userRoles = $this->getUser()->getRoles();
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Трансляция сессии';
-        $forRender['user'] = $userId;
+        $forRender['user'] = $fio;
+        $forRender['userId'] = $userId;
         $forRender['delete'] = in_array("ROLE_ADMIN", $userRoles);
         $forRender['messages'] = $messages;
         $forRender['chatid'] = $chatRoomId;

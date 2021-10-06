@@ -27,7 +27,8 @@
         // This object will be sent everytime you submit a message in the sendMessage function.
         let clientInformation = {
             chatroom: '{{ chatid }}',
-            username: '{{ user }}'
+            username: '{{ user }}',
+            userId: '{{ userId }}'
             // You can add more information in a static object
         };
 
@@ -50,7 +51,7 @@
 
         conn.onmessage = function (e) {
             let data = JSON.parse(e.data);
-            Chat.appendMessage(data.username, data.message);
+            Chat.appendMessage(data.username, data.message, data.userId);
             console.log(data);
         };
 
@@ -79,10 +80,10 @@
 
         // Mini API to send a message with the socket and append a message in a UL element.
         let Chat = {
-            appendMessage: function (username, message) {
+            appendMessage: function (username, message, userId) {
                 let from;
 
-                if (username == clientInformation.username) {
+                if (userId == clientInformation.userId) {
                     from = "Я";
                 } else {
                     from = clientInformation.username;
@@ -91,7 +92,7 @@
                 // Append List Item
                 let ul = document.getElementById("chat-list");
                 let li = document.createElement("li");
-                li.className = 'my-message';
+                (userId == clientInformation.userId) ? li.className = 'my-message' : '';
                 let div = document.createElement("div");
                 div.className = 'chatroom-message';
                 div.innerHTML = message;
@@ -113,6 +114,7 @@
                 date.innerHTML = todayString;
                 li.appendChild(date);
                 ul.appendChild(li);
+                document.getElementById("chat-list").scrollTop = document.getElementById("chat-list").scrollHeight;
             },
             sendMessage: function (text) {
                 clientInformation.message = text;
@@ -120,7 +122,7 @@
                 conn.send(JSON.stringify(clientInformation));
                 console.log(JSON.stringify(clientInformation));
                 // Add my own message to the list
-                this.appendMessage(clientInformation.username, clientInformation.message);
+                this.appendMessage(clientInformation.username, clientInformation.message, clientInformation.userId);
             }
         };
 
@@ -161,7 +163,6 @@
         }
 
         setInterval(function () {
-            console.log('test');
             isReloadPage();
         }, 60000);
     </script>
