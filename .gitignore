@@ -4,5 +4,8 @@
 .idea
 mysql/*
 /app/var/*
-/app/public/uploads/*
+/app/public/uploads/company/*
+/app/public/uploads/news/*
+/app/public/uploads/poster/*
+/app/public/uploads/theses/*
 tmp/*
