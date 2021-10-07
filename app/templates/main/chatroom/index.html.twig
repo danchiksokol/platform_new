@@ -110,7 +110,7 @@
                 let hours = now.getHours() > 10 ? now.getHours() : '0' + now.getHours();
                 let minutes = now.getMinutes() > 10 ? now.getMinutes() : '0' + now.getMinutes();
                 let seconds = now.getSeconds() > 10 ? now.getSeconds() : '0' + now.getSeconds();
-                let todayString = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+                let todayString = `${day}-${month+1}-${year} ${hours}:${minutes}:${seconds}`;
                 date.innerHTML = todayString;
                 li.appendChild(date);
                 ul.appendChild(li);
