@@ -14,7 +14,7 @@
                     {% endif %}
                     <div class="chatroom-message">{{ message.content }}</div>
                     <span class="chatroom-user">{{ message.mine ? 'Я' : user }}</span>
-                    <span class="chatroom-date">{{ message.createdAt|date("d-m-Y H:m:s") }}</span>
+                    <span class="chatroom-date">{{ message.createdAt|date("d-m-Y H:i:s") }}</span>
                 </li>
             {% endfor %}
         </ul>

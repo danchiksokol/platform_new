@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y curl \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 
 
-RUN echo 'date.timezone = "UTC"' >> /usr/local/etc/php/php.ini
+RUN echo 'date.timezone = "Europe/Moscow"' >> /usr/local/etc/php/php.ini
 #Для vps закомментировать
 RUN echo 'xdebug.mode = debug' >> /usr/local/etc/php/php.ini
 RUN echo 'xdebug.discover_client_host = 1' >> /usr/local/etc/php/php.ini

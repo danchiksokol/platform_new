@@ -8,6 +8,7 @@ use App\Entity\Message;
 use App\Entity\Participant;
 use App\Repository\MessageRepository;
 use DateTime;
+use DateTimeImmutable;
 
 class MessageService
 {
@@ -37,7 +38,7 @@ class MessageService
     {
         $message = new Message();
         $message->setContent($content);
-        $message->setCreatedAt(new DateTime('NOW'));
+        $message->setCreatedAt(new DateTimeImmutable());
         $message->setIsShow(1);
         $message->setParticipant($participant);
         $this->messageRepository->setCreate($message);
