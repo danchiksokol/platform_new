@@ -15,7 +15,7 @@ use Symfony\Component\Mime\Email;
 
 class MailerService
 {
-    public const LYMPHORUM_EMAIL = 'lymphorum@tsoncology.com';
+    public const LYMPHORUM_EMAIL = 'conference@tsoncology.com';
     public const INFO_EMAIL = 'info@tsoncology.com';
     /**
      * @var MailerInterface
@@ -102,7 +102,7 @@ class MailerService
             'app_login',
             $user,
             (new TemplatedEmail())
-                ->from(new Address('lymphorum@tsoncology.com', mb_convert_encoding('Лимфорум', "UTF-8")))
+                ->from(new Address(self::LYMPHORUM_EMAIL, mb_convert_encoding('Лимфорум', "UTF-8")))
                 ->to($user->getEmail())
                 ->subject(
                     'Началась трансляция Интерактивного форума экспертов "Лимфорум" 17-18 сентября 2021 г. на платформе.'

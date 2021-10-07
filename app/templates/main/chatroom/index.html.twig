@@ -104,7 +104,6 @@
                 let date = document.createElement("span");
                 date.className = 'chatroom-date';
                 let now = new Date();
-                console.log(now.getMonth()+1);
                 let day = now.getDate() > 9 ? now.getDate() : '0' + now.getDate();
                 let month = (now.getMonth()+1) > 9 ? now.getMonth()+1 : '0' + (now.getMonth()+1);
                 let year = now.getFullYear() > 9 ? now.getFullYear() : '0' + now.getFullYear();
