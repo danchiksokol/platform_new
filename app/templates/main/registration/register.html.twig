@@ -3,7 +3,7 @@
 {% block title %}Регистрация{% endblock %}
 
 {% block body %}
-   <body class="registracia">
+    <body class="registracia">
     <div class="container">
         <div class="row registration">
             <div class="col-lg-7 col-12 registration-order">
@@ -89,10 +89,10 @@
                                 </button>
                             </div>
                         </div>
-                        <!--div class="registration-btn">
+                        <div class="registration-btn">
                             {{ form_row(registrationForm.registryButton) }}
-                             <a class="reg-link" href="/login">Войти на платформу</a>
-                        </div><-->
+                            {# <a class="reg-link" href="/login">Войти на платформу</a> #}
+                        </div>
                         {{ form_end(registrationForm) }}
                         <button type="button" class="btn btn-link registration-help reg-link" data-bs-toggle="modal"
                                 data-bs-target="#callbackModal">Помощь
@@ -163,5 +163,5 @@
     </script>
     {% set submit_url = path('app_register') %}
     {% include 'main/registration/form_help.html.twig' with {url: submit_url} %}
-   </body>
+    </body>
 {% endblock %}
