@@ -1037,7 +1037,7 @@ thead th {
     border-radius: 15px;*/
     /*padding: 46px 24px;*/
     padding: 1.5px;
-    margin-top: 42px;
+    margin-top: 22px;
     /*position: relative;*/
     /*background: #fff;*/
     /*box-shadow: 0 1px 3px #bfbfbf;*/
@@ -1875,6 +1875,10 @@ p {
     color: #fff;
 }
 
+.btn-fill-program:hover {
+    color: #adb5bd;
+}
+
 .program-date .active {
     color: #000;
     background-color: #f8f9fa;
@@ -2009,4 +2013,26 @@ body {
 
 .col-sm-2 {
     width: 12.6666666667%;
+}
+
+@media (max-width: 991px) {
+.nav-link.link-dark {
+    color: #1e3c6d;
+}
+}
+
+.btn-bluez-pdf:hover {
+    color: #adb5bd;
+}
+
+.btn-fill-posters:hover {
+    color: #adb5bd;
+}
+
+.btn-fill-ask:hover {
+    color: #adb5bd;
+}
+
+.btn-fill:hover {
+    color: #adb5bd;
 }
