@@ -42,7 +42,7 @@
         if (window.location.protocol === 'https:') {
             protocol = 'wss://';
         }
-        let wsUri = protocol + "localhost/wss2/:8080";
+        let wsUri = protocol + "localhost/wss2/:8080"; //так на сервере "conferenceml.com/wss2/:8080"
         let conn = new WebSocket(wsUri);
 
         conn.onopen = function (e) {
