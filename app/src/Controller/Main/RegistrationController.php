@@ -66,14 +66,14 @@ class RegistrationController extends BaseController
                 'app_login',
                 $user,
                 (new TemplatedEmail())
-                    ->from(new Address('conference@tsoncology.com', mb_convert_encoding('Лимфорум', "UTF-8")))
+                    ->from(new Address('conference@tsoncology.com', mb_convert_encoding('Conferenceml.com', "UTF-8")))
                     ->to($user->getEmail())
                     ->subject(
-                        'Подтверждение регистрации на Интерактивный форум экспертов "Лимфорум" 17-18 сентября 2021 г.'
+                        'Подтверждение регистрации на XVIII Российскую конференцию с международным участием «Злокачественные лимфомы»'
                     )
                     ->htmlTemplate('main/registration/confirmation_email.html.twig')
             );
-            $this->addFlash('successRegistration', 'Вы успешно зарегистрировались на Лимфорум.');
+            $this->addFlash('successRegistration', 'Вы успешно зарегистрировались на XVIII Российскую конференцию с международным участием «Злокачественные лимфомы».');
 
             return $this->redirectToRoute('app_register');
         }
@@ -81,7 +81,7 @@ class RegistrationController extends BaseController
         $helpFrom = $this->createForm(RegistrationHelpFormType::class);
         $helpFrom->handleRequest($request);
         if ($helpFrom->get('helpButton')->isClicked() && $helpFrom->isSubmitted()) {
-            $title = 'Помощь в регистрации Лимфорум';
+            $title = 'Помощь в регистрации на «Злокачественные лимфомы»';
             $this->mailerService->handleSendRegistrationHelpEmail($helpFrom, $title);
             $this->addFlash('successHelpSend', 'Ваше обращение отправлено');
             return $this->redirectToRoute('app_register');

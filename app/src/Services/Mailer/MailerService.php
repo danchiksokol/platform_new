@@ -102,7 +102,7 @@ class MailerService
             'app_login',
             $user,
             (new TemplatedEmail())
-                ->from(new Address(self::LYMPHORUM_EMAIL, mb_convert_encoding('Лимфорум', "UTF-8")))
+                ->from(new Address(self::LYMPHORUM_EMAIL, mb_convert_encoding('Conferenceml.com', "UTF-8")))
                 ->to($user->getEmail())
                 ->subject(
                     'Началась трансляция Интерактивного форума экспертов "Лимфорум" 17-18 сентября 2021 г. на платформе.'
