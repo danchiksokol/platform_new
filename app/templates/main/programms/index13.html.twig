@@ -1,0 +1,119 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="main-block programs-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-12">
+                    <div class="program-header">
+                        <div class="program-date d-none d-lg-block">
+                            <a href="#prog1" class="btn btn-fill-program active">13 октября</a>
+                            <a href="{{ path('app_main_home_programms14') }}" class="btn btn-fill-program">14 октября</a>
+                            <a href="{{ path('app_main_home_programms15') }}" class="btn btn-fill-program">15 октября</a>
+                        </div>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez-pdf btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                    <div class="programs-logo proglogback">
+                        <div class="programs-logo-img">
+                            <img src="/assets/img/prog-logo1.png">
+                            <img src="/assets/img/eha-logo.png">
+                            <img src="/assets/img/prog-logo2.png">
+                        </div>
+                        <div class="programs-logo-text">
+                            <div class="programs-title d-none d-lg-block" id="prog1"><br><h3>13 октября 2021 г.</h3><br></div>
+                        </div>
+                    </div>
+                    <div class="program-pdf">
+                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}" target="_blank" class="btn btn-bluez">Поключиться
+                            к онлайн трансляции</a>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    {% include 'main/news/index.html.twig' with news %}
+                </div>
+            </div>
+        </div>
+
+        <div class="main-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <br>
+
+                        <div class="program-dop d-none d-lg-flex">
+                            <div class="program-dop-item program-dop-item-one sympprogbacksymp1">
+                                <div class="program-dop-item-time">
+                                    <h5><b>12:00 – 13:45</b></h5>
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Takeda</b><br>
+                                    <h5><b>Терапия множественной миеломы: реалии и перспективы</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                        </div>
+
+                        <div class="program-dop d-none d-lg-flex">
+                            <div class="program-dop-item program-dop-item-one sympprogbacksymp2">
+                                <div class="program-dop-item-time">
+                                    <h5><b>14:00 – 16:30</b></h5>
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Janssen, фармацевтическое подразделение Johnson&Johnson</b><br>
+                                    <h5><b>Как улучшить исходы терапии пациентов с мм и хлл сегодня?</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                        </div>
+
+                        <div class="program-dop d-none d-lg-flex">
+                            <div class="program-dop-item program-dop-item-one sympprogbacksymp3">
+                                <div class="program-dop-item-time">
+                                    <h5><b>17:00 – 19:00</b></h5>
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Roche</b><br>
+                                    <h5><b>ДВКЛ 2.0: реальный вызов лимфоме</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <script>
+        function setUserStatistics(id) {
+            let data = {'broadcast': id};
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                }
+            });
+            return false;
+        };
+    </script>
+{% endblock %}

@@ -27,7 +27,7 @@ input, textarea {
 }
 
 .registration-logo {
-    width: 80px;
+    width: 600px;
     margin: 0 auto;
     display: block;
 }
@@ -35,11 +35,13 @@ input, textarea {
 .form input:not(input[type="checkbox"], input[type="file"]) {
     width: 100%;
     height: 36px;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: bold;
     padding: 0 16px;
     border: solid 2px rgba(224, 224, 255, 0.06);
     background-color: rgba(20, 1, 41, 0.02);
     margin-bottom: 0.7rem;
+    background: #ecedee;
 }
 
 .form .form-select {
@@ -83,7 +85,7 @@ h4 {
 
 .registration-buttons a {
     max-width: 228px;
-    font-size: 20px;
+    font-size: 22px;
     width: 100%;
     padding: 8px;
     margin-bottom: 12px;
@@ -102,7 +104,8 @@ h4 {
 
 .registration-checkbox {
     margin-bottom: 1rem;
-    font-size: 14px;
+    font-size: 16px;
+    color: #ecedee;
 }
 
 .registration-checkbox button {
@@ -110,6 +113,7 @@ h4 {
     background: none;
     text-decoration: underline;
     padding: 0;
+    color: #ecedee;
 }
 
 .theses-create textarea {
@@ -166,10 +170,14 @@ button {
 .nav-link {
     border-radius: 9px;
     margin-right: 8px;
-    border: 3px solid #8a1e83;
+    border: 3px solid #1e3c6d;
     color: #fff;
-    background: #8a1e83;
-    max-width: 160px;
+    font-weight: 500;
+    background: url(/uploads/backrgounds/buttons2.png);
+    background-size: cover;
+    /*background: #8a1e83;*/
+    /*max-width: 160px;*/
+    max-width: 200px;
     text-align: center;
     text-transform: uppercase;
     padding: 0 16px;
@@ -184,8 +192,9 @@ button {
 }
 
 .nav-link.link-dark {
-    background: #24196c;
-    border: 3px solid #24196c;
+    background: url(/uploads/backrgounds/buttons-teh1.png);
+    border: 3px solid #1e3c6d;
+    color: #ecedee;
 }
 
 .nav-link.link-dark:hover {
@@ -194,7 +203,8 @@ button {
 
 .nav-link.active {
     background: #fff;
-    color: #24196c;
+    color: #1e3c6d;
+    font-weight: bold;
 }
 
 .nav-link:last-child {
@@ -296,7 +306,7 @@ header .container {
 
 .main-block-left {
     background-color: #fff;
-    border-radius: 32px;
+    /*border-radius: 32px;*/
     margin: 42px 0;
     padding: 16px 80px 12px 24px;
     box-shadow: 0 3px 9px #bfbfbf;
@@ -335,8 +345,8 @@ header .container {
 }
 
 .spon-title {
-    color: #24196c;
-    font-size: 20px;
+    color: #ecedee;
+    font-size: 24px;
     font-weight: 600;
     text-align: center;
     margin-bottom: 24px;
@@ -436,7 +446,7 @@ header .container {
 .poster-category .active, .program-date .active {
     color: #000;
     background-color: #f8f9fa;
-    border: 2px solid #8a1e83;
+    border: 2px solid #1e3c6d;
 }
 
 .program-date .active:hover {
@@ -458,19 +468,24 @@ header .container {
 }
 
 .program-table thead {
-    background: #24196c;
+    background: url(/uploads/backrgounds/predsed-top-table.png);
+    background-size: cover;
     color: #fff;
     text-align: center;
+    /*height: 60px;*/
 }
 
 .btn-bluez {
     color: #fff;
-    background-color: #24196c;
+    background: url(/uploads/backrgounds/buttons4.png);
+    background-size: cover;
     border-color: #24196c;
+    font-weight: 600;
 }
 
 .btn-fill {
-    background: #8b1883;
+    background: url(/uploads/backrgounds/buttons.png);
+    background-size: cover;
     color: #fff;
 }
 
@@ -494,7 +509,7 @@ header .container {
 
 .program-table {
     background: #f8f9fa;
-    border-radius: 32px;
+    /*border-radius: 32px;*/
     padding: 0px 0px 20px 0px;
     margin: 24px 0;
     box-shadow: 0 3px 9px #bfbfbf;
@@ -523,7 +538,7 @@ header .container {
 
 .program-dop-item {
     background: #f8f9fa;
-    border-radius: 32px;
+    /*border-radius: 32px;*/
     padding: 16px;
     margin-right: 8px;
     display: flex;
@@ -595,7 +610,7 @@ header .container {
 .poster-list ul li {
     margin-bottom: 27px;
     list-style-position: inside;
-    border-bottom: 2px solid #8a1983;
+    border-bottom: 2px solid #1e3c6d;
 }
 
 .poster-list ul li a {
@@ -731,11 +746,11 @@ header .container {
 }
 
 .poster-list .accordion-item button {
-    border: 2px solid #8a1983;
+    border: 2px solid #1e3c6d;
 }
 
 .accordion-flush .accordion-item .accordion-button {
-    border-radius: 0.25rem;
+    /*border-radius: 1rem;*/
     font-weight: bold;
 }
 
@@ -968,9 +983,9 @@ footer img {
 }
 
 .main-block {
-    background: url(/uploads/backrgounds/bottom.png);
+    /*background: url(/uploads/backrgounds/bottom.png);*/
     background-size: cover;
-    padding-bottom: 170px;
+    padding-bottom: 50px;
     background-position-y: bottom;
     background-position-x: center;
     min-height: calc(100vh - 225px);
@@ -1013,18 +1028,19 @@ thead th {
 }
 
 .table {
-    font-size: 16px;
+    font-size: 18px;
+    color: #0c2245;
 }
 
 .program-right {
-    border: 10px solid #24196c;
-    border-radius: 15px;
+   /* border: 10px solid #1e3c6d;
+    border-radius: 15px;*/
     /*padding: 46px 24px;*/
     padding: 1.5px;
     margin-top: 42px;
     /*position: relative;*/
-    background: #fff;
-    box-shadow: 0 3px 9px #bfbfbf;
+    /*background: #fff;*/
+    /*box-shadow: 0 1px 3px #bfbfbf;*/
 }
 
 .program-right:before, .program-right:after {
@@ -1050,6 +1066,7 @@ thead th {
 .program-right a {
     display: block;
     margin-bottom: 18px;
+    box-shadow: 0 1px 9px #bfbfbf;
 }
 
 .program-right a:last-child {
@@ -1057,7 +1074,7 @@ thead th {
 }
 
 .registration-banner img {
-    box-shadow: 0 3px 9px #bfbfbf;
+    /*box-shadow: 0 3px 9px #bfbfbf;*/
 }
 
 .fullscreen-btn {
@@ -1111,11 +1128,13 @@ thead th {
 }
 
 .bg-lilac {
-    background: #c5a2c8;
+    background: url(/uploads/backrgounds/session-back.png);
+    background-size: cover;
+    background-position: bottom;
 }
 
 .bg-gray {
-    background: #d9d8e8;
+    background: #daedf0;
 }
 
 .justify-center {
@@ -1140,10 +1159,12 @@ thead th {
 }
 
 .white_block {
-    box-shadow: 0 3px 9px #bfbfbf;
+    box-shadow: 0 1px 9px #bfbfbf;
     background: #f8f9fa;
-    border-radius: 32px;
+    /*border-radius: 20px;*/
     padding: 24px;
+    background: url(/uploads/backrgounds/sponsorsback.png);
+    background-size: cover;
 }
 
 .spon-logo {
@@ -1151,18 +1172,23 @@ thead th {
 }
 
 .white_block_hello {
-    box-shadow: 0 3px 9px #bfbfbf;
+    box-shadow: 0 1px 9px #bfbfbf;
     background: url(/uploads/backrgounds/helloback.png);
     background-size: cover;
-    border-radius: 32px;
+    /*background-position: top;*/
+    /*border-radius: 20px;*/
     padding: 24px;
     border: 2px solid #24196c;
+}
+
+.white_block_hello .sponlogo-main-item {
+    display: block;
 }
 
 .programs-logo {
     background: #f8f9fa;
     background-position: center;
-    border-radius: 32px;
+    /*border-radius: 32px;*/
     padding: 2px 16px;
     margin: 2px 0;
     box-shadow: 0 3px 9px #bfbfbf;
@@ -1189,7 +1215,7 @@ thead th {
 .programs-logo-symp {
     background: url(/uploads/backrgounds/headsymppage.png);
     background-position: center;
-    border-radius: 32px;
+    /*border-radius: 32px;*/
     padding: 2px 16px;
     margin: 2px 0;
     box-shadow: 0 3px 9px #bfbfbf;
@@ -1204,8 +1230,8 @@ thead th {
 }
 
 .accordion-item .accordion-body {
-    border: 2px solid #8a1983;
-    border-radius: 0.25rem;
+    border: 2px solid #1e3c6d;
+    /*border-radius: 0.25rem;*/
 }
 
 .accordion-button:focus, .btn-check:focus + .btn, .btn:focus {
@@ -1274,7 +1300,7 @@ thead th {
     min-height: 400px;
 }
 .table-border {
-    border: 2px solid #24196c;
+    border: 2px solid #1e3c6d;
 }
 .table-border thead tr, .table-border thead tr th:first-child, .table-border thead tr th:last-child, .bg-lilac td {
     border-width: 0 0;
@@ -1394,9 +1420,9 @@ thead th {
         margin-top: 18px;
     }
 
-    header {
+    /*header {
         background: #fff;
-    }
+    }*/
 
     .registration-order {
         order: 1;
@@ -1468,7 +1494,8 @@ thead th {
     }
 
     .nav-container {
-        max-width: 720px;
+        /*max-width: 720px;*/
+        max-width: 100%;
         margin: 0 auto;
         display: block;
     }
@@ -1573,6 +1600,10 @@ thead th {
     .programs-logo-img img {
         margin-right: 0;
         max-width: calc(50% - 3px);
+    }
+
+    .programs-logo {
+        display: none;
     }
 
     .company-video-item iframe {
@@ -1708,8 +1739,10 @@ thead th {
 }
 
 .regback {
-    background: #f8f9fa;
-    border-radius: 16px;
+    background: url(/uploads/backrgounds/backregform.png);
+    background-size: cover;
+    /*border-radius: 16px;*/
+    margin-bottom: 20px
 }
 
 .table {
@@ -1727,18 +1760,253 @@ thead th {
     background-size: cover;
 }
 
+.sympprogbacksymp1 {
+    background: url(/uploads/backrgounds/sympprogbacksymp-g1.png);
+    background-size: cover;
+    border: 2px solid #24196c;
+}
+
+.sympprogbacksymp1-1 {
+    background: url(/uploads/backrgounds/sympprogbacksymp2.png);
+    background-size: cover;
+}
+
+.sympprogbacksymp2 {
+    background: url(/uploads/backrgounds/sympprogbacksymp-g2.png);
+    background-size: cover;
+    background-position: bottom;
+    border: 2px solid #24196c;
+}
+
+.sympprogbacksymp3 {
+    background: url(/uploads/backrgounds/sympprogbacksymp-g3.png);
+    background-size: cover;
+    border: 2px solid #24196c;
+}
+
+.sympprogbacksymp4 {
+    background: url(/uploads/backrgounds/sympprogbacksymp4.png);
+    background-size: cover;
+}
+
+.sympprogbacksymp5 {
+    background: url(/uploads/backrgounds/sympprogbacksymp5.png);
+    background-size: cover;
+}
+
+.sympprogbacksymp6 {
+    background: url(/uploads/backrgounds/sympprogbacksymp6.png);
+    background-size: cover;
+}
+
+.sympprogbacksymp7 {
+    background: url(/uploads/backrgounds/sympprogbacksymp7.png);
+    background-size: cover;
+}
+
 .sympprogbacktop {
     background: url(/uploads/backrgounds/progsymptopedge.png);
     background-size: cover;
 }
 
-.proglogback {
+.proglogbackpre {
     background: url(/uploads/backrgounds/proglogtop.png);
     background-size: cover;
 }
 
+.proglogback {
+    background: url(/uploads/backrgounds/proglogtoppre.png);
+    background-size: cover;
+}
+
 p {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: bold;
-    color: #24196c
+    /*color: #0c2245;*/
+    color: #0e2e60;
+}
+
+.registracia {
+    background: url(/uploads/backrgounds/back-reg.png);
+    background-size: cover;
+}
+
+.btn {
+    border-radius: 0.75rem;
+}
+
+.reg-title {
+    color: white;
+}
+
+.btn-outline-secondary {
+    color: #51585e;
+    border-color: #6c757d;
+    background: #ecedee;
+}
+
+.reg-link{
+    color: #4798b1;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.reg-link:hover {
+    color: #ecedee; /* Цвет ссылки при наведении на нее курсора мыши */
+    text-decoration: underline; /* Добавляем подчеркивание */
+}
+
+.navbar-light .navbar-toggler {
+    background: #ecedee;
+}
+
+.col-lg-10 {
+    width: 95%;
+}
+
+.nav-link.link-dark:hover {
+    color: #1e3c6d;
+}
+
+.btn-fill-program {
+    background: #1e3c6d;
+    background-size: cover;
+    /* border: 1px solid #fff; */
+    color: #fff;
+}
+
+.program-date .active {
+    color: #000;
+    background-color: #f8f9fa;
+    border: 2px solid #1e3c6d;
+}
+
+.btn-bluez-pdf {
+    color: #fff;
+    background-color: #1e3c6d;
+    border-color: #24196c;
+}
+
+.btn-fill-posters {
+    background: #1e3c6d;
+    background-size: cover;
+    /* border: 1px solid #fff; */
+    color: #fff;
+}
+
+.btn-fill-ask {
+    background: #1e3c6d;
+    background-size: cover;
+    /* border: 1px solid #fff; */
+    color: #fff;
+}
+
+.sumptime {
+    width: 90px
+}
+
+body {
+    color: #261b6b;
+}
+
+.big-letters {
+    font: 22px;
+}
+
+.program-table-symp {
+    background: url(/uploads/backrgounds/sympprogbacksymp8.png);
+    background-size: cover;
+}
+
+.col-sm-3-1 {
+    flex: 0 0 auto;
+    width: 50%;
+}
+
+.white_block-stands1 {
+    box-shadow: 0 1px 9px #bfbfbf;
+    background: #f8f9fa;
+    /*border-radius: 20px;*/
+    padding: 24px;
+    background: url(/uploads/backrgounds/sponsorsback-1.png);
+    background-size: cover;
+    background-position: bottom;
+}
+
+.white_block-stands2 {
+    box-shadow: 0 1px 9px #bfbfbf;
+    background: #f8f9fa;
+    /*border-radius: 20px;*/
+    padding: 24px;
+    background: url(/uploads/backrgounds/sponsorsback-2.png);
+    background-size: cover;
+    background-position: bottom;
+}
+
+.white_block-stands3 {
+    box-shadow: 0 1px 9px #bfbfbf;
+    background: #f8f9fa;
+    /*border-radius: 20px;*/
+    padding: 24px;
+    background: url(/uploads/backrgounds/sponsorsback-3.png);
+    background-size: cover;
+    background-position: bottom;
+}
+
+.spon-title1 {
+    color: #0e2e60;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+    margin-top: 24px;
+    background: url(/uploads/backrgounds/gen-back.png);
+    background-size: cover;
+    border-radius: 20px;
+    height: 35px;
+}
+
+.spon-title2 {
+    color: #0e2e60;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+    margin-top: 24px;
+    background: url(/uploads/backrgounds/gold-back.png);
+    background-size: cover;
+    border-radius: 20px;
+    height: 35px;
+}
+
+.spon-title3 {
+    color: #0e2e60;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+    margin-top: 24px;
+    background: url(/uploads/backrgounds/silver-back.png);
+    background-size: cover;
+    border-radius: 20px;
+    height: 35px;
+}
+
+.col-sm-6 {
+    flex: 0 0 auto;
+    width: 65%;
+}
+
+.col-sm-4-1 {
+    margin-right: 30px;
+    margin-top: 20px;
+}
+
+.col-sm-4-1 {
+    flex: 0 0 auto;
+    width: 33.3333333333%;
+}
+
+.col-sm-2 {
+    width: 12.6666666667%;
 }

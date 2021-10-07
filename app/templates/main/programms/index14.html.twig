@@ -1,0 +1,327 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="main-block programs-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-12">
+                    <div class="program-header">
+                        <div class="program-date d-none d-lg-block">
+                            <a href="{{ path('app_main_home_programms13') }}" class="btn btn-fill-program">13 октября</a>
+                            <a href="#prog2" class="btn btn-fill-program active">14 октября</a>
+                            <a href="{{ path('app_main_home_programms15') }}" class="btn btn-fill-program">15 октября</a>
+                        </div>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez-pdf btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                    <div class="programs-logo proglogback">
+                        <div class="programs-logo-img">
+                            <img src="/assets/img/prog-logo1.png">
+                            <img src="/assets/img/eha-logo.png">
+                            <img src="/assets/img/prog-logo2.png">
+                        </div>
+                        <div class="programs-logo-text">
+                            <div class="programs-title d-none d-lg-block" id="prog2"><br><h3>14 октября 2021 г.</h3><br></div>
+                        </div>
+                    </div>
+                    {# <div class="programs-title d-none d-lg-block" id="prog2">18 сентября 2021 г.</div> #}
+
+                    <div class="program-pdf">
+                        <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 5}) }}" target="_blank" class="btn btn-bluez">Поключиться
+                            к онлайн трансляции</a>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    {% include 'main/news/index.html.twig' with news %}
+                </div>
+            </div>
+        </div>
+
+        <div class="main-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="program-table d-none d-lg-block table-border">
+                            <div class="program-table-scroll">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="3">
+                                            <p style="text-align: center;"><strong>Председатели:<br /> Поддубная Ирина Владимировна, Elizabeth Macintyre (EHA) </strong></p>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-lilac">
+                                        <td colspan="2" class="text-center"><b>Сессия I. Злокачественные лимфомы – движение вперед
+                                                </b><br>Поддубная И.В., Elizabeth Macintyre (EHA), Кулагин А.Д.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">9:00 – 9:10</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Поддубная И.В. </em></strong><br /> Вступительное слово</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">9:10 – 9:20</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Elizabeth Macintyre (EHA) </em></strong><br /> Приветствие от EHA</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">9:20 – 9:40</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Elizabeth Macintyre (France) (EHA Presentation)</em></strong><br /> Новые направления в диагностике и лечении лимфом</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">9:40 – 10:00</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em> Имянитов Е.Н. </em></strong><br /> Молекулярная диагностика лимфопролиферативных заболеваний в России</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">10:00 – 10:20</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Капланов К.Д. </em></strong><br /> Новые препараты и фармакологические взаимодействия в реальной практике</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">10:20 – 10:50</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Michael Hudecek (Germany): презентация ЕНА</em></strong><br /> Следующее поколение клеточной терапии: CART терапия и далее </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">10:50 – 11:10</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Гармаева Т.Ц.</em></strong><br /> Межрегиональное взаимодействие и сотрудничество по профилю «Гематология», <br>«Онкология» в рамках реализации Национального проекта «Здравоохранение» до 2024 года</td>
+                                    </tr>
+                                    <tr class="bg-gray">
+                                        <td><center><strong>11:10 – 11:30</strong></center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong>Перерыв</strong></td>
+                                    </tr>
+
+                                    <tr class="bg-lilac">
+                                        <td colspan="2" class="text-center"><b>Сессия II. Новая эра в подходах к терапии хронического лимфолейкоза
+                                                </b><br>Никитин Е.А., Самойлова О.С., Richard Rosenquist Brandell (Sweden)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">11:30 – 12:00</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Richard Rosenquist Brandell (Sweden): презентация ЕНА </em></strong><br /> Молекулярные маркеры и их значение для клинического подхода к терапии хронического лимфолейкоза</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">12:00 – 12:20</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Peter Hillmen (UK) (EHA Presentation) </em></strong><br /> Выбор последовательности терапии при хроническом лимфолейкозе</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">11:50 – 12:20</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Никитин Е.А.</em></strong><br /> Первая линия без применения химиотерапии у больных ХЛЛ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">12:20 – 12:40</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Калашникова О.Б.</em></strong><br /> Тактика ведения пациентов с ХЛЛ при неудаче лечения нехимиотерапевтическими агентами в первой линии</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">12:40 – 12:50</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Петренко А.А.</em></strong><br /> Эффективность венетоклакс-содержащих схем у пациентов с ХЛЛ при рефрактерности к ибрутинибу</td>
+                                    </tr>
+                                    <tr class="bg-gray">
+                                        <td><center style="width: 120px;"><b>12:50 – 14:20</b></center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong>Перерыв на сателлитные симпозиумы</strong></td>
+                                    </tr>
+
+                                    {# <tr class="bg-gray"> #}
+                                    {# <td>16:00 - 17:45</td> #}
+                                    {# <td colspan="4"><em>Сателлитный симпозиум компании Bristol-Myers Squibb</em></td> #}
+                                    {# <td colspan="2"><em>Сателлитный симпозиум</em></td> #}
+                                    {# </tr> #}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 5}) }}" class="btn btn-bluez">Подключиться к онлайн
+                                трансляции</a>
+                        </div>
+
+                        <div class="program-dop d-none d-lg-flex">
+                            <div class="program-dop-item sympprogbacksymp4">
+                                <div class="program-dop-item-time">
+                                    13:00 – 14:15
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании AbbVie</b><br>
+                                    <h5><b>Фиксированная таргетная терапия: Актуальные подходы в реальной клинической практике</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(2);" href="{{ path('app_broadcast', {'chatid': 2}) }}"
+                                   class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                            <div class="program-dop-item sympprogbacksymp5">
+                                <div class="program-dop-item-time">
+                                    13:00 – 14:15
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании AstraZeneca</b><br>
+                                    <h5><b>Новый уровень управления хлл</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(3);" href="{{ path('app_broadcast', {'chatid': 3}) }}"
+                                   class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                        </div>
+
+                        <div class="program-dop d-none d-lg-flex">
+                            <div class="program-dop-item sympprogbacksymp6">
+                                <div class="program-dop-item-time">
+                                    13:00 – 14:15
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Bristol-Myers Squibb</b><br>
+                                    <h5><b>Коррекция анемического синдрома при мдс низкого риска: новые возможности</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(2);" href="{{ path('app_broadcast', {'chatid': 2}) }}"
+                                   class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                            <div class="program-dop-item sympprogbacksymp7">
+                                <div class="program-dop-item-time">
+                                    13:00 – 14:15
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Roche</b><br>
+                                    <h5><b>Через матрицу теории к реальному пациенту. Междисциплинарный подход в терапии индолентных нхл</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(3);" href="{{ path('app_broadcast', {'chatid': 3}) }}"
+                                   class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                        </div>
+
+                        <div class="program-table d-none d-lg-block table-border">
+                            <div class="program-table-scroll">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                    <tr class="bg-lilac">
+                                        <td colspan="2" class="text-center"><b>Сессия III. Cоздание новой модели лечения неходжкинских лимфом
+                                            </b><br>Тумян Г.С., Птушкин В.В., Gilles Salles (France-USA) (ЕНА)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">14:20 – 14:50</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Gilles Salles (France-USA): презентация ЕНА  </em></strong> <br /> Индолентные лимфомы: дремлющие вопросы (Indolent Lymphomas: Answers to Smoldering Questions)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">14:50 – 15:10</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Тумян Г.С.  </em></strong> <br /> Новые опции таргетной терапии при агрессивных лимфомах</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">15:10 – 15:30</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Михайлова Н.Б. </em></strong> <br /> Сложные клинические ситуации у больных с агрессивными лимфомами: подход к терапии больных не подлежащих  агрессивному лечению (unfit patients)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">15:30 – 15:50</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Воробьев В.И.</em></strong> <br /> Лимфома мантийной зоны- что нового?</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">15:50 – 16:10</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Чернова Н.Г. </em></strong> <br /> Стратегия подходов к терапии Т-клеточных лимфом</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;"><b>16:10 – 16:20</b></center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Чуркина М.И.</em></strong> <br /> Сочетанное метилирование генов семейства MIR-34 и MIR-203 при диффузной В-крупноклеточной лимфоме</td>
+                                    </tr>
+                                    <tr class="bg-gray">
+                                        <td><center style="width: 120px;"><b>16:20 – 16:40</b></center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong>Перерыв</strong></td>
+                                    </tr>
+
+                                    <tr class="bg-lilac">
+                                        <td colspan="2" class="text-center"><b>Сессия IV. КОВИД-19- терапия злокачественных лимфом в период пандемии
+                                            </b><br>Поддубная И.В., Птушкин В.В., Joaquin Martinez-Lopez (Spain)(EHA)
+                                        </td>
+                                    </tr>
+                                    <td><center style="width: 120px;">16:40 – 16:55</center></td>
+                                    <td colspan="2"style="padding-left: 10px; width: 1343px;"><strong><em>Барях Е.А.</em></strong><br /> Лечить или не лечить - баланс между преимуществами и рисками отсрочки лечения онкогематологических больных во время пандемии COVID-19 </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">16:55 – 17:10</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Joaquin Martinez-Lopez (Spain): презентация ЕНА </em></strong><br /> Влияние злокачественных гематологических заболеваний и типа опухолевой терапии на тяжесть и смертность от КОВИДА-19  </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">17:10 – 17:50</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Круглый стол</em></strong><br />
+                                            <ul>
+                                                <li>Модератор - Птушкин В.В</li>
+                                            </ul> Участники: <br>
+                                            <ul>
+                                                <li>Поддубная И.В.</li>
+                                                <li>Гаврилина О.А.</li>
+                                                <li>Joaquin Martinez-Lopez (Spain)</li>
+                                                <li>Казаков С.П.</li>
+                                                <li>Тумян Г.С.</li>
+                                                <li>Барях Е.А.</li>
+                                            </ul></td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">17:50</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Закрытие первого дня конференции </em></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"> </td>
+                                    </tr>
+                                    <tr class="bg-gray">
+                                        <td><center style="width: 120px;">18:00 – 19:30</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong>Постерная сессия  </strong><br /> Экскурсия по постерной сессии с экспертами. <br> Федоров А.Б. (Москва), Гарифуллин А.Д. (Санкт-Петербург) Иванова М.О. (Санкт-Петербург)</td>
+                                    </tr>
+
+                                    {# <tr class="bg-gray"> #}
+                                    {# <td>16:00 - 17:45</td> #}
+                                    {# <td colspan="4"><em>Сателлитный симпозиум компании Bristol-Myers Squibb</em></td> #}
+                                    {# <td colspan="2"><em>Сателлитный симпозиум</em></td> #}
+                                    {# </tr> #}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 5}) }}" class="btn btn-bluez">Подключиться к онлайн
+                                трансляции</a>
+                        </div>
+
+                        <div class="program-dop d-none d-lg-flex">
+                            <div class="program-dop-item program-dop-item-one sympprogbacksymp1-1">
+                                <div class="program-dop-item-time">
+                                    18:00 – 19:30
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Sanofi Genzyme</b><br>
+                                    <h5><b>Из тихого океана в эгейское море: что общего между двумя островами и лечением множественной миеломы?</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function setUserStatistics(id) {
+            let data = {'broadcast': id};
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                }
+            });
+            return false;
+        };
+    </script>
+{% endblock %}

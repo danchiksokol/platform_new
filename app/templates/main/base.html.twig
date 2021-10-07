@@ -52,9 +52,10 @@
         -->
         <div class="container">
             <div class="row">
-                <div class="col-lg-2 col-6 header-logo">
-                    <img src="{{ asset('assets/img/logo.png') }}">
-                </div>
+                <!--div class="col-lg-2 col-6 header-logo"><-->
+                <div>
+                    <img src="{{ asset('uploads/backrgounds/logo-head.png') }}">
+                </div><p></p>
                 <nav class="col-lg-10 col-3 navbar-light navbar navbar-expand-lg">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
@@ -64,29 +65,29 @@
                         <div class="nav-container">
                             <a href="{{ path('app_main_home_index') }}"
                                class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_index' %}active{% endif %}">Главная</a>
-                            <a href="{{ path('app_main_home_programms18') }}"
+                            <a href="{{ path('app_main_home_programms13') }}"
                                class="nav-link {% if app.request.attributes.get('_route') starts with 'app_main_home_programms' %}active{% endif %}">Программа</a>
-                            <a href="{{ path('app_main_home_symposium18') }}"
+                            <a href="{{ path('app_main_home_symposium13') }}"
                                class="nav-link {% if app.request.attributes.get('_route') starts with 'app_main_home_symposium' %}active{% endif %}">Сателлитные Симпозиумы</a>
-                            <a href="{{ path('app_main_home_nmo') }}"
-                               class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_nmo' %}active{% endif %}">НМО</a>
                             <a href="{{ path('app_poster') }}"
                                class="nav-link {% if app.request.attributes.get('_route') == 'app_poster' %}active{% endif %}">
                                 Постерная сессия</a>
                             <a href="{{ path('app_main_home_sponsors') }}" id="sponsors"
                                class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_sponsors' %}active{% endif %}">Виртуальная
                                 выставка</a>
+                            <a href="{{ path('app_main_home_nmo') }}"
+                               class="nav-link {% if app.request.attributes.get('_route') == 'app_main_home_nmo' %}active{% endif %}">НМО</a>
                             <a href="{{ path('app_main_home_help') }}"
                                class="nav-link link-dark {% if app.request.attributes.get('_route') == 'app_main_home_help' %}active{% endif %}">Техническая
                                 поддержка</a>
                         </div>
                     </div>
                 </nav>
-                <div class="col-12 d-lg-none title-mob">
+                <!--div class="col-12 d-lg-none title-mob">
                     <h1 class="title">Интерактивный форум экспертов по вопросам диагностики и лечения
                         лимфопролиферативных
                         заболеваний «Лимфорум», <br class="d-md-none">17-18 сентября 2021 г. </h1>
-                </div>
+                </div><-->
             </div>
         </div>
     </header>

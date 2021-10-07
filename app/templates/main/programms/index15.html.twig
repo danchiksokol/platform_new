@@ -1,0 +1,282 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="main-block programs-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-12">
+                    <div class="program-header">
+                        <div class="program-date d-none d-lg-block">
+                            <a href="{{ path('app_main_home_programms13') }}" class="btn btn-fill-program">13 октября</a>
+                            <a href="{{ path('app_main_home_programms14') }}" class="btn btn-fill-program">14 октября</a>
+                            <a href="#prog2" class="btn btn-fill-program active">15 октября</a>
+                        </div>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez-pdf btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                    <div class="programs-logo proglogback">
+                        <div class="programs-logo-img">
+                            <img src="/assets/img/prog-logo1.png">
+                            <img src="/assets/img/eha-logo.png">
+                            <img src="/assets/img/prog-logo2.png">
+                        </div>
+                        <div class="programs-logo-text">
+                            <div class="programs-title d-none d-lg-block" id="prog2"><br><h3>15 октября 2021 г.</h3><br></div>
+                        </div>
+                    </div>
+                    {# <div class="programs-title d-none d-lg-block" id="prog2">18 сентября 2021 г.</div> #}
+
+                    <div class="program-pdf">
+                        <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 5}) }}" target="_blank" class="btn btn-bluez">Поключиться
+                            к онлайн трансляции</a>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    {% include 'main/news/index.html.twig' with news %}
+                </div>
+            </div>
+        </div>
+
+        <div class="main-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="program-table d-none d-lg-block table-border">
+                            <div class="program-table-scroll">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="3">
+                                            <p style="text-align: center;"><strong>Председатели:<br /> Поддубная Ирина Владимировна, Elizabeth Macintyre (EHA) </strong></p>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-lilac">
+                                        <td colspan="2" class="text-center"><b>Сессия V. Терапия множественной миеломы: где мы находимся, куда мы идем и куда мы должны идти?
+                                            </b><br>Менделеева Л.П., Бессмельцев С.С., Thierry Facon (France) (EHA)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">9:00 – 9:30</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Мухортова О.В.</em></strong><br /> ПЭТ/КТ – новый участник в диагностике и мониторинге множественной миеломы  </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">9:20 – 9:50</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Thierry Facon (France): презентация ЕНА</em></strong><br /> Множественная миелома: терапевтические возможности у первичных больных, не подлежащих трансплантации </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">9:50 – 10:10</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Менделеева Л.П.  </em></strong><br /> Чередование линий терапии при множественной миеломе: как найти правильное решение среди многочисленных возможностей? </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">10:10 – 10:30</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Соловьев М.В.  </em></strong><br /> Роль и место ауто-ТГСК и алло-ТГСК в современном алгоритме лечения множественной миеломы</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;"><b>10:30 – 10:40</b></center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Линков М.В.</em></strong><br /> Проявление болевого синдрома и выраженность эмоциональных нарушений у  пациентов с множественной миеломой  в зависимости от пола и возраста</td>
+                                    </tr>
+                                    <tr class="bg-gray">
+                                        <td><center style="width: 120px;"><b>10:40 – 11:00</b></center></td>
+                                        <td style="padding-left: 10px; width: 1343px;"><strong>Перерыв</strong></td>
+                                    </tr>
+
+                                    <tr class="bg-lilac">
+                                        <td colspan="2" class="text-center"><b>Сессия VI. Лимфома Ходжкина
+                                            </b><br>Демина Е.А., Мельниченко В.Я., Luca Castagna (Italy)( ЕНА)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">11:00 – 11:20</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Демина Е.А.  </em></strong><br /> Лечение I/II стадий классической лимфомы Ходжкина с массивным поражением средостения</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">11:20 – 11:50</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Luca Castagna (Italy): презентация ЕНА </em></strong><br /> Персонализированная медицина при лимфоме Ходжкина: снижение токсичности при сохранении излечения в качестве цели </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">11:50 – 12:10</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Саржевский В.О. </em></strong><br /> Блокада контрольных иммунных точек и аллогенная трансплантация - новая парадигма лечения лимфомы Ходжкина </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;"><b>12:10 – 12:20</b></center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Волченков С.А.</em></strong><br /> Влияние нутритивной поддержки на частоту мукозитов и продолжительность фебрильной нейтропении при проведении трансплантации аутологичных гемопоэтических стволовых клеток (аутоТГСК) у пациентов с лимфомой Ходжкина</td>
+                                    </tr>
+                                    <tr class="bg-gray">
+                                        <td><center style="width: 120px;"><b>12:20 – 14:00</b></center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong>Перерыв на сателлитные симпозиумы </strong></td>
+                                    </tr>
+
+                                    {# <tr class="bg-gray"> #}
+                                    {# <td>16:00 - 17:45</td> #}
+                                    {# <td colspan="4"><em>Сателлитный симпозиум компании Bristol-Myers Squibb</em></td> #}
+                                    {# <td colspan="2"><em>Сателлитный симпозиум</em></td> #}
+                                    {# </tr> #}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 5}) }}" class="btn btn-bluez">Подключиться к онлайн
+                                трансляции</a>
+                        </div>
+
+                        <div class="program-dop d-none d-lg-flex">
+                            <div class="program-dop-item sympprogbacksymp4">
+                                <div class="program-dop-item-time">
+                                    12:30 – 13:45
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Biocad</b><br>
+                                    <h5><b>Ход белых: преимущество с первого хода</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(2);" href="{{ path('app_broadcast', {'chatid': 2}) }}"
+                                   class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                            <div class="program-dop-item sympprogbacksymp5">
+                                <div class="program-dop-item-time">
+                                    12:30 – 13:45
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Sanofi Genzyme</b><br>
+                                    <h5><b>Судьба человека с фолликулярной лимфомой…</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(3);" href="{{ path('app_broadcast', {'chatid': 3}) }}"
+                                   class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                        </div>
+
+                        <div class="program-dop d-none d-lg-flex">
+                            <div class="program-dop-item sympprogbacksymp6">
+                                <div class="program-dop-item-time">
+                                    12:30 – 13:45
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Takeda</b><br>
+                                    <h5><b>Первая линии терапии cd30-позитивных пткл: в авангарде прогресса</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(2);" href="{{ path('app_broadcast', {'chatid': 2}) }}"
+                                   class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                            <div class="program-dop-item sympprogbacksymp7">
+                                <div class="program-dop-item-time">
+                                    12:30 – 13:45
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Фармстандарт</b><br>
+                                    <h5><b>Минимальная остаточная болезнь (МОБ) и вопросы терапии гематологических новообразований</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(3);" href="{{ path('app_broadcast', {'chatid': 3}) }}"
+                                   class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                        </div>
+
+                        <div class="program-table d-none d-lg-block table-border">
+                            <div class="program-table-scroll">
+                                <table class="table table-bordered">
+                                    <tr class="bg-lilac">
+                                        <td colspan="2" class="text-center"><b>Сессия VII. Новые перспективы диагностики и лечения злокачественных лимфом – Российский опыт
+                                            </b><br>Поддубная И.В., Паровичникова Е.Н., Османов Е.А.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">14:00 – 14:20</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Поляков А. </em></strong><br /> Ковид 19- новые условия и новые подходы и правила к проведению клинических исследований</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">14:20 – 14:40</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Гаврилина О.А. (ГНЦ) </em></strong><br /> Исходы гематологических заболеваний и КОВИД-19 в России: промежуточный анализ регистра CHRONOS19 (представлено на ASH 2020, получена премия)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">14:40 – 15:00</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Нестерова Е.С.</em></strong><br /> Промежуточные результаты многоцентрового ретроспективно-проспективного наблюдательного пострегистрационного исследования безопасности и эффективности применения эмпэгфилграстим у пациентов с лимфопролиферативными заболеваниями, получающих цитотоксическую терапию: LEGERITY</td>
+                                    </tr>
+                                    <tr>
+                                        <td><center style="width: 120px;">15:00 – 15:20</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong><em>Тупицына Д.Н </em></strong><br /> Результаты международного исследования B-HOLISTIC: данные по Российской Федерации</td>
+                                    </tr>
+                                    <tr class="bg-gray">
+                                        <td><center style="width: 120px;">15:20 – 16:00</center></td>
+                                        <td colspan="2" style="padding-left: 10px; width: 1343px;"><strong>Церемония награждения победителей постерной сессии<br>
+                                                    Закрытие XVIII конференции Злокачественные лимфомы</strong></td>
+                                    </tr>
+
+                                    {# <tr class="bg-gray"> #}
+                                    {# <td>16:00 - 17:45</td> #}
+                                    {# <td colspan="4"><em>Сателлитный симпозиум компании Bristol-Myers Squibb</em></td> #}
+                                    {# <td colspan="2"><em>Сателлитный симпозиум</em></td> #}
+                                    {# </tr> #}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 5}) }}" class="btn btn-bluez">Подключиться к онлайн
+                                трансляции</a>
+                        </div>
+
+                        <div class="program-dop d-none d-lg-flex">
+                            <div class="program-dop-item sympprogbacksymp6">
+                                <div class="program-dop-item-time">
+                                    16:30 – 18:00
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Amgen</b><br>
+                                    <h5><b>Два лучше, чем один: ингибитор протеасом и ингибитор RANKL– совместный вклад в эффективную терапию множественной миеломы</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(2);" href="{{ path('app_broadcast', {'chatid': 2}) }}"
+                                   class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                            <div class="program-dop-item sympprogbacksymp7">
+                                <div class="program-dop-item-time">
+                                    16:30 – 18:00
+                                </div>
+                                <div class="program-dop-item-title">
+                                    <b>Сателлитный симпозиум компании Нанолек</b><br>
+                                    <h5><b>Занубрутиниб – новый втк ингибитор в лечении пациентов с рецидивом/рефрактерным течением лимфомы из клеток зоны мантии</b></h5>
+                                    <em>* Не обеспечивается кредитами НМО</em>
+                                </div>
+                                <a onclick="setUserStatistics(3);" href="{{ path('app_broadcast', {'chatid': 3}) }}"
+                                   class="btn btn-bluez">Подключиться к
+                                    онлайн трансляции</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function setUserStatistics(id) {
+            let data = {'broadcast': id};
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                }
+            });
+            return false;
+        };
+    </script>
+{% endblock %}

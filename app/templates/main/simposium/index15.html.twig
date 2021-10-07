@@ -1,0 +1,277 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="main-block programs-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-12">
+                    <div class="program-header">
+                        <div class="program-date">
+                            <a href="{{ path('app_main_home_symposium13') }}" class="btn btn-fill-program ">13 октября</a>
+                            <a href="{{ path('app_main_home_symposium14') }}" class="btn btn-fill-program ">14 октября</a>
+                            <a href="#sat18" class="btn btn-fill-program active">15 октября</a>
+                        </div>
+                    </div>
+                    <div class="programs-logo-symp">
+{#                        <div class="programs-logo-img">#}
+{#                            <img src="/assets/img/prog-logo1.jpg">#}
+{#                            <img src="/assets/img/prog-logo2.jpg">#}
+{#                        </div>#}
+                        <div class="programs-logo-text">
+                            <div class="programs-title" id="prog1">
+                                15 октября 2021 г.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="program-table program-table-symp">
+                        <div class="symposium-row">
+                            <div class="col-sm-4 sponlogo-main-item">12:30 – 13:45</div>
+                            <div class="col-sm-4 sponlogo-main-item"><img src="/uploads/backrgounds/logo_sponsors_symp/biocad.png"></div>
+                            <div class="col-sm-4 sponlogo-main-item">Конференц-зал «Чайковский»</div>
+                        </div>
+                        <div class="symposium-title">
+                            <div><h4>Сателлитный симпозиум компании Biocad</h4></div>
+                            <h4><b>«Ход белых: преимущество с первого хода»</b></h4>
+                        </div>
+                        <ul class="symposium-list">
+                            <li>Председатель: Л.Г. Бабичева</li>
+                            <li>
+                                <span>12:30 – 12:40</span>
+                                <span>Дебют: Осложнения полихимиотерапии лимфомы Ходжкина и сопроводительная терапия. <br><em> Л.Г. Бабичева</em></span>
+                            </li>
+                            <li>
+                                <span>12:40 – 12:45</span>
+                                <span>Контргамбит: Гепатотоксичность и её коррекция на фоне системной терапии ЗНО. <br><em> А.М. Степанова</em><span>
+                            </li>
+                            <li>
+                                <span>12:45 – 12:50</span>
+                                <span>Обсуждение</span>
+                            </li>
+                            <li>
+                                <span>12:50 – 13:10</span>
+                                <span>Когда ход конем необходим: Фебрильная нейтропения, лучше предотвратить, чем лечить. <br><em> Е.А. Барях</em><span>
+                            </li>
+                            <li>
+                                <span>13:10 – 13:15</span>
+                                <span>Обсуждение</span>
+                            </li>
+                            <li>
+                                <span>13:15 – 13:30</span>
+                                <span>Сложная партия: Вторичный иммунодефицит как осложнение терапии. <br><em> Л.Г. Бабичева</em></span>
+                            </li>
+                            <li>
+                                <span>13:30 – 13:35</span>
+                                <span>Обсуждение</span>
+                            </li>
+                            <li>
+                                <span>13:35 – 13:45</span>
+                                <span>Школа мастерства: Резюме. Выводы <br><em> Е.А. Барях, Л.Г. Бабичева, А.М. Степанова</em></span>
+                            </li>
+                        </ul>
+                        <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                    </div>
+
+                    <div class="program-table program-table-symp">
+                        <div class="symposium-row">
+                            <div class="col-sm-4 sponlogo-main-item">12:30 – 13:45</div>
+                            <div class="col-sm-4 sponlogo-main-item"><img src="/uploads/backrgounds/logo_sponsors_symp/sanofi.png"></div>
+                            <div class="col-sm-4 sponlogo-main-item">Конференц-зал «Толстой»</div>
+                        </div>
+                        <div class="symposium-title">
+                            <div><h4>Сателлитный симпозиум компании Sanofi Genzyme</h4></div>
+                            <h4><b>«Судьба человека с фолликулярной лимфомой...»</b></h4>
+                        </div>
+                        <ul class="symposium-list">
+                            <li>Председатели: Г.С. Тумян, В.В. Птушкин</li>
+                            <li>
+                                <span>12:30 – 12:40</span>
+                                <span>Все ли нас устраивает? <br><em> Г.С. Тумян</em></span>
+                            </li>
+                            <li>
+                                <span>12:40 – 13:45</span>
+                                <span>Один Случай = Одна Судьба (интерактивное решение) Дискуссия <br><em> В.В. Птушкин, Г.С. Тумян, В.И. Воробьев</em></span>
+                            </li>
+                        </ul>
+                        <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                    </div>
+
+                    <div class="program-table program-table-symp">
+                        <div class="symposium-row">
+                            <div class="col-sm-4 sponlogo-main-item">12:30 – 13:45</div>
+                            <div class="col-sm-4 sponlogo-main-item"><img src="/uploads/backrgounds/logo_sponsors_symp/takeda.png"></div>
+                            <div class="col-sm-4 sponlogo-main-item">Конференц-зал «Пушкин»</div>
+                        </div>
+                        <div class="symposium-title">
+                            <div><h4>Сателлитный симпозиум компании Takeda</h4></div>
+                            <h4><b>«Первая линии терапии CD30-позитивных ПТКЛ: в авангарде прогресса»</b></h4>
+                        </div>
+                        <ul class="symposium-list">
+                            <li>Председатель: И.В. Поддубная</li>
+                            <li>
+                                <span>12:30 – 12:35</span>
+                                <span>Вступительное слово председателя. <br><em> И.В. Поддубная</em></span>
+                            </li>
+                            <li>
+                                <span>12:35 – 13:00</span>
+                                <span>ПТКЛ: нерешенные проблемы и современные возможности терапии. <br><em> Timothy Illidge</em><span>
+                            </li>
+                            <li>
+                                <span>13:00 – 13:20</span>
+                                <span>Новые возможности первой линии терапии CD30 + ПТКЛ. <br><em> Л.Г. Горенкова</em><span>
+                            </li>
+                            <li>
+                                <span>13:20 – 13:40</span>
+                                <span>ПТКЛ – от теории к практике. <br><em> А.А. Семенова</em></span>
+                            </li>
+                            <li>
+                                <span>13:40 – 13:45</span>
+                                <span>Заключительное слово председателя. <br><em> И.В. Поддубная</em></span>
+                            </li>
+                        </ul>
+                        <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                    </div>
+
+                    <div class="program-table program-table-symp">
+                        <div class="symposium-row">
+                            <div class="col-sm-4 sponlogo-main-item">12:30 – 13:45</div>
+                            <div class="col-sm-4 sponlogo-main-item"><img src="/uploads/backrgounds/logo_sponsors_symp/pharmstandart.png"></div>
+                            <div class="col-sm-4 sponlogo-main-item">Конференц-зал «Чехов»</div>
+                        </div>
+                        <div class="symposium-title">
+                            <div><h4>Сателлитный симпозиум компании Фармстандарт</h4></div>
+                            <h4><b>«Первая линии терапии CD30-позитивных ПТКЛ: в авангарде прогресса»</b></h4>
+                        </div>
+                        <ul class="symposium-list">
+                            <li>Председатели: И.С. Мартынкевич, С.Н. Бондаренко</li>
+                            <li>
+                                <span>12:30 – 13:05</span>
+                                <span>МОБ при хроническом миелолейкозе – как цель терапии. <br><em> И.С. Мартынкевич</em></span>
+                            </li>
+                            <li>
+                                <span>13:05 – 13:40</span>
+                                <span>МОБ как цель терапии при ОЛЛ. <br><em> С.Н. Бондаренко</em><span>
+                            </li>
+                            <li>
+                                <span>13:40 – 13:45</span>
+                                <span>Заключение. <br><em> И.С. Мартынкевич</em><span>
+                            </li>
+                        </ul>
+                        <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                    </div>
+
+                    <div class="program-table program-table-symp">
+                        <div class="symposium-row">
+                            <div class="col-sm-4 sponlogo-main-item">16:30 – 18:00</div>
+                            <div class="col-sm-4 sponlogo-main-item"><img src="/uploads/backrgounds/logo_sponsors_symp/amgen.png"></div>
+                            <div class="col-sm-4 sponlogo-main-item">Конференц-зал «Пушкин»</div>
+                        </div>
+                        <div class="symposium-title">
+                            <div><h4>Сателлитный симпозиум компании Amgen</h4></div>
+                            <h4><b>«Два лучше, чем один: ингибитор протеасом и ингибитор RANKL – совместный вклад
+                                    в эффективную терапию множественной миеломы»</b></h4>
+                        </div>
+                        <ul class="symposium-list">
+                            <li>Председатель: Л.П. Менделеева</li>
+                            <li>
+                                <span>16:30 – 17:30</span>
+                                <span>Пациент с рефрактерной/рецидивирующей множественной миеломой: от теории к практике</span>
+                            </li>
+                            <li>
+                                <span>16:30 – 17:00</span>
+                                <span>Агрессивный рецидив множественной миеломы – как поможет Кипролис. <br><em> М.В. Соловьев</em><span>
+                            </li>
+                            <li>
+                                <span>17:00 – 17:30</span>
+                                <span>Разбор клинических случаев. <br><em> В.А. Жеребцова</em><span>
+                            </li>
+                            <li>
+                                <span>17:30 – 18:00</span>
+                                <span>Комплексный подход к лечению множественной миеломы: возможности сочетанного применения ингибитора протеасом и ингибитора RANKL. <br><em> С.В. Семочкин</em><span>
+                            </li>
+                        </ul>
+                        <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                    </div>
+
+                    <div class="program-table program-table-symp">
+                        <div class="symposium-row">
+                            <div class="col-sm-4 sponlogo-main-item">16:30 – 18:00</div>
+                            <div class="col-sm-4 sponlogo-main-item"><img src="/uploads/backrgounds/logo_sponsors_symp/nanolek.png"></div>
+                            <div class="col-sm-4 sponlogo-main-item">Конференц-зал «Толстой»</div>
+                        </div>
+                        <div class="symposium-title">
+                            <div><h4>Сателлитный симпозиум компании Нанолек</h4></div>
+                            <h4><b>«Занубрутиниб – новый ВТК ингибитор в лечении пациентов с рецидивом/рефрактерным
+                                    течением лимфомы из клеток зоны мантии»</b></h4>
+                        </div>
+                        <ul class="symposium-list">
+                            <li>Председатель: И.В. Поддубная</li>
+                            <li>
+                                <span>16:30 – 16:35</span>
+                                <span>Вступительное слово <br><em> И.В. Поддубная</em></span>
+                            </li>
+                            <li>
+                                <span>16:35 – 16:55</span>
+                                <span>Терапия лимфомы из клеток зоны мантии, место BTK ингибиторов: прошлые, настоящие и будущие стратегии. <br><em> Luhua (Michael) Wang</em><span>
+                            </li>
+                            <li>
+                                <span>16:55 – 17:15</span>
+                                <span>Занубрутиниб – новый BTK ингибитор для лечения рецидива/рефрактерного течения ЛКМ. <br><em> Г.С. Тумян</em><span>
+                            </li>
+                            <li>
+                                <span>17:15 – 17:30</span>
+                                <span>Коморбидный пациент с рецидивом/рефрактерным течением ЛКМ. Все ли BTK ингибиторы
+                                одинаковы? <br><em> К.Д. Капланов</em><span>
+                            </li>
+                            <li>
+                                <span>17:30 – 17:45</span>
+                                <span>Перспективы применения Занубрутиниба. <br><em> Е.А. Никитин</em><span>
+                            </li>
+                            <li>
+                                <span>17:45 – 17:55</span>
+                                <span>Дискуссия<span>
+                            </li>
+                            <li>
+                                <span>17:55 – 18:00</span>
+                                <span>Заключение. <br><em> И.В. Поддубная</em><span>
+                            </li>
+
+                            </p>
+                            <li>  </li>
+                            <li>  </li>
+                            <li>  </li>
+                            <li>  </li>
+                            <li>  </li>
+                            <li> </li>
+                            <li>  </li>
+
+                        </ul>
+                        <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                    </div>
+
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    {% include 'main/news/index.html.twig' with news %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function setUserStatistics(id) {
+            let data = {'broadcast': id};
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                }
+            });
+            return false;
+        };
+    </script>
+{% endblock %}

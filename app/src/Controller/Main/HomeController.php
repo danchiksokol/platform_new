@@ -67,40 +67,58 @@ class HomeController extends BaseController
         return $this->render('main/start/index.html.twig', $forRender);
     }
 
-    #[Route('/programms/17', 'app_main_home_programms17')]
-    public function programms17Action(): Response
+    #[Route('/programms/13', 'app_main_home_programms13')]
+    public function programms13Action(): Response
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Программы';
         $forRender['news'] = $this->newsRepository->getAllIsShow();
-        return $this->render('main/programms/index17.html.twig', $forRender);
+        return $this->render('main/programms/index13.html.twig', $forRender);
     }
 
-    #[Route('/programms/18', 'app_main_home_programms18')]
-    public function programms18Action(): Response
+    #[Route('/programms/14', 'app_main_home_programms14')]
+    public function programms14Action(): Response
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Программы';
         $forRender['news'] = $this->newsRepository->getAllIsShow();
-        return $this->render('main/programms/index18.html.twig', $forRender);
+        return $this->render('main/programms/index14.html.twig', $forRender);
     }
 
-    #[Route('/symposium/17', 'app_main_home_symposium17')]
-    public function symposium17Action(): Response
+    #[Route('/programms/15', 'app_main_home_programms15')]
+    public function programms15Action(): Response
+    {
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Программы';
+        $forRender['news'] = $this->newsRepository->getAllIsShow();
+        return $this->render('main/programms/index15.html.twig', $forRender);
+    }
+
+    #[Route('/symposium/13', 'app_main_home_symposium13')]
+    public function symposium13Action(): Response
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Симпозиумы';
         $forRender['news'] = $this->newsRepository->getAllIsShow();
-        return $this->render('main/simposium/index17.html.twig', $forRender);
+        return $this->render('main/simposium/index13.html.twig', $forRender);
     }
 
-    #[Route('/symposium/18', 'app_main_home_symposium18')]
-    public function symposium18Action(): Response
+    #[Route('/symposium/14', 'app_main_home_symposium14')]
+    public function symposium14Action(): Response
     {
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Симпозиумы';
         $forRender['news'] = $this->newsRepository->getAllIsShow();
-        return $this->render('main/simposium/index18.html.twig', $forRender);
+        return $this->render('main/simposium/index14.html.twig', $forRender);
+    }
+
+    #[Route('/symposium/15', 'app_main_home_symposium15')]
+    public function symposium15Action(): Response
+    {
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Симпозиумы';
+        $forRender['news'] = $this->newsRepository->getAllIsShow();
+        return $this->render('main/simposium/index15.html.twig', $forRender);
     }
 
     #[Route('/nmo', 'app_main_home_nmo')]

@@ -7,10 +7,10 @@
             <div class="row">
                 <div class="col-lg-9 col-12">
                     <div class="poster-category">
-                        <a class="btn btn-fill {% if app.request.attributes.get('_route_params').categoryId == 0 %}active{% endif %}"
+                        <a class="btn btn-fill-posters {% if app.request.attributes.get('_route_params').categoryId == 0 %}active{% endif %}"
                            href="{{ path('app_poster') }}">Все постеры</a>
                         {% for category in categories %}
-                            <a class="btn btn-fill {% if app.request.attributes.get('_route_params').categoryId == category.id %}active{% endif %}"
+                            <a class="btn btn-fill-posters {% if app.request.attributes.get('_route_params').categoryId == category.id %}active{% endif %}"
                                href="{{ path('app_poster', {'categoryId': category.id}) }}">{{ category.name }}</a>
                         {% endfor %}
                     </div>
@@ -33,7 +33,7 @@
                                                href="javascript:void(0);">
                                                 {{ row.title }}
                                             </a>
-                                            <br>
+                                            <!--br><-->
                                             <a class="poster-images-img"
                                                data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
                                                data-pdf="/uploads/poster/pdf/{{ row.file }}"

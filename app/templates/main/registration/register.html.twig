@@ -3,6 +3,7 @@
 {% block title %}Регистрация{% endblock %}
 
 {% block body %}
+   <body class="registracia">
     <div class="container">
         <div class="row registration">
             <div class="col-lg-7 col-12 registration-order">
@@ -16,7 +17,7 @@
                         <div class="registration-buttons">
                             {# <a href="{{ path('app_main_home_programms17') }}" #}
                             {# class="btn btn-fill">Программа</a> #}
-                            <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                            <a href="{{ asset('uploads/programm/ZL-Programma.pdf') }}" target="_blank"
                                class="btn btn-fill btn-down">Программа</a>
                             {# <a href="{{ path('theses_create') }}" type="button" class="btn btn-fill">Отправить #}
                             {# постер</a> #}
@@ -32,14 +33,13 @@
                         {# <a class="btn btn-secondary" href="javascript:void(0);">EN</a> #}
                         {# </div> #}
                         <br>
-                        <img class="registration-logo" src="/assets/img/logo.png">
-                        <h1 class="d-lg-none">Интерактивный форум экспертов по вопросам диагностики и лечения
-                            лимфопролиферативных заболеваний «Лимфорум», <br class="d-md-none">17-18 сентября 2021 г. </h1>
+                        <img class="registration-logo" src="/uploads/backrgounds/logo-small.png">
+                        <!--h1 class="d-lg-none">XVIII Российская конференция с международным участием «Злокачественные лимфомы» <br class="d-md-none">14-15 октября 2021 г. </h1><-->
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 form">
-                        <h4>Регистрация</h4>
+                    <div class="col-md-12 form"><br>
+                        <h3 class="reg-title">Регистрация</h3>
                         {{ form_start(registrationForm) }}
                         <div class="mb-3">
                             {{ form_row(registrationForm.email, {
@@ -89,12 +89,12 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="registration-btn">
+                        <!--div class="registration-btn">
                             {{ form_row(registrationForm.registryButton) }}
-                             <a href="/login">Войти на платформу</a>
-                        </div>
+                             <a class="reg-link" href="/login">Войти на платформу</a>
+                        </div><-->
                         {{ form_end(registrationForm) }}
-                        <button type="button" class="btn btn-link registration-help" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-link registration-help reg-link" data-bs-toggle="modal"
                                 data-bs-target="#callbackModal">Помощь
                         </button>
                     </div>
@@ -163,4 +163,5 @@
     </script>
     {% set submit_url = path('app_register') %}
     {% include 'main/registration/form_help.html.twig' with {url: submit_url} %}
+   </body>
 {% endblock %}
