@@ -186,7 +186,7 @@
         }
 
         let myModal = new bootstrap.Modal(document.getElementById('posterModal'));
-        $('.poster-images-img').click(function () {
+        $('.poster-images-img, .poster-images-title').click(function () {
             $('.posterModal .modal-title').text($(this).attr('data-title'));
             $('.posterModal .modal-title-category').text($(this).attr('data-category-name'));
             $('.posterModal .open_pdf').attr('href', $(this).attr('data-pdf'));

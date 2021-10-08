@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Poster;
 use App\Entity\PosterCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -67,6 +68,18 @@ class PosterCategoryRepository extends ServiceEntityRepository
     public function getOne(int $id): PosterCategory
     {
         return $this->find($id);
+    }
+
+    public function getAllIsShow(): array
+    {
+        return $this->entityManager
+            ->createQueryBuilder()
+            ->select('DISTINCT pc.id, pc.name')
+            ->from(PosterCategory::class, 'pc')
+            ->innerJoin(Poster::class, 'p', 'with', 'pc.id = p.posterCategory')
+            ->where('p.is_show = 1')
+            ->getQuery()
+            ->getResult();
     }
 
     /**

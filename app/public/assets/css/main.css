@@ -579,7 +579,12 @@ header .container {
     display: block;
 }
 
+.poster-images a {
+    color: #fff;
+}
+
 .poster-images a:hover {
+    color: #adb5bd;
     text-decoration: none;
 }
 
@@ -992,7 +997,7 @@ footer img {
 }
 
 .poster-images-img {
-    max-height: 306px;
+    max-height: 435px;
     height: 100%;
     max-width: 100%;
     display: flex;

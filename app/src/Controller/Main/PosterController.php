@@ -52,7 +52,7 @@ class PosterController extends BaseController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
-        $category = $this->posterCategoryRepository->getAll();
+        $category = $this->posterCategoryRepository->getAllIsShow();
         $categoryId = $request->get('categoryId');
         $posters = $this->posterRepository->getAllForRender();
         if ($categoryId) {

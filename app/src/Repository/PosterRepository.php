@@ -103,6 +103,6 @@ class PosterRepository extends ServiceEntityRepository
      */
     public function getAllByCategory(int $categoryId): array
     {
-        return $this->findBy(['posterCategory' => $categoryId], ['id' => 'ASC']);
+        return $this->findBy(['posterCategory' => $categoryId, 'is_show' => 1], ['id' => 'ASC']);
     }
 }
