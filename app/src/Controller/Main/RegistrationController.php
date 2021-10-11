@@ -5,11 +5,14 @@ namespace App\Controller\Main;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\RegistrationHelpFormType;
+use App\Repository\MemcachedRepository;
 use App\Security\EmailVerifier;
 use App\Services\Mailer\MailerService;
 use App\Services\User\UserService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,38 +32,45 @@ class RegistrationController extends BaseController
      */
     private UserService $userService;
     private MailerService $mailerService;
+    private MemcachedRepository $memcachedRepository;
 
     /**
      * RegistrationController constructor.
      * @param EmailVerifier $emailVerifier
      * @param UserService $userService
      * @param MailerService $mailerService
+     * @param MemcachedRepository $memcachedRepository
      */
-    public function __construct(EmailVerifier $emailVerifier, UserService $userService, MailerService $mailerService)
-    {
+    public function __construct(
+        EmailVerifier $emailVerifier,
+        UserService $userService,
+        MailerService $mailerService,
+        MemcachedRepository $memcachedRepository
+    ) {
         $this->emailVerifier = $emailVerifier;
         $this->userService = $userService;
         $this->mailerService = $mailerService;
+        $this->memcachedRepository = $memcachedRepository;
     }
 
 
     /**
      * @param Request $request
      * @return Response
-     * @throws ORMException
-     * @throws OptimisticLockException
      * @throws TransportExceptionInterface
+     * @throws InvalidArgumentException
+     * @throws Exception
      */
     #[Route('/register', name: 'app_register')]
-    public function registerAction(
-        Request $request
-    ): Response {
+    public function registerAction(Request $request): Response
+    {
         $user = new User();
         $registryForm = $this->createForm(RegistrationFormType::class, $user);
         $registryForm->handleRequest($request);
         if ($registryForm->get('registryButton')->isClicked()
             && $registryForm->isSubmitted() && $registryForm->isValid()) {
             $this->userService->handleCreate($user, $registryForm);
+            $this->memcachedRepository->clearByKey('users.getAll');
 
             $this->emailVerifier->sendEmailConfirmation(
                 'app_login',
@@ -73,7 +83,10 @@ class RegistrationController extends BaseController
                     )
                     ->htmlTemplate('main/registration/confirmation_email.html.twig')
             );
-            $this->addFlash('successRegistration', 'Вы успешно зарегистрировались на XVIII Российскую конференцию с международным участием «Злокачественные лимфомы».');
+            $this->addFlash(
+                'successRegistration',
+                'Вы успешно зарегистрировались на XVIII Российскую конференцию с международным участием «Злокачественные лимфомы».'
+            );
 
             return $this->redirectToRoute('app_register');
         }
