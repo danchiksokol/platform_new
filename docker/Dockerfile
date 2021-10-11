@@ -32,6 +32,12 @@ RUN echo 'xdebug.mode = debug' >> /usr/local/etc/php/php.ini
 RUN echo 'xdebug.discover_client_host = 1' >> /usr/local/etc/php/php.ini
 RUN echo 'opcache.max_accelerated_files = 20000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
+RUN echo 'memory_limit = 500M' >> /usr/local/etc/php/php.ini
+RUN echo 'upload_max_filesize = 100M' >> /usr/local/etc/php/php.ini
+RUN echo 'post_max_size = 100M' >> /usr/local/etc/php/php.ini
+RUN echo 'max_execution_time = 600' >> /usr/local/etc/php/php.ini
+
+
 # Apache config
 RUN a2enmod ssl
 RUN a2enmod rewrite

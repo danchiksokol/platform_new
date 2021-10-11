@@ -96,9 +96,9 @@ class MailerService
         $this->mailer->send($email);
     }
 
+
     /**
      * @param User $user
-     * @throws TransportExceptionInterface
      */
     public function handleSendTemplateEmail(User $user)
     {
