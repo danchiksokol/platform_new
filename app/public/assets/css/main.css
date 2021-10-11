@@ -1019,7 +1019,7 @@ footer img {
 .programs-title {
     margin: 24px 0 24px;
     text-align: center;
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 600;
 }
 
@@ -1929,7 +1929,12 @@ body {
 
 .col-sm-3-1 {
     flex: 0 0 auto;
-    width: 50%;
+    width: 60%;
+}
+
+.col-sm-3-2 {
+    flex: 0 0 auto;
+    width: 30%;
 }
 
 .white_block-stands1 {
@@ -2041,3 +2046,14 @@ body {
 .btn-fill:hover {
     color: #adb5bd;
 }
+
+.regcontrol-back {
+    background: url(/uploads/backrgounds/silver-back.png);
+    background-size: cover;
+
+
+.input-group {
+    font-size: 18px;
+    color: #fff;
+}
+
