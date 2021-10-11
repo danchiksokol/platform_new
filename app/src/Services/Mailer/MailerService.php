@@ -5,6 +5,7 @@ namespace App\Services\Mailer;
 
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Form\Form;
@@ -22,16 +23,19 @@ class MailerService
      */
     private MailerInterface $mailer;
     private EmailVerifier $emailVerifier;
+    private UserRepository $userRepository;
 
     /**
      * MailerService constructor.
      * @param MailerInterface $mailer
      * @param EmailVerifier $emailVerifier
+     * @param UserRepository $userRepository
      */
-    public function __construct(MailerInterface $mailer, EmailVerifier $emailVerifier)
+    public function __construct(MailerInterface $mailer, EmailVerifier $emailVerifier, UserRepository $userRepository)
     {
         $this->mailer = $mailer;
         $this->emailVerifier = $emailVerifier;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -98,6 +102,10 @@ class MailerService
      */
     public function handleSendTemplateEmail(User $user)
     {
+        if(empty($user->getSecret())){
+            $user->setSecret(md5(uniqid()));
+            $this->userRepository->setSave($user);
+        }
         $this->emailVerifier->sendEmailConfirmation(
             'app_login',
             $user,
