@@ -404,13 +404,14 @@ header .container {
 
 .company-nav-link {
     text-decoration: none;
-    color: #000;
+    color: #261b6b;
     margin: 4px 0 4px 16px;
     padding: 4px 0;
+    font-weight: 500;
 }
 
 .company-nav-link:hover {
-    color: #8a1e83;
+    color: #45474f;
 }
 
 .company-nav-link svg {
@@ -418,7 +419,7 @@ header .container {
 }
 
 .company-nav-link:first-child {
-    border-right: 3px solid #8a1e83;
+    border-right: 3px solid #261b6b;
     display: flex;
     align-items: center;
     padding-right: 16px;
@@ -437,6 +438,7 @@ header .container {
     width: 134px;
     box-shadow: 0 3px 9px #bfbfbf;
     text-align: center;
+    font-weight: 700;
 }
 
 .poster-category a, .program-date a {
@@ -1910,6 +1912,16 @@ p {
     color: #fff;
 }
 
+.btn-standlink {
+    background: url(/uploads/backrgounds/sympprogbacksymp4.png);
+    background-size: cover;
+    background-position: bottom;
+    font-weight: 700;
+    max-width: 700px;
+    border-color: #261b6b;
+    color: #261b6b;
+}
+
 .sumptime {
     width: 90px
 }
@@ -2056,6 +2068,10 @@ body {
     color: #adb5bd;
 }
 
+.btn-standlink:hover {
+    color: #686b6e;
+}
+
 .regcontrol-back {
     background: url(/uploads/backrgounds/silver-back.png);
     background-size: cover;
@@ -2068,4 +2084,9 @@ body {
 
 .color-fios {
     color: #26a3b9;
+}
+
+.btn-standlink {
+    color: #f8f9fa;
+    color: #1e3c6d;
 }
