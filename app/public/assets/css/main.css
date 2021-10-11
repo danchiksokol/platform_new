@@ -1967,6 +1967,15 @@ body {
     background-position: bottom;
 }
 
+.white_block-infpart {
+    box-shadow: 0 1px 9px #bfbfbf;
+    background: #f8f9fa;
+    /*border-radius: 20px;*/
+    padding: 24px;
+    background: url(/uploads/backrgounds/sponsorsback-infpart.png);
+    background-size: cover;
+}
+
 .spon-title1 {
     color: #0e2e60;
     font-size: 24px;
@@ -2057,3 +2066,6 @@ body {
     color: #fff;
 }
 
+.color-fios {
+    color: #26a3b9;
+}
