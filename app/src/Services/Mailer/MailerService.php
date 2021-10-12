@@ -113,9 +113,9 @@ class MailerService
                 ->from(new Address(self::LYMPHORUM_EMAIL, mb_convert_encoding('Conferenceml.com', "UTF-8")))
                 ->to($user->getEmail())
                 ->subject(
-                    'Началась трансляция Интерактивного форума экспертов "Лимфорум" 17-18 сентября 2021 г. на платформе.'
+                    'Открыта онлайн платформа XVIII Российской конференции с международным участием «Злокачественные лимфомы»'
                 )
-                ->htmlTemplate('main/registration/confirmation_email_send.html.twig')
+                ->htmlTemplate('main/registration/confirmation_email_start.html.twig')
         );
     }
 

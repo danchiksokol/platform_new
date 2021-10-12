@@ -16,8 +16,7 @@
             {% set count = 0 %}
             {% for row in chatRooms %}
                 <tr>
-                    {% set count = count + 1 %}
-                    <td>{{ count }}</td>
+                    <td>{{ row.id }}</td>
                     <td>{{ row.name }}</td>
                     <td>{{ row.broadcast }}</td>
                     <td>
