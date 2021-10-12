@@ -1839,6 +1839,11 @@ p {
     background-size: cover;
 }
 
+.posters-back {
+    background: url(/uploads/backrgounds/posters-back.png);
+    background-size: cover;
+}
+
 .btn {
     border-radius: 0.75rem;
 }
