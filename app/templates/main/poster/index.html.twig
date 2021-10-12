@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="poster-voting">
-                        <a class="btn-fill btn" href="javascript:void(0);" target="_blank">
+                        <a class="btn-fill btn" href="{{ asset('uploads/poster/pdf/Poster_voting_instruction.pdf') }}" target="_blank">
                             Инструкция по постерному голосованию
                         </a>
                         <button type="button" class="btn btn-fill poster-voting-btn" data-bs-toggle="modal"
@@ -170,7 +170,7 @@
         if (0 == {{ countVotePoster }} || {{ isVote }}) {
             $('.poster-voting-btn').hide();
         }
-        if (3 == {{ countVotePoster }} || {{ isVote }}) {
+        if (2 < selectedPosters.length || {{ isVote }}) {
             $('.addToVoteButton').hide();
             $(".modal-footer").append("<p><b>Вы уже проголосовали</b></p>");
         }
