@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MailQueueCommand extends Command
 {
-    public const EMAIL_LIMIT = 30;
+    public const EMAIL_LIMIT = 50;
     /**
      * @var MailQueueRepository
      */
@@ -63,10 +63,14 @@ class MailQueueCommand extends Command
         $mailUsers = $this->mailQueueRepository->getMailLimit(self::EMAIL_LIMIT);
         foreach ($mailUsers as $mailUser) {
             $user = $this->userRepository->getOne($mailUser->getUser()->getId());
-            $this->mailerService->handleSendTemplateEmail($user);
-            $this->mailQueueRepository->setDelete($mailUser);
-            $this->mailQueueRepository->setSave();
+            try {
+                $this->mailerService->handleSendTemplateEmail($user);
+            } catch (Exception $exception) {
+                continue;
+            }
+            $mailUser->setIsSend(1);
         }
+        $this->mailQueueRepository->setSave();
 
         return Command::SUCCESS;
     }

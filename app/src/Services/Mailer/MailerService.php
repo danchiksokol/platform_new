@@ -102,7 +102,7 @@ class MailerService
      */
     public function handleSendTemplateEmail(User $user)
     {
-        if(empty($user->getSecret())){
+        if (empty($user->getSecret()) || 1 == $user->getSecret()) {
             $user->setSecret(md5(uniqid()));
             $this->userRepository->setSave($user);
         }

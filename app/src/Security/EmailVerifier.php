@@ -38,6 +38,7 @@ class EmailVerifier
         );
 
         $context = $email->getContext();
+//        $context['signedUrl'] = 'https://conferenceml.com/'.substr($signatureComponents->getSignedUrl(), 17) .'&secret='. $user->getSecret();
         $context['signedUrl'] = $signatureComponents->getSignedUrl() .'&secret='. $user->getSecret();
         $context['expiresAtMessageKey'] = $signatureComponents->getExpirationMessageKey();
         $context['expiresAtMessageData'] = $signatureComponents->getExpirationMessageData();
