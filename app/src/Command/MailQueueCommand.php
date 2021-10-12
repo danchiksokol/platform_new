@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MailQueueCommand extends Command
 {
-    public const EMAIL_LIMIT = 20;
+    public const EMAIL_LIMIT = 30;
     /**
      * @var MailQueueRepository
      */

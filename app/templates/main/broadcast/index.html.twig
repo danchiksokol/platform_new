@@ -8,30 +8,38 @@
                 <div class="col-lg-9 col-12">
                     <div class="broadcast">
                         <div class="broadcast-live">
-                            <div id="player"></div>
-                            <script>
-                                let player = new Playerjs({
-                                    id: "player",
-                                    file: "{{ broadcast }}",
-                                    autoplay: 1,
-                                });
-                            </script>
-                            <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
+                            {% if app.request.requesturi != '/broadcast/7' %}
+                                <div id="player"></div>
+                                <script>
+                                    let player = new Playerjs({
+                                        id: "player",
+                                        file: "{{ broadcast }}",
+                                        autoplay: 1,
+                                    });
+                                </script>
+                                <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
+                            {% else %}
+                                <script src="https://facecast.net/w/js/iframe.js"></script>
+                                <iframe id="z0te58" onload="fc_load_iframe(this)" width="976" height="549"
+                                        style="border:none" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                            {% endif %}
                         </div>
-                        {% if app.request.requesturi != '/broadcast/2' %}
+                        {% if app.request.requesturi != '/broadcast/7' %}
                             {% set questions = questions %}
                             {% include 'main/question_speaker/index.html.twig' with {questions: questions} %}
                         {% endif %}
                     </div>
                 </div>
-                <div id="messages" class="col-lg-3 col-12">
-                    {% set chatid = chatid %}
-                    {% include 'main/chatroom/index.html.twig' with {chatid: chatid} %}
-{#                    <div class="chatroom-bottom">#}
-{#                        <textarea id="form-message" placeholder="Сообщение"></textarea>#}
-{#                        <input onclick="sendMessageAjax({{ chatid }})" type="button" id="form-submit"/>#}
-{#                    </div>#}
-                </div>
+                {% if app.request.requesturi != '/broadcast/7' %}
+                    <div id="messages" class="col-lg-3 col-12">
+                        {% set chatid = chatid %}
+                        {% include 'main/chatroom/index.html.twig' with {chatid: chatid} %}
+                        {# <div class="chatroom-bottom"> #}
+                        {# <textarea id="form-message" placeholder="Сообщение"></textarea> #}
+                        {# <input onclick="sendMessageAjax({{ chatid }})" type="button" id="form-submit"/> #}
+                        {# </div> #}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -97,41 +105,41 @@
             });
         });
 
-        {#setInterval(function () {#}
-        {#    $.ajax({#}
-        {#        url: '{{ (path('app_question_ajax')) }}',#}
-        {#        type: "POST",#}
-        {#        dataType: "json",#}
-        {#        data: {#}
-        {#            "chatRoomId": {{ chatid }} // Данные которые отправляем на сервер#}
-        {#        },#}
-        {#        async: true,#}
-        {#        success: function (data) {#}
-        {#            let output = data.output;#}
-        {#            let idArray = Object.keys(output);#}
-        {#            let divArray = document.getElementsByClassName('broadcast-questions-item');#}
-        {#            for (let j = 0; j < divArray.length; j++) {#}
-        {#                divArray[j].remove();#}
-        {#            }#}
-        {#            for (let i = 0; i < idArray.length; i++) {#}
-        {#                let id = "broadcast-question-id-" + idArray[i];#}
-        {#                if (!document.getElementById(id)) {#}
-        {#                    let divBroadcast = document.createElement("div");#}
-        {#                    divBroadcast.className = "broadcast-questions-item";#}
-        {#                    divBroadcast.setAttribute("id", id);#}
-        {#                    let span = document.createElement("span");#}
-        {#                    span.innerHTML = output[idArray[i]]['fio'];#}
-        {#                    let divQuestion = document.createElement("div");#}
-        {#                    divQuestion.innerHTML = output[idArray[i]]['content'];#}
-        {#                    divBroadcast.prepend(divQuestion);#}
-        {#                    divBroadcast.prepend(span);#}
-        {#                    let broadQuestTitle = document.getElementById('broadcast-questions-title-id');#}
-        {#                    broadQuestTitle.after(divBroadcast);#}
-        {#                }#}
-        {#            }#}
-        {#        }#}
-        {#    });#}
-        {#}, 5000);#}
+        {# setInterval(function () { #}
+        {# $.ajax({ #}
+        {# url: '{{ (path('app_question_ajax')) }}', #}
+        {# type: "POST", #}
+        {# dataType: "json", #}
+        {# data: { #}
+        {# "chatRoomId": {{ chatid }} // Данные которые отправляем на сервер #}
+        {# }, #}
+        {# async: true, #}
+        {# success: function (data) { #}
+        {# let output = data.output; #}
+        {# let idArray = Object.keys(output); #}
+        {# let divArray = document.getElementsByClassName('broadcast-questions-item'); #}
+        {# for (let j = 0; j < divArray.length; j++) { #}
+        {# divArray[j].remove(); #}
+        {# } #}
+        {# for (let i = 0; i < idArray.length; i++) { #}
+        {# let id = "broadcast-question-id-" + idArray[i]; #}
+        {# if (!document.getElementById(id)) { #}
+        {# let divBroadcast = document.createElement("div"); #}
+        {# divBroadcast.className = "broadcast-questions-item"; #}
+        {# divBroadcast.setAttribute("id", id); #}
+        {# let span = document.createElement("span"); #}
+        {# span.innerHTML = output[idArray[i]]['fio']; #}
+        {# let divQuestion = document.createElement("div"); #}
+        {# divQuestion.innerHTML = output[idArray[i]]['content']; #}
+        {# divBroadcast.prepend(divQuestion); #}
+        {# divBroadcast.prepend(span); #}
+        {# let broadQuestTitle = document.getElementById('broadcast-questions-title-id'); #}
+        {# broadQuestTitle.after(divBroadcast); #}
+        {# } #}
+        {# } #}
+        {# } #}
+        {# }); #}
+        {# }, 5000); #}
 
         $('#fullscreen-btn').click(function () {
             $(this).toggleClass('active');
@@ -159,16 +167,16 @@
     {% set submit_url = path('app_broadcast', {'chatid': chatid}) %}
     {% include 'main/question_speaker/form.html.twig' with {url: submit_url} %}
 {% endblock %}
-{#{% block javascripts %}#}
-{#    {{ parent() }}#}
-{#    <script>#}
-{#        setInterval(function () {#}
-{#            $.ajax({#}
-{#                method: 'POST',#}
-{#                url: '{{ path('app_messages', {'chatid':chatid}) }}'#}
-{#            }).done(function (data) {#}
-{#                $('#chat-list').html(data);#}
-{#            });#}
-{#        }, 5000);#}
-{#    </script>#}
-{#{% endblock %}#}
+{# {% block javascripts %} #}
+{# {{ parent() }} #}
+{# <script> #}
+{# setInterval(function () { #}
+{# $.ajax({ #}
+{# method: 'POST', #}
+{# url: '{{ path('app_messages', {'chatid':chatid}) }}' #}
+{# }).done(function (data) { #}
+{# $('#chat-list').html(data); #}
+{# }); #}
+{# }, 5000); #}
+{# </script> #}
+{# {% endblock %} #}
