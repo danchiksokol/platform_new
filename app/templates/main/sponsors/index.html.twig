@@ -9,37 +9,73 @@
                     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <a href="{{ path('app_company') }}">
-                                    <img src="{{ asset('assets/img/sponsor/banner/abbvie.jpg') }}"
+                                <a href="{{ path('app_company', {'id':18}) }}">
+                                    <img src="{{ asset('assets/img/sponsor/banner/amgen.png') }}"
+                                         class="d-block w-100">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{ path('app_company', {'id':13}) }}">
+                                    <img src="{{ asset('assets/img/sponsor/banner/astrazeneca.jpg') }}"
                                          class="d-block w-100">
                                 </a>
                             </div>
                             <div class="carousel-item">
                                 <a href="{{ path('app_company', {'id':19}) }}">
-                                    <img src="{{ asset('assets/img/sponsor/banner/bioccad.jpg') }}"
+                                    <img src="{{ asset('assets/img/sponsor/banner/biocad.png') }}"
                                          class="d-block w-100">
                                 </a>
                             </div>
                             <div class="carousel-item">
-                                <a href="{{ path('app_company', {'id':21}) }}">
-                                    <img src="{{ asset('assets/img/sponsor/banner/janssen.png') }}"
+                                <a href="{{ path('app_company', {'id':12}) }}">
+                                    <img src="{{ asset('assets/img/sponsor/banner/bms1.png') }}"
                                          class="d-block w-100">
                                 </a>
                             </div>
                             <div class="carousel-item">
-                                <a href="{{ path('app_company', {'id':20}) }}">
-                                    <img src="{{ asset('assets/img/sponsor/banner/polivy.png') }}"
+                                <a href="{{ path('app_company', {'id':12}) }}">
+                                    <img src="{{ asset('assets/img/sponsor/banner/bms2.png') }}"
+                                         class="d-block w-100">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{ path('app_company', {'id':17}) }}">
+                                    <img src="{{ asset('assets/img/sponsor/banner/nanolek1.png') }}"
+                                         class="d-block w-100">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{ path('app_company', {'id':17}) }}">
+                                    <img src="{{ asset('assets/img/sponsor/banner/nanolek2.png') }}"
+                                         class="d-block w-100">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="https://go.roche.com/5ohgt">
+                                    <img src="{{ asset('assets/img/sponsor/banner/roche_gaz.png') }}"
+                                         class="d-block w-100">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="https://go.roche.com/vl3xg">
+                                    <img src="{{ asset('assets/img/sponsor/banner/roche2.png') }}"
                                          class="d-block w-100">
                                 </a>
                             </div>
                             <div class="carousel-item">
                                 <a href="{{ path('app_company', {'id':16}) }}">
-                                    <img src="{{ asset('assets/img/sponsor/banner/sanofi.png') }}"
+                                    <img src="{{ asset('assets/img/sponsor/banner/sanofi1.gif') }}"
                                          class="d-block w-100">
                                 </a>
                             </div>
                             <div class="carousel-item">
-                                <a href="{{ path('app_company', {'id':11}) }}">
+                                <a href="{{ path('app_company', {'id':16}) }}">
+                                    <img src="{{ asset('assets/img/sponsor/banner/sanofi2.gif') }}"
+                                         class="d-block w-100">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{{ path('app_company', {'id':22}) }}">
                                     <img src="{{ asset('assets/img/sponsor/banner/takeda.jpg') }}"
                                          class="d-block w-100">
                                 </a>
@@ -64,17 +100,17 @@
                             <div class="col-12 spon-title">
                             </div>
                             <div class="col-sm-6">
-                                <a href="{{ path('app_company', {'id': 13}) }}">
+                                <a href="{{ path('app_company', {'id': 21}) }}">
                                     <img id="company_13" src="assets/img/sponsor/janssen.png">
                                 </a><br>
                             </div>
                             <div class="col-sm-6">
-                                <a href="{{ path('app_company', {'id': 12}) }}">
+                                <a href="{{ path('app_company', {'id': 20}) }}">
                                     <img id="company_12" src="assets/img/sponsor/roche.png">
                                 </a><br>
                             </div>
                             <div class="col-sm-6">
-                                <a href="{{ path('app_company', {'id': 17}) }}">
+                                <a href="{{ path('app_company', {'id': 16}) }}">
                                     <img id="company_17" src="assets/img/sponsor/sanofi.png">
                                 </a>
                             </div>
@@ -89,12 +125,12 @@
                                 <div class="col-sm-2">
                                 </div>
                                 <div class="col-sm-4-1">
-                                    <a href="{{ path('app_company', {'id': 21}) }}">
+                                    <a href="{{ path('app_company', {'id': 10}) }}">
                                         <img id="company_21" src="assets/img/sponsor/abbvie.png">
                                     </a>
                                 </div>
                                 <div class="col-sm-4-1">
-                                    <a href="{{ path('app_company', {'id': 20}) }}">
+                                    <a href="{{ path('app_company', {'id': 13}) }}">
                                         <img id="company_20" src="assets/img/sponsor/astrazeneca.png">
                                     </a>
                                 </div>
@@ -105,12 +141,12 @@
                                 <div class="col-sm-2">
                                 </div>
                                 <div class="col-sm-4-1">
-                                    <a href="{{ path('app_company', {'id': 16}) }}">
+                                    <a href="{{ path('app_company', {'id': 19}) }}">
                                         <img id="company_16" src="assets/img/sponsor/biocad.png">
                                     </a>
                                 </div>
                                 <div class="col-sm-4-1">
-                                    <a href="{{ path('app_company', {'id': 11}) }}">
+                                    <a href="{{ path('app_company', {'id': 12}) }}">
                                         <img id="company_11" src="assets/img/sponsor/bms.png">
                                     </a>
                                 </div>
@@ -121,7 +157,7 @@
                                 <div class="col-sm-2">
                                 </div>
                                 <div class="col-sm-4-1">
-                                    <a href="{{ path('app_company', {'id': 16}) }}">
+                                    <a href="{{ path('app_company', {'id': 22}) }}">
                                         <img id="company_16" src="assets/img/sponsor/pharmstandart.png">
                                     </a>
                                 </div>
@@ -136,7 +172,7 @@
                         </div>
                         <div class="row justify-center">
                             <div class="col-sm-4-1">
-                                <a href="{{ path('app_company', {'id': 18}) }}">
+                                <a href="{{ path('app_company', {'id': 17}) }}">
                                     <img id="company_18" src="assets/img/sponsor/nanolek.png">
                                 </a>
                             </div>
