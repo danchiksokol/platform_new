@@ -52,7 +52,8 @@
                         </div>
                     </div>
                     <div class="poster-voting">
-                        <a class="btn-fill btn" href="{{ asset('uploads/poster/pdf/Poster_voting_instruction.pdf') }}" target="_blank">
+                        <a class="btn-fill btn" href="{{ asset('uploads/poster/pdf/Poster_voting_instruction.pdf') }}"
+                           target="_blank">
                             Инструкция по постерному голосованию
                         </a>
                         <button type="button" class="btn btn-fill poster-voting-btn" data-bs-toggle="modal"
@@ -212,8 +213,13 @@
                 $('#button' + posterId).text('Постер отобран');
                 $('#button' + posterId).attr("disabled", true);
             } else {
-                $('#button' + posterId).removeAttr("disabled");
-                $('#button' + posterId).text('Отобрать данный постер');
+                if (2 < selectedPosters.length) {
+                    $('#button' + posterId).text('Вы уже проголосовали');
+                    $('#button' + posterId).attr("disabled", true);
+                } else {
+                    $('#button' + posterId).removeAttr("disabled");
+                    $('#button' + posterId).text('Отобрать данный постер');
+                }
             }
             myModal.show();
         });
