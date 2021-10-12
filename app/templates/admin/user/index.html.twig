@@ -3,7 +3,7 @@
 {% block title %}{{ title }}{% endblock %}
 {% block body %}
 <body class="registracia">
-    <div class="container">
+    <div class="container-usertable">
                 <span>
                     <a type="button" class="btn btn-success"
                        href="{{ path('app_admin_users_create') }}">Создать Пользователя</a>
@@ -12,15 +12,15 @@
         <table class="table table-hover table-bordered">
             <thead>
             <tr>
-                <th scope="col">№</th>
-                <th scope="col">Ф.И.О.</th>
-                <th scope="col">Место работы</th>
-                <th scope="col">Должность</th>
-                <th scope="col">Телефон</th>
-                <th scope="col">Электронная почта</th>
-                <th scope="col">Страна</th>
-                <th scope="col">Город</th>
-                <th scope="col">Пришел</th>
+                <th scope="col" class="users-list-correction">№</th>
+                <th scope="col" class="users-list-correction">Ф.И.О.</th>
+                <th scope="col" class="users-list-correction">Место работы</th>
+                <th scope="col" class="users-list-correction">Должность</th>
+                <th scope="col" class="users-list-correction">Телефон</th>
+                <th scope="col" class="users-list-correction">Электронная почта</th>
+                <th scope="col" class="users-list-correction">Страна</th>
+                <th scope="col" class="users-list-correction">Город</th>
+                <th scope="col" class="users-list-correction">Пришел</th>
             </tr>
             </thead>
             <tbody>

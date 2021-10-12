@@ -573,6 +573,7 @@ header .container {
 
 .poster-images > div {
     margin-bottom: 16px;
+    margin-top: 30px;
 }
 
 .poster-images-title {
@@ -605,7 +606,7 @@ header .container {
 
 .poster-list {
     margin: 16px 0;
-    max-width: 560px;
+    /*max-width: 560px;*/
     box-shadow: 0 3px 9px #bfbfbf;
 }
 
@@ -2089,4 +2090,20 @@ body {
 .btn-standlink {
     color: #f8f9fa;
     color: #1e3c6d;
+}
+
+.users-list-correction {
+    width: 50px;
+}
+
+.table-users-size {
+    font-size: 14px;
+}
+
+.container-usertable {
+    width: 100%;
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 2rem);
+    margin-right: auto;
+    margin-left: fill;
 }

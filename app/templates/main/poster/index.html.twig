@@ -5,7 +5,7 @@
     <div class="main-block">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 col-12">
+                <div class="col-lg-12 col-12">
                     <div class="poster-category">
                         <a class="btn btn-fill-posters {% if app.request.attributes.get('_route_params').categoryId == 0 %}active{% endif %}"
                            href="{{ path('app_poster') }}">Все постеры</a>
@@ -64,7 +64,7 @@
 
                     <div class="poster-images row">
                         {% for row in posters %}
-                            <div class="col-md-4" id="poster_{{ row.id }}">
+                            <div class="col-md-3" id="poster_{{ row.id }}">
                                 <a class="poster-images-img"
                                    data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
                                    data-pdf="/uploads/poster/pdf/{{ row.file }}"
@@ -150,7 +150,7 @@
                     <h5 class="modal-title" id="posterModalLabel">Poster title</h5>
                     <h6 class="modal-title-category" id="posterModalLabel">Category name</h6>
                     <div class="posterModal-img">
-                        <img src="/assets/img/broadcast/fon.jpg">
+                        <a href="javascript:void(0);"><img src="/assets/img/broadcast/fon.jpg"></a>
                     </div>
                 </div>
                 <div class="modal-footer">
