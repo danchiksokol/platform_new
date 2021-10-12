@@ -33,7 +33,6 @@
                                                href="javascript:void(0);">
                                                 {{ row.title }}
                                             </a>
-                                            <!--br><-->
                                             <a class="poster-images-img"
                                                data-img="/uploads/poster/pdf/thumbnail/{{ row.thumbnail }}"
                                                data-pdf="/uploads/poster/pdf/{{ row.file }}"
@@ -150,7 +149,7 @@
                     <h5 class="modal-title" id="posterModalLabel">Poster title</h5>
                     <h6 class="modal-title-category" id="posterModalLabel">Category name</h6>
                     <div class="posterModal-img">
-                        <a href="javascript:void(0);"><img src="/assets/img/broadcast/fon.jpg"></a>
+                        <a href="javascript:void(0);" target="_blank"><img src="/assets/img/broadcast/fon.jpg"></a>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -191,6 +190,7 @@
             $('.posterModal .modal-title-category').text($(this).attr('data-category-name'));
             $('.posterModal .open_pdf').attr('href', $(this).attr('data-pdf'));
             $('.posterModal .posterModal-img').attr('src', $(this).attr('data-img'));
+            $('.posterModal .posterModal-img a').attr('href', $(this).attr('data-pdf'));
             $('.posterModal .posterModal-img img').attr('src', $(this).attr('data-img'));
 
             if ($(this).parent().prev().length) {
