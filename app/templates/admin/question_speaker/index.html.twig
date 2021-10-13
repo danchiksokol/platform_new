@@ -2,10 +2,10 @@
 {% block title %}{{ title }}{% endblock %}
 {% block body %}
     <div class="container">
-        <span><a type="button" class="btn btn-success" href="{{ path('app_admin_question_speaker') }}">Основная трансляция</a></span>
-        <span><a type="button" class="btn btn-success" href="{{ path('app_admin_question_speaker', {'chatid': 2}) }}">AstraZeneca</a></span>
-        <span><a type="button" class="btn btn-success" href="{{ path('app_admin_question_speaker', {'chatid': 3}) }}">Нанолек</a></span>
-        <span><a type="button" class="btn btn-success" href="{{ path('app_admin_question_speaker', {'chatid': 4}) }}">БМС</a></span>
+        {% for row in chatrooms %}
+            <span><a type="button" class="btn btn-success"
+                     href="{{ path('app_admin_question_speaker', {'chatid': row.id}) }}">{{ row.name }}</a></span>
+        {% endfor %}
         <table class="table table-hover table-bordered">
             <thead>
             <tr>
@@ -37,7 +37,8 @@
                                href="{{ path('app_admin_question_speaker_show', {'id': row.id}) }}">Отобразить</a>
                         {% endif %}
                     </td>
-                    <td><a type="button" class="btn btn-danger" href="{{path('app_admin_question_speaker_delete', {'id': row.id}) }}">X</a></td>
+                    <td><a type="button" class="btn btn-danger"
+                           href="{{ path('app_admin_question_speaker_delete', {'id': row.id}) }}">X</a></td>
                 </tr>
             {% endfor %}
             </tbody>

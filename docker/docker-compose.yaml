@@ -14,9 +14,9 @@ services:
       - 80:80
     links:
       - db
-    environment: #закоммнетировать для vps от
-      XDEBUG_CONFIG: ${XDEBUG_CONFIG} #закоммнетировать для vps от
-      UPLOAD_LIMIT: 64M #закоммнетировать для vps до
+#    environment: #разкоммнетировать для local от
+#      XDEBUG_CONFIG: ${XDEBUG_CONFIG} #разкоммнетировать для vps от
+#      UPLOAD_LIMIT: 64M #разкоммнетировать для vps до
     restart: always
   db:
     image: mysql:8.0.21

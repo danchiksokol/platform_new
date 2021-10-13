@@ -173,7 +173,7 @@
         }
         if (2 < selectedPosters.length || {{ isVote }}) {
             $('.addToVoteButton').hide();
-            $(".modal-footer").append("<p><b>Вы уже проголосовали</b></p>");
+            $(".modal-footer").append("<p><b>Вы отдали голос за постеры</b></p>");
         }
 
         function isVote(objectId) {
@@ -214,7 +214,7 @@
                 $('#button' + posterId).attr("disabled", true);
             } else {
                 if (2 < selectedPosters.length) {
-                    $('#button' + posterId).text('Вы уже выбрали 3');
+                    $('#button' + posterId).text('Вы выбрали 3 постера');
                     $('#button' + posterId).attr("disabled", true);
                 } else {
                     $('#button' + posterId).removeAttr("disabled");

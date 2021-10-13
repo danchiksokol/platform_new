@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AdminBaseController;
+use App\Repository\ChatRoomRepository;
 use App\Repository\QuestionSpeakerRepository;
 use App\Services\QuestionSpeaker\QuestionSpeakerService;
 use Exception;
@@ -15,18 +16,22 @@ class AdminQuestionSpeakerController extends AdminBaseController
 {
     private QuestionSpeakerRepository $questionSpeakerRepository;
     private QuestionSpeakerService $questionSpeakerService;
+    private ChatRoomRepository $chatRoomRepository;
 
     /**
      * AdminQuestionSpeakerController constructor.
      * @param QuestionSpeakerRepository $questionSpeakerRepository
      * @param QuestionSpeakerService $questionSpeakerService
+     * @param ChatRoomRepository $chatRoomRepository
      */
     public function __construct(
         QuestionSpeakerRepository $questionSpeakerRepository,
-        QuestionSpeakerService $questionSpeakerService
+        QuestionSpeakerService $questionSpeakerService,
+        ChatRoomRepository $chatRoomRepository
     ) {
         $this->questionSpeakerRepository = $questionSpeakerRepository;
         $this->questionSpeakerService = $questionSpeakerService;
+        $this->chatRoomRepository = $chatRoomRepository;
     }
 
 
@@ -39,10 +44,12 @@ class AdminQuestionSpeakerController extends AdminBaseController
     {
         $chatRoomId = (int)$request->get('chatid');
         $questions = $this->questionSpeakerService->getQuestionSpeakerForRenderAdmin($chatRoomId);
+        $chatRoomAll = $this->chatRoomRepository->getAll();
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Вопросы у спикеру';
         $forRender['questions'] = $questions;
+        $forRender['chatrooms'] = $chatRoomAll;
 
         return $this->render(
             'admin/question_speaker/index.html.twig',
