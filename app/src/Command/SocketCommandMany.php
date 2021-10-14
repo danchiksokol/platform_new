@@ -1,6 +1,6 @@
 <?php
-// myapplication/src/sandboxBundle/Command/SocketCommand.php
-// Change the namespace according to your bundle
+
+
 namespace App\Command;
 
 use App\Services\Message\MessageService;
@@ -8,9 +8,19 @@ use App\Services\Participant\ParticipantService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+
 
 // Ratchet libs
 use Ratchet\App;
+use Ratchet\Http\Router;
+use Ratchet\Server\IoServer;
+use Ratchet\Http\HttpServer;
+use Ratchet\WebSocket\WsServer;
+
 // Chat instance
 use App\Sockets\Chat;
 
@@ -47,29 +57,44 @@ class SocketCommandMany extends Command
 
     protected function configure()
     {
-        $this->setName('sockets:start-chat-many')
+        $this->setName('socket:chats')
             // the short description shown while running "php bin/console list"
-            ->setHelp("Starts the chat socket demo")
+            ->setHelp("Starts the chats socket demo")
             // the full command description shown when running the command with
-            ->setDescription('Starts the chat socket demo')
-        ;
+            ->setDescription('Starts the chats socket demo');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln([
-                             'Chat socket',// A line
+                             'Chats socket',// A line
                              '============',// Another line
-                             'Starting chat, open your browser.',// Empty line
+                             'Starting chats, open your browser.',// Empty line
                          ]);
 
-        // The domain of your app as first parameter
+//        $collection = new RouteCollection();
+//        $collection->add(
+//            'broadcast1',
+//            new Route('broadcast/1', [
+//                '_controller' => new Chat($this->participantService, $this->messageService),
+//            ])
+//        );
+////        $collection->add(
+////            'broadcast2',
+////            new Route('/broadcast/2', [
+////                '_controller' => new Chat($this->participantService, $this->messageService),
+////            ])
+////        );
+//        $urlMatcher = new UrlMatcher($collection, new RequestContext());
+//        $router = new Router($urlMatcher);
+//
+//        $server = IoServer::factory(
+//            new HttpServer(new WsServer($router)),
+//            8080
+//        );
+//        $server->run();
 
-        // Note : if you got problems during the initialization, add as third parameter '0.0.0.0'
-        // to prevent any error related to localhost :
-        // $app = new \Ratchet\App('sandbox', 8080,'0.0.0.0');
-        // Domain as first parameter
-        $app = new App('platform.local', 8080,'172.18.0.3');
+        $app = new App('localhost', 8080,'172.18.0.3');
         // Add route to chat with the handler as second parameter
         $app->route('/broadcast/1', new Chat($this->participantService, $this->messageService));
 

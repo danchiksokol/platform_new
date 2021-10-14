@@ -4,11 +4,11 @@
             <div class="modal-content form">
                 {{ form_start(questionForm, {'action': url}) }}
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalQuestionLabel">Задайте вопрос спикеру</h5>
+                    <h5 class="modal-title" id="modalQuestionLabel">Задать вопрос спикерам</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Выберите спикера:</p>
+{#                    <p>Выберите спикера:</p>#}
                     {{ form_row(questionForm.speaker) }}
                     {{ form_row(questionForm.content) }}
                 </div>

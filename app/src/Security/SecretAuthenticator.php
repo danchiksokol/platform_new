@@ -94,7 +94,13 @@ class SecretAuthenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
-        return new Response('Что-то пошло не так попробуюте через форму залогиниться');
+        return new Response(
+            '
+                     Данная ссылка неактивна.<br> 
+                     Перейдите на платформу <a href="https://conferenceml.com">conferenceml.com</a> и нажмите на кнопку "Войти на платформу", расположенную в правом нижнем углу страницы. <br>
+                     Для входа введите Ваш адрес электронной почты, указанный при регистрации.
+                     '
+        );
     }
 
     /**

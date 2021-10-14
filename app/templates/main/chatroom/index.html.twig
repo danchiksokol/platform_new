@@ -13,7 +13,7 @@
                         </button>
                     {% endif %}
                     <div class="chatroom-message">{{ message.content }}</div>
-                    <span class="chatroom-user">{{ message.mine ? 'Я' : user }}</span>
+                    <span class="chatroom-user">{{ message.mine ? 'Я' : message.getParticipant().getUser().getSurname()~' '~ message.getParticipant().getUser().getName()~' '~message.getParticipant().getUser().getPatronymic() }}</span>
                     <span class="chatroom-date">{{ message.createdAt|date("d-m-Y H:i:s") }}</span>
                 </li>
             {% endfor %}
@@ -105,7 +105,7 @@
                 date.className = 'chatroom-date';
                 let now = new Date();
                 let day = now.getDate() > 9 ? now.getDate() : '0' + now.getDate();
-                let month = (now.getMonth()+1) > 9 ? now.getMonth()+1 : '0' + (now.getMonth()+1);
+                let month = (now.getMonth() + 1) > 9 ? now.getMonth() + 1 : '0' + (now.getMonth() + 1);
                 let year = now.getFullYear() > 9 ? now.getFullYear() : '0' + now.getFullYear();
                 let hours = now.getHours() > 9 ? now.getHours() : '0' + now.getHours();
                 let minutes = now.getMinutes() > 9 ? now.getMinutes() : '0' + now.getMinutes();

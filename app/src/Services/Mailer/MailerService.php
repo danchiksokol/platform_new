@@ -113,7 +113,7 @@ class MailerService
                 ->from(new Address(self::LYMPHORUM_EMAIL, mb_convert_encoding('Conferenceml.com', "UTF-8")))
                 ->to($user->getEmail())
                 ->subject(
-                    'Открыта онлайн платформа XVIII Российской конференции с международным участием «Злокачественные лимфомы»'
+                    'Началась трансляция XVIII Российской конференции с международным участием «Злокачественные лимфомы»'
                 )
                 ->htmlTemplate('main/registration/confirmation_email.html.twig')
         );
