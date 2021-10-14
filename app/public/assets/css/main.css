@@ -260,6 +260,7 @@ header .container {
     /*display: flex;*/
     flex-wrap: wrap;
 }
+
 .chatroom li {
     list-style: none;
     background: #dcdcdc;
@@ -269,10 +270,12 @@ header .container {
     overflow-wrap: break-word;
     position: relative;
 }
+
 .chatroom li.my-message {
     background: #d9d8e8;
     border-radius: 4px 4px 0px 4px;
 }
+
 .chatroom-del {
     border: none;
     background: none;
@@ -635,6 +638,10 @@ header .container {
 
 .title-mob {
     order: 2;
+}
+
+.poster-present {
+    padding: 16px 16px 16px 0;
 }
 
 .poster-voting {
@@ -1049,8 +1056,8 @@ thead th {
 }
 
 .program-right {
-   /* border: 10px solid #1e3c6d;
-    border-radius: 15px;*/
+    /* border: 10px solid #1e3c6d;
+     border-radius: 15px;*/
     /*padding: 46px 24px;*/
     padding: 1.5px;
     margin-top: 22px;
@@ -1333,12 +1340,15 @@ thead th {
 .company-video-item iframe {
     min-height: 400px;
 }
+
 .table-border {
     border: 2px solid #1e3c6d;
 }
+
 .table-border thead tr, .table-border thead tr th:first-child, .table-border thead tr th:last-child, .bg-lilac td {
     border-width: 0 0;
 }
+
 @media (min-width: 1200px) {
     .program-table tr td:nth-child(1), .program-table tr th:nth-child(1) {
         width: 115px;
@@ -1403,9 +1413,11 @@ thead th {
     .fullscreen .chatroom {
         margin-top: 575px;
     }
+
     .chatroom {
         height: 530px;
     }
+
     .chatroom ul {
         height: 415px;
     }
@@ -1462,7 +1474,6 @@ thead th {
     /*header {
         background: #fff;
     }*/
-
     .registration-order {
         order: 1;
     }
@@ -1579,9 +1590,11 @@ thead th {
     .fullscreen .broadcast-live {
         height: 400px;
     }
+
     .chatroom {
         height: 400px;
     }
+
     .chatroom ul {
         height: 230px;
     }
@@ -1891,7 +1904,7 @@ p {
     background: #ecedee;
 }
 
-.reg-link{
+.reg-link {
     color: #4798b1;
     text-decoration: underline;
     font-weight: bold;
@@ -2088,9 +2101,9 @@ body {
 }
 
 @media (max-width: 991px) {
-.nav-link.link-dark {
-    color: #1e3c6d;
-}
+    .nav-link.link-dark {
+        color: #1e3c6d;
+    }
 
     .col-sm-3-1 {
         width: 100%;
