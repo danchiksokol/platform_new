@@ -999,6 +999,14 @@ footer img {
     min-height: calc(100vh - 225px);
 }
 
+.main-block-postersession {
+    /*background: url(/uploads/backrgounds/bottom.png);*/
+    background-size: cover;
+    padding-bottom: 50px;
+    background-position-y: bottom;
+    background-position-x: center;
+}
+
 .poster-images-img {
     max-height: 435px;
     height: 100%;
@@ -1172,6 +1180,24 @@ thead th {
     /*border-radius: 20px;*/
     padding: 24px;
     background: url(/uploads/backrgounds/sponsorsback.png);
+    background-size: cover;
+}
+
+.white_block-postersession {
+    box-shadow: 0 1px 9px #bfbfbf;
+    background: #f8f9fa;
+    /*border-radius: 20px;*/
+    padding: 24px;
+    background: url(/uploads/backrgounds/sponsorsback.png);
+    background-size: cover;
+}
+
+.white_block-postersession1 {
+    box-shadow: 0 1px 9px #bfbfbf;
+    background: #f8f9fa;
+    /*border-radius: 20px;*/
+    padding: 24px;
+    background: url(/uploads/backrgounds/sponsorsback-infpart.png);
     background-size: cover;
 }
 
@@ -2143,3 +2169,4 @@ body {
     margin-right: auto;
     margin-left: fill;
 }
+
