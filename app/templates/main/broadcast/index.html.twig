@@ -58,12 +58,13 @@
         </div>
     </div>
     <script>
-        {% if app.request.requesturi == '/broadcast' %}
+        {% if app.request.requesturi == '/broadcast' or app.request.requesturi == '/broadcast/4' %}
         function getModalControl() {
             let myModal = new bootstrap.Modal(document.getElementById('modalControl'));
             let time = [
                 '9:22',
                 '10:26',
+                '11:12',
                 '11:37',
                 '12:14',
                 '14:36',
