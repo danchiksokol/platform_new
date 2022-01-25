@@ -26,8 +26,9 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
  */
 final class EventSourceHttpClient implements HttpClientInterface
 {
-    use AsyncDecoratorTrait;
-    use HttpClientTrait;
+    use AsyncDecoratorTrait, HttpClientTrait {
+        AsyncDecoratorTrait::withOptions insteadof HttpClientTrait;
+    }
 
     private $reconnectionTime;
 
@@ -77,7 +78,7 @@ final class EventSourceHttpClient implements HttpClientInterface
             try {
                 $isTimeout = $chunk->isTimeout();
 
-                if (null !== $chunk->getInformationalStatus()) {
+                if (null !== $chunk->getInformationalStatus() || $context->getInfo('canceled')) {
                     yield $chunk;
 
                     return;

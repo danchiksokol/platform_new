@@ -244,6 +244,24 @@
             'reference' => '54251ab2b16c41c6980387839496b235f5f6e10b',
             'dev_requirement' => false,
         ),
+        'lcobucci/clock' => array(
+            'pretty_version' => '2.1.0',
+            'version' => '2.1.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../lcobucci/clock',
+            'aliases' => array(),
+            'reference' => '903513d28e85376a33385ebc601afd2ee69e5653',
+            'dev_requirement' => false,
+        ),
+        'lcobucci/jwt' => array(
+            'pretty_version' => '4.1.5',
+            'version' => '4.1.5.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../lcobucci/jwt',
+            'aliases' => array(),
+            'reference' => 'fe2d89f2eaa7087af4aa166c6f480ef04e000582',
+            'dev_requirement' => false,
+        ),
         'nikic/php-parser' => array(
             'pretty_version' => 'v4.12.0',
             'version' => '4.12.0.0',
@@ -263,6 +281,18 @@
             'dev_requirement' => false,
             'replaced' => array(
                 0 => '^2.1',
+            ),
+        ),
+        'php-http/async-client-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '*',
+            ),
+        ),
+        'php-http/client-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '*',
             ),
         ),
         'psr/cache' => array(
@@ -310,6 +340,12 @@
                 0 => '1.0',
             ),
         ),
+        'psr/http-client-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0',
+            ),
+        ),
         'psr/http-message' => array(
             'pretty_version' => '1.0.1',
             'version' => '1.0.1.0',
@@ -320,6 +356,21 @@
             'dev_requirement' => false,
         ),
         'psr/http-message-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0',
+            ),
+        ),
+        'psr/link' => array(
+            'pretty_version' => '1.1.1',
+            'version' => '1.1.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/link',
+            'aliases' => array(),
+            'reference' => '846c25f58a1f02b93a00f2404e3626b6bf9b7807',
+            'dev_requirement' => false,
+        ),
+        'psr/link-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
                 0 => '1.0',
@@ -601,6 +652,15 @@
             'reference' => '0374044e7b3f7ca403058203403f6bc3097f4fbe',
             'dev_requirement' => false,
         ),
+        'symfony/http-client' => array(
+            'pretty_version' => 'v5.3.13',
+            'version' => '5.3.13.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/http-client',
+            'aliases' => array(),
+            'reference' => '6b47b4785bed0b1c3409e1dfab2abbb1f553f224',
+            'dev_requirement' => false,
+        ),
         'symfony/http-client-contracts' => array(
             'pretty_version' => 'v2.4.0',
             'version' => '2.4.0.0',
@@ -609,6 +669,12 @@
             'aliases' => array(),
             'reference' => '7e82f6084d7cae521a75ef2cb5c9457bbda785f4',
             'dev_requirement' => false,
+        ),
+        'symfony/http-client-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '2.4',
+            ),
         ),
         'symfony/http-foundation' => array(
             'pretty_version' => 'v5.3.3',
@@ -645,6 +711,24 @@
             'aliases' => array(),
             'reference' => 'f093d906c667cba7e3f74487d9e5e55aaf25a031',
             'dev_requirement' => true,
+        ),
+        'symfony/mercure' => array(
+            'pretty_version' => 'v0.6.1',
+            'version' => '0.6.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/mercure',
+            'aliases' => array(),
+            'reference' => '7546092e654f9bb22e554819fb614e462075065a',
+            'dev_requirement' => false,
+        ),
+        'symfony/mercure-bundle' => array(
+            'pretty_version' => 'v0.3.4',
+            'version' => '0.3.4.0',
+            'type' => 'symfony-bundle',
+            'install_path' => __DIR__ . '/../symfony/mercure-bundle',
+            'aliases' => array(),
+            'reference' => '1c04180b3bba5c285b1d6c2a3b347e54111cf838',
+            'dev_requirement' => false,
         ),
         'symfony/mime' => array(
             'pretty_version' => 'v5.3.2',
@@ -944,6 +1028,15 @@
             'install_path' => __DIR__ . '/../symfony/var-exporter',
             'aliases' => array(),
             'reference' => '903c2c0babd6267de5bcb2995e8fc1efb5f01f1f',
+            'dev_requirement' => false,
+        ),
+        'symfony/web-link' => array(
+            'pretty_version' => 'v5.3.4',
+            'version' => '5.3.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/web-link',
+            'aliases' => array(),
+            'reference' => '0075c9949c30a61d9b9e7483686d72d261480ef1',
             'dev_requirement' => false,
         ),
         'symfony/yaml' => array(

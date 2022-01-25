@@ -18,6 +18,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mercure\Exception\InvalidArgumentException;
 use Symfony\Component\Mercure\Exception\RuntimeException;
 
+/**
+ * Manages the "mercureAuthorization" cookies.
+ */
 final class Authorization
 {
     private const MERCURE_AUTHORIZATION_COOKIE_NAME = 'mercureAuthorization';
@@ -35,19 +38,43 @@ final class Authorization
     }
 
     /**
-     * Create Authorization cookie for the given hub.
+     * Sets mercureAuthorization cookie for the given hub.
      *
-     * @param string[]    $subscribe        a list of topics that the authorization cookie will allow subscribing to
-     * @param string[]    $publish          a list of topics that the authorization cookie will allow publishing to
-     * @param mixed[]     $additionalClaims an array of additional claims for the JWT
-     * @param string|null $hub              the hub to generate the cookie for
+     * @param string[]|string      $subscribe        a topic or a list of topics that the authorization cookie will allow subscribing to
+     * @param string[]|string      $publish          a list of topics that the authorization cookie will allow publishing to
+     * @param array<string, mixed> $additionalClaims an array of additional claims for the JWT
+     * @param string|null          $hub              the hub to generate the cookie for
      */
-    public function createCookie(Request $request, array $subscribe = [], array $publish = [], array $additionalClaims = [], ?string $hub = null): Cookie
+    public function setCookie(Request $request, $subscribe = [], $publish = [], array $additionalClaims = [], ?string $hub = null): void
+    {
+        $this->updateCookies($request, $hub, $this->createCookie($request, $subscribe, $publish, $additionalClaims, $hub));
+    }
+
+    /**
+     * Clears the mercureAuthorization cookie for the given hub.
+     *
+     * @param string|null $hub the hub to clear the cookie for
+     */
+    public function clearCookie(Request $request, ?string $hub = null): void
+    {
+        $this->updateCookies($request, $hub, $this->createClearCookie($request, $hub));
+    }
+
+    /**
+     * Creates mercureAuthorization cookie for the given hub.
+     *
+     * @param string[]|string      $subscribe        a list of topics that the authorization cookie will allow subscribing to
+     * @param string[]|string      $publish          a list of topics that the authorization cookie will allow publishing to
+     * @param array<string, mixed> $additionalClaims an array of additional claims for the JWT
+     * @param string|null          $hub              the hub to generate the cookie for
+     */
+    public function createCookie(Request $request, $subscribe = [], $publish = [], array $additionalClaims = [], ?string $hub = null): Cookie
     {
         $hubInstance = $this->registry->getHub($hub);
         $tokenFactory = $hubInstance->getFactory();
         if (null === $tokenFactory) {
-            throw new InvalidArgumentException(sprintf('The "%s" hub does not contain a token factory.', $hub ? '"'.$hub.'"' : 'default'));
+            $message = sprintf('The %s hub does not contain a token factory.', $hub ? "\"$hub\"" : 'default');
+            throw new InvalidArgumentException($message);
         }
 
         $cookieLifetime = $this->cookieLifetime;
@@ -59,7 +86,7 @@ final class Authorization
             $additionalClaims['exp'] = new \DateTimeImmutable(0 === $cookieLifetime ? '+1 hour' : "+{$cookieLifetime} seconds");
         }
 
-        $token = $tokenFactory->create($subscribe, $publish, $additionalClaims);
+        $token = $tokenFactory->create((array) $subscribe, (array) $publish, $additionalClaims);
         $url = $hubInstance->getPublicUrl();
         /** @var array $urlComponents */
         $urlComponents = parse_url($url);
@@ -81,6 +108,30 @@ final class Authorization
         );
     }
 
+    /**
+     * Clears the mercureAuthorization cookie for the given hub.
+     *
+     * @param string|null $hub the hub to clear the cookie for
+     */
+    public function createClearCookie(Request $request, ?string $hub = null): Cookie
+    {
+        $hubInstance = $this->registry->getHub($hub);
+        /** @var array $urlComponents */
+        $urlComponents = parse_url($hubInstance->getPublicUrl());
+
+        return Cookie::create(
+            self::MERCURE_AUTHORIZATION_COOKIE_NAME,
+            null,
+            1,
+            $urlComponents['path'] ?? '/',
+            $this->getCookieDomain($request, $urlComponents),
+            'http' !== strtolower($urlComponents['scheme'] ?? 'https'),
+            true,
+            false,
+            Cookie::SAMESITE_STRICT
+        );
+    }
+
     private function getCookieDomain(Request $request, array $urlComponents): ?string
     {
         if (!isset($urlComponents['host'])) {
@@ -88,16 +139,36 @@ final class Authorization
         }
 
         $cookieDomain = strtolower($urlComponents['host']);
-        $currentDomain = strtolower($request->getHost());
-
-        if ($cookieDomain === $currentDomain) {
+        $host = strtolower($request->getHost());
+        if ($cookieDomain === $host) {
             return null;
         }
 
-        if (!str_ends_with($cookieDomain, ".${currentDomain}")) {
-            throw new RuntimeException(sprintf('Unable to create authorization cookie for a hub on the different second-level domain "%s".', $cookieDomain));
+        if (str_ends_with($cookieDomain, '.'.$host)) {
+            return $host;
         }
 
-        return $cookieDomain;
+        $hostSegments = explode('.', $host);
+        for ($i = 0, $length = \count($hostSegments) - 1; $i < $length; ++$i) {
+            $currentDomain = implode('.', \array_slice($hostSegments, $i));
+            $target = '.'.$currentDomain;
+            if ($currentDomain === $cookieDomain || str_ends_with($cookieDomain, $target)) {
+                return $target;
+            }
+        }
+
+        throw new RuntimeException(sprintf('Unable to create authorization cookie for a hub on the different second-level domain "%s".', $cookieDomain));
+    }
+
+    private function updateCookies(Request $request, ?string $hub, Cookie $cookie): void
+    {
+        $cookies = $request->attributes->get('_mercure_authorization_cookies', []);
+        if (\array_key_exists($hub, $cookies)) {
+            $message = sprintf('The "mercureAuthorization" cookie for the "%s" has already been set. You cannot set it two times during the same request.', $hub ? "\"$hub\" hub" : 'default hub');
+            throw new RuntimeException($message);
+        }
+
+        $cookies[$hub] = $cookie;
+        $request->attributes->set('_mercure_authorization_cookies', $cookies);
     }
 }

@@ -14,9 +14,10 @@ services:
       - 80:80
     links:
       - db
-#    environment: #разкоммнетировать для local от
-#      XDEBUG_CONFIG: ${XDEBUG_CONFIG} #разкоммнетировать для vps от
-#      UPLOAD_LIMIT: 64M #разкоммнетировать для vps до
+      - mercure
+    environment: #разкоммнетировать для local от
+      XDEBUG_CONFIG: ${XDEBUG_CONFIG} #разкоммнетировать для vps от
+      UPLOAD_LIMIT: 64M #разкоммнетировать для vps до
     restart: always
   db:
     image: mysql:8.0.21
@@ -52,3 +53,16 @@ services:
       - PMA_ARBITRARY=1
       - PMA_USER=root
       - PMA_PASSWORD=NtEd5!31_o5NY4X
+
+  mercure:
+    image: dunglas/mercure
+    container_name: mercure
+    environment:
+      - JWT_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.XBETr9w4ZfqG4N0Z804j7t_uMAJwtnPcTFz8166mm04
+      - DEMO=1
+      - ALLOW_ANONYMOUS=1
+      - PUBLISH_ALLOWED_ORIGINS=*
+      - CORS_ALLOWED_ORIGINS=*
+      - DEBUG=1
+    ports:
+      - "3001:443"
