@@ -112,7 +112,7 @@ class KernelBrowser extends HttpKernelBrowser
     /**
      * @param UserInterface $user
      */
-    public function loginUser($user, string $firewallContext = 'main'): self
+    public function loginUser(object $user, string $firewallContext = 'main'): self
     {
         if (!interface_exists(UserInterface::class)) {
             throw new \LogicException(sprintf('"%s" requires symfony/security-core to be installed.', __METHOD__));
@@ -123,21 +123,32 @@ class KernelBrowser extends HttpKernelBrowser
         }
 
         $token = new TestBrowserToken($user->getRoles(), $user, $firewallContext);
-        $token->setAuthenticated(true);
+        // @deprecated since Symfony 5.4
+        if (method_exists($token, 'setAuthenticated')) {
+            $token->setAuthenticated(true, false);
+        }
 
         $container = $this->getContainer();
         $container->get('security.untracked_token_storage')->setToken($token);
 
-        if (!$container->has('session') && !$container->has('session_factory')) {
+        if ($container->has('session.factory')) {
+            $session = $container->get('session.factory')->createSession();
+        } elseif ($container->has('session')) {
+            $session = $container->get('session');
+        } else {
             return $this;
         }
 
-        $session = $container->get($container->has('session') ? 'session' : 'session_factory');
         $session->set('_security_'.$firewallContext, serialize($token));
         $session->save();
 
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->getCookieJar()->set($cookie);
+        $domains = array_unique(array_map(function (Cookie $cookie) use ($session) {
+            return $cookie->getName() === $session->getName() ? $cookie->getDomain() : '';
+        }, $this->getCookieJar()->all())) ?: [''];
+        foreach ($domains as $domain) {
+            $cookie = new Cookie($session->getName(), $session->getId(), null, null, $domain);
+            $this->getCookieJar()->set($cookie);
+        }
 
         return $this;
     }
@@ -145,9 +156,9 @@ class KernelBrowser extends HttpKernelBrowser
     /**
      * {@inheritdoc}
      *
-     * @param Request $request A Request instance
+     * @param Request $request
      *
-     * @return Response A Response instance
+     * @return Response
      */
     protected function doRequest($request)
     {
@@ -172,9 +183,9 @@ class KernelBrowser extends HttpKernelBrowser
     /**
      * {@inheritdoc}
      *
-     * @param Request $request A Request instance
+     * @param Request $request
      *
-     * @return Response A Response instance
+     * @return Response
      */
     protected function doRequestInProcess($request)
     {
@@ -193,9 +204,9 @@ class KernelBrowser extends HttpKernelBrowser
      * Symfony Standard Edition). If this is not your case, create your own
      * client and override this method.
      *
-     * @param Request $request A Request instance
+     * @param Request $request
      *
-     * @return string The script content
+     * @return string
      */
     protected function getScript($request)
     {

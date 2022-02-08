@@ -24,13 +24,16 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
  */
 class InMemoryUserProvider implements UserProviderInterface
 {
+    /**
+     * @var array<string, UserInterface>
+     */
     private $users;
 
     /**
      * The user array is a hash where the keys are usernames and the values are
      * an array of attributes: 'password', 'enabled', and 'roles'.
      *
-     * @param array $users An array of users
+     * @param array<string, array{password?: string, enabled?: bool, roles?: list<string>}> $users An array of users
      */
     public function __construct(array $users = [])
     {
@@ -51,7 +54,7 @@ class InMemoryUserProvider implements UserProviderInterface
      */
     public function createUser(UserInterface $user)
     {
-        // @deprecated since 5.3, change to $user->getUserIdentifier() in 6.0
+        // @deprecated since Symfony 5.3, change to $user->getUserIdentifier() in 6.0
         $userIdentifier = strtolower(method_exists($user, 'getUserIdentifier') ? $user->getUserIdentifier() : $user->getUsername());
         if (isset($this->users[$userIdentifier])) {
             throw new \LogicException('Another user with the same username already exists.');
@@ -74,7 +77,7 @@ class InMemoryUserProvider implements UserProviderInterface
     {
         $user = $this->getUser($identifier);
 
-        // @deprecated since 5.3, change to $user->getUserIdentifier() in 6.0
+        // @deprecated since Symfony 5.3, change to $user->getUserIdentifier() in 6.0
         return new InMemoryUser(method_exists($user, 'getUserIdentifier') ? $user->getUserIdentifier() : $user->getUsername(), $user->getPassword(), $user->getRoles(), $user->isEnabled());
     }
 
@@ -87,7 +90,7 @@ class InMemoryUserProvider implements UserProviderInterface
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_debug_type($user)));
         }
 
-        // @deprecated since 5.3, change to $user->getUserIdentifier() in 6.0
+        // @deprecated since Symfony 5.3, change to $user->getUserIdentifier() in 6.0
         $storedUser = $this->getUser(method_exists($user, 'getUserIdentifier') ? $user->getUserIdentifier() : $user->getUsername());
         $userIdentifier = method_exists($storedUser, 'getUserIdentifier') ? $storedUser->getUserIdentifier() : $storedUser->getUsername();
 

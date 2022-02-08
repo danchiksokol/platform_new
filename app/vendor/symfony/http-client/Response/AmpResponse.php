@@ -43,14 +43,14 @@ final class AmpResponse implements ResponseInterface, StreamableInterface
     use CommonResponseTrait;
     use TransportResponseTrait;
 
-    private static $nextId = 'a';
+    private static string $nextId = 'a';
 
     private $multi;
-    private $options;
+    private ?array $options;
     private $canceller;
-    private $onProgress;
+    private \Closure $onProgress;
 
-    private static $delay;
+    private static ?string $delay = null;
 
     /**
      * @internal
@@ -138,15 +138,12 @@ final class AmpResponse implements ResponseInterface, StreamableInterface
     /**
      * {@inheritdoc}
      */
-    public function getInfo(string $type = null)
+    public function getInfo(string $type = null): mixed
     {
         return null !== $type ? $this->info[$type] ?? null : $this->info;
     }
 
-    /**
-     * @return array
-     */
-    public function __sleep()
+    public function __sleep(): array
     {
         throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
     }

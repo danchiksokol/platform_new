@@ -1,22 +1,6 @@
 <?php
 
-/*
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the MIT license. For more information, see
- * <http://www.doctrine-project.org>.
- */
+declare(strict_types=1);
 
 namespace Doctrine\ORM\Mapping\Driver;
 
@@ -399,8 +383,6 @@ class XmlDriver extends FileDriver
                         'class' => (string) $customGenerator['class'],
                     ]
                 );
-            } elseif (isset($idElement->{'table-generator'})) {
-                throw MappingException::tableIdGeneratorNotImplemented($className);
             }
         }
 
@@ -752,7 +734,7 @@ class XmlDriver extends FileDriver
 
             if (isset($attributes->name)) {
                 $nameAttribute         = (string) $attributes->name;
-                $array[$nameAttribute] = in_array($nameAttribute, ['unsigned', 'fixed'])
+                $array[$nameAttribute] = in_array($nameAttribute, ['unsigned', 'fixed'], true)
                     ? $this->evaluateBoolean($value)
                     : $value;
             } else {
@@ -818,6 +800,9 @@ class XmlDriver extends FileDriver
       *                   scale?: int,
       *                   unique?: bool,
       *                   nullable?: bool,
+      *                   notInsertable?: bool,
+      *                   notUpdatable?: bool,
+      *                   enumType?: string,
       *                   version?: bool,
       *                   columnDefinition?: string,
       *                   options?: array
@@ -857,12 +842,28 @@ class XmlDriver extends FileDriver
             $mapping['nullable'] = $this->evaluateBoolean($fieldMapping['nullable']);
         }
 
+        if (isset($fieldMapping['insertable']) && ! $this->evaluateBoolean($fieldMapping['insertable'])) {
+            $mapping['notInsertable'] = true;
+        }
+
+        if (isset($fieldMapping['updatable']) && ! $this->evaluateBoolean($fieldMapping['updatable'])) {
+            $mapping['notUpdatable'] = true;
+        }
+
+        if (isset($fieldMapping['generated'])) {
+            $mapping['generated'] = constant('Doctrine\ORM\Mapping\ClassMetadata::GENERATED_' . (string) $fieldMapping['generated']);
+        }
+
         if (isset($fieldMapping['version']) && $fieldMapping['version']) {
             $mapping['version'] = $this->evaluateBoolean($fieldMapping['version']);
         }
 
         if (isset($fieldMapping['column-definition'])) {
             $mapping['columnDefinition'] = (string) $fieldMapping['column-definition'];
+        }
+
+        if (isset($fieldMapping['enum-type'])) {
+            $mapping['enumType'] = (string) $fieldMapping['enum-type'];
         }
 
         if (isset($fieldMapping->options)) {
@@ -881,7 +882,7 @@ class XmlDriver extends FileDriver
     private function cacheToArray(SimpleXMLElement $cacheMapping): array
     {
         $region = isset($cacheMapping['region']) ? (string) $cacheMapping['region'] : null;
-        $usage  = isset($cacheMapping['usage']) ? strtoupper($cacheMapping['usage']) : null;
+        $usage  = isset($cacheMapping['usage']) ? strtoupper((string) $cacheMapping['usage']) : null;
 
         if ($usage && ! defined('Doctrine\ORM\Mapping\ClassMetadata::CACHE_USAGE_' . $usage)) {
             throw new InvalidArgumentException(sprintf('Invalid cache usage "%s"', $usage));

@@ -3,6 +3,34 @@
 *We intend to follow [Semantic Versioning 2.0.0](https://semver.org/), if you 
 find a change that break's semver, please create an issue.*
 
+## [v1.8.0](https://github.com/SymfonyCasts/verify-email-bundle/releases/tag/v1.8.0)
+
+*January 31st, 2022*
+
+### Feature
+
+- [#95](https://github.com/symfonycasts/verify-email-bundle/pull/95) - [translations] add Hungarian translations - *@jrushlow*
+
+## [v1.7.0](https://github.com/SymfonyCasts/verify-email-bundle/releases/tag/v1.7.0)
+
+*November 30th, 2021*
+
+### Feature
+
+- [#90](https://github.com/SymfonyCasts/verify-email-bundle/pull/90) - allow deprecation contracts 3.0 - *@jrushlow*
+
+## [v1.6.0](https://github.com/SymfonyCasts/verify-email-bundle/releases/tag/v1.6.0)
+
+*November 18th, 2021*
+
+### Feature
+
+- [#76](https://github.com/SymfonyCasts/verify-email-bundle/pull/76) - add missing return types for Symfony 6 support - *@jrushlow*
+- [#79](https://github.com/SymfonyCasts/verify-email-bundle/pull/79) - [translations] add Finnish translations - *@jrushlow*
+- [#80](https://github.com/SymfonyCasts/verify-email-bundle/pull/80) - [translations] add Czech translations - *@jnovakdev*
+- [#84](https://github.com/SymfonyCasts/verify-email-bundle/pull/84) - [translations] Add Japanese translation - *@nabbisen*
+- [#85](https://github.com/SymfonyCasts/verify-email-bundle/pull/85) - allow symfony6 - *@tacman*
+
 ## [v1.5.0](https://github.com/SymfonyCasts/verify-email-bundle/releases/tag/v1.5.0)
 
 *May 5th, 2021*

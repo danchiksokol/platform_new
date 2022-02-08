@@ -56,7 +56,7 @@ class HttpUtils
      * @param string $path   A path (an absolute path (/foo), an absolute URL (http://...), or a route name (foo))
      * @param int    $status The status code
      *
-     * @return RedirectResponse A RedirectResponse instance
+     * @return RedirectResponse
      */
     public function createRedirectResponse(Request $request, string $path, int $status = 302)
     {
@@ -75,7 +75,7 @@ class HttpUtils
      *
      * @param string $path A path (an absolute path (/foo), an absolute URL (http://...), or a route name (foo))
      *
-     * @return Request A Request instance
+     * @return Request
      */
     public function createRequest(Request $request, string $path)
     {
@@ -142,13 +142,13 @@ class HttpUtils
      *
      * @param string $path A path (an absolute path (/foo), an absolute URL (http://...), or a route name (foo))
      *
-     * @return string An absolute URL
+     * @return string
      *
      * @throws \LogicException
      */
     public function generateUri(Request $request, string $path)
     {
-        if (0 === strpos($path, 'http') || !$path) {
+        if (str_starts_with($path, 'http') || !$path) {
             return $path;
         }
 

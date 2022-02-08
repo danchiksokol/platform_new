@@ -79,7 +79,7 @@ abstract class Composite extends Constraint
             }
         }
 
-        if (!property_exists($this, 'groups')) {
+        if (!isset(((array) $this)['groups'])) {
             $mergedGroups = [];
 
             foreach ($nestedConstraints as $constraint) {
@@ -96,7 +96,7 @@ abstract class Composite extends Constraint
         }
 
         foreach ($nestedConstraints as $constraint) {
-            if (property_exists($constraint, 'groups')) {
+            if (isset(((array) $constraint)['groups'])) {
                 $excessGroups = array_diff($constraint->groups, $this->groups);
 
                 if (\count($excessGroups) > 0) {
@@ -114,10 +114,8 @@ abstract class Composite extends Constraint
      * {@inheritdoc}
      *
      * Implicit group names are forwarded to nested constraints.
-     *
-     * @param string $group
      */
-    public function addImplicitGroupName($group)
+    public function addImplicitGroupName(string $group)
     {
         parent::addImplicitGroupName($group);
 
@@ -141,7 +139,7 @@ abstract class Composite extends Constraint
      *
      * @return Constraint[]
      */
-    public function getNestedContraints()
+    public function getNestedConstraints()
     {
         /* @var Constraint[] $nestedConstraints */
         return $this->{$this->getCompositeOption()};
