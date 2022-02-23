@@ -23,64 +23,36 @@
             <input type="button" id="form-submit"/>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
     <script>
-        // This object will be sent everytime you submit a message in the sendMessage function.
         let clientInformation = {
             chatroom: '{{ chatid }}',
-            username: '{{ user }}',
             userId: '{{ userId }}'
-            // You can add more information in a static object
         };
 
-        // START SOCKET CONFIG
-        /**
-         * Note that you need to change the "sandbox" for the URL of your project.
-         * According to the configuration in Sockets/Chat.php , change the port if you need to.
-         * @type WebSocket
-         */
-        let protocol = 'ws://';
-        if (window.location.protocol === 'https:') {
-            protocol = 'wss://';
-        }
-        let wsUri = protocol + "conferenceml.com/wss2/:8080"; //так на локали "localhost/wss2/:8080"
-        let conn = new WebSocket(wsUri);
+        document.addEventListener('DOMContentLoaded', function () {
+            let url = new URL('http://localhost:3000/.well-known/mercure');
+            url.searchParams.append('topic', '/broadcast/{{ chatid }}')
+            const eventSource = new EventSource(url);
+            eventSource.onmessage = event => Chat.appendMessage(event.data);
+        });
 
-        conn.onopen = function (e) {
-            console.info("Connection established succesfully");
-        };
-
-        conn.onmessage = function (e) {
-            let data = JSON.parse(e.data);
-            Chat.appendMessage(data.username, data.message, data.userId);
-            console.log(data);
-        };
-
-        conn.onerror = function (e) {
-            setInterval(function () {
-                console.error(e);
-                document.location.reload();
-            }, 7000);
-        };
-        // END SOCKET CONFIG
-
-
-        /// Some code to add the messages to the list element and the message submit.
         document.getElementById("form-submit").addEventListener("click", function () {
             let msg = document.getElementById("form-message").value;
-
-            if (!msg) {
-                alert("Please send something on the chat");
+            if (msg) {
+                Chat.sendMessage(msg);
             }
-
-            Chat.sendMessage(msg);
             // Empty text area
             document.getElementById("form-message").value = "";
             document.getElementById("chat-list").scrollTop = document.getElementById("chat-list").scrollHeight;
         }, false);
 
-        // Mini API to send a message with the socket and append a message in a UL element.
         let Chat = {
-            appendMessage: function (username, message, userId) {
+            appendMessage: function (dataJson) {
+                let message = JSON.parse(dataJson).message;
+                let userId = JSON.parse(dataJson).userId;
+                let username = JSON.parse(dataJson).username;
                 let from;
 
                 if (userId == clientInformation.userId) {
@@ -118,11 +90,18 @@
             },
             sendMessage: function (text) {
                 clientInformation.message = text;
-                // Send info as JSON
-                conn.send(JSON.stringify(clientInformation));
-                console.log(JSON.stringify(clientInformation));
-                // Add my own message to the list
-                this.appendMessage(clientInformation.username, clientInformation.message, clientInformation.userId);
+                $.ajax({
+                    url: '{{ (path('app_message_send_ajax')) }}',
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        "content": clientInformation.message,
+                        "chatId": clientInformation.chatroom
+                    },
+                    async: true,
+                    success: function (data) {
+                    }
+                });
             }
         };
 
@@ -145,25 +124,19 @@
             });
         };
 
-        function isReloadPage() {
-            $.ajax({
-                url: '{{ (path('app_broadcast_reload_ajax')) }}',
-                type: "POST",
-                dataType: "json",
-                data: {
-                    "chatId": {{ chatid }}
-                },
-                async: true,
-                success: function (data) {
-                    if (data.reload) {
-                        document.location.reload();
-                    }
-                }
-            });
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            let url = new URL('http://localhost:3000/.well-known/mercure');
+            url.searchParams.append('topic', '/broadcast/reload/{{ chatid }}')
+            const eventSource = new EventSource(url);
+            eventSource.onmessage = event => reload(event.data);
 
-        setInterval(function () {
-            isReloadPage();
-        }, 60000);
+            function reload(dataJson) {
+                let isReload = JSON.parse(dataJson).isReload;
+                console.log(isReload);
+                if (isReload) {
+                    document.location.reload();
+                }
+            }
+        });
     </script>
 {% endblock %}

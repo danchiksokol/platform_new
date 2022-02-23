@@ -88,9 +88,10 @@ class QuestionSpeakerRepository extends ServiceEntityRepository
     /**
      * @param QuestionSpeaker $questionSpeaker
      */
-    public function setShow(QuestionSpeaker $questionSpeaker)
+    public function setShow(QuestionSpeaker $questionSpeaker, string $mercure)
     {
         $questionSpeaker->setIsShow(1);
+        $questionSpeaker->setMercure($mercure);
         $this->entityManager->persist($questionSpeaker);
         $this->setSave();
     }

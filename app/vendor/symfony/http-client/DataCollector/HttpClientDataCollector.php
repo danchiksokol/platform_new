@@ -26,7 +26,7 @@ final class HttpClientDataCollector extends DataCollector implements LateDataCol
     /**
      * @var TraceableHttpClient[]
      */
-    private array $clients = [];
+    private $clients = [];
 
     public function registerClient(string $name, TraceableHttpClient $client)
     {

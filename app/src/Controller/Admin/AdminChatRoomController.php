@@ -9,6 +9,8 @@ use App\Services\ChatRoom\ChatRoomService;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mercure\HubInterface;
+use Symfony\Component\Mercure\Update;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/chat_rooms', name: 'app_admin_')]
@@ -100,13 +102,35 @@ class AdminChatRoomController extends AdminBaseController
         );
     }
 
+
+    /**
+     * @param int $id
+     * @param HubInterface $hub
+     * @return Response
+     */
+    #[Route('/reload/{id}', name: 'chat_rooms_reload')]
+    public function reloadAction(int $id, HubInterface $hub): Response
+    {
+        $update = new Update(
+            "/broadcast/reload/{$id}",
+            json_encode([
+                            'isReload' => true
+                        ]),
+            false
+        );
+
+        $hub->publish($update);
+
+        return $this->redirectToRoute('app_admin_chat_rooms');
+    }
+
     /**
      * @param int $id
      * @return Response
      * @throws Exception
      */
     #[Route('/delete/{id}', name: 'chat_rooms_delete')]
-    public function deleteAction(int $id):Response
+    public function deleteAction(int $id): Response
     {
         $chatRoom = $this->chatRoomRepository->getOne($id);
         $this->chatRoomService->handleDelete($chatRoom);

@@ -56,6 +56,11 @@ class Message
 
     private $mine;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $mercure;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
@@ -170,5 +175,17 @@ class Message
     public function setMine($mine): void
     {
         $this->mine = $mine;
+    }
+
+    public function getMercure(): ?string
+    {
+        return $this->mercure;
+    }
+
+    public function setMercure(string $mercure): self
+    {
+        $this->mercure = $mercure;
+
+        return $this;
     }
 }

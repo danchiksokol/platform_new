@@ -19,14 +19,13 @@ use Symfony\Component\HttpFoundation\IpUtils;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Contracts\HttpClient\ResponseStreamInterface;
-use Symfony\Contracts\Service\ResetInterface;
 
 /**
  * Decorator that blocks requests to private networks by default.
  *
  * @author Hallison Boaventura <hallisonboaventura@gmail.com>
  */
-final class NoPrivateNetworkHttpClient implements HttpClientInterface, LoggerAwareInterface, ResetInterface
+final class NoPrivateNetworkHttpClient implements HttpClientInterface, LoggerAwareInterface
 {
     use HttpClientTrait;
 
@@ -46,16 +45,20 @@ final class NoPrivateNetworkHttpClient implements HttpClientInterface, LoggerAwa
     ];
 
     private $client;
-    private string|array|null $subnets;
+    private $subnets;
 
     /**
      * @param string|array|null $subnets String or array of subnets using CIDR notation that will be used by IpUtils.
      *                                   If null is passed, the standard private subnets will be used.
      */
-    public function __construct(HttpClientInterface $client, string|array $subnets = null)
+    public function __construct(HttpClientInterface $client, $subnets = null)
     {
+        if (!(\is_array($subnets) || \is_string($subnets) || null === $subnets)) {
+            throw new \TypeError(sprintf('Argument 2 passed to "%s()" must be of the type array, string or null. "%s" given.', __METHOD__, get_debug_type($subnets)));
+        }
+
         if (!class_exists(IpUtils::class)) {
-            throw new \LogicException(sprintf('You cannot use "%s" if the HttpFoundation component is not installed. Try running "composer require symfony/http-foundation".', __CLASS__));
+            throw new \LogicException(sprintf('You can not use "%s" if the HttpFoundation component is not installed. Try running "composer require symfony/http-foundation".', __CLASS__));
         }
 
         $this->client = $client;
@@ -77,7 +80,7 @@ final class NoPrivateNetworkHttpClient implements HttpClientInterface, LoggerAwa
 
         $options['on_progress'] = function (int $dlNow, int $dlSize, array $info) use ($onProgress, $subnets, &$lastPrimaryIp): void {
             if ($info['primary_ip'] !== $lastPrimaryIp) {
-                if ($info['primary_ip'] && IpUtils::checkIp($info['primary_ip'], $subnets ?? self::PRIVATE_SUBNETS)) {
+                if (IpUtils::checkIp($info['primary_ip'], $subnets ?? self::PRIVATE_SUBNETS)) {
                     throw new TransportException(sprintf('IP "%s" is blocked for "%s".', $info['primary_ip'], $info['url']));
                 }
 
@@ -93,7 +96,7 @@ final class NoPrivateNetworkHttpClient implements HttpClientInterface, LoggerAwa
     /**
      * {@inheritdoc}
      */
-    public function stream(ResponseInterface|iterable $responses, float $timeout = null): ResponseStreamInterface
+    public function stream($responses, float $timeout = null): ResponseStreamInterface
     {
         return $this->client->stream($responses, $timeout);
     }
@@ -111,18 +114,11 @@ final class NoPrivateNetworkHttpClient implements HttpClientInterface, LoggerAwa
     /**
      * {@inheritdoc}
      */
-    public function withOptions(array $options): static
+    public function withOptions(array $options): self
     {
         $clone = clone $this;
         $clone->client = $this->client->withOptions($options);
 
         return $clone;
-    }
-
-    public function reset()
-    {
-        if ($this->client instanceof ResetInterface) {
-            $this->client->reset();
-        }
     }
 }

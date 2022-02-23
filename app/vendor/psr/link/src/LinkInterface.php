@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Psr\Link;
 
 /**
@@ -22,7 +20,7 @@ interface LinkInterface
      *
      * @return string
      */
-    public function getHref(): string;
+    public function getHref();
 
     /**
      * Returns whether or not this is a templated link.
@@ -30,7 +28,7 @@ interface LinkInterface
      * @return bool
      *   True if this link object is templated, False otherwise.
      */
-    public function isTemplated(): bool;
+    public function isTemplated();
 
     /**
      * Returns the relationship type(s) of the link.
@@ -40,7 +38,7 @@ interface LinkInterface
      *
      * @return string[]
      */
-    public function getRels(): array;
+    public function getRels();
 
     /**
      * Returns a list of attributes that describe the target URI.
@@ -50,5 +48,5 @@ interface LinkInterface
      *  is either a PHP primitive or an array of PHP strings. If no values are
      *  found an empty array MUST be returned.
      */
-    public function getAttributes(): array;
+    public function getAttributes();
 }

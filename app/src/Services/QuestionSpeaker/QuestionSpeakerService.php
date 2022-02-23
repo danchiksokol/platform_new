@@ -76,9 +76,9 @@ class QuestionSpeakerService
     /**
      * @param QuestionSpeaker $questionSpeaker
      */
-    public function handleShow(QuestionSpeaker $questionSpeaker): void
+    public function handleShow(QuestionSpeaker $questionSpeaker, string $mercure): void
     {
-        $this->questionSpeakerRepository->setShow($questionSpeaker);
+        $this->questionSpeakerRepository->setShow($questionSpeaker, $mercure);
     }
 
     /**

@@ -24,6 +24,10 @@
                            href="{{ path('app_admin_chat_rooms_update', {'id': row.id}) }}">Изменить</a>
                     </td>
                     <td>
+                        <a type="button" class="btn btn-success"
+                           href="{{ path('app_admin_chat_rooms_reload', {'id': row.id}) }}">Reload</a>
+                    </td>
+                    <td>
                         <a type="button" class="btn btn-danger"
                            href="{{ path('app_admin_chat_rooms_delete', {'id': row.id}) }}">X</a>
                     </td>

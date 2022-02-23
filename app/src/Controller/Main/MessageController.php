@@ -2,8 +2,7 @@
 
 namespace App\Controller\Main;
 
-use App\Entity\Message;
-use App\Entity\Participant;
+
 use App\Repository\ChatRoomRepository;
 use App\Repository\MessageRepository;
 use App\Repository\ParticipantRepository;
@@ -14,6 +13,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mercure\HubInterface;
+use Symfony\Component\Mercure\Update;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MessageController extends BaseController
@@ -91,16 +92,36 @@ class MessageController extends BaseController
     /**
      * @param Request $request
      * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    #[Route('/newmessage/{chatid}', name: 'newMessage', methods: ['POST'])]
-    public function sendAction(Request $request): Response
+    #[Route('message/send/ajax', name: 'app_message_send_ajax')]
+    public function sendMessageAjaxAction(Request $request, HubInterface $hub): Response
     {
-        $chatRoomId = $request->get('chatid');
-        $chatRoom = $this->chatRoomRepository->find($chatRoomId);
-        $user = $this->getUser();
-        $content = $request->get('content');
+        if ($request->isXMLHttpRequest() && $request->get('chatId') && $request->get('content')) {
+            $userId = $this->getUser()->getId();
+            $user = $this->userRepository->getOne($userId);
+            $userName = $user->getSurname() . ' ' . $user->getName() . ' ' . $user->getPatronymic();
+            $chatRoomId = $request->get('chatId');
+            $content = $request->get('content');
+            $update = new Update(
+                "/broadcast/{$chatRoomId}",
+                json_encode([
+                                'message' => $content,
+                                'userId' => $userId,
+                                'username' => $userName
+                            ]),
+                false
+            );
 
-        return $this->redirectToRoute('app_chatroom', ['chatid' => $chatRoomId]);
+            $mercure = $hub->publish($update);
+            $participant = $this->participantService->handleCreate($chatRoomId, $userId);
+            $this->messageService->handleCreate($participant, $content, $mercure);
+
+            return new Response('success');
+        }
+
+        return new Response('This is not ajax!', 400);
     }
 
     /**
@@ -122,26 +143,5 @@ class MessageController extends BaseController
         return new Response('This is not ajax!', 400);
     }
 
-
-    /**
-     * @param Request $request
-     * @return Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    #[Route('message/send/ajax', name: 'app_message_send_ajax')]
-    public function getMessageAjaxAction(Request $request): Response
-    {
-        if ($request->isXMLHttpRequest() && $request->get('chatId') && $request->get('content')) {
-            $userId = $this->getUser()->getId();
-            $chatRoomId = $request->get('chatId');
-            $content = $request->get('content');
-            $participant = $this->participantService->handleCreate($chatRoomId, $userId);
-            $this->messageService->handleCreate($participant, $content);
-            return new JsonResponse(array('output' => true));
-        }
-
-        return new Response('This is not ajax!', 400);
-    }
 
 }

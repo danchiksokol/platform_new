@@ -14,7 +14,6 @@ namespace Symfony\Component\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Contracts\HttpClient\ResponseStreamInterface;
-use Symfony\Contracts\Service\ResetInterface;
 
 /**
  * Eases with writing decorators.
@@ -41,7 +40,7 @@ trait DecoratorTrait
     /**
      * {@inheritdoc}
      */
-    public function stream(ResponseInterface|iterable $responses, float $timeout = null): ResponseStreamInterface
+    public function stream($responses, float $timeout = null): ResponseStreamInterface
     {
         return $this->client->stream($responses, $timeout);
     }
@@ -49,18 +48,11 @@ trait DecoratorTrait
     /**
      * {@inheritdoc}
      */
-    public function withOptions(array $options): static
+    public function withOptions(array $options): self
     {
         $clone = clone $this;
         $clone->client = $this->client->withOptions($options);
 
         return $clone;
-    }
-
-    public function reset()
-    {
-        if ($this->client instanceof ResetInterface) {
-            $this->client->reset();
-        }
     }
 }

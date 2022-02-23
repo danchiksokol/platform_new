@@ -21,19 +21,18 @@ use Symfony\Contracts\HttpClient\ChunkInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
-use Symfony\Contracts\Service\ResetInterface;
 
 /**
  * Automatically retries failing HTTP requests.
  *
  * @author Jérémy Derussé <jeremy@derusse.com>
  */
-class RetryableHttpClient implements HttpClientInterface, ResetInterface
+class RetryableHttpClient implements HttpClientInterface
 {
     use AsyncDecoratorTrait;
 
     private $strategy;
-    private int $maxRetries;
+    private $maxRetries;
     private $logger;
 
     /**

@@ -38,17 +38,17 @@ class Link implements EvolvableLinkInterface
     // Extra relations
     public const REL_MERCURE = 'mercure';
 
-    private string $href = '';
+    private $href = '';
 
     /**
      * @var string[]
      */
-    private array $rel = [];
+    private $rel = [];
 
     /**
      * @var array<string, string|bool|string[]>
      */
-    private array $attributes = [];
+    private $attributes = [];
 
     public function __construct(string $rel = null, string $href = '')
     {
@@ -92,8 +92,10 @@ class Link implements EvolvableLinkInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @return static
      */
-    public function withHref(string|\Stringable $href): static
+    public function withHref($href)
     {
         $that = clone $this;
         $that->href = $href;
@@ -103,8 +105,10 @@ class Link implements EvolvableLinkInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @return static
      */
-    public function withRel(string $rel): static
+    public function withRel($rel)
     {
         $that = clone $this;
         $that->rel[$rel] = $rel;
@@ -114,8 +118,10 @@ class Link implements EvolvableLinkInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @return static
      */
-    public function withoutRel(string $rel): static
+    public function withoutRel($rel)
     {
         $that = clone $this;
         unset($that->rel[$rel]);
@@ -125,8 +131,12 @@ class Link implements EvolvableLinkInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @param string|\Stringable|int|float|bool|string[] $value
+     *
+     * @return static
      */
-    public function withAttribute(string $attribute, string|\Stringable|int|float|bool|array $value): static
+    public function withAttribute($attribute, $value)
     {
         $that = clone $this;
         $that->attributes[$attribute] = $value;
@@ -136,8 +146,10 @@ class Link implements EvolvableLinkInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @return static
      */
-    public function withoutAttribute(string $attribute): static
+    public function withoutAttribute($attribute)
     {
         $that = clone $this;
         unset($that->attributes[$attribute]);

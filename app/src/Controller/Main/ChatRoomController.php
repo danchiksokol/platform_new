@@ -9,12 +9,15 @@ use App\Repository\MessageRepository;
 use App\Repository\SpeakerRepository;
 use App\Repository\UserRepository;
 use App\Services\QuestionSpeaker\QuestionSpeakerService;
+use App\Services\Token\TokenService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\WebLink\Link;
 
 #[Route('/broadcast', name: 'app_')]
 class ChatRoomController extends BaseController
@@ -37,6 +40,7 @@ class ChatRoomController extends BaseController
     private MessageRepository $messageRepository;
     private QuestionSpeakerService $questionSpeakerService;
     private SpeakerRepository $speakerRepository;
+    private TokenService $tokenService;
 
     /**
      * ChatRoomController constructor.
@@ -46,6 +50,7 @@ class ChatRoomController extends BaseController
      * @param MessageRepository $messageRepository
      * @param QuestionSpeakerService $questionSpeakerService
      * @param SpeakerRepository $speakerRepository
+     * @param TokenService $tokenService
      */
     public function __construct(
         UserRepository $userRepository,
@@ -53,7 +58,8 @@ class ChatRoomController extends BaseController
         ChatRoomRepository $chatRoomRepository,
         MessageRepository $messageRepository,
         QuestionSpeakerService $questionSpeakerService,
-        SpeakerRepository $speakerRepository
+        SpeakerRepository $speakerRepository,
+        TokenService $tokenService
     ) {
         $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
@@ -61,6 +67,7 @@ class ChatRoomController extends BaseController
         $this->messageRepository = $messageRepository;
         $this->questionSpeakerService = $questionSpeakerService;
         $this->speakerRepository = $speakerRepository;
+        $this->tokenService = $tokenService;
     }
 
 
@@ -75,7 +82,6 @@ class ChatRoomController extends BaseController
         $chatRoomId = $request->get('chatid');
         $chatRoom = $this->chatRoomRepository->getOne($chatRoomId);
         $userId = $this->getUser()->getId();
-        $user = $this->userRepository->getOne($userId);
         if (is_null($chatRoom)) {
             throw new Exception('Такого чата нет!');
         }
@@ -113,11 +119,9 @@ class ChatRoomController extends BaseController
 
         $questions = $this->questionSpeakerService->getQuestionSpeakerForRender($chatRoomId);
 
-        $fio = $user->getSurname().' '.$user->getName().' '.$user->getPatronymic();
         $userRoles = $this->getUser()->getRoles();
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Трансляция сессии';
-        $forRender['user'] = $fio;
         $forRender['userId'] = $userId;
         $forRender['delete'] = in_array("ROLE_ADMIN", $userRoles);
         $forRender['messages'] = $messages;
@@ -127,15 +131,34 @@ class ChatRoomController extends BaseController
         $forRender['broadcast'] = $chatRoom->getBroadcast();
         $forRender['questionForm'] = $form->createView();
 
-        return $this->render(
+        $responce = $this->render(
             'main/broadcast/index.html.twig',
             $forRender
         );
+
+        $hubUrl = $this->getParameter('mercure.default_hub');
+        $this->addLink($request, new Link('mercure', $hubUrl));
+        $token = $this->tokenService->createToken($chatRoomId);
+        $responce->headers->setCookie(
+            new Cookie(
+                'mercureAuthorization',
+                $token,
+                (new \DateTime())->add(new \DateInterval('PT2H')),
+                '/.well-known/mercure',
+                null,
+                false,
+                true,
+                false,
+                'strict'
+            )
+        );
+
+        return $responce;
     }
 
 
     #[Route('reload/ajax', name: 'broadcast_reload_ajax')]
-    public function reloadPageAction(Request $request):Response
+    public function reloadPageAction(Request $request): Response
     {
         if ($request->isXMLHttpRequest() && $request->get('chatId')) {
             $chatRoomId = $request->get('chatId');

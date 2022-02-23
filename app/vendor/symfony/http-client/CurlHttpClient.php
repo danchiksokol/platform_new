@@ -36,7 +36,7 @@ final class CurlHttpClient implements HttpClientInterface, LoggerAwareInterface,
 {
     use HttpClientTrait;
 
-    private array $defaultOptions = self::OPTIONS_DEFAULTS + [
+    private $defaultOptions = self::OPTIONS_DEFAULTS + [
         'auth_ntlm' => null, // array|string - an array containing the username as first value, and optionally the
                              //   password as the second one; or string like username:password - enabling NTLM auth
         'extra' => [
@@ -44,10 +44,15 @@ final class CurlHttpClient implements HttpClientInterface, LoggerAwareInterface,
         ],
     ];
 
-    private ?LoggerInterface $logger = null;
+    /**
+     * @var LoggerInterface|null
+     */
+    private $logger;
 
     /**
      * An internal object to share state between the client and its responses.
+     *
+     * @var CurlClientState
      */
     private $multi;
 
@@ -298,13 +303,15 @@ final class CurlHttpClient implements HttpClientInterface, LoggerAwareInterface,
     /**
      * {@inheritdoc}
      */
-    public function stream(ResponseInterface|iterable $responses, float $timeout = null): ResponseStreamInterface
+    public function stream($responses, float $timeout = null): ResponseStreamInterface
     {
         if ($responses instanceof CurlResponse) {
             $responses = [$responses];
+        } elseif (!is_iterable($responses)) {
+            throw new \TypeError(sprintf('"%s()" expects parameter 1 to be an iterable of CurlResponse objects, "%s" given.', __METHOD__, get_debug_type($responses)));
         }
 
-        if ($this->multi->handle instanceof \CurlMultiHandle) {
+        if (\is_resource($this->multi->handle) || $this->multi->handle instanceof \CurlMultiHandle) {
             $active = 0;
             while (\CURLM_CALL_MULTI_PERFORM === curl_multi_exec($this->multi->handle, $active)) {
             }

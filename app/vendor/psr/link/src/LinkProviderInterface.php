@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Psr\Link;
 
 /**
@@ -15,9 +13,9 @@ interface LinkProviderInterface
      * The iterable may be an array or any PHP \Traversable object. If no links
      * are available, an empty array or \Traversable MUST be returned.
      *
-     * @return iterable<LinkInterface>
+     * @return LinkInterface[]|\Traversable
      */
-    public function getLinks(): iterable;
+    public function getLinks();
 
     /**
      * Returns an iterable of LinkInterface objects that have a specific relationship.
@@ -28,7 +26,7 @@ interface LinkProviderInterface
      * @param string $rel
      *   The relationship name for which to retrieve links.
      *
-     * @return iterable<LinkInterface>
+     * @return LinkInterface[]|\Traversable
      */
-    public function getLinksByRel(string $rel): iterable;
+    public function getLinksByRel(string $rel);
 }

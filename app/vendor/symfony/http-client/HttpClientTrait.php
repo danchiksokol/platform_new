@@ -23,12 +23,12 @@ use Symfony\Component\HttpClient\Exception\TransportException;
  */
 trait HttpClientTrait
 {
-    private static int $CHUNK_SIZE = 16372;
+    private static $CHUNK_SIZE = 16372;
 
     /**
      * {@inheritdoc}
      */
-    public function withOptions(array $options): static
+    public function withOptions(array $options): self
     {
         $clone = clone $this;
         $clone->defaultOptions = self::mergeDefaultOptions($options, $this->defaultOptions);
@@ -48,7 +48,7 @@ trait HttpClientTrait
                 throw new InvalidArgumentException(sprintf('Invalid HTTP method "%s", only uppercase letters are accepted.', $method));
             }
             if (!$method) {
-                throw new InvalidArgumentException('The HTTP method cannot be empty.');
+                throw new InvalidArgumentException('The HTTP method can not be empty.');
             }
         }
 
@@ -251,7 +251,7 @@ trait HttpClientTrait
         $normalizedHeaders = [];
 
         foreach ($headers as $name => $values) {
-            if ($values instanceof \Stringable) {
+            if (\is_object($values) && method_exists($values, '__toString')) {
                 $values = (string) $values;
             }
 
@@ -294,18 +294,7 @@ trait HttpClientTrait
     private static function normalizeBody($body)
     {
         if (\is_array($body)) {
-            array_walk_recursive($body, $caster = static function (&$v) use (&$caster) {
-                if (\is_object($v)) {
-                    if ($vars = get_object_vars($v)) {
-                        array_walk_recursive($vars, $caster);
-                        $v = $vars;
-                    } elseif (method_exists($v, '__toString')) {
-                        $v = (string) $v;
-                    }
-                }
-            });
-
-            return http_build_query($body, '', '&');
+            return http_build_query($body, '', '&', \PHP_QUERY_RFC1738);
         }
 
         if (\is_string($body)) {
@@ -356,9 +345,11 @@ trait HttpClientTrait
     }
 
     /**
+     * @param string|string[] $fingerprint
+     *
      * @throws InvalidArgumentException When an invalid fingerprint is passed
      */
-    private static function normalizePeerFingerprint(mixed $fingerprint): array
+    private static function normalizePeerFingerprint($fingerprint): array
     {
         if (\is_string($fingerprint)) {
             switch (\strlen($fingerprint = str_replace(':', '', $fingerprint))) {
@@ -380,16 +371,22 @@ trait HttpClientTrait
     }
 
     /**
+     * @param mixed $value
+     *
      * @throws InvalidArgumentException When the value cannot be json-encoded
      */
-    private static function jsonEncode(mixed $value, int $flags = null, int $maxDepth = 512): string
+    private static function jsonEncode($value, int $flags = null, int $maxDepth = 512): string
     {
         $flags = $flags ?? (\JSON_HEX_TAG | \JSON_HEX_APOS | \JSON_HEX_AMP | \JSON_HEX_QUOT | \JSON_PRESERVE_ZERO_FRACTION);
 
         try {
-            $value = json_encode($value, $flags | \JSON_THROW_ON_ERROR, $maxDepth);
+            $value = json_encode($value, $flags | (\PHP_VERSION_ID >= 70300 ? \JSON_THROW_ON_ERROR : 0), $maxDepth);
         } catch (\JsonException $e) {
             throw new InvalidArgumentException('Invalid value for "json" option: '.$e->getMessage());
+        }
+
+        if (\PHP_VERSION_ID < 70300 && \JSON_ERROR_NONE !== json_last_error() && (false === $value || !($flags & \JSON_PARTIAL_OUTPUT_ON_ERROR))) {
+            throw new InvalidArgumentException('Invalid value for "json" option: '.json_last_error_msg());
         }
 
         return $value;

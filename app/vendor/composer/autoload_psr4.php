@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'Twig\\Extra\\TwigExtraBundle\\' => array($vendorDir . '/twig/extra-bundle'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'Symfony\\Polyfill\\Php81\\' => array($vendorDir . '/symfony/polyfill-php81'),
@@ -30,6 +32,7 @@ return array(
     'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'Symfony\\Component\\String\\' => array($vendorDir . '/symfony/string'),
     'Symfony\\Component\\Stopwatch\\' => array($vendorDir . '/symfony/stopwatch'),
+    'Symfony\\Component\\Serializer\\' => array($vendorDir . '/symfony/serializer'),
     'Symfony\\Component\\Security\\Http\\' => array($vendorDir . '/symfony/security-http'),
     'Symfony\\Component\\Security\\Guard\\' => array($vendorDir . '/symfony/security-guard'),
     'Symfony\\Component\\Security\\Csrf\\' => array($vendorDir . '/symfony/security-csrf'),
@@ -73,6 +76,7 @@ return array(
     'ProxyManager\\' => array($vendorDir . '/friendsofphp/proxy-manager-lts/src/ProxyManager'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'PackageVersions\\' => array($vendorDir . '/composer/package-versions-deprecated/src/PackageVersions'),
+    'PHPStan\\PhpDocParser\\' => array($vendorDir . '/phpstan/phpdoc-parser/src'),
     'Lcobucci\\JWT\\' => array($vendorDir . '/lcobucci/jwt/src'),
     'Lcobucci\\Clock\\' => array($vendorDir . '/lcobucci/clock/src'),
     'Laminas\\Code\\' => array($vendorDir . '/laminas/laminas-code/src'),
@@ -90,7 +94,7 @@ return array(
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib/Doctrine/Common/Collections'),
     'Doctrine\\Common\\Cache\\' => array($vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache'),
     'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations'),
-    'Doctrine\\Common\\' => array($vendorDir . '/doctrine/event-manager/lib/Doctrine/Common', $vendorDir . '/doctrine/persistence/lib/Doctrine/Common', $vendorDir . '/doctrine/common/lib/Doctrine/Common'),
+    'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib/Doctrine/Common', $vendorDir . '/doctrine/event-manager/lib/Doctrine/Common', $vendorDir . '/doctrine/persistence/lib/Doctrine/Common'),
     'Doctrine\\Bundle\\MigrationsBundle\\' => array($vendorDir . '/doctrine/doctrine-migrations-bundle'),
     'Doctrine\\Bundle\\FixturesBundle\\' => array($vendorDir . '/doctrine/doctrine-fixtures-bundle'),
     'Doctrine\\Bundle\\DoctrineBundle\\' => array($vendorDir . '/doctrine/doctrine-bundle'),

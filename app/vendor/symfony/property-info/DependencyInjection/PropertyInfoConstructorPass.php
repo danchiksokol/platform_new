@@ -25,17 +25,30 @@ final class PropertyInfoConstructorPass implements CompilerPassInterface
 {
     use PriorityTaggedServiceTrait;
 
+    private $service;
+    private $tag;
+
+    public function __construct(string $service = 'property_info.constructor_extractor', string $tag = 'property_info.constructor_extractor')
+    {
+        if (0 < \func_num_args()) {
+            trigger_deprecation('symfony/property-info', '5.3', 'Configuring "%s" is deprecated.', __CLASS__);
+        }
+
+        $this->service = $service;
+        $this->tag = $tag;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('property_info.constructor_extractor')) {
+        if (!$container->hasDefinition($this->service)) {
             return;
         }
-        $definition = $container->getDefinition('property_info.constructor_extractor');
+        $definition = $container->getDefinition($this->service);
 
-        $listExtractors = $this->findAndSortTaggedServices('property_info.constructor_extractor', $container);
+        $listExtractors = $this->findAndSortTaggedServices($this->tag, $container);
         $definition->replaceArgument(0, new IteratorArgument($listExtractors));
     }
 }
