@@ -1,6 +1,6 @@
-::-webkit-scrollbar {
+/*::-webkit-scrollbar {
     width: 0;
-}
+}*/
 
 body {
     margin: 0;
@@ -27,7 +27,7 @@ input, textarea {
 }
 
 .registration-logo {
-    width: 600px;
+    width: 80px;
     margin: 0 auto;
     display: block;
 }
@@ -36,12 +36,10 @@ input, textarea {
     width: 100%;
     height: 36px;
     font-size: 16px;
-    font-weight: bold;
     padding: 0 16px;
     border: solid 2px rgba(224, 224, 255, 0.06);
     background-color: rgba(20, 1, 41, 0.02);
     margin-bottom: 0.7rem;
-    background: #ecedee;
 }
 
 .form .form-select {
@@ -85,7 +83,7 @@ h4 {
 
 .registration-buttons a {
     max-width: 228px;
-    font-size: 22px;
+    font-size: 20px;
     width: 100%;
     padding: 8px;
     margin-bottom: 12px;
@@ -105,7 +103,6 @@ h4 {
 .registration-checkbox {
     margin-bottom: 1rem;
     font-size: 16px;
-    color: #ecedee;
 }
 
 .registration-checkbox button {
@@ -113,7 +110,6 @@ h4 {
     background: none;
     text-decoration: underline;
     padding: 0;
-    color: #ecedee;
 }
 
 .theses-create textarea {
@@ -170,14 +166,10 @@ button {
 .nav-link {
     border-radius: 9px;
     margin-right: 8px;
-    border: 3px solid #1e3c6d;
+    border: 3px solid #8a1e83;
     color: #fff;
-    font-weight: 500;
-    background: url(/uploads/backrgounds/buttons2.png);
-    background-size: cover;
-    /*background: #8a1e83;*/
-    /*max-width: 160px;*/
-    max-width: 200px;
+    background: #8a1e83;
+    max-width: 160px;
     text-align: center;
     text-transform: uppercase;
     padding: 0 16px;
@@ -192,9 +184,8 @@ button {
 }
 
 .nav-link.link-dark {
-    background: url(/uploads/backrgounds/buttons-teh1.png);
-    border: 3px solid #1e3c6d;
-    color: #ecedee;
+    background: #24196c;
+    border: 3px solid #24196c;
 }
 
 .nav-link.link-dark:hover {
@@ -203,8 +194,7 @@ button {
 
 .nav-link.active {
     background: #fff;
-    color: #1e3c6d;
-    font-weight: bold;
+    color: #24196c;
 }
 
 .nav-link:last-child {
@@ -224,10 +214,10 @@ nav .navbar-collapse {
 }
 
 header {
-    padding-bottom: 16px;
-    padding-top: 16px;
+    padding-bottom: 8px;
+    /*padding-top: 8px;*/
     position: relative;
-    min-height: 225px;
+    /*min-height: 225px;*/
     /*background: url(/assets/img/header.png);*/
     background-repeat: no-repeat;
     background-size: cover;
@@ -257,10 +247,7 @@ header .container {
     background: #fff;
     margin-top: 42px;
     box-shadow: 0 3px 9px #bfbfbf;
-    /*display: flex;*/
-    flex-wrap: wrap;
 }
-
 .chatroom li {
     list-style: none;
     background: #dcdcdc;
@@ -270,12 +257,9 @@ header .container {
     overflow-wrap: break-word;
     position: relative;
 }
-
 .chatroom li.my-message {
     background: #d9d8e8;
-    border-radius: 4px 4px 0px 4px;
 }
-
 .chatroom-del {
     border: none;
     background: none;
@@ -309,8 +293,8 @@ header .container {
 
 .main-block-left {
     background-color: #fff;
-    /*border-radius: 32px;*/
-    margin: 42px 0;
+    border-radius: 32px;
+    /*margin: 42px 0;*/
     padding: 16px 80px 12px 24px;
     box-shadow: 0 3px 9px #bfbfbf;
     position: relative;
@@ -348,12 +332,12 @@ header .container {
 }
 
 .spon-title {
-    color: #ecedee;
-    font-size: 24px;
-    font-weight: 600;
+    color: #24196c;
+    font-size: 28px;
+    font-weight: 640;
     text-align: center;
     margin-bottom: 24px;
-    margin-top: 24px;
+    margin-top: 10px;
 }
 
 .company-info img {
@@ -407,14 +391,13 @@ header .container {
 
 .company-nav-link {
     text-decoration: none;
-    color: #261b6b;
+    color: #000;
     margin: 4px 0 4px 16px;
     padding: 4px 0;
-    font-weight: 500;
 }
 
 .company-nav-link:hover {
-    color: #45474f;
+    color: #8a1e83;
 }
 
 .company-nav-link svg {
@@ -422,7 +405,7 @@ header .container {
 }
 
 .company-nav-link:first-child {
-    border-right: 3px solid #261b6b;
+    border-right: 3px solid #8a1e83;
     display: flex;
     align-items: center;
     padding-right: 16px;
@@ -441,7 +424,6 @@ header .container {
     width: 134px;
     box-shadow: 0 3px 9px #bfbfbf;
     text-align: center;
-    font-weight: 700;
 }
 
 .poster-category a, .program-date a {
@@ -451,7 +433,7 @@ header .container {
 .poster-category .active, .program-date .active {
     color: #000;
     background-color: #f8f9fa;
-    border: 2px solid #1e3c6d;
+    border: 2px solid #8a1e83;
 }
 
 .program-date .active:hover {
@@ -463,7 +445,7 @@ header .container {
 }
 
 .poster-category, .program-header {
-    margin-top: 16px;
+    /*margin-top: 16px;*/
 }
 
 .program-header {
@@ -473,24 +455,19 @@ header .container {
 }
 
 .program-table thead {
-    background: url(/uploads/backrgounds/predsed-top-table.png);
-    background-size: cover;
+    background: #24196c;
     color: #fff;
     text-align: center;
-    /*height: 60px;*/
 }
 
 .btn-bluez {
     color: #fff;
-    background: url(/uploads/backrgounds/buttons4.png);
-    background-size: cover;
+    background-color: #24196c;
     border-color: #24196c;
-    font-weight: 600;
 }
 
 .btn-fill {
-    background: url(/uploads/backrgounds/buttons.png);
-    background-size: cover;
+    background: #8b1883;
     color: #fff;
 }
 
@@ -514,9 +491,9 @@ header .container {
 
 .program-table {
     background: #f8f9fa;
-    /*border-radius: 32px;*/
+    border-radius: 32px;
     padding: 0px 0px 20px 0px;
-    margin: 24px 0;
+    margin: 12px 0;
     box-shadow: 0 3px 9px #bfbfbf;
     position: relative;
     overflow: hidden;
@@ -537,13 +514,13 @@ header .container {
 
 .program-dop {
     display: flex;
-    margin-bottom: 24px;
+    margin-bottom: 8px;
     flex-wrap: wrap;
 }
 
 .program-dop-item {
     background: #f8f9fa;
-    /*border-radius: 32px;*/
+    border-radius: 32px;
     padding: 16px;
     margin-right: 8px;
     display: flex;
@@ -563,7 +540,7 @@ header .container {
 }
 
 .program-dop-item-title {
-    margin: 8px 0 16px;
+    margin: 6px 0 8px;
     width: 100%;
     text-align: center;
     font-size: 17px;
@@ -576,7 +553,6 @@ header .container {
 
 .poster-images > div {
     margin-bottom: 16px;
-    margin-top: 30px;
 }
 
 .poster-images-title {
@@ -585,12 +561,7 @@ header .container {
     display: block;
 }
 
-.poster-images a {
-    color: #fff;
-}
-
 .poster-images a:hover {
-    color: #adb5bd;
     text-decoration: none;
 }
 
@@ -609,7 +580,7 @@ header .container {
 
 .poster-list {
     margin: 16px 0;
-    /*max-width: 560px;*/
+    max-width: 560px;
     box-shadow: 0 3px 9px #bfbfbf;
 }
 
@@ -619,14 +590,7 @@ header .container {
 }
 
 .poster-list ul li {
-    margin-bottom: 27px;
-    list-style-position: inside;
-    border-bottom: 2px solid #1e3c6d;
-}
-
-.poster-list ul li a {
-    color: #000000;
-    text-decoration: auto;
+    margin-bottom: 7px;
 }
 
 .title {
@@ -638,10 +602,6 @@ header .container {
 
 .title-mob {
     order: 2;
-}
-
-.poster-present {
-    padding: 16px 16px 16px 0;
 }
 
 .poster-voting {
@@ -749,7 +709,7 @@ header .container {
 }
 
 .faq .btn {
-    margin-top: 24px;
+    /*margin-top: 24px;*/
 }
 
 .faq .accordion-item {
@@ -760,12 +720,8 @@ header .container {
     border: 2px solid #24196c;
 }
 
-.poster-list .accordion-item button {
-    border: 2px solid #1e3c6d;
-}
-
 .accordion-flush .accordion-item .accordion-button {
-    /*border-radius: 1rem;*/
+    border-radius: 0.25rem;
     font-weight: bold;
 }
 
@@ -845,11 +801,6 @@ header .container {
     text-align: center;
 }
 
-.posterModal .modal-title-category {
-    margin: 16px 0;
-    text-align: center;
-}
-
 .modal-body .hidden {
     opacity: .2;
     cursor: no-drop;
@@ -912,15 +863,15 @@ header .container {
 }
 
 .chatroom-date {
-    font-size: 12px;
+    font-size: 14px;
     text-align: right;
-    /*width: 60%;*/
+    width: 60%;
     display: inline-block;
 }
 
 .chatroom-user {
-    font-size: 12px;
-    width: 100%;
+    font-size: 14px;
+    width: 38%;
     display: inline-block;
 }
 
@@ -998,24 +949,16 @@ footer img {
 }
 
 .main-block {
-    /*background: url(/uploads/backrgounds/bottom.png);*/
+    background: url(/uploads/backrgounds/bottom.png);
     background-size: cover;
-    padding-bottom: 50px;
+    padding-bottom: 170px;
     background-position-y: bottom;
     background-position-x: center;
     min-height: calc(100vh - 225px);
 }
 
-.main-block-postersession {
-    /*background: url(/uploads/backrgounds/bottom.png);*/
-    background-size: cover;
-    padding-bottom: 50px;
-    background-position-y: bottom;
-    background-position-x: center;
-}
-
 .poster-images-img {
-    max-height: 435px;
+    max-height: 306px;
     height: 100%;
     max-width: 100%;
     display: flex;
@@ -1035,9 +978,9 @@ footer img {
 }
 
 .programs-title {
-    margin: 24px 0 24px;
+    margin: 4px 0 7px;
     text-align: center;
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 600;
 }
 
@@ -1051,19 +994,18 @@ thead th {
 }
 
 .table {
-    font-size: 18px;
-    color: #0c2245;
+    font-size: 17px;
 }
 
 .program-right {
-    /* border: 10px solid #1e3c6d;
-     border-radius: 15px;*/
+    border: 10px solid #24196c;
+    border-radius: 15px;
     /*padding: 46px 24px;*/
     padding: 1.5px;
-    margin-top: 22px;
+    /*margin-top: 42px;*/
     /*position: relative;*/
-    /*background: #fff;*/
-    /*box-shadow: 0 1px 3px #bfbfbf;*/
+    background: #fff;
+    box-shadow: 0 3px 9px #bfbfbf;
 }
 
 .program-right:before, .program-right:after {
@@ -1089,7 +1031,6 @@ thead th {
 .program-right a {
     display: block;
     margin-bottom: 18px;
-    box-shadow: 0 1px 9px #bfbfbf;
 }
 
 .program-right a:last-child {
@@ -1097,7 +1038,7 @@ thead th {
 }
 
 .registration-banner img {
-    /*box-shadow: 0 3px 9px #bfbfbf;*/
+    box-shadow: 0 3px 9px #bfbfbf;
 }
 
 .fullscreen-btn {
@@ -1151,13 +1092,11 @@ thead th {
 }
 
 .bg-lilac {
-    background: url(/uploads/backrgounds/session-back.png);
-    background-size: cover;
-    background-position: bottom;
+    background: #c5a2c8;
 }
 
 .bg-gray {
-    background: #daedf0;
+    background: #d9d8e8;
 }
 
 .justify-center {
@@ -1165,16 +1104,17 @@ thead th {
 }
 
 #carouselExampleIndicators {
-    margin: 24px 0;
+    margin: 0 0 12px;
 }
 
 .sponlogo-main-item {
-    padding: 15px;
+    /*padding: 15px;*/
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
     margin-bottom: 12px;
+    padding-left: 20px;
 }
 
 .sponlogo-main {
@@ -1182,54 +1122,32 @@ thead th {
 }
 
 .white_block {
-    box-shadow: 0 1px 9px #bfbfbf;
+    box-shadow: 0 3px 9px #bfbfbf;
     background: #f8f9fa;
-    /*border-radius: 20px;*/
-    padding: 24px;
-    background: url(/uploads/backrgounds/sponsorsback.png);
-    background-size: cover;
-}
-
-.white_block-postersession {
-    box-shadow: 0 1px 9px #bfbfbf;
-    background: #f8f9fa;
-    /*border-radius: 20px;*/
-    padding: 24px;
-    background: url(/uploads/backrgounds/sponsorsback.png);
-    background-size: cover;
-}
-
-.white_block-postersession1 {
-    box-shadow: 0 1px 9px #bfbfbf;
-    background: #f8f9fa;
-    /*border-radius: 20px;*/
-    padding: 24px;
-    background: url(/uploads/backrgounds/sponsorsback-infpart.png);
-    background-size: cover;
+    border-radius: 32px;
+    padding: 4px 24px 12px;
 }
 
 .spon-logo {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .white_block_hello {
-    box-shadow: 0 1px 9px #bfbfbf;
+    box-shadow: 0 3px 9px #bfbfbf;
     background: url(/uploads/backrgounds/helloback.png);
     background-size: cover;
-    /*background-position: top;*/
-    /*border-radius: 20px;*/
-    padding: 24px;
+    border-radius: 32px;
+    padding-top: 6px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 12px;
     border: 2px solid #24196c;
-}
-
-.white_block_hello .sponlogo-main-item {
-    display: block;
 }
 
 .programs-logo {
     background: #f8f9fa;
     background-position: center;
-    /*border-radius: 32px;*/
+    border-radius: 32px;
     padding: 2px 16px;
     margin: 2px 0;
     box-shadow: 0 3px 9px #bfbfbf;
@@ -1245,18 +1163,18 @@ thead th {
 
 .programs-logo-img {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     margin-top: 15px;
 }
 
 .programs-logo-text {
-    margin-top: 14px;
+    margin-top: 4px;
 }
 
 .programs-logo-symp {
     background: url(/uploads/backrgounds/headsymppage.png);
     background-position: center;
-    /*border-radius: 32px;*/
+    border-radius: 32px;
     padding: 2px 16px;
     margin: 2px 0;
     box-shadow: 0 3px 9px #bfbfbf;
@@ -1271,8 +1189,8 @@ thead th {
 }
 
 .accordion-item .accordion-body {
-    border: 2px solid #1e3c6d;
-    /*border-radius: 0.25rem;*/
+    border: 2px solid #8a1983;
+    border-radius: 0.25rem;
 }
 
 .accordion-button:focus, .btn-check:focus + .btn, .btn:focus {
@@ -1300,19 +1218,20 @@ thead th {
 .symposium-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 4px;
+    margin-top: 8px;
 }
 
 .symposium-title {
     text-align: center;
-    margin-bottom: 42px;
-    margin-top: 42px;
+    margin-bottom: 8px;
+    margin-top: 10px;
 }
 
 .symposium-list {
     /*padding: 0;*/
     list-style: none;
-    margin-bottom: 36px;
+    margin-bottom: 14px;
 }
 
 .symposium-list li {
@@ -1325,7 +1244,7 @@ thead th {
 }
 
 .symposium-list li span:first-child {
-    width: 100px;
+    width: 107px;
     display: block;
     margin-right: 7px;
     flex: none;
@@ -1340,15 +1259,12 @@ thead th {
 .company-video-item iframe {
     min-height: 400px;
 }
-
 .table-border {
-    border: 2px solid #1e3c6d;
+    border: 2px solid #24196c;
 }
-
 .table-border thead tr, .table-border thead tr th:first-child, .table-border thead tr th:last-child, .bg-lilac td {
     border-width: 0 0;
 }
-
 @media (min-width: 1200px) {
     .program-table tr td:nth-child(1), .program-table tr th:nth-child(1) {
         width: 115px;
@@ -1363,7 +1279,6 @@ thead th {
     .program-table tr td:nth-child(2), .program-table tr th:nth-child(2) {
         width: 165px;
     }
-
 }
 
 @media (max-width: 1399px) {
@@ -1379,8 +1294,6 @@ thead th {
     .fullscreen .chatroom {
         margin-top: 678px;
     }
-
-
 }
 
 @media (max-width: 1199px) {
@@ -1413,16 +1326,19 @@ thead th {
     .fullscreen .chatroom {
         margin-top: 575px;
     }
-
     .chatroom {
         height: 530px;
     }
-
     .chatroom ul {
         height: 415px;
     }
+}
 
-
+.white_block_sponsrs {
+    background: #f8f9fa;
+    border-radius: 32px;
+    padding: 0 24px 0;
+    height: 190px;
 }
 
 @media (max-width: 991px) {
@@ -1471,9 +1387,11 @@ thead th {
         margin-top: 18px;
     }
 
-    /*header {
+    header {
         background: #fff;
-    }*/
+        margin-bottom: 20px;
+    }
+
     .registration-order {
         order: 1;
     }
@@ -1498,9 +1416,9 @@ thead th {
         text-align: center;
     }
 
-    .programs-page.main-block {
+    /*.programs-page.main-block {
         background: #f1f1f1;
-    }
+    }*/
 
     .program-pdf {
         max-width: 340px;
@@ -1516,7 +1434,7 @@ thead th {
 
     .program-pdf:after {
         content: '';
-        background: url(/uploads/backrgounds/predsed-top.png);
+        background: url(/assets/img/bottom.png);
         width: 100%;
         height: 48px;
         position: absolute;
@@ -1531,7 +1449,7 @@ thead th {
     }
 
     .main-block-left:after {
-        background: url(/uploads/backrgounds/predsed-top.png);
+        background: url(/assets/img/bottom.png);
         width: 100%;
         height: 48px;
         position: absolute;
@@ -1544,8 +1462,7 @@ thead th {
     }
 
     .nav-container {
-        /*max-width: 720px;*/
-        max-width: 100%;
+        max-width: 720px;
         margin: 0 auto;
         display: block;
     }
@@ -1571,8 +1488,6 @@ thead th {
 
     .main-block {
         min-height: calc(100vh - 336px);
-        /*background: url(/uploads/backrgounds/bottom.png);*/
-        background-size: cover;
     }
 
     .programs-logo {
@@ -1590,15 +1505,17 @@ thead th {
     .fullscreen .broadcast-live {
         height: 400px;
     }
-
     .chatroom {
         height: 400px;
     }
-
     .chatroom ul {
         height: 230px;
     }
 
+}
+
+h5 {
+    font-size: 1.4rem;
 }
 
 @media (max-width: 767px) {
@@ -1656,16 +1573,15 @@ thead th {
         max-width: calc(50% - 3px);
     }
 
-    .programs-logo {
-        display: none;
-    }
-
     .company-video-item iframe {
         min-height: 300px;
     }
 
     .broadcast-live {
         height: 300px;
+    }
+    h5 {
+        font-size: 1.2rem;
     }
 }
 
@@ -1689,7 +1605,7 @@ thead th {
         font-size: 1rem;
         border-radius: .25rem;
         color: #fff;
-        background: #261b6b;
+        background: #8b1883;
         border-color: #0d6efd;
         width: calc(50% - 8px);
         margin: 4px;
@@ -1790,13 +1706,62 @@ thead th {
         max-width: calc(177.778vh);
         height: calc(55.25vw);
     }
+    .white_block_sponsrs {
+        height: 400px;
+    }
+    .white_block_sponsrs .carousel-inner {
+        height: 400px;
+    }
+    .white_block_sponsrs .sponlogo-main-item {
+        margin-bottom: 26px;
+    }
+    .white_block_sponsrs1 {
+        height: 600px;
+    }
+    .white_block_sponsrs1 .carousel-inner {
+        height: 600px;
+    }
+    .white_block_sponsrs1 .sponlogo-main-item {
+        margin-bottom: 26px;
+    }
+    .broadcast-live {
+        height: 300px;
+    }
+}
+
+@media (max-width: 515px) {
+    .broadcast-live {
+        height: 263px;
+    }
+}
+
+@media (max-width: 470px) {
+    .broadcast-live {
+        height: 263px;
+    }
+}
+
+@media (max-width: 450px) {
+    .broadcast-live {
+        height: 250px;
+    }
+}
+
+@media (max-width: 435px) {
+    .broadcast-live {
+        height: 230px;
+    }
+}
+
+@media (max-width: 405px) {
+    .broadcast-live {
+        height: 200px;
+    }
 }
 
 .regback {
-    background: url(/uploads/backrgounds/backregform.png);
-    background-size: cover;
-    /*border-radius: 16px;*/
-    margin-bottom: 20px
+    background: #f8f9fa;
+    border-radius: 16px;
 }
 
 .table {
@@ -1814,372 +1779,208 @@ thead th {
     background-size: cover;
 }
 
-.sympprogbacksymp1 {
-    background: url(/uploads/backrgounds/sympprogbacksymp-g1.png);
-    background-size: cover;
-    border: 2px solid #24196c;
-}
-
-.sympprogbacksymp1-1 {
-    background: url(/uploads/backrgounds/sympprogbacksymp2.png);
-    background-size: cover;
-}
-
-.sympprogbacksymp2 {
-    background: url(/uploads/backrgounds/sympprogbacksymp-g2.png);
-    background-size: cover;
-    background-position: bottom;
-    border: 2px solid #24196c;
-}
-
-.sympprogbacksymp3 {
-    background: url(/uploads/backrgounds/sympprogbacksymp-g3.png);
-    background-size: cover;
-    border: 2px solid #24196c;
-}
-
-.sympprogbacksymp4 {
-    background: url(/uploads/backrgounds/sympprogbacksymp4.png);
-    background-size: cover;
-}
-
-.sympprogbacksymp5 {
-    background: url(/uploads/backrgounds/sympprogbacksymp5.png);
-    background-size: cover;
-}
-
-.sympprogbacksymp6 {
-    background: url(/uploads/backrgounds/sympprogbacksymp6.png);
-    background-size: cover;
-}
-
-.sympprogbacksymp7 {
-    background: url(/uploads/backrgounds/sympprogbacksymp7.png);
-    background-size: cover;
-}
-
 .sympprogbacktop {
     background: url(/uploads/backrgounds/progsymptopedge.png);
     background-size: cover;
 }
 
-.proglogbackpre {
+.proglogback {
     background: url(/uploads/backrgounds/proglogtop.png);
     background-size: cover;
 }
 
-.proglogback {
-    background: url(/uploads/backrgounds/proglogtoppre.png);
-    background-size: cover;
-}
-
 p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
-    /*color: #0c2245;*/
-    color: #0e2e60;
-}
-
-.registracia {
-    background: url(/uploads/backrgounds/back-reg.png);
-    background-size: cover;
-}
-
-.posters-back {
-    background: url(/uploads/backrgounds/posters-back.png);
-    background-size: cover;
-}
-
-.btn {
-    border-radius: 0.75rem;
-}
-
-.reg-title {
-    color: white;
-}
-
-.btn-outline-secondary {
-    color: #51585e;
-    border-color: #6c757d;
-    background: #ecedee;
-}
-
-.reg-link {
-    color: #4798b1;
-    text-decoration: underline;
-    font-weight: bold;
-}
-
-.reg-link:hover {
-    color: #ecedee; /* Цвет ссылки при наведении на нее курсора мыши */
-    text-decoration: underline; /* Добавляем подчеркивание */
-}
-
-.navbar-light .navbar-toggler {
-    background: #ecedee;
-}
-
-.col-lg-10 {
-    width: 95%;
-}
-
-.nav-link.link-dark:hover {
-    color: #1e3c6d;
-}
-
-.btn-fill-program {
-    background: #1e3c6d;
-    background-size: cover;
-    /* border: 1px solid #fff; */
-    color: #fff;
-}
-
-.btn-fill-program:hover {
-    color: #adb5bd;
-}
-
-.program-date .active {
-    color: #000;
-    background-color: #f8f9fa;
-    border: 2px solid #1e3c6d;
-}
-
-.btn-bluez-pdf {
-    color: #fff;
-    background-color: #1e3c6d;
-    border-color: #24196c;
-}
-
-.btn-fill-posters {
-    background: #1e3c6d;
-    background-size: cover;
-    /* border: 1px solid #fff; */
-    color: #fff;
-}
-
-.btn-fill-ask {
-    background: #1e3c6d;
-    background-size: cover;
-    /* border: 1px solid #fff; */
-    color: #fff;
-}
-
-.btn-standlink {
-    background: url(/uploads/backrgounds/sympprogbacksymp4.png);
-    background-size: cover;
-    background-position: bottom;
-    font-weight: 700;
-    max-width: 700px;
-    border-color: #261b6b;
-    color: #261b6b;
-}
-
-.sumptime {
-    width: 90px
+    color: #24196c
 }
 
 body {
-    color: #261b6b;
+    font-weight: 650;
 }
 
-.big-letters {
-    font: 22px;
+.btn {
+    font-weight: 700;
 }
 
-.program-table-symp {
-    background: url(/uploads/backrgounds/sympprogbacksymp8.png);
-    background-size: cover;
+/* Scroll-blue-perp */
+/*::-webkit-scrollbar {
+    width: 14px;
 }
 
-.col-sm-3-1 {
-    flex: 0 0 auto;
-    width: 60%;
+::-webkit-scrollbar-track {
+    background: #28186e2e; 
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: #28186e; 
 }
 
-.col-sm-3-2 {
-    flex: 0 0 auto;
-    width: 30%;
+::-webkit-scrollbar-thumb:hover {
+    background: #630c7b; 
+}*/
+
+/* Scroll-yt-lightgray */
+/*::-webkit-scrollbar {
+    width: 16px;
 }
 
-.white_block-stands1 {
-    box-shadow: 0 1px 9px #bfbfbf;
+::-webkit-scrollbar-thumb {
+    height: 56px;
+    border-radius: 8px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+    background-color: #d3d3d3;
+}*/
+
+.threed img {
+    max-width: 80%;
+}
+
+.threed:hover {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.white_block_hello p {
+margin-bottom: 0.3rem; 
+}
+
+
+h6 {
+    font-size: 1.1rem;
+}
+
+.main-block-left {
+    font-size: 1.05rem;
+}
+
+.program-table {
+    font-size: 1.05rem;
+}
+
+.program-dop-item-time {
+    font-size: 1.05rem;
+}
+
+.sponlogo-main-item h2 {
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 576px) {
+    
+  .white_block_hello .col-sm-4 {
+    width: 23%;
+    /*height: 30%;*/
+  }
+
+
+  .white_block_hello .col-sm-8 {
+    width: 77%;
+  }
+}
+
+@media (min-width: 1200px) {
+.white_block_hello h2 {
+    font-size: 1.8rem;
+}
+.white_block_hello h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.1rem;
+}
+}
+
+.preds_regaly {
+    font-size: 15px;
+}
+
+.spons_main_page {
+    box-shadow: 0 3px 9px #bfbfbf;
     background: #f8f9fa;
-    /*border-radius: 20px;*/
-    padding: 24px;
-    background: url(/uploads/backrgounds/sponsorsback-1.png);
-    background-size: cover;
-    background-position: bottom;
+    border-radius: 32px;
 }
 
-.white_block-stands2 {
-    box-shadow: 0 1px 9px #bfbfbf;
+.spons_main_page1 {
+    box-shadow: 0 3px 9px #bfbfbf;
     background: #f8f9fa;
-    /*border-radius: 20px;*/
-    padding: 24px;
-    background: url(/uploads/backrgounds/sponsorsback-2.png);
-    background-size: cover;
-    background-position: bottom;
+    border-radius: 32px;
 }
 
-.white_block-stands3 {
-    box-shadow: 0 1px 9px #bfbfbf;
-    background: #f8f9fa;
-    /*border-radius: 20px;*/
-    padding: 24px;
-    background: url(/uploads/backrgounds/sponsorsback-3.png);
-    background-size: cover;
-    background-position: bottom;
-}
-
-.white_block-infpart {
-    box-shadow: 0 1px 9px #bfbfbf;
-    background: #f8f9fa;
-    /*border-radius: 20px;*/
-    padding: 24px;
-    background: url(/uploads/backrgounds/sponsorsback-infpart.png);
-    background-size: cover;
-}
-
-.spon-title1 {
-    color: #0e2e60;
-    font-size: 24px;
-    font-weight: 600;
+.spon-title-logoz {
+    color: #24196c;
+    font-size: 28px;
+    font-weight: 640;
     text-align: center;
-    margin-bottom: 24px;
-    margin-top: 24px;
-    background: url(/uploads/backrgounds/gen-back.png);
-    background-size: cover;
-    border-radius: 20px;
-    height: 35px;
+    margin-bottom: 16px;
+    margin-top: 10px;
 }
 
-.spon-title2 {
-    color: #0e2e60;
-    font-size: 24px;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 24px;
-    margin-top: 24px;
-    background: url(/uploads/backrgounds/gold-back.png);
-    background-size: cover;
-    border-radius: 20px;
-    height: 35px;
+.sponlogo-main-item-preds {
+    /*padding: 15px;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    padding-left: 20px;
 }
 
-.spon-title3 {
-    color: #0e2e60;
-    font-size: 24px;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 24px;
-    margin-top: 24px;
-    background: url(/uploads/backrgounds/silver-back.png);
-    background-size: cover;
-    border-radius: 20px;
-    height: 35px;
+.sponlogo-main-item-symp {
+    /* padding: 15px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 4px;
+    padding-left: 20px;
 }
 
-.col-sm-6 {
-    flex: 0 0 auto;
-    width: 65%;
+.spon-stands {
+    margin-bottom: 35px;
 }
 
-.col-sm-4-1 {
-    margin-right: 30px;
-    margin-top: 20px;
+.col-md-6 {
+    margin-bottom: 10px;
+}
+
+.registration-logo {
+    width: 600px;
+    margin-top: 7px;
 }
 
 
-.col-sm-4-1 {
-    flex: 0 0 auto;
-    width: 33.3333333333%;
+.company-info .social-icons {
+    margin: 0 60px -4px;
+    margin-right: -20px;
 }
 
-
-.col-sm-2 {
-    width: 12.6666666667%;
+.company-info .social-icons-scr {
+    margin-left: -20px;
 }
 
-@media (max-width: 991px) {
-    .nav-link.link-dark {
-        color: #1e3c6d;
-    }
-
-    .col-sm-3-1 {
-        width: 100%;
-    }
-
-    .col-sm-3-2 {
-        width: 60%;
-    }
-
-    .col-sm-4-1 {
-        width: 70%;
-        margin-left: 55px;
-    }
-
-    .col-sm-6 {
-        width: 100%;
-    }
-
-    .col-sm-2 {
-        width: 16%;
-    }
-
+.company-info .table-social-icons {
+    width: 20%;
 }
 
-.btn-bluez-pdf:hover {
-    color: #adb5bd;
+.company-info .tablemain-social-icons {
+    width: 10%;
+    margin-left: -124px;
 }
 
-.btn-fill-posters:hover {
-    color: #adb5bd;
+.company-info .social-icons {
+    margin: 0 120px -4px;
+    margin-right: 50px;
 }
 
-.btn-fill-ask:hover {
-    color: #adb5bd;
+.broadcast-bottom-a {
+    padding-left: 22px;
+    padding-top: 10px;
+    background: #f2f2f2;
 }
 
-.btn-fill:hover {
-    color: #adb5bd;
+.broadcast-bottom-a h5 {
+    margin-top: 0;
+    margin-bottom: 0rem;
+    font-weight: 500;
+    line-height: 1.2;
 }
-
-.btn-standlink:hover {
-    color: #686b6e;
-}
-
-.regcontrol-back {
-    background: url(/uploads/backrgounds/silver-back.png);
-    background-size: cover;
-
-
-.input-group {
-    font-size: 18px;
-    color: #fff;
-}
-
-.color-fios {
-    color: #26a3b9;
-}
-
-.btn-standlink {
-    color: #f8f9fa;
-    color: #1e3c6d;
-}
-
-.users-list-correction {
-    width: 50px;
-}
-
-.table-users-size {
-    font-size: 14px;
-}
-
-.container-usertable {
-    width: 100%;
-    padding-right: var(--bs-gutter-x, 0.75rem);
-    padding-left: var(--bs-gutter-x, 2rem);
-    margin-right: auto;
-    margin-left: fill;
-}
-

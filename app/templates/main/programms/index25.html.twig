@@ -1,0 +1,230 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="main-block programs-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-12">
+                    <div class="program-header">
+                        <div class="program-date d-none d-lg-block">
+                            <a href="#prog1" class="btn btn-fill active">25 февраля</a>
+                            <a href="{{ path('app_main_home_programms18') }}" class="btn btn-fill">26 февраля</a>
+                        </div>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                    <div class="programs-logo proglogback">
+                        <div class="programs-logo-img">
+                            <img src="/assets/img/prog-logo1.png">
+                            <img src="/assets/img/prog-logo2.png">
+                        </div>
+                        <div class="programs-logo-text">
+                            <div class="programs-title d-none d-lg-block" id="prog1">25 февраля 2022 г.</div>
+                            <div class="programs-title d-none d-lg-block"><em>Председатель: Поддубная Ирина Владимировна, Москва</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="program-table d-none d-lg-block table-border">
+                        <div class="program-table-scroll">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Время</th>
+                                    <th>Лектор</th>
+                                    <th>Название</th>
+                                    <th>Эксперт-патоморфолог</th>
+                                    <th>Эксперт-клиницист</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td nowrap="">09:00 - 09:10</td>
+                                    <td nowrap="">Поддубная И.В.<br>Москва</td>
+                                    <td colspan="3">Вступительное слово</td>
+                                </tr>
+                                <tr class="bg-lilac">
+                                    <td colspan="5" class="text-center"><b>Сессия I. Комбинации современных препаратов как перспектива
+                                    в терапии лимфопролиферативных заболеваний.</b><br>Модератор: Самойлова О.С., Нижний Новгород
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>09:10 - 10:00</td>
+                                    <td>Широкова М.Н.<br>Москва</td>
+                                    <td>Эффективное применение комбинации таргетных препаратов в терапии множественной миеломы</td>
+                                    <td nowrap=""></td>
+                                    <td>Семочкин С.В.<br>Москва</td>
+                                </tr>
+                                <tr>
+                                    <td>10:00 - 10:50</td>
+                                    <td>Петренко А.А.<br>Москва</td>
+                                    <td>Комбинированная терапия хронического лимфолейкоза, осложненного аутоимунной гемолитической анемией с холодовыми агглютининами	</td>
+                                    <td></td>
+                                    <td>Калашникова О.Б.<br>Санкт-Петербург</td>
+                                </tr>
+                                <tr class="bg-gray">
+                                    <td>10:50 - 11:10</td>
+                                    <td colspan="4" class="text-center"><em>Перерыв</em></td>
+                                </tr>
+                                <tr class="bg-lilac">
+                                    <td colspan="5" class="text-center"><b>Сессия II. Приоритетность выбора терапии в
+                                    различных клинических ситуациях</b><br>Модератор: Михайлова Н.Б., Санкт-Петербург
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>11:10 - 12:10</td>
+                                    <td nowrap="">Исхакова А.И.<br>Уфа</td>
+                                    <td>Современные возможности терапии химиорезистентного течения лимфомы Ходжкина на фоне программного гемодиализа</td>
+                                    <td>Байков В.В.<br>Санкт-Петербург</td>
+                                    <td>Саржевский В.О.<br>Москва</td>
+                                </tr>
+                                <tr>
+                                    <td>12:10 - 13:10</td>
+                                    <td nowrap="">Чекалов А.М.<br>Санкт-Петербург</td>
+                                    <td>Терапия ВИЧ-ассоциированной фолликулярной лимфомы</td>
+                                    <td>Криволапов Ю.А.<br>Cанкт-Петербург</td>
+                                    <td>Некрасова А.В.<br>Москва</td>
+                                </tr>
+                                <tr>
+                                    <td>13:10 - 14:40</td>
+                                    <td colspan="4" class="text-center"><em>Перерыв</em></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 1}) }}"
+                           class="btn btn-bluez">Подключиться к онлайн
+                            трансляции</a>
+                    </div>
+                    <div class="program-dop d-none d-lg-flex">
+                        <div class="program-dop-item sympprogback">
+                            <div class="program-dop-item-time">
+                                13:25 – 14:25
+                            </div>
+                            <div class="program-dop-item-title">
+                                <b>Сателлитный симпозиум <br>компании AstraZeneca*</b><br>
+                                <em>* Не обеспечивается кредитами НМО</em>
+                            </div>
+                            <a onclick="setUserStatistics(2);" href="{{ path('app_broadcast', {'chatid': 2}) }}"
+                               class="btn btn-bluez">Подключиться к
+                                онлайн трансляции</a>
+                        </div>
+                        <div class="program-dop-item sympprogback">
+                            <div class="program-dop-item-time">
+                                13:25 – 14:25
+                            </div>
+                            <div class="program-dop-item-title">
+                                <b>Сателлитный симпозиум <br>компании Roche*</b><br>
+                                <em>* Не обеспечивается кредитами НМО</em>
+                            </div>
+                            <a onclick="setUserStatistics(3);" href="{{ path('app_broadcast', {'chatid': 3}) }}"
+                               class="btn btn-bluez">Подключиться к
+                                онлайн трансляции</a>
+                        </div>
+                    </div>
+                    <div class="program-table d-none d-lg-block table-border">
+                        <div class="program-table-scroll">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Время</th>
+                                    <th>Лектор</th>
+                                    <th>Название</th>
+                                    <th>Эксперт-патоморфолог</th>
+                                    <th>Эксперт-клиницист</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="bg-lilac">
+                                    <td colspan="6" class="text-center"><b>Сессия III. Разбор клинических случаев 
+                                    по вопросам терапии НХЛ</b><br>Модератор: Тумян Г.С., Москва
+                                    </td>
+                                </tr>
+                                <!--tr-->
+                                <tr>
+                                    <td>14:40 - 15:30</td>
+                                    <td>Бялик Т.Е.<br>Москва</td>
+                                    <td>Синдром Рихтера</td>
+                                    <td>Кокосадзе Н.В.<br>Москва</td>
+                                    <td>Медведева Н.В.<br>Санкт-Петербург</td>
+                                </tr>
+                                <tr>
+                                    <td>15:30 - 16:30</td>
+                                    <td>Самарина С.В.<br>Киров</td>
+                                    <td>Рецидив лимфомы из клеток мантии с поражением оболочек мозга</td>
+                                    <td>Байков В.В.<br>Cанкт-Петербург</td>
+                                    <td>Волошин С.В.<br>Санкт-Петербург</td>
+                                </tr>
+                                <tr>
+                                    <td>16:30 - 17:30</td>
+                                    <td>Мангасарова Я.К.<br>Москва</td>
+                                    <td>Фолликулярная лимфома в период новой коронавирусной инфекции (COVID-19)</td>
+                                    <td>Ковригина А.М.<br>Москва</td>
+                                    <td>Бабичева Л.Г.<br>Москва</td>
+                                </tr>
+                                <tr>
+                                    <td>17:30 - 17:40</td>
+                                    <td>Поддубная И.В.<br>Москва</td>
+                                    <td colspan="3">Закрытие первого дня</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 1}) }}"
+                           class="btn btn-bluez">Подключиться к онлайн
+                            трансляции</a>
+                    </div>
+
+                    <div class="program-pdf">
+                        <a href="{{ path('app_broadcast', {'chatid': 1}) }}" target="_blank" class="btn btn-bluez">Поключиться
+                            к онлайн трансляции</a>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div data-bs-toggle="modal" data-bs-target="#politicModal" class="threed">
+                    <img src="/uploads/news/cv-free.png">
+                    <br><p></p></div>
+                    <div>{% include 'main/news/index.html.twig' with news %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="politicModal" tabindex="-1" aria-labelledby="politicModalLabel" aria-hidden="true">
+            <div class="modal-dialog registration-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="politicModalLabel">COVID-free зона</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вся территория мероприятия «Лимфорум» является COVID-free зоной.</p>
+                        <p>Очное участие возможно только при предъявлении паспорта и QR-кода (вакцинация от COVID-19 / QR-код переболевшего или ПЦР-исследование, 
+                        сделанное не ранее 3-х дней до «Лимфорума»).</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-fill" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script>
+        function setUserStatistics(id) {
+            let data = {'broadcast': id};
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                }
+            });
+            return false;
+        };
+    </script>
+{% endblock %}

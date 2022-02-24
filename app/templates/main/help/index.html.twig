@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-9 col-12 faq">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#callbackModal"
-                            class="btn btn-fill-ask">Задать вопрос
+                            class="btn btn-fill">Задать вопрос
                     </button>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
@@ -65,7 +65,7 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#flush-collapseThree" aria-expanded="false"
                                         aria-controls="flush-collapseThree">
-                                    Что если программа форума отображается некорректно?
+                                    Что делать, если программа форума отображается некорректно?
                                 </button>
                             </h2>
                             <div id="flush-collapseThree" class="accordion-collapse collapse"
@@ -88,7 +88,9 @@
                                  aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     Онлайн платформа мероприятия адаптирована для подключения
-                                    как с компьютера, так и с мобильного устройства.
+                                    как с компьютера, так и с мобильного устройства.<br><Br>
+                                    <em>*<u>Баллы НМО начисляются</u> каждому участнику, выполнившему условия их получения, <u>единожды</u>, даже в случае его 
+                                    одновременного подключения к платформе с разных устройств.</em>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +99,7 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#flush-collapseFour" aria-expanded="false"
                                         aria-controls="flush-collapseThree">
-                                    Могу ли я развернуть окно трансляции на весь экран?
+                                    Можно ли развернуть окно трансляции на весь экран?
                                 </button>
                             </h2>
                             <div id="flush-collapseFour" class="accordion-collapse collapse"
@@ -132,10 +134,31 @@
                     </div>
                 </div>
                 <div class="col-lg-3 d-none d-lg-block">
-                    {% include 'main/news/index.html.twig' with news %}
+                    <div data-bs-toggle="modal" data-bs-target="#politicModal" class="threed">
+                    <img src="/uploads/news/cv-free.png">
+                    <br><p></p></div>
+                    <div>{% include 'main/news/index.html.twig' with news %}</div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal fade" id="politicModal" tabindex="-1" aria-labelledby="politicModalLabel" aria-hidden="true">
+            <div class="modal-dialog registration-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="politicModalLabel">COVID-free зона</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вся территория мероприятия «Лимфорум» является COVID-free зоной.</p>
+                        <p>Очное участие возможно только при предъявлении паспорта и QR-кода (вакцинация от COVID-19 / QR-код переболевшего или ПЦР-исследование, 
+                        сделанное не ранее 3-х дней до «Лимфорума»).</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-fill" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
     </div>
     {% for message in app.flashes('successHelpSend') %}
         {% set message = {message} %}

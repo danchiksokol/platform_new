@@ -1,0 +1,109 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="main-block programs-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-12">
+                    <div class="program-header">
+                        <div class="program-date">
+                            <a href="{{ path('app_main_home_symposium17') }}" class="btn btn-fill ">25 февраля</a>
+                            <a href="#sat18" class="btn btn-fill active">26 февраля</a>
+                        </div>
+                    </div>
+                    <div class="programs-logo-symp">
+{#                        <div class="programs-logo-img">#}
+{#                            <img src="/assets/img/prog-logo1.jpg">#}
+{#                            <img src="/assets/img/prog-logo2.jpg">#}
+{#                        </div>#}
+                        <div class="programs-logo-text">
+                            <div class="programs-title" id="prog1">
+                                26 февраля 2022 г.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="program-table">
+                        <div class="symposium-row">
+                            <div class="col-sm-4 sponlogo-main-item-symp">12:30 – 13:30</div>
+                            <div class="col-sm-4 sponlogo-main-item-symp"><img src="/assets/img/sponsor/logo/gen4.png"></div>
+                            <div class="col-sm-4 sponlogo-main-item-symp">Конференц-зал «Вивальди»</div>
+                        </div>
+                        <div class="symposium-title">
+                            <div>Сателлитный медицинский симпозиум компании FarmaMondo</div>
+                            <b>Редкие и сложные – трудный путь к принятию терапевтического решения</b>
+                        </div>
+                        <ul class="symposium-list">
+                            <li>
+                                <span>12:30 – 12:35</span>
+                                <span>Открытие симпозиума <br><em>профессор Тумян Г.С.</em></span>
+                            </li>
+                            <li>
+                                <span>12:35 – 12:45</span>
+                                <span>Ничего, кроме практики: сложный пациент с рецидивом ПТКЛ<br><em>к.м.н. Семенова А.А.</em></span>
+                            </li>
+                            <li>
+                                <span>12:45 – 13:05</span>
+                                <span>Ингибиторы HDAC: раздвигаем границы возможностей лечения рецидивов ПТКЛ <br><em>профессор Тумян Г.С.</em></span>
+                            </li>
+                            <li>
+                                <span>13:05 – 13:15</span>
+                                <span>Многоликие маски. Болезнь Кастлемана в клинических примерах <br><em>Сбитякова Е.И.</em></span>
+                            </li>
+                            <li>
+                                <span>13:15 – 13:30</span>
+                                <span>Маска, я тебя знаю! Возможность, которая есть у нас сегодня <br><em>к.м.н. Стадник Е.А.</em> </span>
+                            </li>
+                            <li>
+                                <span></span>
+                                <span>Вопросы и ответы, закрытие симпозиума <br><em>Тумян Г.С., Стадник Е.А.</em> </span>
+                            </li>
+                        </ul>
+                        <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div data-bs-toggle="modal" data-bs-target="#politicModal" class="threed">
+                    <img src="/uploads/news/cv-free.png">
+                    <br><p></p></div>
+                    <div>{% include 'main/news/index.html.twig' with news %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="politicModal" tabindex="-1" aria-labelledby="politicModalLabel" aria-hidden="true">
+            <div class="modal-dialog registration-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="politicModalLabel">COVID-free зона</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вся территория мероприятия «Лимфорум» является COVID-free зоной.</p>
+                        <p>Очное участие возможно только при предъявлении паспорта и QR-кода (вакцинация от COVID-19 / QR-код переболевшего или ПЦР-исследование, 
+                        сделанное не ранее 3-х дней до «Лимфорума»).</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-fill" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script>
+        function setUserStatistics(id) {
+            let data = {'broadcast': id};
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                }
+            });
+            return false;
+        };
+    </script>
+{% endblock %}

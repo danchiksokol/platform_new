@@ -1,0 +1,134 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="main-block programs-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-12">
+                    <div class="program-header">
+                        <div class="program-date">
+                            <a href="#prog1" class="btn btn-fill active">25 февраля</a>
+                            <a href="{{ path('app_main_home_symposium18') }}" class="btn btn-fill">26 февраля</a>
+                        </div>
+                    </div>
+                    <div class="programs-logo-symp">
+                        {# <div class="programs-logo-img"> #}
+                        {# <img src="/assets/img/prog-logo1.jpg"> #}
+                        {# <img src="/assets/img/prog-logo2.jpg"> #}
+                        {# </div> #}
+                        <div class="programs-logo-text">
+                            <div class="programs-title" id="prog1">25 февраля 2022 г.</div>
+                        </div>
+                    </div>
+                    <div class="program-table">
+                        <div class="symposium-row">
+                            <div class="col-sm-4 sponlogo-main-item-symp">13:25 – 14:25</div>
+                            <div class="col-sm-4 sponlogo-main-item-symp"><img src="/assets/img/sponsor/logo/gen2.png"></div>
+                            <div class="col-sm-4 sponlogo-main-item-symp">Конференц-зал «Вивальди»</div>
+                        </div>
+                        <div class="symposium-title">
+                            <div>Сателлитный симпозиум компании AstraZeneca</div>
+                            <b>Теория и практика применения иБТК второго поколения. Чего хотят клиницисты?</b>
+                        </div>
+                        <ul class="symposium-list">
+                            <li>
+                                <span>13.25 – 13.30</span>
+                                <span>Приветственное слово. <br><em>Председатель академик Поддубная И.В., Москва</em></span>
+                            </li>
+                            <li>
+                                <span>13.30 – 13.45</span>
+                                <span>Первая линия терапии ХЛЛ – акалабрутиниб как оптимальный выбор (Клинический пример).<br>
+<em>Березина О.В., Новосибирск</em></span>
+                            </li>
+                            <li>
+                                <span>13.45 – 14.00</span>
+                                <span>Какую роль играет селективность? Практические примеры в случае непереносимости иБТК первого поколения. <br>
+<em>Петренко А.А., Москва</em></span>
+                            </li>
+                            <li>
+                                <span>14.00 – 14.15</span>
+                                <span>Рецидив мантийно-клеточной лимфомы: место иБТК второго поколения. <br>
+<em>Валиахметова Ч.Х., Уфа</em></span>
+                            </li>
+                            <li>
+                                <span>14.15 – 14.25</span>
+                                <span>Дискуссия и ответы на вопросы.</span>
+                            </li>
+                        </ul>
+                        <a onclick="setUserStatistics(2);" href="{{ path('app_broadcast', {'chatid': 2}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                    </div>
+                    <div class="program-table">
+                        <div class="symposium-row">
+                            <div class="col-sm-4 sponlogo-main-item-symp">13:25 – 14:25</div>
+                            <div class="col-sm-4 sponlogo-main-item-symp"><center><img src="/assets/img/sponsor/logo/sp4.png"></center></div>
+                            <div class="col-sm-4 sponlogo-main-item-symp">Конференц-зал «Шуберт»</div>
+                        </div>
+                        <div class="symposium-title">
+                            <div>Сателлитный симпозиум компании Roche</div>
+                            <b>Как я лечу ДВКЛ: реальная  клиническая практика</b>
+                        </div>
+                        <ul class="symposium-list">
+                            <li>
+                                <span>13:25 – 13:30</span>
+                                <span>Открытие симпозиума, приветственное слово.<br><em>Тумян Г.С., Москва</em></span>
+                            </li>
+                            <li>
+                                <span>13:30 – 14:15</span>
+                                <span>Не упустить важное у пациента с ДВКЛ: ИГХ, ПЭТ-КТ, выбор терапии. <br> <em>Ковригина А.М., Москва</em>
+                                <br> <em>Мухортова О.В., Москва</em><br> <em>Тумян Г.С., Москва</em></span>
+                            </li>
+                            <li>
+                                <span>14:15 – 14:25</span>
+                                <span>Подведение итогов. <br> <em>Все участники</em></span>
+                            </li>
+                        </ul>
+                        <a onclick="setUserStatistics(3);" href="{{ path('app_broadcast', {'chatid': 3}) }}" class="btn btn-bluez">Подключиться к онлайн трансляции</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div data-bs-toggle="modal" data-bs-target="#politicModal" class="threed">
+                    <img src="/uploads/news/cv-free.png">
+                    <br><p></p></div>
+                    <div>{% include 'main/news/index.html.twig' with news %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="politicModal" tabindex="-1" aria-labelledby="politicModalLabel" aria-hidden="true">
+            <div class="modal-dialog registration-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="politicModalLabel">COVID-free зона</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вся территория мероприятия «Лимфорум» является COVID-free зоной.</p>
+                        <p>Очное участие возможно только при предъявлении паспорта и QR-кода (вакцинация от COVID-19 / QR-код переболевшего или ПЦР-исследование, 
+                        сделанное не ранее 3-х дней до «Лимфорума»).</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-fill" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script>
+        function setUserStatistics(id) {
+            let data = {'broadcast': id};
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                }
+            });
+            return false;
+        };
+    </script>
+{% endblock %}

@@ -1,0 +1,217 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <div class="main-block programs-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-12">
+                    <div class="program-header">
+                        <div class="program-date d-none d-lg-block">
+                            <a href="{{ path('app_main_home_programms17') }}" class="btn btn-fill">25 февраля</a>
+                            <a href="#prog2" class="btn btn-fill active">26 февраля</a>
+                        </div>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                    <div class="programs-logo proglogback">
+                        <div class="programs-logo-img">
+                            <img src="/assets/img/prog-logo1.png">
+                            <img src="/assets/img/prog-logo2.png">
+                        </div>
+                        <div class="programs-logo-text">
+                            <div class="programs-title d-none d-lg-block" id="prog2">26 февраля 2022 г.</div>
+                            <div class="programs-title d-none d-lg-block"><em>Председатель: Поддубная Ирина Владимировна, Москва</em>
+                            </div>
+                        </div>
+                    </div>
+                    {# <div class="programs-title d-none d-lg-block" id="prog2">18 сентября 2021 г.</div> #}
+                    <div class="program-table d-none d-lg-block table-border">
+                        <div class="program-table-scroll">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Время</th>
+                                    <th>Лектор</th>
+                                    <th>Название</th>
+                                    <th>Эксперт-патоморфолог</th>
+                                    <th>Эксперт-клиницист</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="bg-lilac">
+                                    <td colspan="5" class="text-center"><b>Сессия IV. Разбор клинических случаев по 
+                                    вопросам лечения редких заболеваний</b><br>Модератор: Птушкин В.В., Москва
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td nowrap="">09:00 - 10:00</td>
+                                    <td nowrap="">Стадник Е.А.<br>Санкт-Петербург</td>
+                                    <td>Болезнь Кастлемана</td>
+                                    <td>Ковригина А.М.<br>Москва</td>
+                                    <td>Потапенко В.Г.<br>Санкт-Петербург</td>
+                                </tr>
+                                <tr>
+                                    <td nowrap="">10:00 - 11:00</td>
+                                    <td>Рукавицын А.А.<br>Санкт-Петербург</td>
+                                    <td>Имплант-ассоциированная Т-клеточная лимфома</td>
+                                    <td>Ковригина А.М.<br>Москва</td>
+                                    <td nowrap="">Тумян Г.С.<br>Москва</td>
+                                </tr>
+                                <tr class="bg-gray">
+                                    <td>11:00 - 11:15</td>
+                                    <td colspan="4" class="text-center"><em>Перерыв</em></td>
+                                </tr>
+                                <tr>
+                                    <td nowrap="">11:15 - 12:15</td>
+                                    <td>Бутаев Л.С.<br>Москва</td>
+                                    <td>Применение биспецифических антител в терапии рецидива ФЛ, трансформированной в ДВККЛ, в сочетании с ОМЛ</td>
+                                    <td></td>
+                                    <td nowrap="">Лепик К.В.<br>Санкт-Петербург</td>
+                                </tr>
+                                <tr>
+                                    <td nowrap="">12:15 - 13:45</td>
+                                    <td rowspan="4">Перерыв</td>
+                                </tr>
+                                {# <tr class="bg-gray"> #}
+                                {# <td>16:00 - 17:45</td> #}
+                                {# <td colspan="4"><em>Сателлитный симпозиум компании Bristol-Myers Squibb</em></td> #}
+                                {# <td colspan="2"><em>Сателлитный симпозиум</em></td> #}
+                                {# </tr> #}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн
+                            трансляции</a>
+                    </div>
+                    <div class="program-pdf">
+                        <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 1}) }}" target="_blank" class="btn btn-bluez">Поключиться
+                            к онлайн трансляции</a>
+                        <a href="{{ asset('uploads/programm/limforum.pdf') }}" target="_blank"
+                           class="btn btn-bluez btn-down">Открыть программу в формате PDF</a>
+                    </div>
+                    <div class="program-dop d-none d-lg-flex">
+                        <div class="program-dop-item program-dop-item-one sympprogbacklong">
+                            <div class="program-dop-item-time">
+                                12:30 – 13:30
+                            </div>
+                            <div class="program-dop-item-title">
+                                <b>Сателлитный медицинский симпозиум компании FarmaMondo*</b><br>
+                                <em>* Не обеспечивается кредитами НМО</em>
+                            </div>
+                            <a onclick="setUserStatistics(4);" href="{{ path('app_broadcast', {'chatid': 4}) }}" class="btn btn-bluez">Подключиться к
+                                онлайн трансляции</a>
+                        </div>
+                        {# <div class="program-dop-item"> #}
+                        {# <div class="program-dop-item-time"> #}
+                        {# 16:00 – 17:45 #}
+                        {# </div> #}
+                        {# <div class="program-dop-item-title"> #}
+                        {# Сателлитный симпозиум компании Bristol-Myers Squibb #}
+                        {# </div> #}
+                        {# <a href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к #}
+                        {# онлайн трансляции</a> #}
+                        {# </div> #}
+                    </div>
+                    <div class="program-table d-none d-lg-block table-border">
+                        <div class="program-table-scroll">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Время</th>
+                                    <th>Лектор</th>
+                                    <th>Название</th>
+                                    <th>Эксперт-патоморфолог</th>
+                                    <th>Эксперт-клиницист</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="bg-lilac">
+                                    <td colspan="5" class="text-center"><b>Сессия V. Разбор клинических случаев по 
+                                    вопросам лечения множественной миеломы</b><br>Модератор: Менделеева Л.П., Москва
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>13:45 - 14:35</td>
+                                    <td nowrap="">Кочкарева Ю.Б.<br>Москва</td>
+                                    <td>Терапия рецидивов множественной миеломы</td>
+                                    <td></td>
+                                    <td>Бессмельцев С.С.<br>Санкт-Петербург</td>
+                                </tr>
+                                <tr>
+                                    <td>14:35 - 15:25</td>
+                                    <td nowrap="">Дедюхина К.С.<br>Чита</td>
+                                    <td>Рецидивно-рефрактерное течение множественной миеломы</td>
+                                    <td></td>
+                                    <td>Капланов К.Д.<br>Москва</td>
+                                </tr>
+                                <tr>
+                                    <td>15:25 - 16:15</td>
+                                    <td nowrap="">Нечаевских В.И.<br>Сургут</td>
+                                    <td>Назначение полностью перорального триплета в терапии рецидива множественной миеломы</td>
+                                    <td></td>
+                                    <td>Соловьев М.В.<br>Москва</td>
+                                </tr>
+                                <tr>
+                                    <td>16:15 - 16:25</td>
+                                    <td>Поддубная И.В.<br>Москва</td>
+                                    <td colspan="3"><em>Заключение</em></td>
+                                </tr>
+                                {# <tr class="bg-gray"> #}
+                                {# <td>16:00 - 17:45</td> #}
+                                {# <td colspan="4"><em>Сателлитный симпозиум компании Bristol-Myers Squibb</em></td> #}
+                                {# <td colspan="2"><em>Сателлитный симпозиум</em></td> #}
+                                {# </tr> #}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a onclick="setUserStatistics(1);" href="{{ path('app_broadcast', {'chatid': 1}) }}" class="btn btn-bluez">Подключиться к онлайн
+                            трансляции</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div data-bs-toggle="modal" data-bs-target="#politicModal" class="threed">
+                    <img src="/uploads/news/cv-free.png">
+                    <br><p></p></div>
+                    <div>{% include 'main/news/index.html.twig' with news %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="politicModal" tabindex="-1" aria-labelledby="politicModalLabel" aria-hidden="true">
+            <div class="modal-dialog registration-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="politicModalLabel">COVID-free зона</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вся территория мероприятия «Лимфорум» является COVID-free зоной.</p>
+                        <p>Очное участие возможно только при предъявлении паспорта и QR-кода (вакцинация от COVID-19 / QR-код переболевшего или ПЦР-исследование, 
+                        сделанное не ранее 3-х дней до «Лимфорума»).</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-fill" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script>
+        function setUserStatistics(id) {
+            let data = {'broadcast': id};
+            $.ajax({
+                url: '{{ (path('app_user_statistics_ajax')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    data: data // Данные которые отправляем на сервер
+                },
+                async: true,
+                success: function (data) {
+                }
+            });
+            return false;
+        };
+    </script>
+{% endblock %}

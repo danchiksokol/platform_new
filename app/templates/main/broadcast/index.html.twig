@@ -8,23 +8,20 @@
                 <div class="col-lg-9 col-12">
                     <div class="broadcast">
                         <div class="broadcast-live">
-                            {% if app.request.requesturi != '/broadcast/7' %}
-                                <div id="player"></div>
-                                <script>
-                                    let player = new Playerjs({
-                                        id: "player",
-                                        file: "{{ broadcast }}",
-                                        autoplay: 1,
-                                    });
-                                </script>
-                                <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
-                            {% else %}
-                                <script src="https://facecast.net/w/js/iframe.js"></script>
-                                <iframe id="z0te58" onload="fc_load_iframe(this)" width="976" height="549"
-                                        style="border:none" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                            {% endif %}
+                            <div id="player"></div>
+                            <script>
+                                let player = new Playerjs({
+                                    id: "player",
+                                    file: "{{ broadcast }}",
+                                    autoplay: 1,
+                                });
+                            </script>
+                            <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
                         </div>
-                        {% if app.request.requesturi != '/broadcast/7' %}
+                        <div class="broadcast-bottom-a"><h5 style="font-size: 14px;">Если трансляция не началась автоматически, нажмите на кнопку 
+                        <font style="color: #808080;">Play</font> (может потребоваться нажать дважды). <br>Для включения звука нажмите на кнопку <font style="color: #FF0000;">
+                        включить звук</font>.</h5></div>
+                        {% if app.request.requesturi != '/broadcast/1001' %}
                             {% set questions = questions %}
                             {% include 'main/question_speaker/index.html.twig' with {questions: questions} %}
                         {% endif %}
@@ -58,22 +55,23 @@
         </div>
     </div>
     <script>
-        {% if app.request.requesturi == '/broadcast' or app.request.requesturi == '/broadcast/4' %}
+        {% if app.request.requesturi == '/broadcast' %}
         function getModalControl() {
             let myModal = new bootstrap.Modal(document.getElementById('modalControl'));
             let time = [
-                '9:22',
-                '10:26',
-                '11:12',
-                '11:37',
-                '12:14',
-                '14:36',
-                '15:11'
+                '9:25',
+                '10:13',
+                '11:28',
+                '12:39',
+                '15:08',
+                '15:51',
+                '16:44',
+                '17:23',
             ];
             let date;
             let now = new Date();
             for (let i = 0; i < time.length; i++) {
-                date = new Date("2021/10/15 " + time[i]);
+                date = new Date("2022/02/25 " + time[i]);
                 let timeDiff = Math.abs(now.getTime() - date.getTime());
                 let diffMinutes = Math.round(timeDiff / (1000 * 60));
                 if (0 == diffMinutes) {
@@ -138,7 +136,7 @@
                     }
                 }
             });
-        }, 30000);
+        }, 5000);
 
         $('#fullscreen-btn').click(function () {
             $(this).toggleClass('active');
