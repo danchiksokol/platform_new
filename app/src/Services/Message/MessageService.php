@@ -7,7 +7,6 @@ namespace App\Services\Message;
 use App\Entity\Message;
 use App\Entity\Participant;
 use App\Repository\MessageRepository;
-use DateTime;
 use DateTimeImmutable;
 
 class MessageService
@@ -34,12 +33,13 @@ class MessageService
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handleCreate(Participant $participant, string $content):static
+    public function handleCreate(Participant $participant, string $content, string $mercure):static
     {
         $message = new Message();
         $message->setContent($content);
         $message->setCreatedAt(new DateTimeImmutable());
         $message->setIsShow(1);
+        $message->setMercure($mercure);
         $message->setParticipant($participant);
         $this->messageRepository->setCreate($message);
 

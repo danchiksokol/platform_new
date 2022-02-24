@@ -9,6 +9,8 @@ use App\Services\QuestionSpeaker\QuestionSpeakerService;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mercure\HubInterface;
+use Symfony\Component\Mercure\Update;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin', name: 'app_admin_')]
@@ -62,11 +64,24 @@ class AdminQuestionSpeakerController extends AdminBaseController
      * @return Response
      */
     #[Route('/question/show/{id}', name: 'question_speaker_show')]
-    public function setShowAction(Request $request): Response
+    public function setShowAction(Request $request, HubInterface $hub): Response
     {
         $questionId = (int)$request->get('id');
         $question = $this->questionSpeakerRepository->getOne($questionId);
-        $this->questionSpeakerService->handleShow($question);
+        $user = $question->getUser();
+        $chatId = $question->getChatroom()->getId();
+        $userName = $user->getSurname() . ' ' . $user->getName() . ' ' . $user->getPatronymic();
+        $update = new Update(
+            "/broadcast/question/{$chatId}",
+            json_encode([
+                            'content' => $question->getContent(),
+                            'username' => $userName
+                        ]),
+            false
+        );
+
+        $mercure = $hub->publish($update);
+        $this->questionSpeakerService->handleShow($question, $mercure);
         $this->addFlash('success', 'Вопрос отображен');
 
         return $this->redirectToRoute('app_admin_question_speaker');

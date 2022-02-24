@@ -56,6 +56,11 @@ class QuestionSpeaker
      */
     private Collection $answerSpeakers;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $mercure;
+
     #[Pure]
     public function __construct()
     {
@@ -219,6 +224,18 @@ class QuestionSpeaker
                 $answerSpeaker->setQuestionSpeaker(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMercure(): ?string
+    {
+        return $this->mercure;
+    }
+
+    public function setMercure(?string $mercure): self
+    {
+        $this->mercure = $mercure;
 
         return $this;
     }

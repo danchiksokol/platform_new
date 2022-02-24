@@ -12,8 +12,6 @@ RUN apt-get update && apt-get install -y curl \
         libzip-dev \
         libonig-dev \
         libmemcached-dev \
-    && pecl install xdebug \
-    && docker-php-ext-enable xdebug \
     && docker-php-ext-install gd \
     && docker-php-ext-install zip \
     && docker-php-ext-install mysqli \
@@ -32,7 +30,7 @@ RUN echo 'date.timezone = "Europe/Moscow"' >> /usr/local/etc/php/php.ini
 #Для local разкомментировать
 #RUN echo 'xdebug.mode = debug' >> /usr/local/etc/php/php.ini
 #RUN echo 'xdebug.discover_client_host = 1' >> /usr/local/etc/php/php.ini
-#RUN echo 'opcache.max_accelerated_files = 20000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+RUN echo 'opcache.max_accelerated_files = 20000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 RUN echo 'memory_limit = 500M' >> /usr/local/etc/php/php.ini
 RUN echo 'upload_max_filesize = 100M' >> /usr/local/etc/php/php.ini
@@ -53,5 +51,5 @@ RUN a2enmod proxy_wstunnel
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 #Install Symfony
-RUN curl -sS https://get.symfony.com/cli/installer | bash
-RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+#RUN curl -sS https://get.symfony.com/cli/installer | bash
+#RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony

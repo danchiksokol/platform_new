@@ -8,17 +8,23 @@
                 <div class="col-lg-9 col-12">
                     <div class="broadcast">
                         <div class="broadcast-live">
-                            <div id="player"></div>
-                            <script>
-                                let player = new Playerjs({
-                                    id: "player",
-                                    file: "{{ broadcast }}",
-                                    autoplay: 1,
-                                });
-                            </script>
-                            <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
+                            {% if app.request.requesturi != '/broadcast/7' %}
+                                <div id="player"></div>
+                                <script>
+                                    let player = new Playerjs({
+                                        id: "player",
+                                        file: "{{ broadcast }}",
+                                        autoplay: 1,
+                                    });
+                                </script>
+                                <button type="button" id="fullscreen-btn" class="fullscreen-btn"></button>
+                            {% else %}
+                                <script src="https://facecast.net/w/js/iframe.js"></script>
+                                <iframe id="z0te58" onload="fc_load_iframe(this)" width="976" height="549"
+                                        style="border:none" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                            {% endif %}
                         </div>
-                        <div class="broadcast-bottom-a"><h5 style="font-size: 14px;">Если трансляция не началась автоматически, нажмите на кнопку 
+                        <div class="broadcast-bottom-a"><h5 style="font-size: 14px;">Если трансляция не началась автоматически, нажмите на кнопку
                         <font style="color: #808080;">Play</font> (может потребоваться нажать дважды). <br>Для включения звука нажмите на кнопку <font style="color: #FF0000;">
                         включить звук</font>.</h5></div>
                         {% if app.request.requesturi != '/broadcast/1001' %}
@@ -55,7 +61,7 @@
         </div>
     </div>
     <script>
-        {% if app.request.requesturi == '/broadcast' %}
+        {% if app.request.requesturi == '/broadcast' or app.request.requesturi == '/broadcast/4' %}
         function getModalControl() {
             let myModal = new bootstrap.Modal(document.getElementById('modalControl'));
             let time = [
@@ -102,78 +108,35 @@
             });
         });
 
-        setInterval(function () {
-            $.ajax({
-                url: '{{ (path('app_question_ajax')) }}',
-                type: "POST",
-                dataType: "json",
-                data: {
-                    "chatRoomId": {{ chatid }} // Данные которые отправляем на сервер
-                },
-                async: true,
-                success: function (data) {
-                    let output = data.output;
-                    let idArray = Object.keys(output);
-                    let divArray = document.getElementsByClassName('broadcast-questions-item');
-                    for (let j = 0; j < divArray.length; j++) {
-                        divArray[j].remove();
-                    }
-                    for (let i = 0; i < idArray.length; i++) {
-                        let id = "broadcast-question-id-" + idArray[i];
-                        if (!document.getElementById(id)) {
-                            let divBroadcast = document.createElement("div");
-                            divBroadcast.className = "broadcast-questions-item";
-                            divBroadcast.setAttribute("id", id);
-                            let span = document.createElement("span");
-                            span.innerHTML = output[idArray[i]]['fio'];
-                            let divQuestion = document.createElement("div");
-                            divQuestion.innerHTML = output[idArray[i]]['content'];
-                            divBroadcast.prepend(divQuestion);
-                            divBroadcast.prepend(span);
-                            let broadQuestTitle = document.getElementById('broadcast-questions-title-id');
-                            broadQuestTitle.after(divBroadcast);
-                        }
-                    }
-                }
-            });
-        }, 5000);
+        document.addEventListener('DOMContentLoaded', function () {
+            let url = new URL('http://localhost:3000/.well-known/mercure');
+            url.searchParams.append('topic', '/broadcast/question/{{ chatid }}')
+            const eventSource = new EventSource(url);
+            eventSource.onmessage = event => addQuestion(event.data);
+        });
+
+        function addQuestion(dataJson) {
+            let content = JSON.parse(dataJson).content;
+            let username = JSON.parse(dataJson).username;
+            let divBroadcast = document.createElement("div");
+            divBroadcast.className = "broadcast-questions-item";
+            let span = document.createElement("span");
+            span.innerHTML = username;
+            let divQuestion = document.createElement("div");
+            divQuestion.innerHTML = content;
+            divBroadcast.prepend(divQuestion);
+            divBroadcast.prepend(span);
+            let broadQuestTitle = document.getElementById('broadcast-questions-title-id');
+            broadQuestTitle.after(divBroadcast);
+
+        }
 
         $('#fullscreen-btn').click(function () {
             $(this).toggleClass('active');
             $('.main-block').toggleClass('fullscreen');
         });
-
-        {# function sendMessageAjax(id) { #}
-        {# let content = $("#form-message").val(); #}
-        {# $.ajax({ #}
-        {# url: '{{ (path('app_message_send_ajax')) }}', #}
-        {# type: "POST", #}
-        {# dataType: "json", #}
-        {# data: { #}
-        {# "chatId": id, // Данные которые отправляем на сервер messageId #}
-        {# "content": content, // Данные которые отправляем на сервер messageId #}
-        {# }, #}
-        {# async: true, #}
-        {# success: function (data) { #}
-        {# $("#form-message").val(''); #}
-        {# } #}
-        {# }); #}
-        {# return false; #}
-        {# }; #}
     </script>
     {% set submit_url = path('app_broadcast', {'chatid': chatid}) %}
     {% include 'main/question_speaker/form.html.twig' with {url: submit_url} %}
 {% endblock %}
-{# {% block javascripts %} #}
-{# {{ parent() }} #}
-{# <script> #}
-{# setInterval(function () { #}
-{# $.ajax({ #}
-{# method: 'POST', #}
-{# url: '{{ path('app_messages', {'chatid':chatid}) }}' #}
-{# }).done(function (data) { #}
-{# $('#chat-list').html(data); #}
-{# }); #}
-{# }, 5000); #}
-{# </script> #}
-{# {% endblock %} #}
+

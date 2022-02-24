@@ -79,6 +79,7 @@ class RegistrationController extends AbstractController
             );
         
         $email = new TemplatedEmail();
+        $email->from('send@example.com');
         $email->to($user->getEmail());
         $email->htmlTemplate('registration/confirmation_email.html.twig');
         $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
@@ -110,7 +111,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
         // Do not get the User's Id or Email Address from the Request object
         try {
-            $this->helper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
+            $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
         } catch (VerifyEmailExceptionInterface $e) {
             $this->addFlash('verify_email_error', $e->getReason());
 
@@ -184,7 +185,7 @@ would then validate the signed URL in the following method:
 +       }
 
         try {
-            $this->helper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
+            $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
         } catch (VerifyEmailExceptionInterface $e) {
         // ...
 ```

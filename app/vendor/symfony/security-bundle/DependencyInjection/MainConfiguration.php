@@ -50,24 +50,6 @@ class MainConfiguration implements ConfigurationInterface
         $rootNode
             ->beforeNormalization()
                 ->ifTrue(function ($v) {
-                    if (!isset($v['access_decision_manager'])) {
-                        return true;
-                    }
-
-                    if (!isset($v['access_decision_manager']['strategy']) && !isset($v['access_decision_manager']['service'])) {
-                        return true;
-                    }
-
-                    return false;
-                })
-                ->then(function ($v) {
-                    $v['access_decision_manager']['strategy'] = AccessDecisionManager::STRATEGY_AFFIRMATIVE;
-
-                    return $v;
-                })
-            ->end()
-            ->beforeNormalization()
-                ->ifTrue(function ($v) {
                     if ($v['encoders'] ?? false) {
                         trigger_deprecation('symfony/security-bundle', '5.3', 'The child node "encoders" at path "security" is deprecated, use "password_hashers" instead.');
 
@@ -322,7 +304,7 @@ class MainConfiguration implements ConfigurationInterface
                             continue;
                         }
 
-                        if (false !== strpos($firewall[$k]['check_path'], '/') && !preg_match('#'.$firewall['pattern'].'#', $firewall[$k]['check_path'])) {
+                        if (str_contains($firewall[$k]['check_path'], '/') && !preg_match('#'.$firewall['pattern'].'#', $firewall[$k]['check_path'])) {
                             throw new \LogicException(sprintf('The check_path "%s" for login method "%s" is not matched by the firewall pattern "%s".', $firewall[$k]['check_path'], $k, $firewall['pattern']));
                         }
                     }

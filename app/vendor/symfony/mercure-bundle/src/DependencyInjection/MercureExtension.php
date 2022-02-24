@@ -27,6 +27,7 @@ use Symfony\Component\Mercure\Authorization;
 use Symfony\Component\Mercure\Debug\TraceableHub;
 use Symfony\Component\Mercure\Debug\TraceablePublisher;
 use Symfony\Component\Mercure\Discovery;
+use Symfony\Component\Mercure\EventSubscriber\SetCookieSubscriber;
 use Symfony\Component\Mercure\Hub;
 use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Mercure\HubRegistry;
@@ -40,9 +41,11 @@ use Symfony\Component\Mercure\Jwt\TokenProviderInterface;
 use Symfony\Component\Mercure\Messenger\UpdateHandler;
 use Symfony\Component\Mercure\Publisher;
 use Symfony\Component\Mercure\PublisherInterface;
+use Symfony\Component\Mercure\Twig\MercureExtension as TwigMercureExtension;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\UX\Turbo\Bridge\Mercure\Broadcaster;
 use Symfony\UX\Turbo\Bridge\Mercure\TurboStreamListenRenderer;
+use Twig\Environment;
 
 /**
  * @author Kévin Dunglas <dunglas@gmail.com>
@@ -71,7 +74,7 @@ final class MercureExtension extends Extension
         $hubs = [];
         $defaultHubUrl = null;
         $defaultHubName = null;
-        $enableProfiler = $config['enable_profiler'] && class_exists(Stopwatch::class);
+        $enableProfiler = ($config['enable_profiler'] ?? $container->getParameter('kernel.debug')) && class_exists(Stopwatch::class);
         foreach ($config['hubs'] as $name => $hub) {
             $tokenFactory = null;
             if (isset($hub['jwt'])) {
@@ -104,6 +107,8 @@ final class MercureExtension extends Extension
                         $container->register($tokenFactory, LcobucciFactory::class)
                             ->addArgument($hub['jwt']['secret'])
                             ->addArgument($hub['jwt']['algorithm'])
+                            ->addArgument(null)
+                            ->addArgument($hub['jwt']['passphrase'])
                             ->addTag('mercure.jwt.factory')
                         ;
                     }
@@ -255,9 +260,20 @@ final class MercureExtension extends Extension
             ->addArgument($config['default_cookie_lifetime'])
         ;
 
-        $container->register(Discovery::class, Discovery::class)
+        $container->register(Discovery::class)
             ->addArgument(new Reference(HubRegistry::class))
         ;
+
+        if (class_exists(SetCookieSubscriber::class)) {
+            $container->register(SetCookieSubscriber::class)
+                ->addTag('kernel.event_subscriber', ['priority' => -10]);
+        }
+
+        if (class_exists(Environment::class) && class_exists(TwigMercureExtension::class)) {
+            $container->register(TwigMercureExtension::class)
+                ->setArguments([new Reference(HubRegistry::class), new Reference(Authorization::class), new Reference('request_stack')])
+                ->addTag('twig.extension');
+        }
 
         // TODO: remove these parameters in the next release.
         $container->setParameter('mercure.hubs', $hubUrls);
@@ -272,6 +288,7 @@ final class MercureExtension extends Extension
         if (class_exists(AliasDeprecatedPublicServicesPass::class)) {
             $definition->setDeprecated('symfony/mercure-bundle', '0.2', $message);
         } else {
+            /* @phpstan-ignore-next-line */
             $definition->setDeprecated(true, $message);
         }
     }

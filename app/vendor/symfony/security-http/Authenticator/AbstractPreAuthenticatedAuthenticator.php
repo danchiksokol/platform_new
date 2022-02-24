@@ -41,7 +41,7 @@ abstract class AbstractPreAuthenticatedAuthenticator implements InteractiveAuthe
     private $firewallName;
     private $logger;
 
-    public function __construct(UserProviderInterface $userProvider, TokenStorageInterface $tokenStorage, string $firewallName, ?LoggerInterface $logger = null)
+    public function __construct(UserProviderInterface $userProvider, TokenStorageInterface $tokenStorage, string $firewallName, LoggerInterface $logger = null)
     {
         $this->userProvider = $userProvider;
         $this->tokenStorage = $tokenStorage;
@@ -79,6 +79,17 @@ abstract class AbstractPreAuthenticatedAuthenticator implements InteractiveAuthe
             return false;
         }
 
+        // do not overwrite already stored tokens from the same user (i.e. from the session)
+        $token = $this->tokenStorage->getToken();
+
+        if ($token instanceof PreAuthenticatedToken && $this->firewallName === $token->getFirewallName() && $token->getUserIdentifier() === $username) {
+            if (null !== $this->logger) {
+                $this->logger->debug('Skipping pre-authenticated authenticator as the user already has an existing session.', ['authenticator' => static::class]);
+            }
+
+            return false;
+        }
+
         $request->attributes->set('_pre_authenticated_username', $username);
 
         return true;
@@ -86,7 +97,7 @@ abstract class AbstractPreAuthenticatedAuthenticator implements InteractiveAuthe
 
     public function authenticate(Request $request): PassportInterface
     {
-        // @deprecated since 5.3, change to $this->userProvider->loadUserByIdentifier() in 6.0
+        // @deprecated since Symfony 5.3, change to $this->userProvider->loadUserByIdentifier() in 6.0
         $method = 'loadUserByIdentifier';
         if (!method_exists($this->userProvider, 'loadUserByIdentifier')) {
             trigger_deprecation('symfony/security-core', '5.3', 'Not implementing method "loadUserByIdentifier()" in user provider "%s" is deprecated. This method will replace "loadUserByUsername()" in Symfony 6.0.', get_debug_type($this->userProvider));

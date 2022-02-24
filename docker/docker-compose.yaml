@@ -4,6 +4,7 @@ services:
     depends_on:
       - db
       - memcached
+      - mercure
     volumes:
       - ../:/var/www/html/
       -  ./webconfig:/etc/apache2/sites-enabled
@@ -14,9 +15,10 @@ services:
       - 80:80
     links:
       - db
-#    environment: #разкоммнетировать для local от
+      - mercure
+    environment: #разкоммнетировать для local от
 #      XDEBUG_CONFIG: ${XDEBUG_CONFIG} #разкоммнетировать для vps от
-#      UPLOAD_LIMIT: 64M #разкоммнетировать для vps до
+      UPLOAD_LIMIT: 64M #разкоммнетировать для vps до
     restart: always
   db:
     image: mysql:8.0.21
@@ -52,3 +54,23 @@ services:
       - PMA_ARBITRARY=1
       - PMA_USER=root
       - PMA_PASSWORD=NtEd5!31_o5NY4X
+
+  mercure:
+    container_name: mercure
+    image: dunglas/mercure
+    environment:
+      DEBUG: debug
+      SERVER_NAME: ':80'
+      MERCURE_PUBLISHER_JWT_KEY: 'platform'
+      MERCURE_SUBSCRIBER_JWT_KEY: 'platform'
+      PUBLISH_ALLOWED_ORIGINS: '*'
+      CORS_ALLOWED_ORIGINS: '*'
+      ALLOW_ANONYMOUS: 1
+    ports:
+      - 3000:80
+      - 443:443
+
+    volumes:
+      - ./caddy_config:/config
+      - ./caddy_data:/data
+    command: /usr/bin/caddy run -config /etc/caddy/Caddyfile.dev
